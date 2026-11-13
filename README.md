@@ -18,6 +18,65 @@ Add your Hyde-issued key as `FINN_GLM_API_KEY` in `.env`, then restart. The curr
 
 With no key, research returns relevant source excerpts with `status=evidence_only`. It does not pretend a generated answer exists. A missing corpus returns `status=needs_sources`.
 
+## Review P0–P4
+
+The supplied plan is implemented incrementally on the existing backend. Next.js stays in P6;
+model selection per task stays undecided. Existing /api routes remain available.
+
+Create an isolated review without changing your database or spending model tokens:
+
+```sh
+PYTHONPATH=. uv run python scripts/check_phases.py > /tmp/finn-review.json
+```
+
+The JSON includes a ranked digest, CFO introduction paths, financial comparisons, a deliberately
+mismatched synthetic reference and a reconnect nudge. All 40 demo people, histories and financial
+examples are fictional. For interactive review, start the server, call `POST /api/demo/phases`
+(prefer a fresh demo database), then use `/docs`:
+
+- `GET /api/digest?mode=demo` — management, results and material-event cards; routine filings collapse.
+- `GET /api/network/paths?person_id=workflow-cfo` — recorded introduction; overlaps alone are not edges.
+- `GET /api/network/expertise?theme=IT%20services` and `/api/network/reconnect?mode=demo`.
+- `POST /api/announcements/{id}/enrich` — explicitly request original filing extraction/model fallback.
+- `GET /api/companies/MOCKIT/financials?mode=demo` and `/api/usage`.
+
+The real portfolio is separate: `data/mock/portfolio.json` records a 90-day scan of all 100
+official Nifty 100 constituents, 18 selections, four off-portfolio research candidates, dated
+source links and coverage. Its `mode=live` records public events, not mock financial figures.
+It does not automatically replace an existing investor portfolio.
+
+```sh
+python -m ingest.portfolio --days 90
+python -m ingest.all --tickers TCS INFY --days 90 --fundamentals
+python -m ingest.all --tickers TCS INFY --days 90 --fundamentals --offline
+```
+
+Ingestion is repeatable and reports failures and fallback provenance. Public responses and
+original PDFs live under `data/cache/live`; six dated TCS/INFY snapshots ship under
+`data/cache/demo_sources`. Cached data retains its original timestamp. Date-window filings
+require a matching saved request; uncached windows fail visibly. BSE codes come from Screener's
+BSE links. Live BSE access failed during verification; the explicit NSE fallback succeeded.
+Use `--document-manifest path.json` for selected documents with confirmed dates. Add `--enrich`
+(or refresh JSON `enrich=true`) when model extraction is wanted; routine refreshes don't spend
+model tokens by default.
+
+Quarterly/annual financials share one typed table. Growth calculations require compatible
+periods, basis, currency and units; missing quarters, absent metrics and nonpositive bases are
+flagged. Operating profit is never relabelled EBITDA. Recognised PDF statements are parsed in
+code; other layouts use a strict model schema with validated source-line citations and numeric
+anchors. Compatible metric fragments are merged; conflicting values are rejected before caching.
+Original page numbers and verbatim rows remain available for review. The original 22-page TCS
+filing was compared with Screener: consolidated revenue/PBT/PAT matched; EBITDA was unavailable.
+This is representative validation, not support for every PDF layout. OCR and ZIP attachments
+remain unsupported.
+
+All model calls pass through `engine/llm.py`; versioned prompts live in `engine/prompts/`.
+It caches validated output, retries transient failures once and records tokens/latency without
+keys or contact profiles. `/api/usage` leaves monetary cost unset until model choices/pricing
+are supplied. Digest enrichment is computed at ingestion and refreshed on relevant writes;
+viewing the digest makes no model calls. `FINN_OWNER_ID` scopes contact storage and queries;
+it is server configuration, not multi-user authentication or full tenant isolation.
+
 ## Try the complete demo
 
 ```sh
@@ -149,9 +208,9 @@ flowchart LR
 ```
 
 - **Prices:** Yahoo daily chart adapter; today's bar is excluded so an intraday quote is never treated as a completed day. Price alerts compare consecutive stored closes. Volume alerts compare the latest day with the preceding N trading observations, excluding that day, and require the full lookback. Bars are not adjusted for all corporate actions; investigate split-driven alerts.
-- **Announcements:** NSE adapter with cookie bootstrap; deterministic deduplication and category rules. A blocked or changed provider yields a visible failure. BSE price suffixes are supported; automatic BSE filings are not yet implemented, so use announcement import for those.
+- **Announcements:** BSE adapter when a verified code is available, with NSE fallback and recorded source failures; deterministic deduplication and category rules. Original filing URLs are retained. ZIP attachments remain unsupported.
 - **Fundamentals:** Screener discovers links, while original PDFs/text supply the research corpus. Parsing and indexing are deterministic. SQLite FTS5 retrieves chunks across documents; no embedding API is needed. Replacing a document atomically updates its search index. No news or broker research is fetched for Pull.
-- **Model:** Only research generation calls GLM. No autonomous actions, web tools or contact messaging. The prompt treats documents as untrusted evidence, and source excerpts—not the entire corpus—are sent. Contact profiles are not sent to GLM. Cache keys include the question, retrieved source content, prompt version, model and endpoint. Network suggestions are recalculated on every request.
+- **Model:** Research and explicitly requested filing extraction use the shared gateway. Recognised financial statements, graph operations and digest reads use no model. Prompts treat source text as untrusted evidence. Contact profiles are not sent to the model. Cache keys include input, prompt version, model and endpoint.
 - **Network:** Explicit employment tickers, expertise tags, recorded connection edges, and temporal employment overlaps. An overlap is not proof of acquaintance. No LinkedIn scraping, name-based identity guessing, or invented second-degree links. Incoming-person profiles must be provided before their relationships can be queried.
 - **Refresh:** Manual background jobs, with optional interval polling via `FINN_REFRESH_INTERVAL_SECONDS`. Use one server worker. Job progress is persisted; jobs interrupted by restart are marked accordingly. This is not a distributed durable queue. Scheduling refreshes updates stored data; phone notification delivery is a future frontend/infrastructure task.
 
@@ -165,7 +224,7 @@ The database is not encrypted at rest by this application. Keep its directory pr
 
 ```sh
 uv run pytest -q
-uv run ruff check finn tests scripts
+uv run ruff check finn engine ingest api tests scripts
 PYTHONPATH=. uv run python scripts/check_sources.py TCS
 ```
 
@@ -174,13 +233,14 @@ The default suite uses a temporary real SQLite database and mocked external HTTP
 Run the real-model acceptance suite explicitly (uses the current `.env` provider/model and spends tokens):
 
 ```sh
-FINN_RUN_LIVE_TESTS=1 uv run pytest tests/test_live_workflow.py -q --junitxml=/tmp/finn-live-results.xml
+FINN_RUN_LIVE_TESTS=1 uv run pytest -m live -q --junitxml=/tmp/finn-live-results.xml
 ```
 
-The seven cases check two different margin misses and a beat, correct source-linked percentages
+The eight cases check two different margin misses and a beat, correct source-linked percentages
 and percentage-point differences, stated causes, Q1/Q2 retrieval, unrelated-company exclusion,
 the three expected contacts and relationship types, missing forecasts, cache reuse, fresh analysis
 after source replacement, document prompt injection, and no model call when sources are absent.
+The Push case also checks source-cited extraction into a results card and repeated-call caching.
 The live tests use the actual API, SQLite, retrieval and configured model HTTP calls; no model
 response is mocked. A missing key or provider/schema error fails an explicitly enabled live run.
 Each case writes `observations.json` with imported fixtures and research requests/responses to its
@@ -208,4 +268,4 @@ retained for seven days; database files and `.env` are excluded.
 
 ## Deliberately left for the next stage
 
-The frontend and mobile interaction design; real portfolio source coverage; automatic document selection/refresh; extraction of results tables into verified Revenue/EBITDA/PBT/PAT QoQ/YoY comparisons; incoming-management biographies/entity resolution; advanced financial comparison across four quarters; notification delivery; stronger retrieval evaluation; and production hosting/privacy infrastructure. The current research endpoint can discuss these metrics when they appear in supplied excerpts, but it is not yet a verified financial calculation engine.
+The frontend and mobile interaction design; broader filing-layout/OCR coverage; reliable live BSE access; automatic report/transcript selection; verified real-person biographies; advanced four-quarter guidance comparisons; notification delivery; stronger retrieval/semantic evaluation; and production hosting/privacy infrastructure. Calculations exist for explicitly sourced, compatible records; financial interpretation is not universally verified. P5/P6 expansion awaits user review of P0–P4.

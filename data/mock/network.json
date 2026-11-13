@@ -1,0 +1,752 @@
+{
+  "owner_id": "local",
+  "notice": "All people, professional histories and relationships are fictional; real company names do not imply real relationships.",
+  "contacts": [
+    {
+      "id": "workflow-cfo",
+      "name": "Riya Sen (fictional)",
+      "provenance": "synthetic",
+      "direct_contact": false,
+      "roles": [
+        {
+          "company": "Harbor Finance",
+          "ticker": "HARBOR",
+          "title": "Finance manager",
+          "start_year": 2016,
+          "end_year": 2022
+        },
+        {
+          "company": "Mock IT Services (fictional)",
+          "ticker": "MOCKIT",
+          "title": "Incoming CFO",
+          "start_year": 2026,
+          "end_year": null
+        }
+      ]
+    },
+    {
+      "id": "workflow-connector",
+      "name": "Neha Rao (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "Harbor Finance",
+          "ticker": "HARBOR",
+          "title": "Controller",
+          "start_year": 2017,
+          "end_year": 2021
+        }
+      ],
+      "knows": [
+        "workflow-cfo"
+      ],
+      "relationship_strength": 5
+    },
+    {
+      "id": "workflow-expert",
+      "name": "Ananya Das (fictional)",
+      "provenance": "synthetic",
+      "expertise": [
+        "IT services",
+        "operating margins"
+      ],
+      "relationship_strength": 4
+    },
+    {
+      "id": "workflow-insider",
+      "name": "Vikram Shah (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "Mock IT Services (fictional)",
+          "ticker": "MOCKIT",
+          "title": "Delivery director",
+          "start_year": 2022,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "delivery operations"
+      ]
+    },
+    {
+      "id": "workflow-unrelated",
+      "name": "Kabir Mehta (fictional)",
+      "provenance": "synthetic",
+      "expertise": [
+        "agriculture",
+        "irrigation"
+      ]
+    },
+    {
+      "id": "network-supplier",
+      "name": "Leela Iyer (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "Precision Components",
+          "ticker": "PCOMP",
+          "title": "Plant head",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "SRF",
+          "kind": "supplier"
+        }
+      ],
+      "expertise": [
+        "specialty chemicals",
+        "capacity expansion"
+      ]
+    },
+    {
+      "id": "network-peer",
+      "name": "Devika Sen (fictional)",
+      "provenance": "synthetic",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "knows": [
+        "network-promoter"
+      ],
+      "relationship_strength": 4
+    },
+    {
+      "id": "network-promoter",
+      "name": "Karan Shah (fictional)",
+      "provenance": "synthetic",
+      "direct_contact": false,
+      "roles": [
+        {
+          "company": "Mock Consumer",
+          "ticker": "MOCKCON",
+          "title": "Promoter",
+          "start_year": 2013,
+          "end_year": null
+        }
+      ],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ]
+    },
+    {
+      "id": "network-reconnect",
+      "name": "Sameer Gupta (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TCS",
+          "ticker": "TCS",
+          "title": "Operations manager",
+          "start_year": 2010,
+          "end_year": 2020
+        }
+      ],
+      "last_contacted": "2026-01-01",
+      "expertise": [
+        "IT services",
+        "delivery operations"
+      ]
+    },
+    {
+      "id": "network-contact-01",
+      "name": "Demo Professional 01 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-02",
+      "name": "Demo Professional 02 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-03",
+      "name": "Demo Professional 03 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-04",
+      "name": "Demo Professional 04 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-05",
+      "name": "Demo Professional 05 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-06",
+      "name": "Demo Professional 06 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-07",
+      "name": "Demo Professional 07 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-08",
+      "name": "Demo Professional 08 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-09",
+      "name": "Demo Professional 09 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-10",
+      "name": "Demo Professional 10 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-11",
+      "name": "Demo Professional 11 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-12",
+      "name": "Demo Professional 12 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-13",
+      "name": "Demo Professional 13 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-14",
+      "name": "Demo Professional 14 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-15",
+      "name": "Demo Professional 15 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-16",
+      "name": "Demo Professional 16 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-17",
+      "name": "Demo Professional 17 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-18",
+      "name": "Demo Professional 18 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-19",
+      "name": "Demo Professional 19 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-20",
+      "name": "Demo Professional 20 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-21",
+      "name": "Demo Professional 21 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-22",
+      "name": "Demo Professional 22 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-23",
+      "name": "Demo Professional 23 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-24",
+      "name": "Demo Professional 24 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-25",
+      "name": "Demo Professional 25 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-26",
+      "name": "Demo Professional 26 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-27",
+      "name": "Demo Professional 27 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "relationship_strength": 2,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-28",
+      "name": "Demo Professional 28 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "relationship_strength": 3,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-29",
+      "name": "Demo Professional 29 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "relationship_strength": 4,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-30",
+      "name": "Demo Professional 30 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "relationship_strength": 5,
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-31",
+      "name": "Demo Professional 31 (fictional)",
+      "provenance": "synthetic",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "relationship_strength": 1,
+      "last_contacted": "2026-09-01"
+    }
+  ]
+}

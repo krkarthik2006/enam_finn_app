@@ -1,12 +1,14 @@
 import json
 from datetime import datetime, timezone
 
+from engine.financials import save_financial
 from finn.alerts import save_announcement, save_prices
 from finn.db import Database
+from finn.enrichment import extract_filing, refresh_cards
 from finn.providers import ProviderError, Providers
 
 
-def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[str], days: int):
+def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[str], days: int, fundamentals=False, enrichments=False):
     started = datetime.now(timezone.utc).isoformat()
     report = {"id": run_id, "status": "running", "tickers": tickers, "sources": [], "days": days}
     db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
@@ -14,32 +16,55 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
         portfolio = {r["ticker"]: json.loads(r["payload"]) for r in db.all("SELECT * FROM portfolio")}
         for ticker in tickers:
             exchange = portfolio.get(ticker, {}).get("exchange", "NSE")
-            for source in ("prices", "announcements"):
+            bse_code = portfolio.get(ticker, {}).get("bse_code")
+            company = db.one("SELECT payload FROM companies WHERE ticker=?", (ticker,))
+            if company:
+                bse_code = bse_code or json.loads(company["payload"]).get("bse_code")
+            for source in (("prices", "fundamentals", "announcements") if fundamentals else ("prices", "announcements")):
+                before = len(providers.cache.observations)
+                enrichment_errors = []
                 try:
                     if source == "prices":
                         data = providers.prices(ticker, exchange)
                         save_prices(db, data)
                         count = len(data.prices)
+                    elif source == "fundamentals":
+                        financials = providers.fundamentals(ticker)
+                        for record in financials["records"]:
+                            save_financial(db, record)
+                        bse_code = financials["bse_code"] or bse_code
+                        db.execute("INSERT OR REPLACE INTO companies VALUES (?,?)", (
+                            ticker, json.dumps({"ticker": ticker, "bse_code": bse_code, "source": financials["source"]}),
+                        ))
+                        count = len(financials["records"])
                     else:
-                        if exchange != "NSE":
-                            raise ProviderError(
-                                "Automatic BSE filing ingestion is not implemented; use filing import"
-                            )
-                        data = providers.announcements(ticker, days)
+                        if exchange != "NSE" and not bse_code:
+                            raise ProviderError("Provide a verified BSE code before automatic BSE filing ingestion")
+                        data = providers.announcements(ticker, days, bse_code)
                         for item in data:
-                            save_announcement(db, item)
+                            saved = save_announcement(db, item)
+                            if enrichments and saved["category"] in ("results", "management_change", "M&A", "capex", "litigation", "unclassified"):
+                                try:
+                                    extract_filing(db, saved, providers)
+                                except (ProviderError, ValueError) as exc:
+                                    enrichment_errors.append({"event_id": saved["id"], "message": str(exc)})
                         count = len(data)
                     report["sources"].append(
-                        {"ticker": ticker, "source": source, "status": "ok", "count": count}
+                        {"ticker": ticker, "source": source, "status": "partial" if enrichment_errors else "ok", "count": count,
+                         "provenance": providers.cache.observations[before:], "enrichment_errors": enrichment_errors}
                     )
-                except ProviderError as exc:
+                except (ProviderError, ValueError) as exc:
                     report["sources"].append(
                         {"ticker": ticker, "source": source, "status": "error", "message": str(exc)}
                     )
                 db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
-        errors = sum(s["status"] == "error" for s in report["sources"])
+        errors = sum(s["status"] != "ok" for s in report["sources"])
+        refresh_cards(db)
         report["status"] = (
-            "completed" if not errors else "partial" if errors < len(report["sources"]) else "failed"
+            "completed" if not errors else "partial" if any(s.get("count", 0) > 0 for s in report["sources"]) else "failed"
+        )
+        report["uses_cached_sources"] = any(
+            p["origin"] == "cache" for s in report["sources"] for p in s.get("provenance", [])
         )
     except Exception:
         report["status"] = "failed"

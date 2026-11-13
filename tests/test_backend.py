@@ -15,6 +15,7 @@ def client(tmp_path):
     app = create_app(
         Settings(
             database_path=tmp_path / "test.sqlite",
+            cache_path=tmp_path / "source-cache",
             glm_api_key="",
             api_token="",
             refresh_interval_seconds=0,

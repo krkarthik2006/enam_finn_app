@@ -5,6 +5,10 @@
 __pycache__/
 .pytest_cache/
 .ruff_cache/
-data/
+data/*
+!data/mock/
+!data/cache/
+data/cache/*
+!data/cache/demo_sources/
 *.sqlite*
 .DS_Store

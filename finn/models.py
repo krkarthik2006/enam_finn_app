@@ -45,6 +45,7 @@ class Company(Input):
     name: str = Field(min_length=1, max_length=200)
     sector: str = Field(default="", max_length=100)
     exchange: Literal["NSE", "BSE"] = "NSE"
+    bse_code: str | None = Field(default=None, pattern=r"^\d{6}$")
     _ticker = field_validator("ticker")(normalize_ticker)
 
 
@@ -63,6 +64,14 @@ class AlertSettings(Input):
     volume_multiple: float = Field(default=2, gt=1, le=100)
     volume_lookback_days: int = Field(default=20, ge=2, le=90)
     material_categories: list[Category] = ["results", "M&A", "management_change", "litigation", "capex"]
+    category_weights: dict[Category, float] = Field(default_factory=dict)
+
+    @field_validator("category_weights")
+    @classmethod
+    def bounded_weights(cls, value):
+        if any(not 0 <= weight <= 5 for weight in value.values()):
+            raise ValueError("Category preferences must be between 0 and 5")
+        return value
 
 
 class Announcement(Input):
@@ -74,6 +83,9 @@ class Announcement(Input):
     category: Category | None = None
     mode: Mode = "live"
     subject_person_id: str | None = Field(default=None, max_length=200)
+    source: dict | None = None
+    financial_period_end: date | None = None
+    materiality: float = Field(default=1, ge=0, le=5, allow_inf_nan=False)
     _ticker = field_validator("ticker")(normalize_ticker)
 
     @field_validator("published_at")
@@ -94,6 +106,7 @@ class PriceImport(Input):
     ticker: Ticker
     prices: list[Price] = Field(min_length=1, max_length=365)
     mode: Mode = "live"
+    source: dict | None = None
     _ticker = field_validator("ticker")(normalize_ticker)
 
 
@@ -141,11 +154,32 @@ class Role(Input):
         return self
 
 
+class Education(Input):
+    institution: str = Field(min_length=1, max_length=200)
+    start_year: int = Field(ge=1950, le=2100)
+    end_year: int = Field(ge=1950, le=2100)
+
+    @model_validator(mode="after")
+    def dates(self):
+        if self.end_year < self.start_year:
+            raise ValueError("Education end must follow start")
+        return self
+
+
+class CompanyRelationship(Input):
+    ticker: Ticker
+    kind: Literal["competitor", "supplier", "customer"]
+    _ticker = field_validator("ticker")(normalize_ticker)
+
+
 class Contact(Input):
     name: str = Field(min_length=1, max_length=200)
     roles: list[Role] = Field(default_factory=list, max_length=30)
     expertise: list[str] = Field(default_factory=list, max_length=30)
-    education: list[str] = Field(default_factory=list, max_length=20)
+    education: list[str | Education] = Field(default_factory=list, max_length=20)
+    related_companies: list[CompanyRelationship] = Field(default_factory=list, max_length=20)
+    relationship_strength: int = Field(default=3, ge=1, le=5)
+    direct_contact: bool = True
     # Only explicit known edges; shared employers are evidence of overlap, not proof of acquaintance.
     knows: list[str] = Field(default_factory=list, max_length=100)
     provenance: Literal["synthetic", "user_provided", "consented_public"] = "synthetic"
@@ -156,9 +190,43 @@ class Contact(Input):
 
 class Refresh(Input):
     tickers: list[str] = Field(default_factory=list, max_length=50)
-    days: int = Field(default=7, ge=1, le=30)
+    days: int = Field(default=7, ge=1, le=90)
+    fundamentals: bool = False
+    enrich: bool = False
 
     @field_validator("tickers")
     @classmethod
     def clean(cls, values):
         return list(dict.fromkeys(normalize_ticker(v) for v in values))
+
+
+class FinancialRecord(Input):
+    ticker: Ticker
+    period_end: date
+    frequency: Literal["quarterly", "annual"] = "quarterly"
+    basis: Literal["consolidated", "standalone"]
+    currency: Literal["INR"] = "INR"
+    unit: Literal["crore", "lakh", "million"] = "crore"
+    metrics: dict[Literal["revenue", "ebitda", "pbt", "pat", "operating_profit"], float | None]
+    source_type: Literal["screener", "filing", "synthetic"]
+    source_url: str = Field(default="", max_length=2000)
+    pages: dict[str, int | None] = Field(default_factory=dict)
+    mode: Mode = "live"
+    source: dict | None = None
+    _ticker = field_validator("ticker")(normalize_ticker)
+
+    @model_validator(mode="after")
+    def valid_values(self):
+        import math
+        if not self.metrics or all(v is None for v in self.metrics.values()):
+            raise ValueError("At least one explicitly reported financial metric is required")
+        if any(v is not None and not math.isfinite(v) for v in self.metrics.values()):
+            raise ValueError("Financial figures must be finite")
+        if self.source_type == "synthetic" and self.mode != "demo":
+            raise ValueError("Synthetic financials require demo mode")
+        if self.period_end.month not in (3, 6, 9, 12):
+            raise ValueError("Use a calendar quarter-end period")
+        import calendar
+        if self.period_end.day != calendar.monthrange(self.period_end.year, self.period_end.month)[1]:
+            raise ValueError("Use the last day of the reporting quarter")
+        return self

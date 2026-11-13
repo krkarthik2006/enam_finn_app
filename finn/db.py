@@ -20,22 +20,33 @@ CREATE TABLE IF NOT EXISTS chunks(
  id TEXT PRIMARY KEY, document_id TEXT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
  position INTEGER NOT NULL, page INTEGER, text TEXT NOT NULL);
 CREATE VIRTUAL TABLE IF NOT EXISTS chunk_search USING fts5(id UNINDEXED, text);
-CREATE TABLE IF NOT EXISTS contacts(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS contacts(id TEXT PRIMARY KEY, payload TEXT NOT NULL, owner_id TEXT NOT NULL DEFAULT 'local');
 CREATE TABLE IF NOT EXISTS research_cache(key TEXT PRIMARY KEY, payload TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS llm_cache(key TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS financials(
+ id TEXT PRIMARY KEY, ticker TEXT NOT NULL, period_end TEXT NOT NULL,
+ frequency TEXT NOT NULL, source_type TEXT NOT NULL, mode TEXT NOT NULL, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS doc_pages(
+ document_id TEXT NOT NULL REFERENCES documents(id) ON DELETE CASCADE, page INTEGER NOT NULL,
+ text TEXT NOT NULL, PRIMARY KEY(document_id,page));
+CREATE TABLE IF NOT EXISTS companies(ticker TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS enrichments(
+ event_id TEXT NOT NULL, owner_id TEXT NOT NULL, payload TEXT NOT NULL,
+ PRIMARY KEY(event_id,owner_id));
 CREATE TABLE IF NOT EXISTS llm_calls(
  id INTEGER PRIMARY KEY, model TEXT NOT NULL, task TEXT NOT NULL, status TEXT NOT NULL,
  prompt_tokens INTEGER NOT NULL, completion_tokens INTEGER NOT NULL, seconds REAL NOT NULL,
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE IF NOT EXISTS refresh_runs(
  id TEXT PRIMARY KEY, started_at TEXT NOT NULL, finished_at TEXT, payload TEXT NOT NULL);
-PRAGMA user_version=1;
+PRAGMA user_version=2;
 """
 
 
 class Database:
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, owner_id="local"):
         self.path = path
+        self.owner_id = owner_id
 
     @contextmanager
     def connect(self):
@@ -49,6 +60,8 @@ class Database:
         with self.connect() as conn:
             conn.execute("PRAGMA journal_mode=WAL")
             conn.executescript(SCHEMA)
+            if "owner_id" not in {r["name"] for r in conn.execute("PRAGMA table_info(contacts)")}:
+                conn.execute("ALTER TABLE contacts ADD COLUMN owner_id TEXT NOT NULL DEFAULT 'local'")
 
     def all(self, query, params=()):
         with self.connect() as conn:

@@ -38,42 +38,42 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - **Done when:** backend and shared model gateway checks pass; frontend build is verified in P6. Hosted CI status is reported separately.
 
 ## Phase 1 — Check the data sources, then choose the portfolio (Fri night/Sat early, ~2–3h) ★ most important
-- [ ] Spike scripts confirm each source responds: yfinance `.NS`, BSE announcements, screener page + doc links
-- [ ] Scan the last 60–90 days of filings across ~100 liquid NSE names for: CFO/CEO/MD changes, results, M&A, large capex, litigation
-- [ ] Choose **15–20 portfolio stocks** around real events (mixed sectors and sizes) + **3–5 research tickers**
-- [ ] Record the picks and the reason for each in `data/mock/portfolio.json`
+- [x] Probe prices, BSE/NSE announcements and Screener tables/doc links: Yahoo, NSE and Screener passed live; BSE access failed and the explicit NSE fallback succeeded.
+- [x] Scan 90 days across the official Nifty 100: 100/100 symbols scanned, no failures.
+- [x] Choose 18 event-backed portfolio stocks and 4 off-portfolio research candidates; event coverage includes 22 results and other material filings.
+- [x] Record picks, sectors, dated source links, executive-change examples, coverage and reasons in `data/mock/portfolio.json` (real sources, not synthetic financials).
+- [ ] Restore reliable live BSE access; the adapter contract and NSE fallback are tested, but upstream access remains blocked/unavailable.
 - **Done when:** at least one real management change, ≥5 results filings and ≥1 material event are in the portfolio window.
 
 ## Phase 2 — Data layer + ingestion (Sat morning, ~3h)
-- [ ] Schema: `companies, prices, announcements, documents, doc_pages, financials_quarterly, financials_annual, llm_cache`
-- [ ] Ingest jobs are safe to re-run (re-runs don't duplicate): prices, announcements, screener tables, document downloads + per-page text
-- [ ] NSE→BSE scrip code map
-- [ ] Every fetcher saves its raw response to `/data/cache` and can fall back to it
-- [ ] Offline fixtures for 2 companies
+- [x] Schema: companies, prices, announcements, documents, doc_pages, llm_cache; quarterly/annual financials share one typed `financials` table with explicit frequency, basis, currency, units and mode.
+- [x] Repeatable `python -m ingest.all`: prices, filings, optional fundamentals, and selected document manifests with authentic dates; per-page text and original PDF cache retained.
+- [x] Verified NSE→BSE scrip codes extracted from official BSE links on Screener pages and stored with company metadata.
+- [x] Retry transient fetch failures and retain raw snapshots under data/cache; matching cached responses preserve original timestamps and expose fallback provenance. Invalid/uncached requests fail visibly.
+- [x] Packaged real TCS/INFY source snapshots plus original statement-page fixture; live 2-company ingestion completed and cached fallback verified.
 - **Done when:** `python -m ingest.all --tickers <portfolio>` fills the DB and the tests pass offline.
 
 ## Phase 3 — Mock network + graph engine (Sat morning, ~3h, no LLM)
-- [ ] `data/mock/investor.json`: the investor's alma maters, past employers, sectors
-- [ ] `data/mock/network.json`: ~40 synthetic people with employers (dates), education (years), expertise tags, relationship strength 1–5, last_contacted, and known-to-know edges
-- [ ] **Planted stories** (fill in after Phase 1):
-  - [ ] the incoming CFO at `<CO>` worked at `<ORG>` alongside the investor's ex-colleague `<X>` (overlap of 2+ years)
-  - [ ] contact `<Y>` works at a competitor or supplier of `<CO2>` (which had a material event)
-  - [ ] the investor's classmate `<Z>` studied with `<PROMOTER>`
-  - [ ] contact `<W>` not spoken to for 9 months; their former employer just reported results → reconnect nudge
-- [ ] `engine/network.py`: `resolve_person`, `work_overlap`, `study_overlap`, `paths_to(max_hops=2)` with strength score + explanation, `best_contact_for(company|sector)`, `expertise_map(theme)`, `reconnect_nudges(events)`
+- [x] data/mock/investor.json and network.json: 40 synthetic profiles, dated roles/education, expertise, strength, contact dates and recorded edges; contact storage/queries are owner-scoped with legacy migration.
+- [x] **Planted stories**, explicitly fictional and independently tested:
+  - [x] Riya (incoming MOCKIT CFO) and Neha overlapped at Harbor Finance; recorded path You → Neha → Riya.
+  - [x] Leela is a recorded supplier contact for SRF's synthetic capex event.
+  - [x] Devika's education dates overlap with fictional promoter Karan; recorded path is separate from attendance overlap.
+  - [x] Sameer last contacted in January; TCS's synthetic results produce a reconnect nudge.
+- [x] Pure engine/network.py functions: resolve_person, work_overlap, study_overlap, paths_to(max_hops=2), best_contact_for, expertise_map, reconnect_nudges. Unknown acquaintance is never promoted to a recorded edge.
 - **Done when:** a test exists for each planted story and passes.
 
 ## Phase 4 — Push engine (Sat afternoon, ~4–5h)
-- [ ] `classify.py`: BSE category + keyword rules → our categories; the cheap LLM only handles what the rules can't decide
-- [ ] `score.py`: attention score = filing type weight × materiality × the investor's preferences + network-link boost
-- [ ] `alerts.py`: the investor sets thresholds: volume > k× 20d average, |price move| > X%, and which filing types to watch
-- [ ] Enrichers:
-  - [ ] **Management change:** extract the incoming person → synthetic bio → network overlaps + paths
-  - [ ] **Results:** extract Revenue/EBITDA/PBT/PAT from the filing PDF (cheap model, JSON) → QoQ and YoY → **cross-check with screener**, flag mismatches over 2%
-  - [ ] **Material event** (M&A/capex/litigation): best contact + "why"
-  - [ ] **Other:** one-line summary (cheap model) or the bare filing, by priority
-- [ ] API: `GET /digest?from&to`, `GET /alerts`, `PUT /settings/alerts`
-- [ ] Pre-compute enrichments at ingest time, not when the investor views them
+- [x] Existing classifier keeps explicit overrides and keyword decisions; optional source-cited model extraction supplies classification only on a rule miss. Provider categories remain source metadata rather than trusted taxonomy.
+- [x] engine/push.py: type weight × materiality × investor category preference + capped network boost; expose score components and rank digest cards.
+- [x] Configurable close/volume thresholds, complete prior-20-observation baseline, category preferences and routine collapse.
+- [x] Enrichers:
+  - [x] Management: source-cited incoming name/title, conservative person resolution, labelled synthetic profile, dated overlaps and recorded paths; unmatched identities remain gaps.
+  - [x] Results: rule-first recognised PDF statements; model fallback selects validated source-line IDs. Preserve units/basis/periods, calculate QoQ/YoY in code and cross-check available Screener values at 2%; absent EBITDA remains absent.
+  - [x] Material events: explainable employee/industry contacts plus a distinct recorded supplier/competitor perspective when available.
+  - [x] Other filings: title-based fallback or source-cited model summary; methods are labelled.
+- [x] Preserve /api routes and add /digest?from&to, /alerts and /settings/alerts aliases; financials, graph, enrichment and usage endpoints available in /docs.
+- [x] Persist ingest-time enrichment; refresh deterministic cards on relevant data/settings/contact changes. GET digest never invokes a model. Model extraction is explicit via an enrichment request or refresh `enrich=true`/CLI --enrich.
 - **Done when:** the digest for the demo window returns ranked cards with all 3 hero enrichments.
 
 ## Phase 5 — Pull engine (Sat evening/night, ~5–6h)

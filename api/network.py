@@ -1,0 +1,63 @@
+import json
+from datetime import datetime, timedelta, timezone
+
+from fastapi import APIRouter, HTTPException, Query
+
+from engine.network import expertise_map, paths_to, reconnect_nudges, resolve_person
+from finn.models import Contact, Mode
+
+
+def load_people(db):
+    return [{"id": r["id"], **json.loads(r["payload"])} for r in db.all(
+        "SELECT id,payload FROM contacts WHERE owner_id=?", (db.owner_id,),
+    )]
+
+
+def investor(db):
+    return db.setting(f"investor:{db.owner_id}", {"id": "investor-" + db.owner_id, "name": "You", "knows": []})
+
+
+def router(db):
+    routes = APIRouter()
+
+    @routes.get("/api/network/investor", tags=["network"])
+    def get_investor():
+        return investor(db)
+
+    @routes.put("/api/network/investor", tags=["network"])
+    def update_investor(body: Contact):
+        ids = {p["id"] for p in load_people(db)}
+        if not set(body.knows) <= ids:
+            raise HTTPException(422, "Investor connections must reference contacts owned by this instance")
+        payload = {"id": "investor-" + db.owner_id, **body.model_dump(mode="json")}
+        db.set_setting(f"investor:{db.owner_id}", payload)
+        from finn.enrichment import refresh_cards
+        refresh_cards(db)
+        return payload
+
+    @routes.get("/api/network/paths", tags=["network"])
+    def paths(person_id: str):
+        people = load_people(db)
+        if person_id not in {p["id"] for p in people}:
+            raise HTTPException(404, "Person not found")
+        return {"paths": paths_to(people, investor(db), person_id),
+                "note": "Only recorded connections form paths; employment/education overlap is not acquaintance."}
+
+    @routes.post("/api/network/resolve", tags=["network"])
+    def resolve(body: Contact):
+        return {"matches": resolve_person(body.model_dump(mode="json"), load_people(db))}
+
+    @routes.get("/api/network/expertise", tags=["network"])
+    def expertise(theme: str = Query(min_length=1, max_length=200)):
+        return {"matches": expertise_map(load_people(db), theme)}
+
+    @routes.get("/api/network/reconnect", tags=["network"])
+    def reconnect(mode: Mode = "live"):
+        since = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+        events = [json.loads(r["payload"]) for r in db.all(
+            "SELECT payload FROM announcements WHERE mode=? AND julianday(published_at)>=julianday(?)",
+            (mode, since),
+        )]
+        return {"nudges": reconnect_nudges(load_people(db), events)}
+
+    return routes

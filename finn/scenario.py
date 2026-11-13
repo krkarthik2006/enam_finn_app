@@ -17,11 +17,14 @@ QUESTION = (
 
 def seed_workflow(db: Database):
     now = datetime.now(timezone.utc)
+    suffix = "" if db.owner_id == "local" else ":" + db.owner_id
+    target_id = TARGET + suffix
     company = Company(ticker=TICKER, name="Mock IT Services (fictional)", sector="IT services")
     db.execute("INSERT OR IGNORE INTO portfolio VALUES (?,?)", (TICKER, company.model_dump_json()))
     people = {
         TARGET: Contact(
             name="Riya Sen (fictional)",
+            direct_contact=False,
             roles=[Role(company=company.name, ticker=TICKER, title="Incoming CFO", start_year=2026)],
             notes="Subject of the synthetic appointment; not an introduction contact.",
         ),
@@ -44,10 +47,13 @@ def seed_workflow(db: Database):
             notes="Negative control: unrelated to this company, question and person.",
         ),
     }
+    people = {identifier + suffix: contact.model_copy(update={
+        "knows": [other + suffix for other in contact.knows],
+    }) for identifier, contact in people.items()}
     with db.connect() as conn:
         conn.executemany(
-            "INSERT OR IGNORE INTO contacts VALUES (?,?)",
-            [(identifier, contact.model_dump_json()) for identifier, contact in people.items()],
+            "INSERT OR IGNORE INTO contacts(id,payload,owner_id) VALUES (?,?,?)",
+            [(identifier, contact.model_dump_json(), db.owner_id) for identifier, contact in people.items()],
         )
     for kind, title, published, text in [
         ("annual_report", "SYNTHETIC MOCKIT FY2025 annual report", date(2025, 6, 1),
@@ -69,7 +75,7 @@ def seed_workflow(db: Database):
     event = save_announcement(db, Announcement(
         ticker=TICKER, title="SYNTHETIC: Appointment of CFO; IT services operating margins review",
         body="Fictional Riya Sen appointed CFO following a margin shortfall. All data is synthetic.",
-        published_at=now - timedelta(minutes=1), subject_person_id=TARGET, mode="demo",
+        published_at=now - timedelta(minutes=1), subject_person_id=target_id, mode="demo",
     ))
     # Stable event identity keeps repeated seeding from accumulating daily filing copies.
     db.execute(
@@ -86,15 +92,15 @@ def seed_workflow(db: Database):
     bars[-1] = Price(day=bars[-1].day, close=107, volume=3000)
     save_prices(db, PriceImport(ticker=TICKER, prices=bars, mode="demo"))
     return {
-        "mode": "demo", "ticker": TICKER, "subject_person_id": TARGET,
+        "mode": "demo", "ticker": TICKER, "subject_person_id": target_id,
         "announcement_id": event["id"],
         "research_request": {
             "ticker": TICKER, "question": QUESTION, "mode": "demo",
-            "person_id": TARGET, "include_trace": True,
+            "person_id": target_id, "include_trace": True,
         },
         "expected_contacts": {
-            "industry_expert": "workflow-expert", "company_insider": "workflow-insider",
-            "recorded_connection": "workflow-connector",
+            "industry_expert": "workflow-expert" + suffix, "company_insider": "workflow-insider" + suffix,
+            "recorded_connection": "workflow-connector" + suffix,
         },
         "expected_evidence": {"q2_guided_margin_percent": 22, "q2_actual_margin_percent": 20},
         "notice": "Company, people, relationships and financial figures are fictional. No messages are sent.",

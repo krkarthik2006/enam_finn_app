@@ -2,16 +2,17 @@ import json
 import re
 from datetime import date
 
+from engine.network import study_overlap
 from finn.db import Database
 
 
 def recommend(db: Database, ticker: str | None = None, theme: str = "", person_id: str | None = None):
-    contacts = [{"id": r["id"], **json.loads(r["payload"])} for r in db.all("SELECT * FROM contacts")]
+    contacts = [{"id": r["id"], **json.loads(r["payload"])} for r in db.all("SELECT * FROM contacts WHERE owner_id=?", (db.owner_id,))]
     target = next((c for c in contacts if c["id"] == person_id), None)
     tokens = set(re.findall(r"[a-z0-9]+", theme.lower())) - {"the", "and", "who", "can", "help", "with"}
     matches = []
     for contact in contacts:
-        if contact["id"] == person_id:
+        if contact["id"] == person_id or not contact.get("direct_contact", True):
             continue
         reasons, score, match_types = [], 0, set()
         for role in contact["roles"]:
@@ -28,6 +29,11 @@ def recommend(db: Database, ticker: str | None = None, theme: str = "", person_i
                 score += 3
                 match_types.add("industry_expert")
                 reasons.append(f"Listed expertise: {expertise}.")
+        for relation in contact.get("related_companies", []):
+            if ticker and relation["ticker"] == ticker:
+                score += 4
+                match_types.add(relation["kind"])
+                reasons.append(f"Recorded {relation['kind']} relationship to {ticker}.")
         relationship = None
         if target:
             if target["id"] in contact["knows"] or contact["id"] in target["knows"]:
@@ -50,9 +56,7 @@ def recommend(db: Database, ticker: str | None = None, theme: str = "", person_i
                         )
                         relationship = relationship or "possible_employment_overlap"
                         match_types.add("employment_overlap")
-            schools = set(s.casefold() for s in contact["education"]) & set(
-                s.casefold() for s in target["education"]
-            )
+            schools = study_overlap(contact, target)
             if schools:
                 score += 1
                 reasons.append(

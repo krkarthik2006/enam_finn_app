@@ -8,6 +8,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="FINN_", env_file=".env", extra="ignore")
 
     database_path: Path = Path("data/finn.sqlite3")
+    cache_path: Path = Path("data/cache/live")
+    offline_sources: bool = False
+    owner_id: str = Field(default="local", min_length=1, max_length=100)
     glm_api_key: SecretStr = SecretStr("")
     glm_base_url: str = "https://inference.hyde.tech/v1"
     glm_model: str = "hyde/glm-5.3-flash"

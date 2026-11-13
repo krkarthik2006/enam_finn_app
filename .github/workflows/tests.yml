@@ -33,7 +33,7 @@ jobs:
       - name: Install locked dependencies
         run: uv sync --locked --group dev
       - name: Lint
-        run: uv run --no-sync ruff check finn tests scripts
+        run: uv run --no-sync ruff check finn engine ingest api tests scripts
       - name: Test backend and acceptance checks
         run: uv run --no-sync pytest -m "not live" -q --junitxml=reports/backend.xml
       - name: Save test results
@@ -67,7 +67,7 @@ jobs:
           FINN_GLM_BASE_URL: ${{ vars.FINN_GLM_BASE_URL || 'https://inference.hyde.tech/v1' }}
           FINN_GLM_MODEL: ${{ vars.FINN_GLM_MODEL || 'hyde/glm-5.3-flash' }}
         run: >-
-          uv run --no-sync pytest tests/test_live_workflow.py -q
+          uv run --no-sync pytest -m live -q
           --basetemp="${{ runner.temp }}/finn-live"
           --junitxml=reports/live.xml
       - name: Save live results and fictional research responses

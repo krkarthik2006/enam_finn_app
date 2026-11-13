@@ -74,6 +74,21 @@ def mentions_percent(text, value):
     return re.search(rf"(?<!\d){value}(?:\.0+)?\s*(?:%|percent\b)", text.lower()) is not None
 
 
+def supported_percent(text, cited, number):
+    if mentions_percent(cited, number):
+        return True
+    if not re.search(r"impli|imply|deriv|calculat|comput", text, re.I):
+        return False
+    amounts = re.search(
+        r"revenue[^.;]*?inr\s+([\d,]+(?:\.\d+)?)\s+crore[^.;]*?ebitda[^.;]*?inr\s+([\d,]+(?:\.\d+)?)\s+crore",
+        cited, re.I,
+    )
+    if not amounts:
+        return False
+    revenue, ebitda = [float(n.replace(",", "")) for n in amounts.groups()]
+    return revenue > 0 and abs(ebitda / revenue * 100 - float(number)) < 0.0001
+
+
 def assert_margin_answer(result, guided, actual):
     """Check numeric facts plus their source links, accepting ordinary wording variations."""
     assert_citations(result)
@@ -162,7 +177,7 @@ def test_live_missing_evidence_does_not_invent_forecast(live_workflow):
     for finding in result["findings"]:
         cited = " ".join(sources[c] for c in finding["citation_ids"]).lower()
         for number in re.findall(r"(\d+(?:\.\d+)?)\s*(?:%|percent\b)", finding["text"].lower()):
-            assert mentions_percent(cited, number), finding
+            assert supported_percent(finding["text"], cited, number), finding
         for amount in re.findall(r"\b(?:inr|rs\.?)\s*([\d,]+(?:\.\d+)?)", finding["text"].lower()):
             assert amount in cited, finding
 

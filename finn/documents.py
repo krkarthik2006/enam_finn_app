@@ -50,6 +50,7 @@ def save_document(db: Database, item: Document, pages: list[tuple[int | None, st
             "DELETE FROM chunk_search WHERE id IN (SELECT id FROM chunks WHERE document_id=?)", (identifier,)
         )
         conn.execute("DELETE FROM chunks WHERE document_id=?", (identifier,))
+        conn.execute("DELETE FROM doc_pages WHERE document_id=?", (identifier,))
         conn.execute(
             "INSERT OR REPLACE INTO documents VALUES (?,?,?,?,?,?,?,?)",
             (
@@ -64,6 +65,9 @@ def save_document(db: Database, item: Document, pages: list[tuple[int | None, st
             ),
         )
         conn.executemany("INSERT INTO chunks VALUES (?,?,?,?,?)", chunks)
+        conn.executemany("INSERT INTO doc_pages VALUES (?,?,?)", [
+            (identifier, page, text) for page, text in pages if page is not None
+        ])
         conn.executemany("INSERT INTO chunk_search(id,text) VALUES (?,?)", [(c[0], c[4]) for c in chunks])
     return {
         "id": identifier,
@@ -85,6 +89,7 @@ def retrieve(db: Database, ticker: str, question: str, mode: str):
     if query:
         rows = db.all(
             base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? "
+            "AND d.kind IN ('annual_report','transcript') "
             "AND chunk_search MATCH ? ORDER BY bm25(chunk_search),d.published_on DESC LIMIT 60",
             (*args, query),
         )
@@ -93,7 +98,8 @@ def retrieve(db: Database, ticker: str, question: str, mode: str):
     # Include context when a question uses vocabulary that does not literally occur in the source.
     if not rows:
         rows = db.all(
-            base + " WHERE d.ticker=? AND d.mode=? ORDER BY d.published_on DESC,c.position LIMIT 8", args
+            base + " WHERE d.ticker=? AND d.mode=? AND d.kind IN ('annual_report','transcript') "
+            "ORDER BY d.published_on DESC,c.position LIMIT 8", args
         )
     # Give multiple periods a chance to appear instead of filling context with one long annual report.
     selected, remaining, seen = [], [], set()

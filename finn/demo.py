@@ -125,8 +125,12 @@ def seed(db: Database):
         ),
     ]
     with db.connect() as conn:
+        suffix = "" if db.owner_id == "local" else ":" + db.owner_id
         conn.executemany(
-            "INSERT OR IGNORE INTO contacts VALUES (?,?)", [(i, c.model_dump_json()) for i, c in people]
+            "INSERT OR IGNORE INTO contacts(id,payload,owner_id) VALUES (?,?,?)", [
+                (i + suffix, c.model_copy(update={"knows": [k + suffix for k in c.knows]}).model_dump_json(), db.owner_id)
+                for i, c in people
+            ]
         )
     for index, (ticker, _, _) in enumerate(COMPANIES):
         bars = []

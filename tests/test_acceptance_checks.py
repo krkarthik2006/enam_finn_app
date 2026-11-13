@@ -1,7 +1,7 @@
 """Ensure the live-test numeric oracle rejects bad answers and accepts valid citations."""
 
 import pytest
-from test_live_workflow import assert_margin_answer
+from test_live_workflow import assert_margin_answer, supported_percent
 
 
 def answer(text, citations=None):
@@ -38,3 +38,11 @@ def test_margin_oracle_accepts_supported_wording_and_restatement(text):
 def test_margin_oracle_rejects_wrong_facts_units_direction_or_sources(text, citations):
     with pytest.raises(AssertionError):
         assert_margin_answer(answer(text, citations), 22, 20)
+
+
+def test_missing_evidence_oracle_allows_only_correct_explicitly_derived_margin():
+    cited = "FY2025 revenue was INR 4,000 crore and EBITDA was INR 800 crore."
+    assert supported_percent("FY2025 margin was 20% implied", cited, "20")
+    assert supported_percent("FY2025 figures implying ~20% EBITDA margin", cited, "20")
+    assert not supported_percent("FY2025 margin was 21% implied", cited, "21")
+    assert not supported_percent("Q3 forecast was 20%", cited, "20")

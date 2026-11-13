@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from finn.db import Database
+from finn.enrichment import save_card
 from finn.models import AlertSettings, Announcement, PriceImport
 from finn.network import recommend
 
@@ -57,6 +58,7 @@ def save_announcement(db: Database, item: Announcement):
             json.dumps(payload),
         ),
     )
+    save_card(db, payload)
     return payload
 
 
@@ -66,7 +68,9 @@ def save_prices(db: Database, item: PriceImport):
             "INSERT OR REPLACE INTO prices VALUES (?,?,?,?,?)",
             [(item.ticker, p.day.isoformat(), item.mode, p.close, p.volume) for p in item.prices],
         )
-    return {"ticker": item.ticker, "count": len(item.prices), "mode": item.mode}
+    if item.source:
+        db.set_setting(f"prices_source:{item.mode}:{item.ticker}", item.source)
+    return {"ticker": item.ticker, "count": len(item.prices), "mode": item.mode, "source": item.source}
 
 
 def digest(db: Database, since: datetime, until: datetime, mode: str, include_routine: bool):
@@ -84,12 +88,16 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
         if item["ticker"] not in tickers:
             continue
         material = item["category"] in settings.material_categories
+        stored = db.one("SELECT payload FROM enrichments WHERE event_id=? AND owner_id=?", (item["id"], db.owner_id))
+        card = json.loads(stored["payload"]) if stored else {}
         item.update(
             {
                 "type": "announcement",
                 "priority": "high" if material else "routine",
-                "summary": item["title"],
-                "summary_method": "filing_title",
+                "summary": card.get("summary", item["title"]),
+                "summary_method": card.get("summary_method", "filing_title"),
+                "enrichment": card,
+                "attention_score": card.get("attention_score", {"value": 1}),
                 "network": recommend(
                     db, ticker=item["ticker"], theme=item["title"] + " " + item["body"],
                     person_id=item.get("subject_person_id"),
@@ -133,7 +141,9 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
                     "ticker": ticker,
                     "type": "market_alert",
                     "mode": mode,
+                    "source": db.setting(f"prices_source:{mode}:{ticker}", None),
                     "priority": "high",
+                    "attention_score": {"value": 5, "method": "market_threshold"},
                     "published_at": timestamp.isoformat(),
                     "summary": " ".join(reasons),
                     "price_change_percent": round(change, 4),
@@ -143,7 +153,7 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
                     "network": recommend(db, ticker=ticker)[:3],
                 }
             )
-    items.sort(key=lambda i: datetime.fromisoformat(i["published_at"]), reverse=True)
+    items.sort(key=lambda i: (i["attention_score"]["value"], datetime.fromisoformat(i["published_at"])), reverse=True)
     routine.sort(key=lambda i: datetime.fromisoformat(i["published_at"]), reverse=True)
     return {
         "mode": mode,

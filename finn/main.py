@@ -11,11 +11,15 @@ from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
+from api.financials import router as financial_router
+from api.network import router as network_router
 from finn.alerts import digest, save_announcement, save_prices
 from finn.config import Settings
 from finn.db import Database
 from finn.demo import seed
 from finn.documents import extract_pdf, save_document
+from finn.enrichment import extract_filing, refresh_cards
+from finn.mock_network import seed_network
 from finn.models import (
     AlertSettings,
     Announcement,
@@ -29,6 +33,7 @@ from finn.models import (
     normalize_ticker,
 )
 from finn.network import recommend
+from finn.phase_demo import seed_phases
 from finn.pipeline import run_refresh
 from finn.providers import ProviderError, Providers
 from finn.research import Research
@@ -37,7 +42,7 @@ from finn.scenario import seed_workflow
 
 def create_app(settings: Settings | None = None):
     settings = settings or Settings()
-    db = Database(settings.database_path)
+    db = Database(settings.database_path, settings.owner_id)
     providers = Providers(settings)
     research = Research(db, settings)
     security = HTTPBearer(auto_error=False)
@@ -52,6 +57,11 @@ def create_app(settings: Settings | None = None):
             return normalize_ticker(value)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
+
+    def validate_connections(body):
+        owned = {r["id"] for r in db.all("SELECT id FROM contacts WHERE owner_id=?", (db.owner_id,))}
+        if not set(body.knows) <= owned:
+            raise HTTPException(422, "Connections must reference contacts owned by this investor")
 
     def enqueue(request: Refresh):
         tickers = request.tickers or [r["ticker"] for r in db.all("SELECT ticker FROM portfolio")]
@@ -139,6 +149,8 @@ def create_app(settings: Settings | None = None):
         }
 
     protected = [Depends(authorize)]
+    app.include_router(financial_router(db), dependencies=protected)
+    app.include_router(network_router(db), dependencies=protected)
 
     @app.get("/api/usage", dependencies=protected, tags=["system"])
     def model_usage():
@@ -156,6 +168,16 @@ def create_app(settings: Settings | None = None):
     def workflow_seed():
         return seed_workflow(db)
 
+    @app.post("/api/demo/network", dependencies=protected, tags=["demo"])
+    def network_seed():
+        result = seed_network(db)
+        refresh_cards(db)
+        return result
+
+    @app.post("/api/demo/phases", dependencies=protected, tags=["demo"])
+    def phase_seed():
+        return seed_phases(db)
+
     @app.get("/api/portfolio", dependencies=protected, tags=["portfolio"])
     def get_portfolio():
         return {
@@ -172,6 +194,7 @@ def create_app(settings: Settings | None = None):
                 "INSERT INTO portfolio VALUES (?,?)",
                 [(c.ticker, c.model_dump_json()) for c in body.companies],
             )
+        refresh_cards(db)
         return body
 
     @app.get("/api/alerts/settings", dependencies=protected, tags=["push"])
@@ -181,6 +204,7 @@ def create_app(settings: Settings | None = None):
     @app.put("/api/alerts/settings", dependencies=protected, tags=["push"])
     def put_alert_settings(body: AlertSettings):
         db.set_setting("alerts", body.model_dump())
+        refresh_cards(db)
         return body
 
     @app.get("/api/digest", dependencies=protected, tags=["push"])
@@ -202,7 +226,36 @@ def create_app(settings: Settings | None = None):
 
     @app.post("/api/announcements", dependencies=protected, tags=["ingestion"])
     def import_announcement(body: Announcement):
+        if body.subject_person_id and not db.one("SELECT id FROM contacts WHERE id=? AND owner_id=?",
+                                                 (body.subject_person_id, db.owner_id)):
+            raise HTTPException(422, "Subject person must belong to this investor")
         return save_announcement(db, body)
+
+    @app.post("/api/announcements/{event_id}/enrich", dependencies=protected, tags=["ingestion"])
+    def enrich_filing(event_id: str):
+        event = db.one("SELECT payload FROM announcements WHERE id=?", (event_id,))
+        if not event:
+            raise HTTPException(404, "Filing not found")
+        try:
+            return extract_filing(db, json.loads(event["payload"]), providers)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.get("/digest", dependencies=protected, tags=["push"])
+    def digest_alias(from_time: datetime | None = Query(None, alias="from"),
+                     to_time: datetime | None = Query(None, alias="to"), mode: Mode = "live",
+                     include_routine: bool = False):
+        return get_digest(from_time, to_time, mode, include_routine)
+
+    @app.get("/api/alerts", dependencies=protected, tags=["push"])
+    @app.get("/alerts", dependencies=protected, tags=["push"])
+    def get_alerts(mode: Mode = "live"):
+        result = get_digest(None, None, mode, False)
+        return {"mode": mode, "alerts": [i for i in result["items"] if i["type"] == "market_alert"]}
+
+    @app.put("/settings/alerts", dependencies=protected, tags=["push"])
+    def alert_settings_alias(body: AlertSettings):
+        return put_alert_settings(body)
 
     @app.post("/api/prices", dependencies=protected, tags=["ingestion"])
     def import_prices(body: PriceImport):
@@ -222,7 +275,7 @@ def create_app(settings: Settings | None = None):
     @app.post("/api/refresh", status_code=202, dependencies=protected, tags=["ingestion"])
     def refresh(body: Refresh, background: BackgroundTasks):
         report = enqueue(body)
-        background.add_task(run_refresh, db, providers, report["id"], report["tickers"], body.days)
+        background.add_task(run_refresh, db, providers, report["id"], report["tickers"], body.days, body.fundamentals, body.enrich)
         return report
 
     @app.get("/api/refresh", dependencies=protected, tags=["ingestion"])
@@ -253,7 +306,9 @@ def create_app(settings: Settings | None = None):
                 if not body.url:
                     raise ValueError("Provide primary-source text or a PDF URL")
                 pages = extract_pdf(providers.download(body.url))
-            return save_document(db, body, pages)
+            result = save_document(db, body, pages)
+            result["source"] = providers.cache.observations[-1] if pages and providers.cache.observations else None
+            return result
         except httpx.HTTPError as exc:
             raise ProviderError("Document download failed") from exc
         except ValueError as exc:
@@ -278,11 +333,12 @@ def create_app(settings: Settings | None = None):
             )
             conn.execute("DELETE FROM documents WHERE id=?", (document_id,))
             conn.execute("DELETE FROM research_cache")
+            conn.execute("DELETE FROM llm_cache")
         return {"deleted": document_id}
 
     @app.post("/api/research", dependencies=protected, tags=["research"])
     def ask(body: ResearchQuestion):
-        if body.person_id and not db.one("SELECT id FROM contacts WHERE id=?", (body.person_id,)):
+        if body.person_id and not db.one("SELECT id FROM contacts WHERE id=? AND owner_id=?", (body.person_id, db.owner_id)):
             raise HTTPException(404, "Person not found")
         return research.answer(body)
 
@@ -290,33 +346,42 @@ def create_app(settings: Settings | None = None):
     def contacts():
         return {
             "contacts": [
-                {"id": r["id"], **json.loads(r["payload"])} for r in db.all("SELECT * FROM contacts")
+                {"id": r["id"], **json.loads(r["payload"])} for r in db.all("SELECT * FROM contacts WHERE owner_id=?", (db.owner_id,))
             ]
         }
 
     @app.post("/api/network", status_code=201, dependencies=protected, tags=["network"])
     def add_contact(body: Contact):
+        validate_connections(body)
         identifier = str(uuid.uuid4())
-        db.execute("INSERT INTO contacts VALUES (?,?)", (identifier, body.model_dump_json()))
+        db.execute("INSERT INTO contacts(id,payload,owner_id) VALUES (?,?,?)", (identifier, body.model_dump_json(), db.owner_id))
+        refresh_cards(db)
         return {"id": identifier, **body.model_dump(mode="json")}
 
     @app.put("/api/network/{contact_id}", dependencies=protected, tags=["network"])
     def update_contact(contact_id: str, body: Contact):
-        if not db.one("SELECT id FROM contacts WHERE id=?", (contact_id,)):
+        if not db.one("SELECT id FROM contacts WHERE id=? AND owner_id=?", (contact_id, db.owner_id)):
             raise HTTPException(404, "Contact not found")
-        db.execute("UPDATE contacts SET payload=? WHERE id=?", (body.model_dump_json(), contact_id))
+        validate_connections(body)
+        db.execute("UPDATE contacts SET payload=? WHERE id=? AND owner_id=?", (body.model_dump_json(), contact_id, db.owner_id))
+        refresh_cards(db)
         return {"id": contact_id, **body.model_dump(mode="json")}
 
     @app.delete("/api/network/{contact_id}", dependencies=protected, tags=["network"])
     def delete_contact(contact_id: str):
         with db.connect() as conn:
-            if not conn.execute("SELECT id FROM contacts WHERE id=?", (contact_id,)).fetchone():
+            if not conn.execute("SELECT id FROM contacts WHERE id=? AND owner_id=?", (contact_id, db.owner_id)).fetchone():
                 raise HTTPException(404, "Contact not found")
-            conn.execute("DELETE FROM contacts WHERE id=?", (contact_id,))
-            for row in conn.execute("SELECT id,payload FROM contacts").fetchall():
+            conn.execute("DELETE FROM contacts WHERE id=? AND owner_id=?", (contact_id, db.owner_id))
+            for row in conn.execute("SELECT id,payload FROM contacts WHERE owner_id=?", (db.owner_id,)).fetchall():
                 person = json.loads(row["payload"])
                 person["knows"] = [i for i in person["knows"] if i != contact_id]
-                conn.execute("UPDATE contacts SET payload=? WHERE id=?", (json.dumps(person), row["id"]))
+                conn.execute("UPDATE contacts SET payload=? WHERE id=? AND owner_id=?", (json.dumps(person), row["id"], db.owner_id))
+        profile = db.setting(f"investor:{db.owner_id}", None)
+        if profile:
+            profile["knows"] = [identifier for identifier in profile.get("knows", []) if identifier != contact_id]
+            db.set_setting(f"investor:{db.owner_id}", profile)
+        refresh_cards(db)
         return {"deleted": contact_id}
 
     @app.get("/api/network/recommendations", dependencies=protected, tags=["network"])
@@ -325,7 +390,7 @@ def create_app(settings: Settings | None = None):
     ):
         if not any((symbol, theme, person_id)):
             raise HTTPException(422, "Provide symbol, theme or person_id")
-        if person_id and not db.one("SELECT id FROM contacts WHERE id=?", (person_id,)):
+        if person_id and not db.one("SELECT id FROM contacts WHERE id=? AND owner_id=?", (person_id, db.owner_id)):
             raise HTTPException(404, "Person not found")
         return {"matches": recommend(db, ticker(symbol) if symbol else None, theme, person_id)}
 

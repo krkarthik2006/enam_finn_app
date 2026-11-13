@@ -1,0 +1,1646 @@
+{
+  "companies": [
+    {
+      "ticker": "POWERGRID",
+      "name": "Power Grid Corporation of India Ltd.",
+      "sector": "Power",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_06112026225441_BSENSEReg30Apptt06112026_s.pdf",
+          "published_at": "2026-11-06T17:25:01+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_03112026120246_BSENSEMerger.pdf",
+          "published_at": "2026-11-03T06:32:56+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_01112026200821_BSENSEReg30FileFinal.pdf",
+          "published_at": "2026-11-01T14:41:02+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_12102026214537_JamKhambhaliya.pdf",
+          "published_at": "2026-10-12T16:15:43+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_12102026214346_LakadiaC.pdf",
+          "published_at": "2026-10-12T16:14:19+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_12102026173004_BSENSEReg30acquisitionDt12102026REC.pdf",
+          "published_at": "2026-10-12T12:00:29+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_30092026200406_BSENSEReg30dt30092026_Final.pdf",
+          "published_at": "2026-09-30T14:34:25+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_23092026191217_BSENSEReg30Acqdt23092026_v2signed.pdf",
+          "published_at": "2026-09-23T13:44:23+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_28082026181534_BSENSEReg30dt28082026Acq_v1.pdf",
+          "published_at": "2026-08-28T12:46:18+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Cessation",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_20082026134236_BSENSEReg30dt20082026Outcome.pdf",
+          "published_at": "2026-08-20T08:13:21+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_18082026154055_BSENSEReg30dt18082026.pdf",
+          "published_at": "2026-08-18T10:13:10+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "TATASTEEL",
+      "name": "Tata Steel Ltd.",
+      "sector": "Metals & Mining",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_07112026154336_NSEBSE_CPDPL.pdf",
+          "published_at": "2026-11-07T10:15:33+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_07112026130531_BOARDOUTCOME-NOV7.pdf",
+          "published_at": "2026-11-07T07:36:33+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Amalgamation/Merger",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_03112026124745_BSENSE.pdf",
+          "published_at": "2026-11-03T07:19:40+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Amalgamation/Merger",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_15102026192421_BSENSE_Signed.pdf",
+          "published_at": "2026-10-15T13:54:44+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Amalgamation/Merger",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_01102026205831_BSENSE_-_RIL_Order.pdf",
+          "published_at": "2026-10-01T15:31:37+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_29092026180406_BSENSE-TSH_funding.pdf",
+          "published_at": "2026-09-29T12:36:31+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_29092026164617_BSENSE_Signed.pdf",
+          "published_at": "2026-09-29T11:17:07+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_18092026201353_BSENSE.pdf",
+          "published_at": "2026-09-18T14:44:37+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_27082026223434_BSENSE-TSH_funding.pdf",
+          "published_at": "2026-08-27T17:06:07+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_26082026144016_BSENSE_-_890_crore.pdf",
+          "published_at": "2026-08-26T09:17:21+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_26082026142913_BSENSE_-_Sukinda_August_26_2026.pdf",
+          "published_at": "2026-08-26T09:03:57+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_25082026100839_BSENSE.pdf",
+          "published_at": "2026-08-25T04:46:37+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/NIDHIFADNAVIS_20082026192916_BSENSE_signed.pdf",
+          "published_at": "2026-08-20T14:00:35+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "ASIANPAINT",
+      "name": "Asian Paints Ltd.",
+      "sector": "Consumer Durables",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_06112026220521_SE_intimation_-_Appointment_of_ID.pdf",
+          "published_at": "2026-11-06T16:36:58+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_29102026140936_OutcomeofBM29102026signed.pdf",
+          "published_at": "2026-10-29T08:40:22+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_29102026140213_OutcomeofBM29102026signed.pdf",
+          "published_at": "2026-10-29T08:34:43+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Shareholders meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_07102026204250_SE_Intimation_-_Postal_ballot_Notice.pdf",
+          "published_at": "2026-10-07T15:14:07+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_09092026222531_SEintimationAppointmentofNED09092026signed.pdf",
+          "published_at": "2026-09-09T16:55:41+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_07092026144607_SE_Appointment_Leo_Puri_-_ID_and_chair_signed.pdf",
+          "published_at": "2026-09-07T09:16:45+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/ASIANPAINT_07092026144547_SE_Appointment_Leo_Puri_-_ID_and_chair_signed.pdf",
+          "published_at": "2026-09-07T09:16:45+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "ULTRACEMCO",
+      "name": "UltraTech Cement Ltd.",
+      "sector": "Construction Materials",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO_ROID_100834_KMP_Doc.zip",
+          "published_at": "2026-10-19T10:44:32+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO_ROID_100832_KMP_Doc.zip",
+          "published_at": "2026-10-19T10:37:59+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO1_19102026135017_SE_Intimation_Change_in_board_composition.pdf",
+          "published_at": "2026-10-19T08:20:27+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO1_19102026134508_Outcome_of_BM_-_Financial_Results.pdf",
+          "published_at": "2026-10-19T08:15:47+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO1_11092026120313_SEIntimationCMO.pdf",
+          "published_at": "2026-09-11T06:35:58+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/ULTRACEMCO1_21082026180343_UHG_Holdings_IFSC_Private_Limited_SE_disclosure_21082026.pdf",
+          "published_at": "2026-08-21T12:34:14+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "BSE",
+      "name": "BSE Ltd.",
+      "sector": "Financial Services",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_04112026180514_NSEINTIMATION.pdf",
+          "published_at": "2026-11-04T12:35:34+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_04112026175851_NSEINTIMATION.pdf",
+          "published_at": "2026-11-04T12:31:51+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_21102026130745_NSEintimation.pdf",
+          "published_at": "2026-10-21T07:38:07+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_11092026174820_NSEintimation.pdf",
+          "published_at": "2026-09-11T12:18:55+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_10092026180312_NSEIntimation.pdf",
+          "published_at": "2026-09-10T12:33:37+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/BSE1_18082026125015_NSEintimation.pdf",
+          "published_at": "2026-08-18T07:23:32+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "MAXHEALTH",
+      "name": "Max Healthcare Institute Ltd.",
+      "sector": "Healthcare",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_03112026221201_SE_Disclosure.pdf",
+          "published_at": "2026-11-03T16:44:12+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Copy of Newspaper Publication",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_31102026205106_SE_Intimation_Newspaper_Publication.pdf",
+          "published_at": "2026-10-31T15:22:14+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Change in Management",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_30102026145418_Outcome_BM.pdf",
+          "published_at": "2026-10-30T09:24:35+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_30102026144248_Outcome_BM.pdf",
+          "published_at": "2026-10-30T09:14:42+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_29102026212151_SE_Disclosure.pdf",
+          "published_at": "2026-10-29T15:54:53+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_29092026223824_SE_Disclosure.pdf",
+          "published_at": "2026-09-29T17:09:15+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_11092026160125_SE_Disclosure_Kalinga_Hearing.pdf",
+          "published_at": "2026-09-11T10:32:00+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_03092026152852_SE_Disclosure.pdf",
+          "published_at": "2026-09-03T09:59:51+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/MAXHEALTH_19082026220424_SE_Disclosure.pdf",
+          "published_at": "2026-08-19T16:35:58+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "TVSMOTOR",
+      "name": "TVS Motor Company Ltd.",
+      "sector": "Automobile and Auto Components",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_ROID_104748_KMP_Doc.zip",
+          "published_at": "2026-11-13T09:44:31+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_13112026150251_TVSM_SMP_intimationSD.pdf",
+          "published_at": "2026-11-13T09:33:11+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_28102026152125_STPL_AcquisitionSD.pdf",
+          "published_at": "2026-10-28T09:51:34+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_28102026151607_TVSM_SchemeSD.pdf",
+          "published_at": "2026-10-28T09:46:16+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_28102026145930_TVSMQ2FY27ResultsoutcomeSD.pdf",
+          "published_at": "2026-10-28T09:31:47+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_28082026101912_TVSMNSEBSEMANAGEMENTSD.pdf",
+          "published_at": "2026-08-28T04:51:50+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "CGPOWER",
+      "name": "CG Power and Industrial Solutions Ltd.",
+      "sector": "Capital Goods",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_23102026142554_OutcomeoftheBoardMeeting23102026.pdf",
+          "published_at": "2026-10-23T08:56:10+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_30092026213339_Disclosure_on_change_in_SMP_300926.pdf",
+          "published_at": "2026-09-30T16:04:53+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_01092026113412_SE_Intimation_SMP_Appt.pdf",
+          "published_at": "2026-09-01T06:10:47+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_20082026105341_SE_Intimitaion_Tosil_20_08_26.pdf",
+          "published_at": "2026-08-20T05:24:18+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_19082026150441_SE_Intimitaion_Outcome_of_BM.pdf",
+          "published_at": "2026-08-19T09:35:26+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/CGPOWER_17082026144832_SE_Tosil_170826.pdf",
+          "published_at": "2026-08-17T09:21:03+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "VBL",
+      "name": "Varun Beverages Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_30102026114937_Outcome.pdf",
+          "published_at": "2026-10-30T06:20:01+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_30092026214014_Update_Crickely.pdf",
+          "published_at": "2026-09-30T16:10:51+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_ROID_98921_KMP_Doc.zip",
+          "published_at": "2026-09-24T11:36:24+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_24092026170034_SMPChange.pdf",
+          "published_at": "2026-09-24T11:30:59+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_25082026162007_Outcome.pdf",
+          "published_at": "2026-08-25T10:51:24+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/VBL_17082026202812_Update_TwizzaMerger.pdf",
+          "published_at": "2026-08-17T14:58:40+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "TRENT",
+      "name": "Trent Ltd.",
+      "sector": "Consumer Services",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Copy of Newspaper Publication",
+          "url": "https://nsearchives.nseindia.com/corporate/TRENT_02112026132637_Q2FY27_Financial_Results_-_Newspaper_Publication.pdf",
+          "published_at": "2026-11-02T07:56:56+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/TRENT_29102026163044_AppointmentofDirector.pdf",
+          "published_at": "2026-10-29T11:02:13+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/TRENT_29102026163140_AppointmentofDirector.pdf",
+          "published_at": "2026-10-29T11:02:13+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/TRENT_ROID_100856_KMP_Doc.zip",
+          "published_at": "2026-10-19T11:55:08+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/TRENT_18102026184315_Intimation_of_Resignation_of_NED.pdf",
+          "published_at": "2026-10-18T13:17:05+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "GAIL",
+      "name": "GAIL (India) Ltd.",
+      "sector": "Oil Gas & Consumable Fuels",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/DEVIKA_30102026143000_UFR.pdf",
+          "published_at": "2026-10-30T09:05:06+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/GAIL_05102026170439_ShriRajeevKumar.pdf",
+          "published_at": "2026-10-05T11:34:51+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/GAIL_19092026155331_Letter_Director.pdf",
+          "published_at": "2026-09-19T10:23:37+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/GAIL_09092026172555_Auditor.pdf",
+          "published_at": "2026-09-09T11:56:42+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/GAIL_09092026172313_Auditor.pdf",
+          "published_at": "2026-09-09T11:56:42+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "PIDILITIND",
+      "name": "Pidilite Industries Ltd.",
+      "sector": "Chemicals",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Copy of Newspaper Publication",
+          "url": "https://nsearchives.nseindia.com/corporate/Nisha_30102026141126_SEIntimationUFRSep2026finalsigned.pdf",
+          "published_at": "2026-10-30T08:42:13+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/Nisha_28102026185331_SEIntimationUFRfinalsigned.pdf",
+          "published_at": "2026-10-28T13:24:17+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/Nisha_09102026112953_SEIntimationAppointmentofSMPsigned.pdf",
+          "published_at": "2026-10-09T06:01:45+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/PIDILITIND_ROID_97132_KMP_Doc.zip",
+          "published_at": "2026-08-26T04:57:57+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/Nisha_25082026155407_SEintimationVivekSharmaresignationsigned.pdf",
+          "published_at": "2026-08-25T10:24:57+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "WIPRO",
+      "name": "Wipro Ltd.",
+      "sector": "Information Technology",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_06112026190358_SEintimation06112026.pdf",
+          "published_at": "2026-11-06T13:35:22+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_16102026083110_Reg30SEIntimation16102026.pdf",
+          "published_at": "2026-10-16T03:01:42+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_15102026154647_Reg33Financials.pdf",
+          "published_at": "2026-10-15T10:17:35+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Amalgamation/Merger",
+          "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_03102026155257_Reg30SEIntimation03102026.pdf",
+          "published_at": "2026-10-03T10:23:23+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_30092026153230_Reg30SEIntimation30092026.pdf",
+          "published_at": "2026-09-30T10:07:34+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "IDEA",
+      "name": "Vodafone Idea Ltd.",
+      "sector": "Telecommunication",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/IDEA_12112026184039_SEIntimationFinancialResults12112026.pdf",
+          "published_at": "2026-11-12T13:11:13+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/IDEA_16102026180102_SE_Intimation_COO_ApptSIGNED.pdf",
+          "published_at": "2026-10-16T12:31:49+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Shareholders meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/IDEA_21092026181857_VILSEIntimationPostalBallotNotice21092026signed.pdf",
+          "published_at": "2026-09-21T12:52:23+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/IDEA_15092026140606_SEIntimationApptofGopika15092026Signed.pdf",
+          "published_at": "2026-09-15T08:45:18+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "MUTHOOTFIN",
+      "name": "Muthoot Finance Ltd.",
+      "sector": "Financial Services",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_31102026151723_MFIN_BM_Outcome_Cover_Final-sd.pdf",
+          "published_at": "2026-10-31T09:49:14+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_01102026181354_Appointment_of_Directors_SD.pdf",
+          "published_at": "2026-10-01T12:49:45+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_01102026181347_Appointment_of_Directors_SD.pdf",
+          "published_at": "2026-10-01T12:49:45+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_01102026181341_Appointment_of_Directors_SD.pdf",
+          "published_at": "2026-10-01T12:49:45+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_09092026180915_MFIN_Reg_30_AAF_Right_issue_SD.pdf",
+          "published_at": "2026-09-09T12:39:30+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Amalgamation/Merger",
+          "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_31082026155537_OutcomeBM31826sd.pdf",
+          "published_at": "2026-08-31T10:26:32+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "CUMMINSIND",
+      "name": "Cummins India Ltd.",
+      "sector": "Capital Goods",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "results",
+          "title": "Copy of Newspaper Publication",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_06112026172100_SEIntimationNewspaperFRfinal.pdf",
+          "published_at": "2026-11-06T11:51:42+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_04112026223607_SEintimation_OutcomeFR_04112026.pdf",
+          "published_at": "2026-11-04T17:08:38+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_08102026182130_SEintimationBM08102026.pdf",
+          "published_at": "2026-10-08T12:51:42+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Appointment",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_02092026175031_SEintimationSMPAppt01092026.pdf",
+          "published_at": "2026-09-02T12:20:45+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_ROID_96803_KMP_Doc.zip",
+          "published_at": "2026-08-20T12:11:38+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_20082026172933_SEintimation20082026.pdf",
+          "published_at": "2026-08-20T11:59:42+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "name": "Sun Pharmaceutical Industries Ltd.",
+      "sector": "Healthcare",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "management_change",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_30102026151827_BMOutcome30102026_Conclusion.pdf",
+          "published_at": "2026-10-30T09:48:46+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_30102026141321_BMOutcomeFinancialoct26signed.pdf",
+          "published_at": "2026-10-30T08:45:10+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation of Director/KMP/SMP",
+          "url": "https://nsearchives.nseindia.com/corporate/SUNPHARMA_ROID_100278_KMP_Doc.zip",
+          "published_at": "2026-10-12T15:04:43+00:00"
+        },
+        {
+          "category": "management_change",
+          "title": "Resignation",
+          "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_12102026200413_BMOutcome12October2026.pdf",
+          "published_at": "2026-10-12T14:35:00+00:00"
+        },
+        {
+          "category": "litigation",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/SUNSEC_17082026083921_SEIntimationforupdateonLipitor.pdf",
+          "published_at": "2026-08-17T03:10:41+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "ADANIENT",
+      "name": "Adani Enterprises Ltd.",
+      "sector": "Metals & Mining",
+      "exchange": "NSE",
+      "reason": "Real material filings in the scanned window",
+      "events": [
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_11112026201423_AELintimationIncorporation11112026.pdf",
+          "published_at": "2026-11-11T14:44:30+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_08112026173159_AELIntimationofacquisitioncompletion08112026.pdf",
+          "published_at": "2026-11-08T12:02:09+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "General Updates",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_06112026121716_AELIntimationVizagMegaDataCenterParkLimited06112026.pdf",
+          "published_at": "2026-11-06T06:47:22+00:00"
+        },
+        {
+          "category": "results",
+          "title": "Outcome of Board Meeting",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_28102026133333_AELBoardoutcome30092026.pdf",
+          "published_at": "2026-10-28T08:07:13+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_26092026124830_AELIntimationsigned26092026.pdf",
+          "published_at": "2026-09-26T07:18:37+00:00"
+        },
+        {
+          "category": "M&A",
+          "title": "Acquisition",
+          "url": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_27082026173118_AELIntimationChandenvalleInfraPark27082026.pdf",
+          "published_at": "2026-08-27T12:01:24+00:00"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "portfolio_size": true,
+    "management_change": true,
+    "five_results": true,
+    "material_event": true
+  },
+  "categories": {
+    "management_change": 52,
+    "M&A": 31,
+    "results": 22,
+    "litigation": 12
+  },
+  "research_tickers": [
+    "ABB",
+    "ADANIENSOL",
+    "ADANIPORTS",
+    "AMBUJACEM"
+  ],
+  "status": "covered",
+  "scanned_universe": 100,
+  "days": 90,
+  "scanned_at": "2026-11-13T17:28:32.944303+00:00",
+  "sources": [
+    {
+      "url": "https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv",
+      "fetched_at": "2026-11-13T17:15:45.179986+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ABB&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:15:45.715535+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ADANIENSOL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:05.106223+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ADANIENT&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:05.449641+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ADANIGREEN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:05.747201+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ADANIPORTS&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:06.231010+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ADANIPOWER&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:07.561204+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=AMBUJACEM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:07.859790+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=APOLLOHOSP&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:08.326463+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ASIANPAINT&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:08.549243+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=DMART&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:08.990331+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=AXISBANK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:09.349683+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BSE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:09.654621+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BAJAJ-AUTO&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:10.072755+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BAJFINANCE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:16:29.578925+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BAJAJFINSV&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:17:19.167440+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BAJAJHLDNG&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:17:38.508236+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BANKBARODA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:17:38.830256+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BEL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:17:58.379643+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BPCL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:17.919216+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BHARTIARTL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:18.396054+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BOSCHLTD&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:18.812811+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=BRITANNIA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:38.259889+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=CGPOWER&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:38.588378+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=CANBK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:18:38.944174+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=CHOLAFIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:09.289050+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=CIPLA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:09.725174+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=COALINDIA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:29.030908+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=CUMMINSIND&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:48.363755+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=DLF&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:48.930253+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=DIVISLAB&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:19:49.424276+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=DRREDDY&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:08.810720+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=EICHERMOT&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:09.174011+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ETERNAL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:09.481884+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=GAIL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:10.083863+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=GODREJCP&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:10.467700+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=GRASIM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:11.013146+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HCLTECH&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:30.313521+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HDFCAMC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:50.061385+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HDFCBANK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:50.352897+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HDFCLIFE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:20:50.710587+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HINDALCO&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:21:10.011044+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HAL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:21:10.474432+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HINDUNILVR&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:21:59.847087+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HINDZINC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:00.237553+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=POWERINDIA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:00.889276+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=HYUNDAI&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:01.426285+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ICICIBANK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:01.875894+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ITC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:22.018000+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=IOC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:41.657949+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=IRFC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:42.216865+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=INFY&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:42.727769+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=INDIGO&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:22:43.178517+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=JSWSTEEL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:02.579244+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=JINDALSTEL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:02.900758+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=JIOFIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:03.493082+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=KOTAKBANK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:03.728520+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=LTM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:04.109630+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=LT&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:04.459832+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=M%26M&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:04.808347+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=MARUTI&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:23:24.251121+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=MAXHEALTH&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:24.721796+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=MAZDOCK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:25.032882+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=MUTHOOTFIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:25.240361+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=NTPC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:25.641837+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=NESTLEIND&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:26.112702+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ONGC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:26.563304+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=PIDILITIND&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:24:56.856039+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=POLYCAB&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:16.292071+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=PFC&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:16.611323+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=POWERGRID&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:16.871409+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=PNB&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:17.163365+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=RELIANCE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:36.604264+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SBILIFE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:36.952300+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=MOTHERSON&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:37.323686+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SHRIRAMFIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:56.822661+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ENRIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:25:57.134530+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SIEMENS&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:26:27.434725+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SOLARINDS&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:26:46.987704+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SBIN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:26:47.302529+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=SUNPHARMA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:26:47.756936+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TVSMOTOR&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:07.113912+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TATACAP&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:07.486768+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TCS&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:07.800798+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TATACONSUM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:08.115206+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TMCV&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:08.343583+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TMPV&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:08.711585+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TATAPOWER&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:09.005690+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TATASTEEL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:09.289153+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TECHM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:09.645957+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TITAN&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:10.043980+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TORNTPHARM&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:40.513395+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=TRENT&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:27:59.925392+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ULTRACEMCO&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:00.583994+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=UNIONBANK&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:00.890913+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=VBL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:31.296575+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=VAML&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:31.598358+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=VEDL&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:31.887408+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=IDEA&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:32.163394+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=WIPRO&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:32.625658+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    },
+    {
+      "url": "https://www.nseindia.com/api/corporate-announcements?index=equities&symbol=ZYDUSLIFE&from_date=15-08-2026&to_date=13-11-2026",
+      "fetched_at": "2026-11-13T17:28:32.898103+00:00",
+      "origin": "live",
+      "stale": false,
+      "failure": null
+    }
+  ],
+  "mode": "live",
+  "scan_failures": [],
+  "executive_change_examples": [
+    {
+      "ticker": "POWERGRID",
+      "description": "Power Grid Corporation of India Limited has informed the Exchange regarding Cessation of Mr Venkata Subrahamanayam Vallurie as Chief Financial Officer of the company w.e.f. August 20, 2026.",
+      "published_at": "2026-08-20T08:13:21+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/POWERGRID1_20082026134236_BSENSEReg30dt20082026Outcome.pdf"
+    },
+    {
+      "ticker": "TVSMOTOR",
+      "description": "TVS Motor Company Limited has informed the Exchange regarding a press release dated August 28, 2026, titled \"TVS Motor Company Appoints Peyman Kargar as Director and Chief Executive Officer of the Company.\".",
+      "published_at": "2026-08-28T05:06:46+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/TVSMOTOR_28082026103636_BSENSEPRESSRELEASESD.pdf"
+    },
+    {
+      "ticker": "VBL",
+      "description": "The Board of Directors at their meeting held today inter-alia approved: (i) to incorporate a wholly-owned subsidiary company in India, (ii) appointment of Mr. Prathmesh Mishra as CEO & Managing Director of above-mentioned proposed wholly-owned subsidiary company in India; and (iii) to incorporate a joint venture company in Tunisia as per details in enclosed disclosure.",
+      "published_at": "2026-08-25T10:51:24+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/VBL_25082026162007_Outcome.pdf"
+    },
+    {
+      "ticker": "WIPRO",
+      "description": "Wipro Limited has informed the Exchange regarding a press release dated November 06, 2026, titled \"Wipro Appoints Angan Guha as President and Chief Executive Officer forAmericas 2 Strategic Market Unit\".",
+      "published_at": "2026-11-06T13:45:02+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_06112026191442_PressRelease06112026.pdf"
+    },
+    {
+      "ticker": "WIPRO",
+      "description": "Wipro Limited has informed the Exchange regarding Appointment of Mr. Angan Guha as President and Chief Executive Officer for Americas 2 Strategic Market Unit of the company w.e.f. December 08, 2026.",
+      "published_at": "2026-11-06T13:35:22+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/Wipro_Secretarial_06112026190358_SEintimation06112026.pdf"
+    },
+    {
+      "ticker": "MUTHOOTFIN",
+      "description": "Muthoot Finance Limited has informed the Exchange regarding Appointment of Mr Alexander George as Managing Director of the company w.e.f. October 01, 2026.",
+      "published_at": "2026-10-01T12:49:45+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/MUTHOOTFIN_01102026181347_Appointment_of_Directors_SD.pdf"
+    },
+    {
+      "ticker": "CUMMINSIND",
+      "description": "Cummins India Limited has informed the Exchange regarding Appointment of Mr Adegbile Adedapo Adewunmi as Managing Director of the company w.e.f. November 01, 2026.",
+      "published_at": "2026-10-08T12:51:42+00:00",
+      "url": "https://nsearchives.nseindia.com/corporate/CUMMINSIND_08102026182130_SEintimationBM08102026.pdf"
+    }
+  ],
+  "notice": "Portfolio picks are backed by public filings; network people and relationships are separate synthetic fixtures."
+}

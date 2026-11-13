@@ -1,0 +1,29 @@
+{
+  "id": "investor-local",
+  "name": "Demo investor (fictional)",
+  "provenance": "synthetic",
+  "roles": [
+    {
+      "company": "Harbor Finance",
+      "ticker": "HARBOR",
+      "title": "Analyst",
+      "start_year": 2014,
+      "end_year": 2018
+    }
+  ],
+  "education": [
+    {
+      "institution": "IIT Delhi",
+      "start_year": 2007,
+      "end_year": 2011
+    }
+  ],
+  "knows": [
+    "workflow-connector",
+    "workflow-expert",
+    "workflow-insider",
+    "network-supplier",
+    "network-peer",
+    "network-reconnect"
+  ]
+}
