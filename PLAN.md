@@ -34,7 +34,8 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - [x] Keep the working backend layout and uv lockfile; add engine/ingest modules incrementally. Frontend scaffold/build deferred to P6.
 - [x] `engine/llm.py`: shared model boundary, validated SQLite `llm_cache`, bounded retries and token/latency log. Model allocation and monetary rates remain undecided.
 - [x] CI workflow: lint and backend tests on push/PR for Python 3.11/3.12; manual real-model acceptance with repository secret and saved diagnostics.
-- [ ] Resolve GitHub account billing lock, rerun hosted backend checks, then configure the live-test secret with explicit approval and verify the manual live job.
+- [x] Retry previously blocked hosted backend checks: original workflow commit 1b8ca6b passed on Python 3.11 and 3.12 (31 tests each); GitHub reported zero billable runner milliseconds for that run.
+- [ ] Verify the newer P0–P4 commit on hosted CI after user review; configure the live-test secret only with explicit approval, then verify the manual live job.
 - **Done when:** backend and shared model gateway checks pass; frontend build is verified in P6. Hosted CI status is reported separately.
 
 ## Phase 1 — Check the data sources, then choose the portfolio (Fri night/Sat early, ~2–3h) ★ most important

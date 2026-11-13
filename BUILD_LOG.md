@@ -80,3 +80,11 @@ Decisions: source dates/basis/units are constrained and validated; no operating-
 Corrected: broad NSE scan was blocked, so 100 per-symbol scans were used. Screener whitespace affected basis parsing and was fixed. Real PDF/model trials exposed duplicate fragments, fabricated dates/IDs and over-complex schemas; use rule-first recognised statement layouts, a shallow source-constrained model schema, validated numeric anchors and computed result summaries. Test oracles now allow correctly recomputed, explicitly derived historical margins while rejecting unsupported forecasts.
 Verified: 100/100 symbols scanned without failures; 18 portfolio picks plus 4 off-portfolio candidates; isolated DB has 4,446 prices, 448 financial periods and 623 filings across all 18 companies. Live two-company pipeline completed with explicit BSE failure/NSE fallback. Original 22-page TCS filing's available consolidated Revenue/PBT/PAT match Screener; EBITDA absent. Backend 67 passed, live suite 8 passed; ruff, actionlint and diff checks passed; check_phases.py review checks passed.
 Open: live BSE access and hosted CI billing remain external blockers; no API key exported to GitHub. OCR/ZIP and unrecognised/ambiguous layouts fail visibly. P5/P6, broader semantic evaluation, real-person biography verification and model selection await user review. No frontend or cloud deployment claimed.
+
+### [P0] Retry hosted CI after billing block — 2026-11-14 00:06
+Changed: PLAN.md hosted-run status; no application, budget, payment or credential changes.
+Routes: reran original blocked workflow (chosen) vs changing billing controls or publishing unreviewed P0–P4 changes (not needed).
+Decisions: paid live-model job stays disabled; screenshot's $0 spent/$0 budget is not evidence of exhausted included usage.
+Corrected: billing/account startup rejection is no longer reproduced; earlier failed jobs had no executed steps.
+Verified: run 43469299535 attempt 2 on commit 1b8ca6b succeeded; lint and 31 tests passed on each Python 3.11/3.12 job; timing API reported 0 billable milliseconds, run duration 19 seconds; live-model job skipped.
+Open: latest P0–P4 commit remains local pending user review; live Actions secret was not exported and live job was not run.
