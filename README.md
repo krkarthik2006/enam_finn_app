@@ -14,7 +14,7 @@ uv run uvicorn finn.main:app --host 127.0.0.1 --port 8000 --reload
 
 Open http://127.0.0.1:8000/docs for the interactive API. Health: http://127.0.0.1:8000/health.
 
-Add your Hyde-issued key as `FINN_GLM_API_KEY` in `.env`, then restart. The assessment uses `FINN_GLM_BASE_URL=https://inference.hyde.tech/v1` and `FINN_GLM_MODEL=hyde/glm-5.3-flash`, following the [Hyde quickstart](https://inference.hyde.tech/docs/quickstart). Hyde keys must be sent to the Hyde gateway. Use only the provided GLM model in the assessment pipeline. Keys are read by the backend only, never returned to API clients or committed.
+Add your Hyde-issued key as `FINN_GLM_API_KEY` in `.env`, then restart. The current working baseline uses `FINN_GLM_BASE_URL=https://inference.hyde.tech/v1` and `FINN_GLM_MODEL=hyde/glm-5.3-flash`, following the [Hyde quickstart](https://inference.hyde.tech/docs/quickstart). Hyde keys must be sent to the Hyde gateway. FINN has no GLM-only restriction: providers/models per task, including smaller models for efficiency, will be decided with the user after workflow validation (see PLAN.md). The existing adapter accepts OpenAI-compatible chat-completions APIs; other API formats will need an adapter. Keys are read by the backend only, never returned to API clients or committed.
 
 With no key, research returns relevant source excerpts with `status=evidence_only`. It does not pretend a generated answer exists. A missing corpus returns `status=needs_sources`.
 
@@ -169,9 +169,32 @@ uv run ruff check finn tests scripts
 PYTHONPATH=. uv run python scripts/check_sources.py TCS
 ```
 
-The automated suite uses a temporary real SQLite database and mocked external HTTP responses. It exercises the full demo, live/demo separation, arbitrary-ticker retrieval, document replacement/deletion, exact alert calculations and lookback rules, timezone/deduplication handling, contact relationships/deletion, bearer authentication, URL restrictions, partial refresh failure, model citation validation, cache invalidation and API schema generation.
+The default suite uses a temporary real SQLite database and mocked external HTTP responses. It checks exact alert calculations, lookback rules, live/demo separation, document replacement/deletion, contact relationships, authentication, URL restrictions, partial refresh failure, invalid citations, cache invalidation and API schemas. These checks isolate backend behaviour; they do not prove that a live model follows the prompt.
 
-The read-only source check is separate because external sites can rate-limit, block requests or change response formats. A GLM account/key is required to validate a real paid model request; tests exercise its request/response contract without spending credits.
+Run the real-model acceptance suite explicitly (uses the current `.env` provider/model and spends tokens):
+
+```sh
+FINN_RUN_LIVE_TESTS=1 uv run pytest tests/test_live_workflow.py -q --junitxml=/tmp/finn-live-results.xml
+```
+
+The seven cases check two different margin misses and a beat, correct source-linked percentages
+and percentage-point differences, stated causes, Q1/Q2 retrieval, unrelated-company exclusion,
+the three expected contacts and relationship types, missing forecasts, cache reuse, fresh analysis
+after source replacement, document prompt injection, and no model call when sources are absent.
+The live tests use the actual API, SQLite, retrieval and configured model HTTP calls; no model
+response is mocked. A missing key or provider/schema error fails an explicitly enabled live run.
+Each case writes `observations.json` with imported fixtures and research requests/responses to its
+pytest temporary directory; `--basetemp` can select a fresh directory for inspection. Credentials
+and HTTP auth headers are excluded. The XML contains test outcomes.
+
+These are bounded acceptance checks against known synthetic facts, not a universal factuality
+judge or evidence of reliable real-company ingestion. Assertions accept ordinary phrasing variants;
+historical figures are allowed in missing-evidence answers when supported by their cited sources.
+Review the saved answers and add cases from real documents before claiming broader reliability.
+Providers used for research must support strict `json_schema` structured output. Invalid output
+and unknown citations still fail validation. Changing the output contract invalidates old analysis caches.
+
+The read-only source check is separate because external sites can rate-limit, block requests or change response formats. Default tests skip the paid live suite; report offline and live results separately.
 
 ## Deliberately left for the next stage
 

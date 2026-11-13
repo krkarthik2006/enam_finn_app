@@ -40,3 +40,11 @@ Decisions: use https://inference.hyde.tech/v1 with hyde/glm-5.3-flash; contacts 
 Corrected: initial calls wrongly sent the Hyde-issued key to Z.ai and returned 401; the user supplied Hyde invitation instructions, establishing the correct gateway and model alias.
 Verified: pytest -q: 21 passed; ruff: passed; live check_workflow.py --live-model: all 5 checks passed; reviewed all four findings against Q1/Q2 excerpts (22% guidance, 20% actual, 2pp shortfall, stated causes/missing Q3 guidance); 1,140 tokens.
 Open: live verification covers one synthetic scenario; broader real-document evaluation and planned engine/llm.py/tenant-isolation architecture remain future work. Invitation/key excluded from committed files.
+
+### [P5] Real-model acceptance tests and deferred model routing — 2026-11-13 22:31
+Changed: AGENTS.md/PLAN.md model policy and checklist, live acceptance/oracle tests, strict research JSON Schema contract (cache prompt version 3), README and pytest marker.
+Routes: real-provider acceptance tests with known synthetic ground truth plus offline backend/oracle tests (chosen); mocked success alone or an uncalibrated LLM judge (rejected: cannot establish real integration or numeric correctness).
+Decisions: provider/model selection per task remains for the user, including smaller models for efficiency; keep working Hyde configuration meanwhile; live tests save fixture/request/response artifacts, without credentials.
+Corrected: user clarified GLM-only rule belongs to another project. First live run: 6 failed/1 passed, exposing extra quiz fields; prompt-only fix still failed 4 cases. Strict JSON Schema fixed output shape. Fixed overly strict test assumptions about historical numbers and guidance restated in Q2; oracle tests now reject wrong facts, units, direction and citations.
+Verified: pytest -q: 31 passed/7 live cases skipped by default; explicit real-provider suite: 7 passed (24.20s); ruff and git diff --check passed. Reviewed saved findings for two misses, one beat, missing forecasts, source replacement and ignored document injection.
+Open: real-company/long-corpus evaluation and broader semantic review remain pending; numerical acceptance checks do not prove every free-text sentence true. Model allocation and efficiency benchmarks remain unchecked in PLAN.md.
