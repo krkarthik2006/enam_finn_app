@@ -196,6 +196,16 @@ and unknown citations still fail validation. Changing the output contract invali
 
 The read-only source check is separate because external sites can rate-limit, block requests or change response formats. Default tests skip the paid live suite; report offline and live results separately.
 
+GitHub Actions runs the backend tests and lint on every push and pull request, using Python 3.11
+and 3.12 with the committed lockfile. See [Backend tests](https://github.com/krkarthik2006/enam_finn_app/actions/workflows/tests.yml).
+To run the real-model suite, select **Run workflow** and enable **run_live**. It runs after the
+backend checks pass. Configure the repository Actions secret `FINN_GLM_API_KEY`; repository
+variables `FINN_GLM_BASE_URL` and `FINN_GLM_MODEL` select the provider/model (default: current
+Hyde baseline). Future model choices can change these variables without changing the workflow.
+Live calls run only on manual dispatch. Missing credentials or failed model checks fail the job.
+JUnit results and fictional research observations are uploaded as artifacts even on test failure,
+retained for seven days; database files and `.env` are excluded.
+
 ## Deliberately left for the next stage
 
 The frontend and mobile interaction design; real portfolio source coverage; automatic document selection/refresh; extraction of results tables into verified Revenue/EBITDA/PBT/PAT QoQ/YoY comparisons; incoming-management biographies/entity resolution; advanced financial comparison across four quarters; notification delivery; stronger retrieval evaluation; and production hosting/privacy infrastructure. The current research endpoint can discuss these metrics when they appear in supplied excerpts, but it is not yet a verified financial calculation engine.

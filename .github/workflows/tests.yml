@@ -1,0 +1,81 @@
+name: Backend tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_live:
+        description: Run acceptance tests against the configured real model (uses tokens)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend / Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.6"
+          python-version: ${{ matrix.python }}
+      - name: Install locked dependencies
+        run: uv sync --locked --group dev
+      - name: Lint
+        run: uv run --no-sync ruff check finn tests scripts
+      - name: Test backend and acceptance checks
+        run: uv run --no-sync pytest -m "not live" -q --junitxml=reports/backend.xml
+      - name: Save test results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: backend-python-${{ matrix.python }}
+          path: reports/backend.xml
+          retention-days: 7
+
+  live:
+    name: Real-model acceptance
+    needs: backend
+    if: github.event_name == 'workflow_dispatch' && inputs.run_live
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.6"
+          python-version: "3.12"
+      - name: Install locked dependencies
+        run: uv sync --locked --group dev
+      - name: Test real model
+        env:
+          FINN_RUN_LIVE_TESTS: "1"
+          FINN_GLM_API_KEY: ${{ secrets.FINN_GLM_API_KEY }}
+          FINN_GLM_BASE_URL: ${{ vars.FINN_GLM_BASE_URL || 'https://inference.hyde.tech/v1' }}
+          FINN_GLM_MODEL: ${{ vars.FINN_GLM_MODEL || 'hyde/glm-5.3-flash' }}
+        run: >-
+          uv run --no-sync pytest tests/test_live_workflow.py -q
+          --basetemp="${{ runner.temp }}/finn-live"
+          --junitxml=reports/live.xml
+      - name: Save live results and fictional research responses
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: live-model-acceptance
+          path: |
+            reports/live.xml
+            ${{ runner.temp }}/finn-live/**/observations.json
+          retention-days: 7

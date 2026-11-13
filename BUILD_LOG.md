@@ -48,3 +48,11 @@ Decisions: provider/model selection per task remains for the user, including sma
 Corrected: user clarified GLM-only rule belongs to another project. First live run: 6 failed/1 passed, exposing extra quiz fields; prompt-only fix still failed 4 cases. Strict JSON Schema fixed output shape. Fixed overly strict test assumptions about historical numbers and guidance restated in Q2; oracle tests now reject wrong facts, units, direction and citations.
 Verified: pytest -q: 31 passed/7 live cases skipped by default; explicit real-provider suite: 7 passed (24.20s); ruff and git diff --check passed. Reviewed saved findings for two misses, one beat, missing forecasts, source replacement and ignored document injection.
 Open: real-company/long-corpus evaluation and broader semantic review remain pending; numerical acceptance checks do not prove every free-text sentence true. Model allocation and efficiency benchmarks remain unchecked in PLAN.md.
+
+### [P0] GitHub Actions test automation — 2026-11-13 22:35
+Changed: .github/workflows/tests.yml, README.md and PLAN.md.
+Routes: backend lint/tests on push and PR plus explicit manual live tests (chosen) vs paid model calls on every change (rejected: unnecessary usage and nondeterminism).
+Decisions: Python 3.11/3.12 matrix, locked dependencies, SHA-pinned actions, read-only workflow token, model key confined to the live step; upload XML and fictional observations on failures, exclude databases/env files.
+Corrected: automatic approval review rejected exporting the existing key to a repository secret without explicit credential-transfer approval; requested approval separately and continued unaffected CI work.
+Verified: local pytest -m "not live": 31 passed/7 deselected; ruff passed; actionlint v1.7.12 passed; remote execution to be inspected after this commit is pushed.
+Open: hosted live execution requires the repository Actions secret FINN_GLM_API_KEY; upload pending explicit user approval (or user can add it directly).

@@ -23,7 +23,7 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - [ ] Decide providers/models per task with the user after workflow validation: benchmark smaller models for classification/extraction/summary and stronger models for reasoning; compare accuracy, latency and token cost. Current Hyde GLM is a baseline, not a project restriction.
 - [ ] Create the repo layout from AGENTS.md §4, plus `.env.example`, `requirements.txt`, Next.js app, pytest config
 - [ ] `engine/llm.py`: routing wrapper + SQLite `llm_cache` + token/cost log
-- [ ] CI: GitHub Action that runs `pytest -q` on push
+- [x] CI workflow: lint and backend tests on push/PR for Python 3.11/3.12; manual real-model acceptance with repository secret and saved diagnostics.
 - **Done when:** `pytest -q` passes (empty) and `npm run build` succeeds.
 
 ## Phase 1 — Check the data sources, then choose the portfolio (Fri night/Sat early, ~2–3h) ★ most important
