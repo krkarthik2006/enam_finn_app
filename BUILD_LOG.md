@@ -64,3 +64,11 @@ Decisions: retain the locally validated workflow; do not change account billing 
 Corrected: hosted run could not start despite valid workflow syntax; GitHub annotation: "The job was not started because your account is locked due to a billing issue."
 Verified: pushed commit 1b8ca6b; https://github.com/krkarthik2006/enam_finn_app/actions/runs/43469299535 failed at runner startup on both Python versions, with no test steps executed; live job skipped as designed for push.
 Open: user must resolve the GitHub account lock, then rerun; FINN_GLM_API_KEY repository secret awaits explicit transfer approval or user setup.
+
+### [P0] Shared model boundary and incremental phase plan — 2026-11-13 22:40
+Changed: engine/llm.py, versioned research prompt, DB model cache/usage log, research integration and /api/usage; PLAN.md records P0–P4 scope and defers frontend to P6.
+Routes: extend existing API incrementally (chosen) vs rewrite directories/scaffold frontend during backend validation (rejected: regressions without user benefit).
+Decisions: validate before caching; retry transport/429/5xx at most once; no retry for authentication or invalid schema; record tokens/latency without source or contact text; monetary rates await model choice.
+Corrected: existing backend had direct research HTTP calls; these now pass through the required shared boundary.
+Verified: pytest: 36 passed/7 live skipped; ruff passed. Live source spike: TCS Yahoo 126 bars, NSE 1 filing, Screener 56 document links.
+Open: P1–P4 implementation follows; real portfolio evidence still to be collected; hosted CI remains blocked by GitHub billing.

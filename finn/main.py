@@ -140,6 +140,14 @@ def create_app(settings: Settings | None = None):
 
     protected = [Depends(authorize)]
 
+    @app.get("/api/usage", dependencies=protected, tags=["system"])
+    def model_usage():
+        return {"models": db.all(
+            "SELECT model,task,status,COUNT(*) AS calls,SUM(prompt_tokens) AS prompt_tokens,"
+            "SUM(completion_tokens) AS completion_tokens,SUM(seconds) AS seconds "
+            "FROM llm_calls GROUP BY model,task,status"
+        ), "cost": None, "note": "Monetary rates await model selection; no price is assumed."}
+
     @app.post("/api/demo/seed", dependencies=protected, tags=["demo"])
     def demo_seed():
         return seed(db)
