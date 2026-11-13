@@ -24,6 +24,7 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - [ ] Create the repo layout from AGENTS.md §4, plus `.env.example`, `requirements.txt`, Next.js app, pytest config
 - [ ] `engine/llm.py`: routing wrapper + SQLite `llm_cache` + token/cost log
 - [x] CI workflow: lint and backend tests on push/PR for Python 3.11/3.12; manual real-model acceptance with repository secret and saved diagnostics.
+- [ ] Resolve GitHub account billing lock, rerun hosted backend checks, then configure the live-test secret with explicit approval and verify the manual live job.
 - **Done when:** `pytest -q` passes (empty) and `npm run build` succeeds.
 
 ## Phase 1 — Check the data sources, then choose the portfolio (Fri night/Sat early, ~2–3h) ★ most important
