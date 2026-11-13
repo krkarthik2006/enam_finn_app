@@ -14,7 +14,7 @@ uv run uvicorn finn.main:app --host 127.0.0.1 --port 8000 --reload
 
 Open http://127.0.0.1:8000/docs for the interactive API. Health: http://127.0.0.1:8000/health.
 
-Add `FINN_GLM_API_KEY` in `.env` when ready, then restart. Select a model enabled for your account with `FINN_GLM_MODEL`. The default endpoint follows the [official Z.ai chat-completions API](https://docs.z.ai/api-reference/llm/chat-completion). The base URL is configurable for a different GLM provider. A coding subscription may have different endpoint and usage rules; verify the account before using it for an application. Keys are read by the backend only, never returned to API clients or committed.
+Add your Hyde-issued key as `FINN_GLM_API_KEY` in `.env`, then restart. The assessment uses `FINN_GLM_BASE_URL=https://inference.hyde.tech/v1` and `FINN_GLM_MODEL=hyde/glm-5.3-flash`, following the [Hyde quickstart](https://inference.hyde.tech/docs/quickstart). Hyde keys must be sent to the Hyde gateway. Use only the provided GLM model in the assessment pipeline. Keys are read by the backend only, never returned to API clients or committed.
 
 With no key, research returns relevant source excerpts with `status=evidence_only`. It does not pretend a generated answer exists. A missing corpus returns `status=needs_sources`.
 
@@ -33,6 +33,50 @@ curl 'http://127.0.0.1:8000/api/network/recommendations?person_id=demo-arjun'
 The seed adds an 18-company portfolio only if the portfolio is empty. It adds six fictional contacts, synthetic daily prices and announcements, and synthetic reports/transcripts for TCS, INFY, TITAN plus CDSL, COFORGE and DIXON for off-portfolio research. Repeating the seed updates demo fixtures without duplicating documents or contacts. Real company names do **not** make these financial figures real. `mode=demo` is explicit; live queries never fall back to these records. Synthetic contacts are labelled in recommendations, including when they overlap with live companies.
 
 ## API contract
+
+### Inspect one complete fictional workflow
+
+Run this without a server or API key:
+
+```sh
+PYTHONPATH=. uv run python scripts/check_workflow.py > /tmp/finn-workflow.json
+```
+
+This uses a temporary database, exercises the actual API and document retrieval, and mocks only
+the model HTTP response. The JSON contains the Push event, retrieved excerpts, model request,
+cited answer, chosen contacts with scores/reasons, and pass/fail checks. It does not change your
+portfolio or local database. The scripted answer checks wiring, not model reasoning.
+
+The fictional company `MOCKIT` has Q1 guidance for Q2 EBITDA margin of 22% and Q2 delivered margin
+of 20%. Its appointment filing links to a fictional incoming CFO. Both the filing and research
+select Ananya (industry expert), Vikram (current employee), and Neha (recorded connection to the CFO).
+An unrelated agriculture contact is excluded. Vikram's employment overlap is explicitly unverified.
+The person ID is supplied in the fixture; automatic identification of executives is still future work.
+
+To run the same scenario against your configured GLM account, with possible model usage charges:
+
+```sh
+PYTHONPATH=. uv run python scripts/check_workflow.py --live-model > /tmp/finn-workflow-live.json
+```
+
+The live run also uses a temporary database. Review whether its findings accurately cite the
+retrieved Q1/Q2 excerpts, distinguish guidance from actual performance, and explain missing Q3
+guidance. Citation-ID checks alone do not establish factual accuracy.
+
+To explore the scenario in the running API, call `POST /api/demo/workflow`. This adds the fictional
+company to your portfolio and seeds its contacts/documents; repeated calls preserve contact edits
+and replace the scenario's filing. Send its returned `research_request` to `POST /api/research`,
+and read `GET /api/digest?mode=demo` for the Push event.
+
+Research accepts an optional `person_id` for recorded relationships and `include_trace=true` to
+return the prepared model request, retrieved document/chunk counts, and whether a model call
+actually happened. Evidence-only and cached answers have `model_called=false`. The prepared
+request contains the question and document excerpts, without API credentials or contact profiles.
+Network selection remains rule-based and returns `match_types`, scores and reasons independently
+of model generation. Announcement imports can supply `subject_person_id` to use the same person
+context in Push suggestions.
+
+### Routes
 
 All `/api/*` routes require a bearer token when `FINN_API_TOKEN` is set. No token means local development mode, for one investor, bound to localhost. The schema is also available at `/openapi.json`.
 
@@ -56,6 +100,7 @@ All `/api/*` routes require a bearer token when `FINN_API_TOKEN` is set. No toke
 | `PUT / DELETE /api/network/{id}` | Update or delete a contact |
 | `GET /api/network/recommendations` | Match by `symbol`, `theme`, or a target `person_id` |
 | `POST /api/demo/seed` | Seed explicitly synthetic demonstration data |
+| `POST /api/demo/workflow` | Seed a focused fictional Push/Pull/network scenario and return its research request |
 
 `since` and `until` on the digest must include timezones; the default is the preceding 24 hours. Routine filings are counted but hidden unless `include_routine=true`. Categories can be overridden on import. Classification and summaries are explicitly labelled as rule-based and filing-title-based, respectively.
 

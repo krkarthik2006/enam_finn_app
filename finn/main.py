@@ -32,6 +32,7 @@ from finn.network import recommend
 from finn.pipeline import run_refresh
 from finn.providers import ProviderError, Providers
 from finn.research import Research
+from finn.scenario import seed_workflow
 
 
 def create_app(settings: Settings | None = None):
@@ -142,6 +143,10 @@ def create_app(settings: Settings | None = None):
     @app.post("/api/demo/seed", dependencies=protected, tags=["demo"])
     def demo_seed():
         return seed(db)
+
+    @app.post("/api/demo/workflow", dependencies=protected, tags=["demo"])
+    def workflow_seed():
+        return seed_workflow(db)
 
     @app.get("/api/portfolio", dependencies=protected, tags=["portfolio"])
     def get_portfolio():
@@ -269,6 +274,8 @@ def create_app(settings: Settings | None = None):
 
     @app.post("/api/research", dependencies=protected, tags=["research"])
     def ask(body: ResearchQuestion):
+        if body.person_id and not db.one("SELECT id FROM contacts WHERE id=?", (body.person_id,)):
+            raise HTTPException(404, "Person not found")
         return research.answer(body)
 
     @app.get("/api/network", dependencies=protected, tags=["network"])

@@ -345,3 +345,66 @@ def test_openapi_contract(client):
     schema = client.get("/openapi.json").json()
     for path in ("/api/research", "/api/digest", "/api/network/recommendations", "/api/refresh"):
         assert path in schema["paths"]
+
+
+def test_mock_workflow_push_pull_and_model_boundary(client, monkeypatch):
+    scenario = client.post("/api/demo/workflow").json()
+    expected = set(scenario["expected_contacts"].values())
+    document(client, ticker="OTHER", text=(
+        "IT services operating margins EBITDA Q1 Q2 guidance 99%. "
+        "UNRELATED_COMPANY_EVIDENCE must never enter MOCKIT research."
+    ), mode="demo")
+    calls = mock_model(client, monkeypatch)
+    response = client.post("/api/research", json=scenario["research_request"])
+    assert response.status_code == 200, response.text
+    result = response.json()
+    assert {c["contact_id"] for c in result["network"]} == expected
+    by_id = {c["contact_id"]: c for c in result["network"]}
+    assert "industry_expert" in by_id["workflow-expert"]["match_types"]
+    assert "company_insider" in by_id["workflow-insider"]["match_types"]
+    assert by_id["workflow-connector"]["relationship"] == "explicit_connection"
+    assert by_id["workflow-insider"]["relationship"] == "possible_employment_overlap"
+    assert any("unverified" in r for r in by_id["workflow-insider"]["reasons"])
+    assert all(any(q in s["title"] for s in result["sources"]) for q in ("Q1", "Q2"))
+    assert all(s["mode"] == "demo" for s in result["sources"])
+    assert "UNRELATED_COMPANY_EVIDENCE" not in json.dumps(result["sources"])
+    assert result["trace"]["model_called"]
+    assert result["trace"]["model_request"] == calls[0]
+    model_data = json.loads(calls[0]["messages"][1]["content"])
+    assert set(model_data) == {"ticker", "question", "excerpts"}
+    assert model_data["excerpts"] == result["sources"]
+    assert all(c["name"] not in json.dumps(calls[0]) for c in result["network"])
+    digest = client.get("/api/digest?mode=demo").json()
+    event = next(i for i in digest["items"] if i["id"] == scenario["announcement_id"])
+    assert {c["contact_id"] for c in event["network"]} == expected
+    assert client.get("/api/digest").json()["items"] == []
+    assert client.post("/api/research", json={"ticker": "MOCKIT"}).json()["status"] == "needs_sources"
+    # Changing the contact context and trace flag must reuse the same financial analysis.
+    cached = client.post("/api/research", json={
+        **scenario["research_request"], "person_id": None, "include_trace": False,
+    }).json()
+    assert cached["cached"] and "trace" not in cached and len(calls) == 1
+    assert "workflow-connector" not in {c["contact_id"] for c in cached["network"]}
+    traced_cache = client.post("/api/research", json=scenario["research_request"]).json()
+    assert traced_cache["cached"] and not traced_cache["trace"]["model_called"]
+    before = len(client.app.state.db.all("SELECT * FROM documents"))
+    client.post("/api/demo/workflow")
+    assert len(client.app.state.db.all("SELECT * FROM documents")) == before
+    assert len(client.app.state.db.all("SELECT * FROM contacts")) == 5
+    assert len(client.app.state.db.all("SELECT * FROM announcements")) == 1
+
+
+def test_research_trace_without_model_and_unknown_person(client):
+    scenario = client.post("/api/demo/workflow").json()
+    result = client.post("/api/research", json=scenario["research_request"]).json()
+    assert result["status"] == "evidence_only"
+    assert not result["trace"]["model_called"]
+    assert result["trace"]["retrieved_document_count"] >= 2
+    assert client.post("/api/research", json={
+        **scenario["research_request"], "person_id": "missing",
+    }).status_code == 404
+
+
+def test_hyde_model_configuration_defaults():
+    assert Settings.model_fields["glm_base_url"].default == "https://inference.hyde.tech/v1"
+    assert Settings.model_fields["glm_model"].default == "hyde/glm-5.3-flash"

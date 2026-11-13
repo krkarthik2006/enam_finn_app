@@ -73,6 +73,7 @@ class Announcement(Input):
     published_at: datetime
     category: Category | None = None
     mode: Mode = "live"
+    subject_person_id: str | None = Field(default=None, max_length=200)
     _ticker = field_validator("ticker")(normalize_ticker)
 
     @field_validator("published_at")
@@ -116,6 +117,8 @@ class ResearchQuestion(Input):
     )
     mode: Mode = "live"
     use_model: bool = True
+    person_id: str | None = Field(default=None, max_length=200)
+    include_trace: bool = False
     _ticker = field_validator("ticker")(normalize_ticker)
 
 

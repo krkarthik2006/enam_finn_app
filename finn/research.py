@@ -49,6 +49,18 @@ class Research:
 
     def answer(self, request: ResearchQuestion):
         evidence = retrieve(self.db, request.ticker, request.question, request.mode)
+        model_request = {
+            "model": self.settings.glm_model,
+            "stream": False,
+            "max_tokens": 3000,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": SYSTEM},
+                {"role": "user", "content": json.dumps({
+                    "ticker": request.ticker, "question": request.question, "excerpts": evidence,
+                })},
+            ],
+        }
         result = {
             "ticker": request.ticker,
             "question": request.question,
@@ -57,8 +69,18 @@ class Research:
             "findings": [],
             "sources": evidence,
             "cached": False,
-            "network": recommend(self.db, ticker=request.ticker, theme=request.question)[:5],
+            "network": recommend(
+                self.db, ticker=request.ticker, theme=request.question, person_id=request.person_id,
+            )[:5],
         }
+        if request.include_trace:
+            result["trace"] = {
+                "retrieved_chunk_count": len(evidence),
+                "retrieved_document_count": len({e["document_id"] for e in evidence}),
+                "model_called": False,
+                "model_request": model_request if evidence else None,
+                "network_method": "rule_based; contact profiles are not sent to the model",
+            }
         if not evidence:
             return {
                 **result,
@@ -78,7 +100,7 @@ class Research:
             json.dumps(
                 {
                     "prompt_version": 1,
-                    "request": request.model_dump(),
+                    "request": request.model_dump(exclude={"include_trace", "person_id"}),
                     "evidence": evidence,
                     "model": self.settings.glm_model,
                     "endpoint": self.settings.glm_base_url,
@@ -91,29 +113,13 @@ class Research:
             # Network stays current and private; only the analysis is cached.
             return {**result, **json.loads(cached["payload"]), "cached": True}
         try:
+            if request.include_trace:
+                result["trace"]["model_called"] = True
             with httpx.Client(timeout=90) as client:
                 response = client.post(
                     self.settings.glm_base_url.rstrip("/") + "/chat/completions",
                     headers={"Authorization": "Bearer " + self.settings.glm_api_key.get_secret_value()},
-                    json={
-                        "model": self.settings.glm_model,
-                        "stream": False,
-                        "max_tokens": 3000,
-                        "response_format": {"type": "json_object"},
-                        "messages": [
-                            {"role": "system", "content": SYSTEM},
-                            {
-                                "role": "user",
-                                "content": json.dumps(
-                                    {
-                                        "ticker": request.ticker,
-                                        "question": request.question,
-                                        "excerpts": evidence,
-                                    }
-                                ),
-                            },
-                        ],
-                    },
+                    json=model_request,
                 )
                 response.raise_for_status()
             raw = response.json()

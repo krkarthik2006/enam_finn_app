@@ -90,7 +90,10 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
                 "priority": "high" if material else "routine",
                 "summary": item["title"],
                 "summary_method": "filing_title",
-                "network": recommend(db, ticker=item["ticker"])[:3] if material else [],
+                "network": recommend(
+                    db, ticker=item["ticker"], theme=item["title"] + " " + item["body"],
+                    person_id=item.get("subject_person_id"),
+                )[:3] if material else [],
             }
         )
         (items if material else routine).append(item)
