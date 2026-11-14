@@ -88,3 +88,11 @@ Decisions: paid live-model job stays disabled; screenshot's $0 spent/$0 budget i
 Corrected: billing/account startup rejection is no longer reproduced; earlier failed jobs had no executed steps.
 Verified: run 43469299535 attempt 2 on commit 1b8ca6b succeeded; lint and 31 tests passed on each Python 3.11/3.12 job; timing API reported 0 billable milliseconds, run duration 19 seconds; live-model job skipped.
 Open: latest P0–P4 commit remains local pending user review; live Actions secret was not exported and live job was not run.
+
+### [P0] Persist live-validation preference and rerun — 2026-11-14 12:39
+Changed: AGENTS.md records the user's validation preference and default full-suite command; README.md uses the same command.
+Routes: backend plus real-model acceptance in one run (chosen) vs backend-only or mocked-model results as sufficient evidence (rejected).
+Decisions: use the existing configured Hyde key for live validation; user authorizes API usage without repeated token-budget confirmation. Model allocation remains undecided; credential export is separate.
+Corrected: avoid calling live checks "paid tests" when no charge is established. Initial rerun did not execute because approval review hit its own usage limit; resumed retry cleared review and ran normally.
+Verified: FINN_RUN_LIVE_TESTS=1 pytest -q: 75 passed (67 backend/oracle checks + 8 live-model cases), 1 existing dependency deprecation warning, 25.68s; ruff, actionlint and git diff --check passed. Artifacts: /private/tmp/finn-validation.oNddjr and matching .xml.
+Open: latest application changes remain local for user review; no API key was exported to GitHub and no billing settings changed.

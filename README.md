@@ -223,7 +223,7 @@ The database is not encrypted at rest by this application. Keep its directory pr
 ## Validation
 
 ```sh
-uv run pytest -q
+FINN_RUN_LIVE_TESTS=1 uv run pytest -q
 uv run ruff check finn engine ingest api tests scripts
 PYTHONPATH=. uv run python scripts/check_sources.py TCS
 ```

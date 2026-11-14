@@ -70,6 +70,14 @@ Hyde GLM configuration is a working baseline, not a final model choice. The user
 which providers/models handle each task, including smaller models for efficiency, after
 workflow validation. The tiers below are provisional; do not switch providers autonomously.
 
+Validation preference (user instruction, 2026-11-14): whenever the agent runs validation,
+include the real-model acceptance suite using the existing configured Hyde API key alongside
+backend checks. The user reports an unlimited API budget and authorizes these calls without
+repeated token-budget confirmation. Do not call them "paid tests" or imply that an actual
+charge is known. Use the current key/model until the user changes the selection; model choices
+per task remain undecided. Runtime use does not itself authorize exporting the key to GitHub
+or another destination. Keep credentials private and report real-model results separately.
+
 | Step | Model tier | Why |
 |---|---|---|
 | Filing classification (rule miss only) | cheap (Gemini Flash-Lite / Flash) | bulk, low reasoning |
@@ -140,7 +148,7 @@ Matching people across sources (entity resolution) goes in `engine/network.py::r
 2. Reply with: your assumptions, your plan (steps + how each step is verified), and the files you'll touch.
 3. Write or extend tests and fixtures first (offline).
 4. Implement the minimum.
-5. Run `pytest -q` (and `npm run build` / `npm run lint` for web). Paste the results.
+5. Run `FINN_RUN_LIVE_TESTS=1 pytest -q` with the configured Hyde key, including backend and real-model acceptance checks (and `npm run build` / `npm run lint` for web). Paste the results; identify any skipped/unverified live checks.
 6. **Append your entry to `BUILD_LOG.md`** using its format: what changed, routes considered (chosen vs rejected, with why), key decisions, any human corrections, verification result, open items. Be honest; log failed first attempts.
 7. Summarise to the human in chat: what changed, what's not verified, and any follow-ups.
 8. One task = one commit (code + BUILD_LOG entry together), with message format `phaseN: <what>`.
