@@ -28,6 +28,7 @@ test("three simple tabs, offline updates, saved research and contacts",async({pa
   await page.getByRole("textbox",{name:"Search people"}).fill("Neha Rao");
   await page.locator(".person-card").click();
   await expect(page.locator("dialog .intro-path")).toContainText("Neha");
+  await expect(page.locator("dialog")).not.toContainText(/synthetic|fictional|sample contact/i);
   await page.getByRole("button",{name:"Close dialog"}).click();
   await page.getByRole("button",{name:"Alert preferences",exact:true}).filter({visible:true}).first().click();
   await page.getByRole("spinbutton",{name:"Price threshold"}).fill("6");
@@ -153,6 +154,7 @@ test("portfolio edits persist through the API",async({page})=>{
    await expect(page.locator("body")).not.toContainText(/Analysis:|hyde\/|glm-\d|published_on|model narrative|computed guidance/i);
    await page.getByRole("button",{name:"Sources & privacy",exact:true}).click();
    await expect(page.locator(".about-copy")).not.toContainText(/model|provider|backend|API|build/i);
+   expect((await page.locator(".about-copy").innerText()).match(/synthetic/gi)).toHaveLength(1);
  });
 
  test("provider failures show a plain research error",async({page})=>{
