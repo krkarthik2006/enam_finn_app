@@ -11,7 +11,7 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
 
 export async function research(ticker: string, body: object, progress: (text: string) => void, signal: AbortSignal): Promise<Brief> {
   const response = await fetch(`/api/research/${encodeURIComponent(ticker)}/brief`, {method: "POST", signal, headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
-  if (!response.ok || !response.body) throw new Error("Research service is unavailable. Your saved demo remains available.");
+  if (!response.ok || !response.body) throw new Error("Research is unavailable right now. Please try again.");
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
