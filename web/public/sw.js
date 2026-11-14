@@ -1,4 +1,4 @@
-const CACHE = "finn-static-v7";
+const CACHE = "finn-static-v9";
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
@@ -10,7 +10,16 @@ self.addEventListener("install", event => {
     await self.skipWaiting();
   })());
 });
-self.addEventListener("activate", event => {event.waitUntil((async () => {await Promise.all((await caches.keys()).filter(k => k.startsWith("finn-static-") && k !== CACHE).map(k => caches.delete(k))); await self.clients.claim();})());});
+self.addEventListener("activate", event => {event.waitUntil((async () => {
+  const previous = (await caches.keys()).filter(k => k.startsWith("finn-static-") && k !== CACHE);
+  await Promise.all(previous.map(k => caches.delete(k)));
+  await self.clients.claim();
+  if (previous.length) {
+    const windows = await self.clients.matchAll({type: "window"});
+    // Let activation finish before the replacement page loads through this worker.
+    for (const client of windows) client.navigate(client.url).catch(() => {});
+  }
+})());});
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
   if (event.request.method !== "GET" || url.origin !== self.location.origin || url.pathname.startsWith("/api/")) return;

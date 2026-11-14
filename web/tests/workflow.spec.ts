@@ -14,9 +14,11 @@ test("three simple tabs, offline updates, saved research and contacts",async({pa
   await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
   await page.getByRole("button",{name:"TCS",exact:true}).click();
   await expect(page.getByRole("heading",{name:"Promised vs delivered",exact:true})).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(/Analysis:|hyde\/|glm-\d|published_on|backend|API key/i);
   await page.locator(".citation-chips button").first().click();
   await expect(page.locator("dialog")).not.toContainText(/SYNTHETIC REVIEW|fictional financials/i);
   await page.locator("dialog").screenshot({path:`/private/tmp/finn-${info.project.name}-real-tcs-source.png`});
+  await expect(page.locator(".dialog-title")).not.toContainText(/AI Summary|PPT|REC/);
   await expect(page.locator("dialog .source-excerpt, dialog .financial-table")).toBeVisible();
   await expect(page.getByRole("link",{name:"Open original document"})).toBeVisible();
   await expect(page.locator("dialog")).not.toContainText(/SYNTHETIC REVIEW|fictional financials/i);
@@ -71,15 +73,19 @@ test("connected research returns a cited brief from original company sources",as
   await page.getByRole("textbox",{name:"NSE ticker"}).fill("TCS");
   await page.getByRole("button",{name:"Ask FINN",exact:true}).click();
   await expect(page.locator(".brief-header")).toContainText("Primary-source research",{timeout:110000});
-  await expect(page.locator(".brief-coverage")).toContainText(/Source-cited analysis|Saved analysis/);
+  await expect(page.locator(".brief-coverage")).toContainText("documents");
   await page.locator(".citation-chips button").first().click();
   await expect(page.locator("dialog .source-excerpt, dialog .financial-table")).toBeVisible();
   await expect(page.getByRole("link",{name:"Open original document"})).toBeVisible();
   await expect(page.locator("dialog")).not.toContainText(/SYNTHETIC REVIEW|fictional financials/i);
 });
 
-test("installed shell reloads without the network",async({page,context})=>{
+test("installed shell updates old caches and reloads without the network",async({page,context})=>{
+  await page.addInitScript(async()=>{if(!sessionStorage.getItem("old-cache-seeded")){sessionStorage.setItem("old-cache-seeded","1");await caches.open("finn-static-v7");}});
+  let navigations=0;page.on("framenavigated",frame=>{if(frame===page.mainFrame())navigations++;});
   await page.goto("/");
+  await expect.poll(()=>navigations).toBeGreaterThanOrEqual(2);
+  await expect.poll(async()=>{try{return await page.evaluate(async()=>(await caches.keys()).includes("finn-static-v7"));}catch{return true;}}).toBe(false);
   await expect(page.getByRole("heading",{name:"Portfolio updates"})).toBeVisible();
   expect(await page.evaluate(async()=>{await navigator.serviceWorker.ready;return true;})).toBe(true);
   await expect.poll(()=>page.evaluate(()=>!!navigator.serviceWorker.controller)).toBe(true);
@@ -132,4 +138,41 @@ test("portfolio edits persist through the API",async({page})=>{
    await page.getByRole("button",{name:"Ask FINN",exact:true}).click();
    await expect(page.locator(".error-panel")).toContainText("Reconnect");
    await expect(page.locator(".brief-header")).toHaveCount(0);
+ });
+
+ test("research pages show investor information without build details",async({page})=>{
+   const snapshot=await (await page.request.get("/snapshot.json")).json();
+   snapshot.briefs.TCS.model="hyde/glm-5.3-flash";
+   snapshot.briefs.TCS.gaps=["Model narrative is unavailable: hyde/glm-5.3-flash", "Publication dates unavailable (published_on null).", "No computed guidance comparisons supplied."];
+   await page.route("**/snapshot.json",route=>route.fulfill({contentType:"application/json",body:JSON.stringify(snapshot)}));
+   await page.route("**/api/**",route=>route.fulfill({status:503,body:"{}"}));
+   await page.goto("/");
+   await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
+   await page.getByRole("button",{name:"TCS",exact:true}).click();
+   await expect(page.locator(".brief-header")).toBeVisible();
+   await expect(page.locator("body")).not.toContainText(/Analysis:|hyde\/|glm-\d|published_on|model narrative|computed guidance/i);
+   await page.getByRole("button",{name:"Sources & privacy",exact:true}).click();
+   await expect(page.locator(".about-copy")).not.toContainText(/model|provider|backend|API|build/i);
+ });
+
+ test("provider failures show a plain research error",async({page})=>{
+   const snapshot=await (await page.request.get("/snapshot.json")).json();
+   await page.route("**/api/**",async route=>{
+     const path=new URL(route.request().url()).pathname.slice(5);
+     if(path==="alerts/settings" && route.request().method()==="PUT") {await route.fulfill({status:422,contentType:"application/json",body:JSON.stringify({detail:"Configure model key in backend API"})});return;}
+     if(path==="research/TCS/brief") {await route.fulfill({contentType:"application/x-ndjson",body:JSON.stringify({type:"error",data:"Model provider hyde/glm-5.3-flash returned invalid JSON schema"})+"\n"});return;}
+     const values:Record<string,unknown>={portfolio:{companies:snapshot.portfolio},digest:{mode:"live",items:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
+     await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
+   });
+   await page.goto("/");
+   await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+   await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
+   await page.getByRole("button",{name:"TCS",exact:true}).click();
+   await expect(page.locator(".error-panel")).toContainText("Please try again");
+   await expect(page.locator("body")).not.toContainText(/hyde\/|glm-\d|provider|JSON schema/i);
+   await page.getByRole("button",{name:"Alert preferences",exact:true}).filter({visible:true}).first().click();
+   await page.getByRole("button",{name:"Save preferences",exact:true}).click();
+   await expect(page.locator("dialog [role=alert]")).toContainText("Please try again");
+   await expect(page.locator("dialog")).not.toContainText(/model key|backend|API/);
+
  });
