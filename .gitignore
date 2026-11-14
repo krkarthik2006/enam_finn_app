@@ -12,3 +12,8 @@ data/cache/*
 !data/cache/demo_sources/
 *.sqlite*
 .DS_Store
+node_modules/
+.next/
+*.tsbuildinfo
+web/test-results/
+web/playwright-report/

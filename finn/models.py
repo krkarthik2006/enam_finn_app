@@ -116,7 +116,7 @@ class Document(Input):
     title: str = Field(min_length=1, max_length=300)
     url: str = Field(default="", max_length=2000)
     text: str = Field(default="", max_length=2_000_000)
-    published_on: date
+    published_on: date | None = None
     mode: Mode = "live"
     _ticker = field_validator("ticker")(normalize_ticker)
 

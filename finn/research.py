@@ -97,7 +97,7 @@ class Research:
         cache_key = hashlib.sha256(
             json.dumps(
                 {
-                    "prompt_version": 3,
+                    "prompt_version": 4,
                     "request": request.model_dump(exclude={"include_trace", "person_id"}),
                     "evidence": evidence,
                     "model": self.settings.glm_model,
@@ -119,7 +119,7 @@ class Research:
                 if any(not set(f.citation_ids) <= valid_ids for f in parsed.findings):
                     raise ValueError("Model returned an unknown citation")
 
-            raw = self.llm.complete(model_request, "research-v3", validate)
+            raw = self.llm.complete(model_request, "research-v4", validate)
             analysis = Analysis.model_validate_json(raw["choices"][0]["message"]["content"])
             output = {
                 "status": "analysed",

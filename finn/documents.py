@@ -60,7 +60,7 @@ def save_document(db: Database, item: Document, pages: list[tuple[int | None, st
                 item.mode,
                 item.title,
                 item.url,
-                item.published_on.isoformat(),
+                item.published_on.isoformat() if item.published_on else "",
                 content_hash,
             ),
         )
@@ -79,16 +79,22 @@ def save_document(db: Database, item: Document, pages: list[tuple[int | None, st
     }
 
 
-def retrieve(db: Database, ticker: str, question: str, mode: str):
+def retrieve(db: Database, ticker: str, question: str, mode: str, document_ids: list[str] | None = None):
     tokens = list(dict.fromkeys(re.findall(r"[A-Za-z0-9]{3,}", question)))[:30]
     stop = {"the", "and", "what", "how", "this", "company", "explain", "its", "for", "with"}
     query = " OR ".join(f'"{t}"' for t in tokens if t.lower() not in stop)
     fields = """c.id, c.text, c.page, d.id AS document_id, d.title, d.url, d.kind, d.published_on, d.mode"""
     base = f"SELECT {fields} FROM chunks c JOIN documents d ON d.id=c.document_id"
     args = (ticker, mode)
+    restriction = ""
+    if document_ids is not None:
+        if not document_ids:
+            return []
+        restriction = " AND d.id IN (" + ",".join("?" for _ in document_ids) + ") "
+        args = (*args, *document_ids)
     if query:
         rows = db.all(
-            base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? "
+            base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? " + restriction +
             "AND d.kind IN ('annual_report','transcript') "
             "AND chunk_search MATCH ? ORDER BY bm25(chunk_search),d.published_on DESC LIMIT 60",
             (*args, query),
@@ -98,7 +104,7 @@ def retrieve(db: Database, ticker: str, question: str, mode: str):
     # Include context when a question uses vocabulary that does not literally occur in the source.
     if not rows:
         rows = db.all(
-            base + " WHERE d.ticker=? AND d.mode=? AND d.kind IN ('annual_report','transcript') "
+            base + " WHERE d.ticker=? AND d.mode=? " + restriction + " AND d.kind IN ('annual_report','transcript') "
             "ORDER BY d.published_on DESC,c.position LIMIT 8", args
         )
     # Give multiple periods a chance to appear instead of filling context with one long annual report.
@@ -110,4 +116,4 @@ def retrieve(db: Database, ticker: str, question: str, mode: str):
         else:
             remaining.append(row)
     selected.extend(remaining[: 12 - len(selected)])
-    return [{"citation_id": r.pop("id"), **r} for r in selected]
+    return [{"citation_id": r.pop("id"), **r, "published_on": r["published_on"] or None} for r in selected]

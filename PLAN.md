@@ -16,7 +16,7 @@ without a wholesale directory rewrite. The Next.js scaffold and build move to P6
 current model as a configurable baseline; provider/model allocation remains undecided.
 Each phase has code checks and an explicit live-source result. Synthetic fixtures remain
 separate from real sources; failed/blocked sources and unverified portfolio picks stay labelled.
-Stop implementation after P4 so the user can review before P5/P6 work.
+The user extended scope on 14 Nov: implement P5/P6 before review so the workflow can be inspected visually. P7 deployment remains separate.
 
 ## Product point of view
 
@@ -80,29 +80,33 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 ## Phase 5 — Pull engine (Sat evening/night, ~5–6h)
 - [x] Run live-model acceptance tests against known synthetic facts: financial accuracy, missing evidence, source isolation, citations, network selection, cache invalidation and document prompt injection; keep response artifacts for review (7 passed).
 - [ ] Extend acceptance coverage to real company documents, longer corpora, multiple periods/units and unsupported prose in findings/gaps; review factual support beyond the bounded numeric checks.
-- [ ] Works for **any NSE ticker**: fetch screener tables + last 4 concall transcripts + latest annual report (fetched live, then cached)
-- [ ] Split documents into chunks by page; simple retrieval (BM25 or small embeddings)
-- [ ] Guidance extractor (cheap model, JSON): `{quarter, metric, guided_value_or_range, quote_page}`
-- [ ] Promised-vs-delivered **computed in code** against the actual figures
-- [ ] Strong model writes the narrative + bull/bear **using only the cited chunks**
-- [ ] Sections (in priority order): Business snapshot → Financial snapshot + trajectory → **Promised vs delivered** → Bull/Bear
-- [ ] A "People who'd know" panel from the network engine
-- [ ] API: `POST /research/{ticker}` (cached; streams progress)
+- [x] Generic NSE ticker discovery: fetch Screener tables and attempt the latest annual report + four transcripts; preserve original PDF pages/cache and report missing sources. Live INFY: 1 annual + 4 transcripts; unseen HCLTECH: 1 annual + 3 transcripts, one HTML response rejected. Unknown publication dates remain unknown.
+- [x] Split documents into chunks by page; simple retrieval (BM25 or small embeddings)
+- [x] Guidance extractor (cheap model, JSON): `{quarter, metric, guided_value_or_range, quote_page}`
+- [x] Promised-vs-delivered **computed in code** against the actual figures
+- [x] Current configured model writes the narrative + bull/bear **using only the cited chunks**
+- [x] Sections (in priority order): Business snapshot → Financial snapshot + trajectory → **Promised vs delivered** → Bull/Bear
+- [x] A "People who'd know" panel from the network engine
+- [x] API: `POST /research/{ticker}` (cached; streams progress)
+- [x] Five saved synthetic-company briefs generated with the actual model; sectioned live-model acceptance includes an unseen ticker, exact citations, code-computed misses, cache and network refresh. INFY and unseen HCLTECH real-source briefs also generated.
+- **Review limit:** identifiers and numerical anchors are validated; full semantic support across long documents remains a review task. Numerical guidance comparisons require explicit compatible quarter/basis/unit evidence; real trials correctly returned gaps rather than guessed delivery scores.
 - **Done when:** briefs for the 3–5 research tickers plus one unseen ticker render with citations.
 
 ## Phase 6 — Frontend (Sun morning/afternoon, ~6–8h)
 Build in this order:
-- [ ] Today feed + card components (results card, management-change card, event card, collapsed routine row)
-- [ ] Card detail: bio, overlap timeline, path view (You → A → Target)
-- [ ] Ask: command bar → research brief with citation chips (tap → doc + page)
-- [ ] People: search by company/theme, expertise map, reconnect nudges
-- [ ] Alert settings sheet
-- [ ] Design pass: one type scale, one accent colour, dense but calm, readable in 2 seconds
+- [x] Today feed + card components (results card, management-change card, event card, collapsed routine row)
+- [x] Card detail: bio, overlap timeline, path view (You → A → Target)
+- [x] Ask: command bar → research brief with citation chips (tap → doc + page)
+- [x] People: search by company/theme, expertise map, reconnect nudges
+- [x] Alert settings sheet
+- [x] Design pass: one type scale, one accent colour, dense but calm, readable in 2 seconds
+- [x] Next.js production build, lint/types and desktop/mobile Chromium workflows; installable manifest/icons and service worker; backend-offline saved briefs and full network-offline reload checked.
+- [ ] Verify on a physical phone with the user; mobile viewport automation does not establish physical-device support.
 - **Done when:** the whole demo works on a real phone.
 
 ## Phase 7 — Deploy + make the demo safe (Sun afternoon, ~3h)
 - [ ] Deploy the API (Render/Railway) and the web app (Vercel)
-- [ ] Seed snapshots for all demo tickers; the frontend falls back to them if the API is cold
+- [x] Five synthetic review snapshots ship in web/public/demo.json and render if the API is unavailable; real-source snapshot expansion remains a deployment task.
 - [ ] Keep-warm ping; loading states for live research
 - [ ] Run the demo end to end twice on mobile data
 

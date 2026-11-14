@@ -220,10 +220,11 @@ class Providers:
                         continue
                     link = urljoin(url, anchor["href"])
                     if urlparse(link).scheme == "https":
+                        parent = anchor.find_parent("li")
                         links.append(
                             {
                                 "kind": kind,
-                                "title": title,
+                                "title": parent.get_text(" ", strip=True) if parent else title,
                                 "url": link,
                                 "download_host_allowed": urlparse(link).hostname
                                 in self.settings.document_hosts,
@@ -233,6 +234,10 @@ class Providers:
                 "ticker": ticker,
                 "discovery_url": url,
                 "documents": links,
+                "company_website": next((a.get("href") for a in soup.select(".company-links a[href]")
+                                         if "screener.in" not in (urlparse(a.get("href", "")).hostname or "")
+                                         and "bseindia.com" not in (urlparse(a.get("href", "")).hostname or "")
+                                         and "nseindia.com" not in (urlparse(a.get("href", "")).hostname or "")), None),
                 "source": response.extensions.get("finn_source"),
                 "note": "Discovery only. Ingest the selected original document, with its publication date.",
             }

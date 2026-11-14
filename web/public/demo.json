@@ -1,0 +1,5014 @@
+{
+  "generated_at": "2026-11-14T08:06:29.200854+00:00",
+  "scenario": {
+    "mode": "demo",
+    "network": {
+      "contacts": 40,
+      "notice": "All people, professional histories and relationships are fictional; real company names do not imply real relationships.",
+      "owner_id": "local"
+    },
+    "workflow": {
+      "mode": "demo",
+      "ticker": "MOCKIT",
+      "subject_person_id": "workflow-cfo",
+      "announcement_id": "028ef52db693df4d15ec2826",
+      "research_request": {
+        "ticker": "MOCKIT",
+        "question": "Compare Q2 delivered EBITDA margin with the guidance given in Q1. What explains the shortfall in IT services operating margins?",
+        "mode": "demo",
+        "person_id": "workflow-cfo",
+        "include_trace": true
+      },
+      "expected_contacts": {
+        "industry_expert": "workflow-expert",
+        "company_insider": "workflow-insider",
+        "recorded_connection": "workflow-connector"
+      },
+      "expected_evidence": {
+        "q2_guided_margin_percent": 22,
+        "q2_actual_margin_percent": 20
+      },
+      "notice": "Company, people, relationships and financial figures are fictional. No messages are sent."
+    },
+    "results_event_id": "26a8c48ac25b213266fc6192",
+    "material_event_id": "8558f4a8e732cfc3036497af",
+    "period_end": "2026-09-30",
+    "digest_since": "2026-11-11T08:06:29.148132+00:00",
+    "notice": "Review data is synthetic; real companies' names do not make these numbers real.",
+    "research_tickers": [
+      "MOCKIT",
+      "TCS",
+      "INFY",
+      "TITAN",
+      "CDSL"
+    ]
+  },
+  "portfolio": [
+    {
+      "ticker": "MOCKIT",
+      "name": "Mock IT Services (fictional)",
+      "sector": "IT services",
+      "exchange": "NSE",
+      "bse_code": null
+    },
+    {
+      "ticker": "SRF",
+      "name": "SRF",
+      "sector": "specialty chemicals",
+      "exchange": "NSE",
+      "bse_code": null
+    },
+    {
+      "ticker": "TCS",
+      "name": "TCS",
+      "sector": "IT services",
+      "exchange": "NSE",
+      "bse_code": null
+    }
+  ],
+  "contacts": [
+    {
+      "id": "workflow-cfo",
+      "name": "Riya Sen (fictional)",
+      "roles": [
+        {
+          "company": "Harbor Finance",
+          "ticker": "HARBOR",
+          "title": "Finance manager",
+          "start_year": 2016,
+          "end_year": 2022
+        },
+        {
+          "company": "Mock IT Services (fictional)",
+          "ticker": "MOCKIT",
+          "title": "Incoming CFO",
+          "start_year": 2026,
+          "end_year": null
+        }
+      ],
+      "expertise": [],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": false,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "workflow-connector",
+      "name": "Neha Rao (fictional)",
+      "roles": [
+        {
+          "company": "Harbor Finance",
+          "ticker": "HARBOR",
+          "title": "Controller",
+          "start_year": 2017,
+          "end_year": 2021
+        }
+      ],
+      "expertise": [],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [
+        "workflow-cfo"
+      ],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "workflow-expert",
+      "name": "Ananya Das (fictional)",
+      "roles": [],
+      "expertise": [
+        "IT services",
+        "operating margins"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "workflow-insider",
+      "name": "Vikram Shah (fictional)",
+      "roles": [
+        {
+          "company": "Mock IT Services (fictional)",
+          "ticker": "MOCKIT",
+          "title": "Delivery director",
+          "start_year": 2022,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "delivery operations"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "workflow-unrelated",
+      "name": "Kabir Mehta (fictional)",
+      "roles": [],
+      "expertise": [
+        "agriculture",
+        "irrigation"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "network-supplier",
+      "name": "Leela Iyer (fictional)",
+      "roles": [
+        {
+          "company": "Precision Components",
+          "ticker": "PCOMP",
+          "title": "Plant head",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "specialty chemicals",
+        "capacity expansion"
+      ],
+      "education": [],
+      "related_companies": [
+        {
+          "ticker": "SRF",
+          "kind": "supplier"
+        }
+      ],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "network-peer",
+      "name": "Devika Sen (fictional)",
+      "roles": [],
+      "expertise": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [
+        "network-promoter"
+      ],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "network-promoter",
+      "name": "Karan Shah (fictional)",
+      "roles": [
+        {
+          "company": "Mock Consumer",
+          "ticker": "MOCKCON",
+          "title": "Promoter",
+          "start_year": 2013,
+          "end_year": null
+        }
+      ],
+      "expertise": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": false,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": null
+    },
+    {
+      "id": "network-reconnect",
+      "name": "Sameer Gupta (fictional)",
+      "roles": [
+        {
+          "company": "TCS",
+          "ticker": "TCS",
+          "title": "Operations manager",
+          "start_year": 2010,
+          "end_year": 2020
+        }
+      ],
+      "expertise": [
+        "IT services",
+        "delivery operations"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-01-01"
+    },
+    {
+      "id": "network-contact-01",
+      "name": "Demo Professional 01 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-02",
+      "name": "Demo Professional 02 (fictional)",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-03",
+      "name": "Demo Professional 03 (fictional)",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-04",
+      "name": "Demo Professional 04 (fictional)",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-05",
+      "name": "Demo Professional 05 (fictional)",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-06",
+      "name": "Demo Professional 06 (fictional)",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-07",
+      "name": "Demo Professional 07 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-08",
+      "name": "Demo Professional 08 (fictional)",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-09",
+      "name": "Demo Professional 09 (fictional)",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-10",
+      "name": "Demo Professional 10 (fictional)",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-11",
+      "name": "Demo Professional 11 (fictional)",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-12",
+      "name": "Demo Professional 12 (fictional)",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-13",
+      "name": "Demo Professional 13 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-14",
+      "name": "Demo Professional 14 (fictional)",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-15",
+      "name": "Demo Professional 15 (fictional)",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-16",
+      "name": "Demo Professional 16 (fictional)",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-17",
+      "name": "Demo Professional 17 (fictional)",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-18",
+      "name": "Demo Professional 18 (fictional)",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-19",
+      "name": "Demo Professional 19 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-20",
+      "name": "Demo Professional 20 (fictional)",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-21",
+      "name": "Demo Professional 21 (fictional)",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-22",
+      "name": "Demo Professional 22 (fictional)",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-23",
+      "name": "Demo Professional 23 (fictional)",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-24",
+      "name": "Demo Professional 24 (fictional)",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-25",
+      "name": "Demo Professional 25 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-26",
+      "name": "Demo Professional 26 (fictional)",
+      "roles": [
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Industry specialist",
+          "start_year": 2015,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "specialty chemicals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-27",
+      "name": "Demo Professional 27 (fictional)",
+      "roles": [
+        {
+          "company": "TITAN",
+          "ticker": "TITAN",
+          "title": "Industry specialist",
+          "start_year": 2016,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "retail"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 2,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-28",
+      "name": "Demo Professional 28 (fictional)",
+      "roles": [
+        {
+          "company": "INFY",
+          "ticker": "INFY",
+          "title": "Industry specialist",
+          "start_year": 2017,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "IT services"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 3,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-29",
+      "name": "Demo Professional 29 (fictional)",
+      "roles": [
+        {
+          "company": "LT",
+          "ticker": "LT",
+          "title": "Industry specialist",
+          "start_year": 2018,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "engineering"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 4,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-30",
+      "name": "Demo Professional 30 (fictional)",
+      "roles": [
+        {
+          "company": "SUNPHARMA",
+          "ticker": "SUNPHARMA",
+          "title": "Industry specialist",
+          "start_year": 2019,
+          "end_year": 2023
+        }
+      ],
+      "expertise": [
+        "pharmaceuticals"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 5,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    },
+    {
+      "id": "network-contact-31",
+      "name": "Demo Professional 31 (fictional)",
+      "roles": [
+        {
+          "company": "HDFCBANK",
+          "ticker": "HDFCBANK",
+          "title": "Industry specialist",
+          "start_year": 2014,
+          "end_year": null
+        }
+      ],
+      "expertise": [
+        "banking"
+      ],
+      "education": [],
+      "related_companies": [],
+      "relationship_strength": 1,
+      "direct_contact": true,
+      "knows": [],
+      "provenance": "synthetic",
+      "source_url": "",
+      "notes": "",
+      "last_contacted": "2026-09-01"
+    }
+  ],
+  "digest": {
+    "mode": "demo",
+    "since": "2026-11-11T08:06:29.148132+00:00",
+    "until": "2026-11-14T08:06:29.203918+00:00",
+    "items": [
+      {
+        "ticker": "MOCKIT",
+        "title": "SYNTHETIC: Appointment of CFO; IT services operating margins review",
+        "body": "Fictional Riya Sen appointed CFO following a margin shortfall. All data is synthetic.",
+        "url": "",
+        "published_at": "2026-11-14T08:05:29.144130Z",
+        "category": "management_change",
+        "mode": "demo",
+        "subject_person_id": "workflow-cfo",
+        "source": null,
+        "financial_period_end": null,
+        "materiality": 1.0,
+        "id": "028ef52db693df4d15ec2826",
+        "classification_method": "keyword_rules",
+        "type": "announcement",
+        "priority": "high",
+        "summary": "SYNTHETIC: Appointment of CFO; IT services operating margins review",
+        "summary_method": "filing_title",
+        "enrichment": {
+          "category": "management_change",
+          "summary": "SYNTHETIC: Appointment of CFO; IT services operating margins review",
+          "summary_method": "filing_title",
+          "contacts": [
+            {
+              "person_id": "workflow-insider",
+              "name": "Vikram Shah (fictional)",
+              "score": 10,
+              "roles": [
+                {
+                  "company": "Mock IT Services (fictional)",
+                  "ticker": "MOCKIT",
+                  "title": "Delivery director",
+                  "start_year": 2022,
+                  "end_year": null
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "workflow-expert",
+              "name": "Ananya Das (fictional)",
+              "score": 6,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-contact-04",
+              "name": "Demo Professional 04 (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            }
+          ],
+          "attention_score": {
+            "value": 11.0,
+            "components": {
+              "type_weight": 8,
+              "materiality": 1.0,
+              "investor_preference": 1,
+              "network_boost": 3
+            }
+          },
+          "gaps": [],
+          "management": {
+            "person": {
+              "id": "workflow-cfo",
+              "name": "Riya Sen (fictional)",
+              "roles": [
+                {
+                  "company": "Harbor Finance",
+                  "ticker": "HARBOR",
+                  "title": "Finance manager",
+                  "start_year": 2016,
+                  "end_year": 2022
+                },
+                {
+                  "company": "Mock IT Services (fictional)",
+                  "ticker": "MOCKIT",
+                  "title": "Incoming CFO",
+                  "start_year": 2026,
+                  "end_year": null
+                }
+              ],
+              "expertise": [],
+              "education": [],
+              "related_companies": [],
+              "relationship_strength": 3,
+              "direct_contact": false,
+              "knows": [],
+              "provenance": "synthetic",
+              "source_url": "",
+              "notes": "",
+              "last_contacted": null
+            },
+            "profile_provenance": "synthetic",
+            "paths": [
+              {
+                "person_ids": [
+                  "investor-local",
+                  "workflow-connector",
+                  "workflow-cfo"
+                ],
+                "names": [
+                  "Demo investor (fictional)",
+                  "Neha Rao (fictional)",
+                  "Riya Sen (fictional)"
+                ],
+                "hops": 2,
+                "strength": 3,
+                "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Riya Sen (fictional); recorded connections only"
+              }
+            ],
+            "overlaps": [
+              {
+                "person_id": "workflow-connector",
+                "name": "Neha Rao (fictional)",
+                "work": [
+                  {
+                    "company": "Harbor Finance",
+                    "start_year": 2017,
+                    "end_year": 2021,
+                    "years": 4,
+                    "acquaintance_verified": false
+                  }
+                ],
+                "education": []
+              },
+              {
+                "person_id": "workflow-insider",
+                "name": "Vikram Shah (fictional)",
+                "work": [
+                  {
+                    "company": "Mock IT Services (fictional)",
+                    "start_year": 2026,
+                    "end_year": 2026,
+                    "years": 0,
+                    "acquaintance_verified": false
+                  }
+                ],
+                "education": []
+              }
+            ]
+          },
+          "event_hash": "f88bd2d029303858d666f0c220796229e6a54eb75d7810cc806f74cf31aaf0e5",
+          "model_facts": null,
+          "person_resolution": []
+        },
+        "attention_score": {
+          "value": 11.0,
+          "components": {
+            "type_weight": 8,
+            "materiality": 1.0,
+            "investor_preference": 1,
+            "network_boost": 3
+          }
+        },
+        "network": [
+          {
+            "contact_id": "workflow-connector",
+            "name": "Neha Rao (fictional)",
+            "score": 20,
+            "reasons": [
+              "Explicit recorded connection to Riya Sen (fictional).",
+              "Employment dates overlap at Harbor Finance; acquaintance is unverified."
+            ],
+            "relationship": "explicit_connection",
+            "match_types": [
+              "employment_overlap",
+              "recorded_connection"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": null
+          },
+          {
+            "contact_id": "workflow-insider",
+            "name": "Vikram Shah (fictional)",
+            "score": 15,
+            "reasons": [
+              "Works at Mock IT Services (fictional) as Delivery director (2022\u2013present).",
+              "Employment dates overlap at Mock IT Services (fictional); acquaintance is unverified."
+            ],
+            "relationship": "possible_employment_overlap",
+            "match_types": [
+              "company_insider",
+              "employment_overlap"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": null
+          },
+          {
+            "contact_id": "workflow-expert",
+            "name": "Ananya Das (fictional)",
+            "score": 6,
+            "reasons": [
+              "Listed expertise: IT services.",
+              "Listed expertise: operating margins."
+            ],
+            "relationship": null,
+            "match_types": [
+              "industry_expert"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": null
+          }
+        ]
+      },
+      {
+        "ticker": "MOCKIT",
+        "title": "SYNTHETIC: Quarterly financial results",
+        "body": "Fictional quarterly results for period ended 2026-09-30. Consolidated figures, INR crore: Revenue 1200; EBITDA 240; PBT 200; PAT 150. These are reported results in this synthetic exercise, not forecasts or real financial data.",
+        "url": "",
+        "published_at": "2026-11-14T00:01:00Z",
+        "category": "results",
+        "mode": "demo",
+        "subject_person_id": null,
+        "source": null,
+        "financial_period_end": "2026-09-30",
+        "materiality": 1.0,
+        "id": "26a8c48ac25b213266fc6192",
+        "classification_method": "provided",
+        "type": "announcement",
+        "priority": "high",
+        "summary": "SYNTHETIC: Quarterly financial results",
+        "summary_method": "filing_title",
+        "enrichment": {
+          "category": "results",
+          "summary": "SYNTHETIC: Quarterly financial results",
+          "summary_method": "filing_title",
+          "contacts": [
+            {
+              "person_id": "workflow-insider",
+              "name": "Vikram Shah (fictional)",
+              "score": 10,
+              "roles": [
+                {
+                  "company": "Mock IT Services (fictional)",
+                  "ticker": "MOCKIT",
+                  "title": "Delivery director",
+                  "start_year": 2022,
+                  "end_year": null
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "workflow-expert",
+              "name": "Ananya Das (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-contact-04",
+              "name": "Demo Professional 04 (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            }
+          ],
+          "attention_score": {
+            "value": 10.0,
+            "components": {
+              "type_weight": 7,
+              "materiality": 1.0,
+              "investor_preference": 1,
+              "network_boost": 3
+            }
+          },
+          "gaps": [],
+          "results": {
+            "period": {
+              "ticker": "MOCKIT",
+              "period_end": "2026-09-30",
+              "frequency": "quarterly",
+              "basis": "consolidated",
+              "currency": "INR",
+              "unit": "crore",
+              "metrics": {
+                "revenue": 1200.0,
+                "ebitda": 240.0,
+                "pbt": 200.0,
+                "pat": 150.0
+              },
+              "source_type": "synthetic",
+              "source_url": "",
+              "pages": {},
+              "mode": "demo",
+              "source": null
+            },
+            "comparisons": {
+              "qoq": {
+                "revenue": {
+                  "percent": 20.0,
+                  "status": "calculated"
+                },
+                "ebitda": {
+                  "percent": 20.0,
+                  "status": "calculated"
+                },
+                "pbt": {
+                  "percent": 25.0,
+                  "status": "calculated"
+                },
+                "pat": {
+                  "percent": 25.0,
+                  "status": "calculated"
+                }
+              },
+              "yoy": {
+                "revenue": {
+                  "percent": 33.3333,
+                  "status": "calculated"
+                },
+                "ebitda": {
+                  "percent": 60.0,
+                  "status": "calculated"
+                },
+                "pbt": {
+                  "percent": 42.8571,
+                  "status": "calculated"
+                },
+                "pat": {
+                  "percent": 50.0,
+                  "status": "calculated"
+                }
+              }
+            },
+            "cross_check": {
+              "status": "checked",
+              "metrics": {
+                "revenue": {
+                  "status": "mismatch",
+                  "difference_percent": 9.0909
+                },
+                "ebitda": {
+                  "status": "not_available",
+                  "difference_percent": null
+                },
+                "pbt": {
+                  "status": "match",
+                  "difference_percent": 0.0
+                },
+                "pat": {
+                  "status": "match",
+                  "difference_percent": 1.3514
+                }
+              },
+              "reference": {
+                "source_type": "screener",
+                "source_url": "https://demo.invalid/MOCKIT/synthetic-reference",
+                "mode": "demo",
+                "notice": "Synthetic reference fixture"
+              }
+            }
+          },
+          "event_hash": "5c9fca44ceb1f8ce812fea0c57ffcef21857d40e9c7c1173a61d81092a3da1d0",
+          "model_facts": null,
+          "person_resolution": []
+        },
+        "attention_score": {
+          "value": 10.0,
+          "components": {
+            "type_weight": 7,
+            "materiality": 1.0,
+            "investor_preference": 1,
+            "network_boost": 3
+          }
+        },
+        "network": [
+          {
+            "contact_id": "workflow-insider",
+            "name": "Vikram Shah (fictional)",
+            "score": 10,
+            "reasons": [
+              "Works at Mock IT Services (fictional) as Delivery director (2022\u2013present)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_insider"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": null
+          }
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "title": "SYNTHETIC: Quarterly financial results",
+        "body": "Fictional results event to demonstrate a reconnect nudge; no actual financial figures supplied.",
+        "url": "",
+        "published_at": "2026-11-14T00:01:00Z",
+        "category": "results",
+        "mode": "demo",
+        "subject_person_id": null,
+        "source": null,
+        "financial_period_end": null,
+        "materiality": 1.0,
+        "id": "b45631cecba0451a7b351b5b",
+        "classification_method": "provided",
+        "type": "announcement",
+        "priority": "high",
+        "summary": "SYNTHETIC: Quarterly financial results",
+        "summary_method": "filing_title",
+        "enrichment": {
+          "category": "results",
+          "summary": "SYNTHETIC: Quarterly financial results",
+          "summary_method": "filing_title",
+          "contacts": [
+            {
+              "person_id": "network-reconnect",
+              "name": "Sameer Gupta (fictional)",
+              "score": 11,
+              "roles": [
+                {
+                  "company": "TCS",
+                  "ticker": "TCS",
+                  "title": "Operations manager",
+                  "start_year": 2010,
+                  "end_year": 2020
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "workflow-expert",
+              "name": "Ananya Das (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-contact-04",
+              "name": "Demo Professional 04 (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            }
+          ],
+          "attention_score": {
+            "value": 10.0,
+            "components": {
+              "type_weight": 7,
+              "materiality": 1.0,
+              "investor_preference": 1,
+              "network_boost": 3
+            }
+          },
+          "gaps": [
+            "No extracted financial period linked to this results filing; no numbers are invented."
+          ],
+          "results": null,
+          "event_hash": "1a37d9183f52dcae04f2b77e38ea8167e5455370ff766cb55cd8e7f8a356a135",
+          "model_facts": null,
+          "person_resolution": []
+        },
+        "attention_score": {
+          "value": 10.0,
+          "components": {
+            "type_weight": 7,
+            "materiality": 1.0,
+            "investor_preference": 1,
+            "network_boost": 3
+          }
+        },
+        "network": [
+          {
+            "contact_id": "network-reconnect",
+            "name": "Sameer Gupta (fictional)",
+            "score": 8,
+            "reasons": [
+              "Worked at TCS as Operations manager (2010\u20132020)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_alumnus"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": "2026-01-01"
+          }
+        ]
+      },
+      {
+        "ticker": "SRF",
+        "title": "SYNTHETIC: Board approves capacity expansion",
+        "body": "Fictional new plant; the investor knows a synthetic supplier contact.",
+        "url": "",
+        "published_at": "2026-11-14T00:01:00Z",
+        "category": "capex",
+        "mode": "demo",
+        "subject_person_id": null,
+        "source": null,
+        "financial_period_end": null,
+        "materiality": 1.0,
+        "id": "8558f4a8e732cfc3036497af",
+        "classification_method": "provided",
+        "type": "announcement",
+        "priority": "high",
+        "summary": "SYNTHETIC: Board approves capacity expansion",
+        "summary_method": "filing_title",
+        "enrichment": {
+          "category": "capex",
+          "summary": "SYNTHETIC: Board approves capacity expansion",
+          "summary_method": "filing_title",
+          "contacts": [
+            {
+              "person_id": "network-contact-02",
+              "name": "Demo Professional 02 (fictional)",
+              "score": 11,
+              "roles": [
+                {
+                  "company": "SRF",
+                  "ticker": "SRF",
+                  "title": "Industry specialist",
+                  "start_year": 2015,
+                  "end_year": 2023
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-contact-08",
+              "name": "Demo Professional 08 (fictional)",
+              "score": 11,
+              "roles": [
+                {
+                  "company": "SRF",
+                  "ticker": "SRF",
+                  "title": "Industry specialist",
+                  "start_year": 2015,
+                  "end_year": 2023
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-supplier",
+              "name": "Leela Iyer (fictional)",
+              "score": 10,
+              "roles": [],
+              "relationships": [
+                {
+                  "ticker": "SRF",
+                  "kind": "supplier"
+                }
+              ],
+              "provenance": "synthetic",
+              "selection_reason": "Recorded supplier/competitor/customer perspective"
+            }
+          ],
+          "attention_score": {
+            "value": 9.0,
+            "components": {
+              "type_weight": 6,
+              "materiality": 1.0,
+              "investor_preference": 1,
+              "network_boost": 3
+            }
+          },
+          "gaps": [],
+          "event_hash": "1fbd53cea056c2ed3d0fc5185d8fd074b9169cd8378c5099b26e6073af6421bb",
+          "model_facts": null,
+          "person_resolution": []
+        },
+        "attention_score": {
+          "value": 9.0,
+          "components": {
+            "type_weight": 6,
+            "materiality": 1.0,
+            "investor_preference": 1,
+            "network_boost": 3
+          }
+        },
+        "network": [
+          {
+            "contact_id": "network-contact-02",
+            "name": "Demo Professional 02 (fictional)",
+            "score": 8,
+            "reasons": [
+              "Worked at SRF as Industry specialist (2015\u20132023)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_alumnus"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": "2026-09-01"
+          },
+          {
+            "contact_id": "network-contact-08",
+            "name": "Demo Professional 08 (fictional)",
+            "score": 8,
+            "reasons": [
+              "Worked at SRF as Industry specialist (2015\u20132023)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_alumnus"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": "2026-09-01"
+          },
+          {
+            "contact_id": "network-contact-14",
+            "name": "Demo Professional 14 (fictional)",
+            "score": 8,
+            "reasons": [
+              "Worked at SRF as Industry specialist (2015\u20132023)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_alumnus"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": "2026-09-01"
+          }
+        ]
+      },
+      {
+        "id": "price:demo:MOCKIT:2026-11-13",
+        "ticker": "MOCKIT",
+        "type": "market_alert",
+        "mode": "demo",
+        "source": null,
+        "priority": "high",
+        "attention_score": {
+          "value": 5,
+          "method": "market_threshold"
+        },
+        "published_at": "2026-11-13T12:30:00+00:00",
+        "summary": "Daily close changed +7.00% (threshold \u00b15%). Volume was 3.00\u00d7 the prior 20 trading-day average.",
+        "price_change_percent": 7.0,
+        "volume_multiple": 3.0,
+        "volume_baseline_days": 20,
+        "volume_baseline_complete": true,
+        "network": [
+          {
+            "contact_id": "workflow-insider",
+            "name": "Vikram Shah (fictional)",
+            "score": 10,
+            "reasons": [
+              "Works at Mock IT Services (fictional) as Delivery director (2022\u2013present)."
+            ],
+            "relationship": null,
+            "match_types": [
+              "company_insider"
+            ],
+            "provenance": "synthetic",
+            "last_contacted": null
+          }
+        ]
+      }
+    ],
+    "routine_count": 1,
+    "routine": [
+      {
+        "ticker": "MOCKIT",
+        "title": "SYNTHETIC: Compliance certificate",
+        "body": "Fictional routine filing.",
+        "url": "",
+        "published_at": "2026-11-14T00:01:00Z",
+        "category": "unclassified",
+        "mode": "demo",
+        "subject_person_id": null,
+        "source": null,
+        "financial_period_end": null,
+        "materiality": 1.0,
+        "id": "2ba683448032641c4cdd9c8f",
+        "classification_method": "provided",
+        "type": "announcement",
+        "priority": "routine",
+        "summary": "SYNTHETIC: Compliance certificate",
+        "summary_method": "filing_title",
+        "enrichment": {
+          "category": "unclassified",
+          "summary": "SYNTHETIC: Compliance certificate",
+          "summary_method": "filing_title",
+          "contacts": [
+            {
+              "person_id": "workflow-insider",
+              "name": "Vikram Shah (fictional)",
+              "score": 10,
+              "roles": [
+                {
+                  "company": "Mock IT Services (fictional)",
+                  "ticker": "MOCKIT",
+                  "title": "Delivery director",
+                  "start_year": 2022,
+                  "end_year": null
+                }
+              ],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "workflow-expert",
+              "name": "Ananya Das (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            },
+            {
+              "person_id": "network-contact-04",
+              "name": "Demo Professional 04 (fictional)",
+              "score": 3,
+              "roles": [],
+              "relationships": [],
+              "provenance": "synthetic"
+            }
+          ],
+          "attention_score": {
+            "value": 4.0,
+            "components": {
+              "type_weight": 1,
+              "materiality": 1.0,
+              "investor_preference": 1,
+              "network_boost": 3
+            }
+          },
+          "gaps": [],
+          "event_hash": "25d899f3c6e5a6c33fb9779007491266690e802f31cea87f62d372acb4b89599",
+          "model_facts": null,
+          "person_resolution": []
+        },
+        "attention_score": {
+          "value": 4.0,
+          "components": {
+            "type_weight": 1,
+            "materiality": 1.0,
+            "investor_preference": 1,
+            "network_boost": 3
+          }
+        },
+        "network": []
+      }
+    ],
+    "note": "EOD price alerts use close-to-close prices; splits and other corporate actions require review."
+  },
+  "investor": {
+    "id": "investor-local",
+    "name": "Demo investor (fictional)",
+    "provenance": "synthetic",
+    "roles": [
+      {
+        "company": "Harbor Finance",
+        "ticker": "HARBOR",
+        "title": "Analyst",
+        "start_year": 2014,
+        "end_year": 2018
+      }
+    ],
+    "education": [
+      {
+        "institution": "IIT Delhi",
+        "start_year": 2007,
+        "end_year": 2011
+      }
+    ],
+    "knows": [
+      "workflow-connector",
+      "workflow-expert",
+      "workflow-insider",
+      "network-supplier",
+      "network-peer",
+      "network-reconnect"
+    ]
+  },
+  "settings": {
+    "price_change_percent": 5.0,
+    "volume_multiple": 2.0,
+    "volume_lookback_days": 20,
+    "material_categories": [
+      "results",
+      "M&A",
+      "management_change",
+      "litigation",
+      "capex"
+    ],
+    "category_weights": {}
+  },
+  "nudges": [
+    {
+      "person_id": "network-reconnect",
+      "name": "Sameer Gupta (fictional)",
+      "event_id": "b45631cecba0451a7b351b5b",
+      "days_since_contact": 317,
+      "reason": "Their current/former employer TCS has a new results filing.",
+      "provenance": "synthetic"
+    }
+  ],
+  "paths": {
+    "workflow-cfo": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector",
+          "workflow-cfo"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)",
+          "Riya Sen (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Riya Sen (fictional); recorded connections only"
+      }
+    ],
+    "workflow-connector": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)"
+        ],
+        "hops": 1,
+        "strength": 5,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional); recorded connections only"
+      }
+    ],
+    "workflow-expert": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-expert"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Ananya Das (fictional)"
+        ],
+        "hops": 1,
+        "strength": 4,
+        "explanation": "Demo investor (fictional) \u2192 Ananya Das (fictional); recorded connections only"
+      }
+    ],
+    "workflow-insider": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-insider"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Vikram Shah (fictional)"
+        ],
+        "hops": 1,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Vikram Shah (fictional); recorded connections only"
+      }
+    ],
+    "workflow-unrelated": [],
+    "network-supplier": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-supplier"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Leela Iyer (fictional)"
+        ],
+        "hops": 1,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Leela Iyer (fictional); recorded connections only"
+      }
+    ],
+    "network-peer": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-peer"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Devika Sen (fictional)"
+        ],
+        "hops": 1,
+        "strength": 4,
+        "explanation": "Demo investor (fictional) \u2192 Devika Sen (fictional); recorded connections only"
+      }
+    ],
+    "network-promoter": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-peer",
+          "network-promoter"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Devika Sen (fictional)",
+          "Karan Shah (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Devika Sen (fictional) \u2192 Karan Shah (fictional); recorded connections only"
+      }
+    ],
+    "network-reconnect": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-reconnect"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Sameer Gupta (fictional)"
+        ],
+        "hops": 1,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-01": [],
+    "network-contact-02": [],
+    "network-contact-03": [],
+    "network-contact-04": [],
+    "network-contact-05": [],
+    "network-contact-06": [],
+    "network-contact-07": [],
+    "network-contact-08": [],
+    "network-contact-09": [],
+    "network-contact-10": [],
+    "network-contact-11": [],
+    "network-contact-12": [],
+    "network-contact-13": [],
+    "network-contact-14": [],
+    "network-contact-15": [],
+    "network-contact-16": [],
+    "network-contact-17": [],
+    "network-contact-18": [],
+    "network-contact-19": [],
+    "network-contact-20": [],
+    "network-contact-21": [],
+    "network-contact-22": [],
+    "network-contact-23": [],
+    "network-contact-24": [],
+    "network-contact-25": [],
+    "network-contact-26": [],
+    "network-contact-27": [],
+    "network-contact-28": [],
+    "network-contact-29": [],
+    "network-contact-30": [],
+    "network-contact-31": []
+  },
+  "briefs": {
+    "MOCKIT": {
+      "ticker": "MOCKIT",
+      "question": "Explain the business, financial trajectory, management guidance delivery, positives and risks.",
+      "mode": "demo",
+      "status": "analysed",
+      "sections": [
+        {
+          "id": "business",
+          "title": "Business snapshot",
+          "findings": [
+            {
+              "section": "business",
+              "text": "Mock IT Services (MOCKIT) provides recurring services to enterprise customers in India and overseas; management describes repeat customer relationships and better project delivery as strengths. All figures are fictional/synthetic for this exercise.",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "financial",
+          "title": "Financial trajectory",
+          "findings": [
+            {
+              "section": "financial",
+              "text": "FY2025 (consolidated, INR crore): revenue 3200, EBITDA 600, PBT 500, PAT 360. FY2026: revenue 3680, EBITDA 660.2, PBT 574, PAT 411 \u2014 growth across all four lines year over year.",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0",
+                "table:d70a18452dc2ea5d0c4f19b9"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "FY2026 cash from operations was 580 and capital expenditure 100; year-end debt 300 and equity 2000 (INR crore).",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly consolidated revenue (INR crore) rose sequentially across the five reported quarters: 900 (Q2 FY2026, period ended 2025-09-30), 950 (Q3 FY2026), 980 (Q4 FY2026), 1000 (Q1 FY2027), 1200 (Q2 FY2027).",
+              "citation_ids": [
+                "table:82c5841bfb685a9ee3415a93",
+                "table:e97087168f89a588d1ef5191",
+                "table:9e6650b38e22f7a85a5227d9",
+                "table:033fa318957d5b2bf2c109bb",
+                "table:72568d2749eba2b08067934e"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly EBITDA (INR crore) also rose sequentially: 150, 171, 186.2, 200, 240 over the same five quarters; Q2 FY2027 EBITDA of 240 on revenue of 1200 corresponds to the 20% margin stated in the transcript.",
+              "citation_ids": [
+                "table:82c5841bfb685a9ee3415a93",
+                "table:e97087168f89a588d1ef5191",
+                "table:9e6650b38e22f7a85a5227d9",
+                "table:033fa318957d5b2bf2c109bb",
+                "table:72568d2749eba2b08067934e",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly PBT/PAT (INR crore): 140/100 (Q2 FY2026), 150/110 (Q3 FY2026), 154/111 (Q4 FY2026), 160/120 (Q1 FY2027), 200/150 (Q2 FY2027) \u2014 steady sequential improvement.",
+              "citation_ids": [
+                "table:82c5841bfb685a9ee3415a93",
+                "table:e97087168f89a588d1ef5191",
+                "table:9e6650b38e22f7a85a5227d9",
+                "table:033fa318957d5b2bf2c109bb",
+                "table:72568d2749eba2b08067934e"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "guidance",
+          "title": "Promised vs delivered",
+          "findings": [
+            {
+              "section": "guidance",
+              "text": "Management has repeatedly guided to higher EBITDA margins but has missed each time: guided 20% for FY2026 Q4, delivered 19% (miss by 1.0 pp); guided 21% for FY2027 Q1, delivered 20% (miss by 1.0 pp); guided 22% for FY2027 Q2, delivered 20% (miss by 2.0 pp).",
+              "citation_ids": [
+                "da966e09d0ab2c9cef555c41:0",
+                "c3b7ccfb11c5e5abd8f587bc:0",
+                "72bf9c72eddeb6aa36dc1609:0",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Current outstanding guidance: management explicitly guided for EBITDA margin of 23% in FY2027 Q3 (the quarter following Q2 FY2027). No actual exists yet for that period, so delivery is unverified. No numerical revenue growth guidance or share-price target was provided in any transcript.",
+              "citation_ids": [
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Management consistently attributes margin pressure to delayed customer approvals and higher hiring costs, and says project timing remains uncertain when asked about execution risk \u2014 the same explanation across the last three quarters.",
+              "citation_ids": [
+                "da966e09d0ab2c9cef555c41:0",
+                "c3b7ccfb11c5e5abd8f587bc:0",
+                "72bf9c72eddeb6aa36dc1609:0",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bull",
+          "title": "What could go right",
+          "findings": [
+            {
+              "section": "bull",
+              "text": "Revenue, EBITDA, PBT and PAT all grew from FY2025 to FY2026, and quarterly revenue, EBITDA and PAT have risen sequentially for five straight quarters, indicating an intact growth trajectory despite margin shortfalls.",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0",
+                "table:82c5841bfb685a9ee3415a93",
+                "table:e97087168f89a588d1ef5191",
+                "table:9e6650b38e22f7a85a5227d9",
+                "table:033fa318957d5b2bf2c109bb",
+                "table:72568d2749eba2b08067934e"
+              ]
+            },
+            {
+              "section": "bull",
+              "text": "Cash generation appears healthy relative to investment: FY2026 cash from operations of 580 versus capex of 100, with modest year-end debt of 300 against equity of 2000; repeat client relationships are cited as supporting revenue resilience.",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0",
+                "da966e09d0ab2c9cef555c41:0",
+                "c3b7ccfb11c5e5abd8f587bc:0",
+                "72bf9c72eddeb6aa36dc1609:0",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bear",
+          "title": "What to watch",
+          "findings": [
+            {
+              "section": "bear",
+              "text": "Guidance credibility is a risk: management missed its own EBITDA margin guidance in three consecutive reported quarters, with the miss widening from 1.0 pp (FY2026 Q4, FY2027 Q1) to 2.0 pp (FY2027 Q2), so the outstanding 23% FY2027 Q3 guide may again prove optimistic.",
+              "citation_ids": [
+                "da966e09d0ab2c9cef555c41:0",
+                "c3b7ccfb11c5e5abd8f587bc:0",
+                "72bf9c72eddeb6aa36dc1609:0",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            },
+            {
+              "section": "bear",
+              "text": "Disclosed risks include delayed customer approvals, hiring costs, and revenue concentration in a few large clients; management also flags uncertain project timing, and the same margin-pressure causes persisting across quarters suggests these are unresolved rather than one-off issues.",
+              "citation_ids": [
+                "3ecc8d7df15a1d47e618d7f4:0",
+                "da966e09d0ab2c9cef555c41:0",
+                "c3b7ccfb11c5e5abd8f587bc:0",
+                "72bf9c72eddeb6aa36dc1609:0",
+                "4d5bcfda2d8f1de0cf1d2f5c:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        }
+      ],
+      "sources": [
+        {
+          "citation_id": "3ecc8d7df15a1d47e618d7f4:0",
+          "text": "SYNTHETIC REVIEW SOURCE. Mock IT Services (MOCKIT). All figures and descriptions in this exercise are fictional, not actual company financials. The illustrative business provides recurring services to enterprise customers in India and overseas. Consolidated figures in INR crore. FY2025 revenue was 3200, EBITDA 600, PBT 500 and PAT 360. FY2026 revenue was 3680, EBITDA 660.2, PBT 574 and PAT 411. FY2026 cash from operations was 580 and capital expenditure was 100. Year-end debt was 300 and equity 2000. Management described repeat customer relationships and better project delivery as strengths. Risks include delayed customer approvals, hiring costs and the concentration of revenue in a few large clients. No numerical valuation or future share-price target was provided.",
+          "page": null,
+          "document_id": "3ecc8d7df15a1d47e618d7f4",
+          "title": "SYNTHETIC MOCKIT FY2026 annual report",
+          "url": "",
+          "kind": "annual_report",
+          "published_on": "2026-05-31",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "4d5bcfda2d8f1de0cf1d2f5c:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for MOCKIT, FY2027 Q2. Period ended 2026-09-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1200 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 23% in the following quarter. PBT was INR 200 crore and PAT was INR 150 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "4d5bcfda2d8f1de0cf1d2f5c",
+          "title": "SYNTHETIC MOCKIT FY2027 Q2 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-10-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "72bf9c72eddeb6aa36dc1609:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for MOCKIT, FY2027 Q1. Period ended 2026-06-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1000 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 22% in the following quarter. PBT was INR 160 crore and PAT was INR 120 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "72bf9c72eddeb6aa36dc1609",
+          "title": "SYNTHETIC MOCKIT FY2027 Q1 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-07-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "c3b7ccfb11c5e5abd8f587bc:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for MOCKIT, FY2026 Q4. Period ended 2026-03-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 980 crore. EBITDA margin delivered was 19%. Management explicitly guided for EBITDA margin of 21% in the following quarter. PBT was INR 154 crore and PAT was INR 111 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "c3b7ccfb11c5e5abd8f587bc",
+          "title": "SYNTHETIC MOCKIT FY2026 Q4 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-04-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "da966e09d0ab2c9cef555c41:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for MOCKIT, FY2026 Q3. Period ended 2025-12-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 950 crore. EBITDA margin delivered was 18%. Management explicitly guided for EBITDA margin of 20% in the following quarter. PBT was INR 150 crore and PAT was INR 110 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "da966e09d0ab2c9cef555c41",
+          "title": "SYNTHETIC MOCKIT FY2026 Q3 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-01-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "table:72568d2749eba2b08067934e",
+          "document_id": "72568d2749eba2b08067934e",
+          "title": "MOCKIT quarterly financials \u00b7 2026-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2026-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1200.0, \"ebitda\": 240.0, \"pbt\": 200.0, \"pat\": 150.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2026-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1200.0,
+              "ebitda": 240.0,
+              "pbt": 200.0,
+              "pat": 150.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:033fa318957d5b2bf2c109bb",
+          "document_id": "033fa318957d5b2bf2c109bb",
+          "title": "MOCKIT quarterly financials \u00b7 2026-06-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2026-06-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1000.0, \"ebitda\": 200.0, \"pbt\": 160.0, \"pat\": 120.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2026-06-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1000.0,
+              "ebitda": 200.0,
+              "pbt": 160.0,
+              "pat": 120.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:d70a18452dc2ea5d0c4f19b9",
+          "document_id": "d70a18452dc2ea5d0c4f19b9",
+          "title": "MOCKIT annual financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2026-03-31\", \"frequency\": \"annual\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 3680.0, \"ebitda\": 660.2, \"pbt\": 574.0, \"pat\": 411.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2026-03-31",
+            "frequency": "annual",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 3680.0,
+              "ebitda": 660.2,
+              "pbt": 574.0,
+              "pat": 411.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:9e6650b38e22f7a85a5227d9",
+          "document_id": "9e6650b38e22f7a85a5227d9",
+          "title": "MOCKIT quarterly financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2026-03-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 980.0, \"ebitda\": 186.2, \"pbt\": 154.0, \"pat\": 111.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2026-03-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 980.0,
+              "ebitda": 186.2,
+              "pbt": 154.0,
+              "pat": 111.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:e97087168f89a588d1ef5191",
+          "document_id": "e97087168f89a588d1ef5191",
+          "title": "MOCKIT quarterly financials \u00b7 2025-12-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2025-12-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 950.0, \"ebitda\": 171.0, \"pbt\": 150.0, \"pat\": 110.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2025-12-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 950.0,
+              "ebitda": 171.0,
+              "pbt": 150.0,
+              "pat": 110.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:82c5841bfb685a9ee3415a93",
+          "document_id": "82c5841bfb685a9ee3415a93",
+          "title": "MOCKIT quarterly financials \u00b7 2025-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "https://demo.invalid/MOCKIT/results",
+          "text": "{\"ticker\": \"MOCKIT\", \"period_end\": \"2025-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 900.0, \"ebitda\": 150.0, \"pbt\": 140.0, \"pat\": 100.0}, \"source_type\": \"synthetic\", \"source_url\": \"https://demo.invalid/MOCKIT/results\", \"pages\": {\"revenue\": null, \"ebitda\": null, \"pbt\": null, \"pat\": null}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "MOCKIT",
+            "period_end": "2025-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 900.0,
+              "ebitda": 150.0,
+              "pbt": 140.0,
+              "pat": 100.0
+            },
+            "source_type": "synthetic",
+            "source_url": "https://demo.invalid/MOCKIT/results",
+            "pages": {
+              "revenue": null,
+              "ebitda": null,
+              "pbt": null,
+              "pat": null
+            },
+            "mode": "demo",
+            "source": null
+          }
+        }
+      ],
+      "guidance": [
+        {
+          "period": "FY2026 Q4",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 20.0,
+          "guided_high": 20.0,
+          "actual": 19.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "da966e09d0ab2c9cef555c41:0",
+            "c3b7ccfb11c5e5abd8f587bc:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q1",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 21.0,
+          "guided_high": 21.0,
+          "actual": 20.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "c3b7ccfb11c5e5abd8f587bc:0",
+            "72bf9c72eddeb6aa36dc1609:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q2",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 22.0,
+          "guided_high": 22.0,
+          "actual": 20.0,
+          "delta": -2.0,
+          "status": "missed",
+          "citation_ids": [
+            "72bf9c72eddeb6aa36dc1609:0",
+            "4d5bcfda2d8f1de0cf1d2f5c:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q3",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 23.0,
+          "guided_high": 23.0,
+          "actual": null,
+          "delta": null,
+          "status": "missing_actual",
+          "citation_ids": [
+            "4d5bcfda2d8f1de0cf1d2f5c:0"
+          ]
+        }
+      ],
+      "financials": [
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2026-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1200.0,
+            "ebitda": 240.0,
+            "pbt": 200.0,
+            "pat": 150.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2026-06-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1000.0,
+            "ebitda": 200.0,
+            "pbt": 160.0,
+            "pat": 120.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2026-03-31",
+          "frequency": "annual",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 3680.0,
+            "ebitda": 660.2,
+            "pbt": 574.0,
+            "pat": 411.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2026-03-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 980.0,
+            "ebitda": 186.2,
+            "pbt": 154.0,
+            "pat": 111.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2025-12-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 950.0,
+            "ebitda": 171.0,
+            "pbt": 150.0,
+            "pat": 110.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "MOCKIT",
+          "period_end": "2025-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 900.0,
+            "ebitda": 150.0,
+            "pbt": 140.0,
+            "pat": 100.0
+          },
+          "source_type": "synthetic",
+          "source_url": "https://demo.invalid/MOCKIT/results",
+          "pages": {
+            "revenue": null,
+            "ebitda": null,
+            "pbt": null,
+            "pat": null
+          },
+          "mode": "demo",
+          "source": null
+        }
+      ],
+      "network": [
+        {
+          "contact_id": "workflow-insider",
+          "name": "Vikram Shah (fictional)",
+          "score": 13,
+          "reasons": [
+            "Works at Mock IT Services (fictional) as Delivery director (2022\u2013present).",
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider",
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": null
+        },
+        {
+          "contact_id": "network-reconnect",
+          "name": "Sameer Gupta (fictional)",
+          "score": 3,
+          "reasons": [
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-01-01"
+        }
+      ],
+      "gaps": [
+        "No FY2027 Q3 actuals exist yet, so the outstanding 23% EBITDA margin guidance cannot be assessed.",
+        "No numerical revenue growth guidance, order-book/backlog, client-concentration percentages, or share-price/valuation targets were provided in any source.",
+        "The financial tables for 2025-09-30 through 2026-09-30 have published_on = null, so their publication dates are unavailable; only the annual report (2026-05-31) and transcripts carry dates.",
+        "FY2025 quarterly figures and FY2026 Q1 figures are absent, so the full quarterly series and year-over-year quarterly comparisons cannot be constructed.",
+        "No balance-sheet detail beyond year-end debt (300) and equity (2000), and no cash-flow figures for periods other than FY2026.",
+        "All sources are explicitly synthetic/fictional demo data, not actual company financials."
+      ],
+      "coverage": {
+        "documents": 5,
+        "transcripts": 4,
+        "annual_reports": 1,
+        "retrieved_excerpts": 5
+      },
+      "cached": false,
+      "model": "hyde/glm-5.3-flash",
+      "usage": {
+        "completion_tokens": 2296,
+        "prompt_tokens": 4141,
+        "total_tokens": 6437,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."
+    },
+    "TCS": {
+      "ticker": "TCS",
+      "question": "Explain the business, financial trajectory, management guidance delivery, positives and risks.",
+      "mode": "demo",
+      "status": "analysed",
+      "sections": [
+        {
+          "id": "business",
+          "title": "Business snapshot",
+          "findings": [
+            {
+              "section": "business",
+              "text": "TCS provides recurring services to enterprise customers in India and overseas; management cites repeat customer relationships and better project delivery as strengths.",
+              "citation_ids": [
+                "72cde961ddfea93fdec01d26:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "financial",
+          "title": "Financial trajectory",
+          "findings": [
+            {
+              "section": "financial",
+              "text": "FY2025 (consolidated, INR crore): revenue 3200, EBITDA 600, PBT 500, PAT 360.",
+              "citation_ids": [
+                "72cde961ddfea93fdec01d26:0"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "FY2026 (consolidated, INR crore): revenue 3680, EBITDA 660.2, PBT 574, PAT 411; cash from operations 580, capex 100, year-end debt 300, equity 2000.",
+              "citation_ids": [
+                "72cde961ddfea93fdec01d26:0",
+                "table:835f40c5164a47a291966f45"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly trajectory (consolidated, INR crore): FY2026 Q3 revenue 950 / PAT 110; FY2026 Q4 revenue 980 / PAT 111; FY2027 Q1 revenue 1000 / PAT 120; FY2027 Q2 revenue 1200 / PAT 150.",
+              "citation_ids": [
+                "table:a6feb3d17e80cf8973ee21e7",
+                "table:4dbf76c4890c699df5212c5d",
+                "table:055f69e84ce6c1c536b3a6d2",
+                "table:c36769a9c9a468bb9174764c"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "guidance",
+          "title": "Promised vs delivered",
+          "findings": [
+            {
+              "section": "guidance",
+              "text": "Management has missed its own EBITDA margin guidance for three consecutive quarters: FY2026 Q4 guided 20% vs 19% actual (-1.0 pp, missed); FY2027 Q1 guided 21% vs 20% actual (-1.0 pp, missed); FY2027 Q2 guided 22% vs 20% actual (-2.0 pp, missed).",
+              "citation_ids": [
+                "34e6345ec32cbc3bcb00a543:0",
+                "accdec808a37571da988f2fe:0",
+                "4c113f73d97e32728a903fbb:0",
+                "35d24940132f865ca6b36750:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Current outstanding guidance: FY2027 Q3 EBITDA margin of 23% (guided in the FY2027 Q2 transcript); no actual is available yet, so delivery is unverified.",
+              "citation_ids": [
+                "35d24940132f865ca6b36750:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "No numerical revenue growth guidance or share-price target was provided in any transcript.",
+              "citation_ids": [
+                "35d24940132f865ca6b36750:0",
+                "4c113f73d97e32728a903fbb:0",
+                "accdec808a37571da988f2fe:0",
+                "34e6345ec32cbc3bcb00a543:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bull",
+          "title": "What could go right",
+          "findings": [
+            {
+              "section": "bull",
+              "text": "Revenue and PAT have risen sequentially for four straight quarters (950\u2192980\u21921000\u21921200 revenue; 110\u2192111\u2192120\u2192150 PAT), and repeat client relationships are cited as supporting revenue resilience.",
+              "citation_ids": [
+                "table:a6feb3d17e80cf8973ee21e7",
+                "table:4dbf76c4890c699df5212c5d",
+                "table:055f69e84ce6c1c536b3a6d2",
+                "table:c36769a9c9a468bb9174764c",
+                "35d24940132f865ca6b36750:0"
+              ]
+            },
+            {
+              "section": "bull",
+              "text": "FY2026 showed year-over-year growth across all reported lines (revenue 3200\u21923680, EBITDA 600\u2192660.2, PBT 500\u2192574, PAT 360\u2192411), with cash from operations of 580 comfortably exceeding capex of 100.",
+              "citation_ids": [
+                "72cde961ddfea93fdec01d26:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bear",
+          "title": "What to watch",
+          "findings": [
+            {
+              "section": "bear",
+              "text": "Margin pressure is persistent: delivered EBITDA margin has stayed at 18-20% across the last four quarters while management repeatedly attributes shortfalls to delayed customer approvals and higher hiring costs, and acknowledges project timing uncertainty.",
+              "citation_ids": [
+                "34e6345ec32cbc3bcb00a543:0",
+                "accdec808a37571da988f2fe:0",
+                "4c113f73d97e32728a903fbb:0",
+                "35d24940132f865ca6b36750:0"
+              ]
+            },
+            {
+              "section": "bear",
+              "text": "Revenue is concentrated in a few large clients, and the widening guidance miss (-1.0 pp to -2.0 pp) suggests execution risk is increasing rather than resolving.",
+              "citation_ids": [
+                "72cde961ddfea93fdec01d26:0",
+                "35d24940132f865ca6b36750:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        }
+      ],
+      "sources": [
+        {
+          "citation_id": "72cde961ddfea93fdec01d26:0",
+          "text": "SYNTHETIC REVIEW SOURCE. Tata Consultancy Services (TCS). All figures and descriptions in this exercise are fictional, not actual company financials. The illustrative business provides recurring services to enterprise customers in India and overseas. Consolidated figures in INR crore. FY2025 revenue was 3200, EBITDA 600, PBT 500 and PAT 360. FY2026 revenue was 3680, EBITDA 660.2, PBT 574 and PAT 411. FY2026 cash from operations was 580 and capital expenditure was 100. Year-end debt was 300 and equity 2000. Management described repeat customer relationships and better project delivery as strengths. Risks include delayed customer approvals, hiring costs and the concentration of revenue in a few large clients. No numerical valuation or future share-price target was provided.",
+          "page": null,
+          "document_id": "72cde961ddfea93fdec01d26",
+          "title": "SYNTHETIC TCS FY2026 annual report",
+          "url": "",
+          "kind": "annual_report",
+          "published_on": "2026-05-31",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "35d24940132f865ca6b36750:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TCS, FY2027 Q2. Period ended 2026-09-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1200 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 23% in the following quarter. PBT was INR 200 crore and PAT was INR 150 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "35d24940132f865ca6b36750",
+          "title": "SYNTHETIC TCS FY2027 Q2 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-10-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "4c113f73d97e32728a903fbb:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TCS, FY2027 Q1. Period ended 2026-06-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1000 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 22% in the following quarter. PBT was INR 160 crore and PAT was INR 120 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "4c113f73d97e32728a903fbb",
+          "title": "SYNTHETIC TCS FY2027 Q1 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-07-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "accdec808a37571da988f2fe:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TCS, FY2026 Q4. Period ended 2026-03-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 980 crore. EBITDA margin delivered was 19%. Management explicitly guided for EBITDA margin of 21% in the following quarter. PBT was INR 154 crore and PAT was INR 111 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "accdec808a37571da988f2fe",
+          "title": "SYNTHETIC TCS FY2026 Q4 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-04-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "34e6345ec32cbc3bcb00a543:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TCS, FY2026 Q3. Period ended 2025-12-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 950 crore. EBITDA margin delivered was 18%. Management explicitly guided for EBITDA margin of 20% in the following quarter. PBT was INR 150 crore and PAT was INR 110 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "34e6345ec32cbc3bcb00a543",
+          "title": "SYNTHETIC TCS FY2026 Q3 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-01-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "table:c36769a9c9a468bb9174764c",
+          "document_id": "c36769a9c9a468bb9174764c",
+          "title": "TCS quarterly financials \u00b7 2026-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TCS\", \"period_end\": \"2026-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1200.0, \"ebitda\": 240.0, \"pbt\": 200.0, \"pat\": 150.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TCS",
+            "period_end": "2026-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1200.0,
+              "ebitda": 240.0,
+              "pbt": 200.0,
+              "pat": 150.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:055f69e84ce6c1c536b3a6d2",
+          "document_id": "055f69e84ce6c1c536b3a6d2",
+          "title": "TCS quarterly financials \u00b7 2026-06-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TCS\", \"period_end\": \"2026-06-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1000.0, \"ebitda\": 200.0, \"pbt\": 160.0, \"pat\": 120.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TCS",
+            "period_end": "2026-06-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1000.0,
+              "ebitda": 200.0,
+              "pbt": 160.0,
+              "pat": 120.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:835f40c5164a47a291966f45",
+          "document_id": "835f40c5164a47a291966f45",
+          "title": "TCS annual financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TCS\", \"period_end\": \"2026-03-31\", \"frequency\": \"annual\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 3680.0, \"ebitda\": 660.2, \"pbt\": 574.0, \"pat\": 411.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TCS",
+            "period_end": "2026-03-31",
+            "frequency": "annual",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 3680.0,
+              "ebitda": 660.2,
+              "pbt": 574.0,
+              "pat": 411.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:4dbf76c4890c699df5212c5d",
+          "document_id": "4dbf76c4890c699df5212c5d",
+          "title": "TCS quarterly financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TCS\", \"period_end\": \"2026-03-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 980.0, \"ebitda\": 186.2, \"pbt\": 154.0, \"pat\": 111.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TCS",
+            "period_end": "2026-03-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 980.0,
+              "ebitda": 186.2,
+              "pbt": 154.0,
+              "pat": 111.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:a6feb3d17e80cf8973ee21e7",
+          "document_id": "a6feb3d17e80cf8973ee21e7",
+          "title": "TCS quarterly financials \u00b7 2025-12-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TCS\", \"period_end\": \"2025-12-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 950.0, \"ebitda\": 171.0, \"pbt\": 150.0, \"pat\": 110.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TCS",
+            "period_end": "2025-12-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 950.0,
+              "ebitda": 171.0,
+              "pbt": 150.0,
+              "pat": 110.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        }
+      ],
+      "guidance": [
+        {
+          "period": "FY2026 Q4",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 20.0,
+          "guided_high": 20.0,
+          "actual": 19.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "34e6345ec32cbc3bcb00a543:0",
+            "accdec808a37571da988f2fe:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q1",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 21.0,
+          "guided_high": 21.0,
+          "actual": 20.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "accdec808a37571da988f2fe:0",
+            "4c113f73d97e32728a903fbb:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q2",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 22.0,
+          "guided_high": 22.0,
+          "actual": 20.0,
+          "delta": -2.0,
+          "status": "missed",
+          "citation_ids": [
+            "4c113f73d97e32728a903fbb:0",
+            "35d24940132f865ca6b36750:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q3",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 23.0,
+          "guided_high": 23.0,
+          "actual": null,
+          "delta": null,
+          "status": "missing_actual",
+          "citation_ids": [
+            "35d24940132f865ca6b36750:0"
+          ]
+        }
+      ],
+      "financials": [
+        {
+          "ticker": "TCS",
+          "period_end": "2026-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1200.0,
+            "ebitda": 240.0,
+            "pbt": 200.0,
+            "pat": 150.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TCS",
+          "period_end": "2026-06-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1000.0,
+            "ebitda": 200.0,
+            "pbt": 160.0,
+            "pat": 120.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TCS",
+          "period_end": "2026-03-31",
+          "frequency": "annual",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 3680.0,
+            "ebitda": 660.2,
+            "pbt": 574.0,
+            "pat": 411.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TCS",
+          "period_end": "2026-03-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 980.0,
+            "ebitda": 186.2,
+            "pbt": 154.0,
+            "pat": 111.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TCS",
+          "period_end": "2025-12-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 950.0,
+            "ebitda": 171.0,
+            "pbt": 150.0,
+            "pat": 110.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        }
+      ],
+      "network": [
+        {
+          "contact_id": "network-reconnect",
+          "name": "Sameer Gupta (fictional)",
+          "score": 11,
+          "reasons": [
+            "Worked at TCS as Operations manager (2010\u20132020).",
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus",
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-01-01"
+        },
+        {
+          "contact_id": "workflow-insider",
+          "name": "Vikram Shah (fictional)",
+          "score": 3,
+          "reasons": [
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": null
+        }
+      ],
+      "gaps": [
+        "No FY2027 Q3 actuals yet, so the 23% EBITDA margin guidance cannot be assessed.",
+        "No numerical revenue growth guidance or share-price target in any source.",
+        "No segment, geography, or client-concentration percentages disclosed.",
+        "No balance-sheet or cash-flow detail for FY2027 quarters (only FY2026 annual figures).",
+        "FY2025 quarterly figures not provided, limiting year-over-year quarterly comparison.",
+        "Published dates are unavailable for the financial tables (published_on null)."
+      ],
+      "coverage": {
+        "documents": 5,
+        "transcripts": 4,
+        "annual_reports": 1,
+        "retrieved_excerpts": 5
+      },
+      "cached": false,
+      "model": "hyde/glm-5.3-flash",
+      "usage": {
+        "completion_tokens": 1465,
+        "prompt_tokens": 3691,
+        "total_tokens": 5156,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."
+    },
+    "INFY": {
+      "ticker": "INFY",
+      "question": "Explain the business, financial trajectory, management guidance delivery, positives and risks.",
+      "mode": "demo",
+      "status": "analysed",
+      "sections": [
+        {
+          "id": "business",
+          "title": "Business snapshot",
+          "findings": [
+            {
+              "section": "business",
+              "text": "Infosys (INFY) provides recurring services to enterprise customers in India and overseas, with management citing repeat customer relationships and better project delivery as strengths. All figures are fictional/synthetic for this exercise.",
+              "citation_ids": [
+                "de1e2684e34b148a37c9f5b1:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "financial",
+          "title": "Financial trajectory",
+          "findings": [
+            {
+              "section": "financial",
+              "text": "FY2025 (consolidated, INR crore): revenue 3,200; EBITDA 600; PBT 500; PAT 360. FY2026 (consolidated, INR crore): revenue 3,680; EBITDA 660.2; PBT 574; PAT 411 \u2014 growth across all four metrics year over year. FY2026 cash from operations was 580 with capital expenditure of 100; year-end debt was 300 against equity of 2,000.",
+              "citation_ids": [
+                "de1e2684e34b148a37c9f5b1:0",
+                "table:24ddfa17a5644d5ed41c4c1f"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly trajectory (consolidated, INR crore): FY2026 Q3 revenue 950 / EBITDA 171 / PBT 150 / PAT 110; FY2026 Q4 revenue 980 / EBITDA 186.2 / PBT 154 / PAT 111; FY2027 Q1 revenue 1,000 / EBITDA 200 / PBT 160 / PAT 120; FY2027 Q2 revenue 1,200 / EBITDA 240 / PBT 200 / PAT 150. Revenue and profit metrics rose sequentially in each of the four reported quarters.",
+              "citation_ids": [
+                "table:32702b73da2d1155824001f1",
+                "table:efaf0c6ca3e50ca9515c9af5",
+                "table:679a7a0294975f1c09c5e9f8",
+                "table:3d2a7133fe47377ae83d6247"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Delivered EBITDA margins per transcripts: FY2026 Q3 18%, FY2026 Q4 19%, FY2027 Q1 20%, FY2027 Q2 20% \u2014 a step up from Q3 to Q1 followed by a flat Q2, with management attributing margin pressure in each quarter to delayed customer approvals and higher hiring costs.",
+              "citation_ids": [
+                "822a07b1e6e2a1df4573ffb5:0",
+                "4b9d934c53d43b8f5e9c4ff9:0",
+                "7a77dd1ca2bad9f32f7c806f:0",
+                "aa59cc3c596c3cdd8ba1b8bb:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "guidance",
+          "title": "Promised vs delivered",
+          "findings": [
+            {
+              "section": "guidance",
+              "text": "Guidance delivery (EBITDA margin, consolidated, per supplied computed comparisons): FY2026 Q4 guided 20% vs actual 19% \u2014 missed by 1.0 percentage point; FY2027 Q1 guided 21% vs actual 20% \u2014 missed by 1.0 percentage point; FY2027 Q2 guided 22% vs actual 20% \u2014 missed by 2.0 percentage points. FY2027 Q3 guided 23% has no actual yet (missing_actual). Management has missed its EBITDA margin guidance in all three quarters where an actual is available, and the shortfall widened in the most recent quarter.",
+              "citation_ids": [
+                "822a07b1e6e2a1df4573ffb5:0",
+                "4b9d934c53d43b8f5e9c4ff9:0",
+                "7a77dd1ca2bad9f32f7c806f:0",
+                "aa59cc3c596c3cdd8ba1b8bb:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Forward guidance outstanding: management explicitly guided for EBITDA margin of 23% in FY2027 Q3 (quarter following FY2027 Q2). No numerical revenue growth guidance and no share-price target were provided in any transcript.",
+              "citation_ids": [
+                "aa59cc3c596c3cdd8ba1b8bb:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Guidance vs delivered results distinction: the 23% FY2027 Q3 EBITDA margin figure is forward guidance only, not a delivered result; delivered margins to date are 18% (FY2026 Q3), 19% (FY2026 Q4), 20% (FY2027 Q1) and 20% (FY2027 Q2).",
+              "citation_ids": [
+                "aa59cc3c596c3cdd8ba1b8bb:0",
+                "822a07b1e6e2a1df4573ffb5:0",
+                "4b9d934c53d43b8f5e9c4ff9:0",
+                "7a77dd1ca2bad9f32f7c806f:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bull",
+          "title": "What could go right",
+          "findings": [
+            {
+              "section": "bull",
+              "text": "Bull case (evidence-based possibilities): revenue has grown sequentially for four straight quarters (950 \u2192 980 \u2192 1,000 \u2192 1,200 INR crore) with PAT rising from 110 to 150 INR crore, and repeat client relationships are described as supporting revenue resilience; if delayed customer approvals resolve, the guided 23% EBITDA margin for FY2027 Q3 could be achieved, extending the margin recovery from 18% in FY2026 Q3 to 20% in FY2027 Q2.",
+              "citation_ids": [
+                "table:32702b73da2d1155824001f1",
+                "table:efaf0c6ca3e50ca9515c9af5",
+                "table:679a7a0294975f1c09c5e9f8",
+                "table:3d2a7133fe47377ae83d6247",
+                "822a07b1e6e2a1df4573ffb5:0",
+                "aa59cc3c596c3cdd8ba1b8bb:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bear",
+          "title": "What to watch",
+          "findings": [
+            {
+              "section": "bear",
+              "text": "Bear case (evidence-based possibilities): management has missed its own EBITDA margin guidance three consecutive times (by 1.0, 1.0 and 2.0 percentage points), with the miss widening; the same headwinds \u2014 delayed customer approvals and higher hiring costs \u2014 have persisted across all four reported quarters, and management itself flags uncertain project timing and execution risk. Revenue concentration in a few large clients adds downside sensitivity if any major client is affected.",
+              "citation_ids": [
+                "822a07b1e6e2a1df4573ffb5:0",
+                "4b9d934c53d43b8f5e9c4ff9:0",
+                "7a77dd1ca2bad9f32f7c806f:0",
+                "aa59cc3c596c3cdd8ba1b8bb:0",
+                "de1e2684e34b148a37c9f5b1:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        }
+      ],
+      "sources": [
+        {
+          "citation_id": "de1e2684e34b148a37c9f5b1:0",
+          "text": "SYNTHETIC REVIEW SOURCE. Infosys (INFY). All figures and descriptions in this exercise are fictional, not actual company financials. The illustrative business provides recurring services to enterprise customers in India and overseas. Consolidated figures in INR crore. FY2025 revenue was 3200, EBITDA 600, PBT 500 and PAT 360. FY2026 revenue was 3680, EBITDA 660.2, PBT 574 and PAT 411. FY2026 cash from operations was 580 and capital expenditure was 100. Year-end debt was 300 and equity 2000. Management described repeat customer relationships and better project delivery as strengths. Risks include delayed customer approvals, hiring costs and the concentration of revenue in a few large clients. No numerical valuation or future share-price target was provided.",
+          "page": null,
+          "document_id": "de1e2684e34b148a37c9f5b1",
+          "title": "SYNTHETIC INFY FY2026 annual report",
+          "url": "",
+          "kind": "annual_report",
+          "published_on": "2026-05-31",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "aa59cc3c596c3cdd8ba1b8bb:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for INFY, FY2027 Q2. Period ended 2026-09-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1200 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 23% in the following quarter. PBT was INR 200 crore and PAT was INR 150 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "aa59cc3c596c3cdd8ba1b8bb",
+          "title": "SYNTHETIC INFY FY2027 Q2 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-10-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "7a77dd1ca2bad9f32f7c806f:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for INFY, FY2027 Q1. Period ended 2026-06-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1000 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 22% in the following quarter. PBT was INR 160 crore and PAT was INR 120 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "7a77dd1ca2bad9f32f7c806f",
+          "title": "SYNTHETIC INFY FY2027 Q1 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-07-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "4b9d934c53d43b8f5e9c4ff9:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for INFY, FY2026 Q4. Period ended 2026-03-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 980 crore. EBITDA margin delivered was 19%. Management explicitly guided for EBITDA margin of 21% in the following quarter. PBT was INR 154 crore and PAT was INR 111 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "4b9d934c53d43b8f5e9c4ff9",
+          "title": "SYNTHETIC INFY FY2026 Q4 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-04-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "822a07b1e6e2a1df4573ffb5:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for INFY, FY2026 Q3. Period ended 2025-12-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 950 crore. EBITDA margin delivered was 18%. Management explicitly guided for EBITDA margin of 20% in the following quarter. PBT was INR 150 crore and PAT was INR 110 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "822a07b1e6e2a1df4573ffb5",
+          "title": "SYNTHETIC INFY FY2026 Q3 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-01-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "table:3d2a7133fe47377ae83d6247",
+          "document_id": "3d2a7133fe47377ae83d6247",
+          "title": "INFY quarterly financials \u00b7 2026-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"INFY\", \"period_end\": \"2026-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1200.0, \"ebitda\": 240.0, \"pbt\": 200.0, \"pat\": 150.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "INFY",
+            "period_end": "2026-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1200.0,
+              "ebitda": 240.0,
+              "pbt": 200.0,
+              "pat": 150.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:679a7a0294975f1c09c5e9f8",
+          "document_id": "679a7a0294975f1c09c5e9f8",
+          "title": "INFY quarterly financials \u00b7 2026-06-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"INFY\", \"period_end\": \"2026-06-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1000.0, \"ebitda\": 200.0, \"pbt\": 160.0, \"pat\": 120.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "INFY",
+            "period_end": "2026-06-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1000.0,
+              "ebitda": 200.0,
+              "pbt": 160.0,
+              "pat": 120.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:24ddfa17a5644d5ed41c4c1f",
+          "document_id": "24ddfa17a5644d5ed41c4c1f",
+          "title": "INFY annual financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"INFY\", \"period_end\": \"2026-03-31\", \"frequency\": \"annual\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 3680.0, \"ebitda\": 660.2, \"pbt\": 574.0, \"pat\": 411.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "INFY",
+            "period_end": "2026-03-31",
+            "frequency": "annual",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 3680.0,
+              "ebitda": 660.2,
+              "pbt": 574.0,
+              "pat": 411.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:efaf0c6ca3e50ca9515c9af5",
+          "document_id": "efaf0c6ca3e50ca9515c9af5",
+          "title": "INFY quarterly financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"INFY\", \"period_end\": \"2026-03-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 980.0, \"ebitda\": 186.2, \"pbt\": 154.0, \"pat\": 111.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "INFY",
+            "period_end": "2026-03-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 980.0,
+              "ebitda": 186.2,
+              "pbt": 154.0,
+              "pat": 111.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:32702b73da2d1155824001f1",
+          "document_id": "32702b73da2d1155824001f1",
+          "title": "INFY quarterly financials \u00b7 2025-12-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"INFY\", \"period_end\": \"2025-12-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 950.0, \"ebitda\": 171.0, \"pbt\": 150.0, \"pat\": 110.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "INFY",
+            "period_end": "2025-12-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 950.0,
+              "ebitda": 171.0,
+              "pbt": 150.0,
+              "pat": 110.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        }
+      ],
+      "guidance": [
+        {
+          "period": "FY2026 Q4",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 20.0,
+          "guided_high": 20.0,
+          "actual": 19.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "822a07b1e6e2a1df4573ffb5:0",
+            "4b9d934c53d43b8f5e9c4ff9:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q1",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 21.0,
+          "guided_high": 21.0,
+          "actual": 20.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "4b9d934c53d43b8f5e9c4ff9:0",
+            "7a77dd1ca2bad9f32f7c806f:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q2",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 22.0,
+          "guided_high": 22.0,
+          "actual": 20.0,
+          "delta": -2.0,
+          "status": "missed",
+          "citation_ids": [
+            "7a77dd1ca2bad9f32f7c806f:0",
+            "aa59cc3c596c3cdd8ba1b8bb:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q3",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 23.0,
+          "guided_high": 23.0,
+          "actual": null,
+          "delta": null,
+          "status": "missing_actual",
+          "citation_ids": [
+            "aa59cc3c596c3cdd8ba1b8bb:0"
+          ]
+        }
+      ],
+      "financials": [
+        {
+          "ticker": "INFY",
+          "period_end": "2026-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1200.0,
+            "ebitda": 240.0,
+            "pbt": 200.0,
+            "pat": 150.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "INFY",
+          "period_end": "2026-06-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1000.0,
+            "ebitda": 200.0,
+            "pbt": 160.0,
+            "pat": 120.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "INFY",
+          "period_end": "2026-03-31",
+          "frequency": "annual",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 3680.0,
+            "ebitda": 660.2,
+            "pbt": 574.0,
+            "pat": 411.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "INFY",
+          "period_end": "2026-03-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 980.0,
+            "ebitda": 186.2,
+            "pbt": 154.0,
+            "pat": 111.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "INFY",
+          "period_end": "2025-12-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 950.0,
+            "ebitda": 171.0,
+            "pbt": 150.0,
+            "pat": 110.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        }
+      ],
+      "network": [
+        {
+          "contact_id": "network-contact-04",
+          "name": "Demo Professional 04 (fictional)",
+          "score": 8,
+          "reasons": [
+            "Worked at INFY as Industry specialist (2017\u20132023)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-10",
+          "name": "Demo Professional 10 (fictional)",
+          "score": 8,
+          "reasons": [
+            "Worked at INFY as Industry specialist (2017\u20132023)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-16",
+          "name": "Demo Professional 16 (fictional)",
+          "score": 8,
+          "reasons": [
+            "Worked at INFY as Industry specialist (2017\u20132023)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-22",
+          "name": "Demo Professional 22 (fictional)",
+          "score": 8,
+          "reasons": [
+            "Worked at INFY as Industry specialist (2017\u20132023)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-28",
+          "name": "Demo Professional 28 (fictional)",
+          "score": 8,
+          "reasons": [
+            "Worked at INFY as Industry specialist (2017\u20132023)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_alumnus"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        }
+      ],
+      "gaps": [
+        "No numerical revenue growth guidance was provided in any transcript; only EBITDA margin guidance is available.",
+        "No share-price target or numerical valuation was provided in any source.",
+        "FY2027 Q3 actuals are not yet available, so the 23% guided EBITDA margin cannot be assessed against a delivered result.",
+        "The quarterly financial tables carry no publication date (published_on is null); only the annual report (2026-05-31) and transcripts (2026-01-15, 2026-04-15, 2026-07-15, 2026-10-15) have stated publication dates.",
+        "No client-concentration metric (e.g., top-client revenue share) is quantified despite concentration being named as a risk.",
+        "No balance-sheet or cash-flow detail is available for FY2027 quarters; debt, equity, cash from operations and capex are only provided for FY2026.",
+        "No segment, geography or service-line revenue breakdown is provided.",
+        "All figures are explicitly fictional/synthetic for this review exercise and do not represent actual company financials."
+      ],
+      "coverage": {
+        "documents": 5,
+        "transcripts": 4,
+        "annual_reports": 1,
+        "retrieved_excerpts": 5
+      },
+      "cached": false,
+      "model": "hyde/glm-5.3-flash",
+      "usage": {
+        "completion_tokens": 1954,
+        "prompt_tokens": 3738,
+        "total_tokens": 5692,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."
+    },
+    "TITAN": {
+      "ticker": "TITAN",
+      "question": "Explain the business, financial trajectory, management guidance delivery, positives and risks.",
+      "mode": "demo",
+      "status": "analysed",
+      "sections": [
+        {
+          "id": "business",
+          "title": "Business snapshot",
+          "findings": [
+            {
+              "section": "business",
+              "text": "Titan provides recurring services to enterprise customers in India and overseas, with management citing repeat customer relationships and better project delivery as strengths.",
+              "citation_ids": [
+                "6379f794381c307f983dc855:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "financial",
+          "title": "Financial trajectory",
+          "findings": [
+            {
+              "section": "financial",
+              "text": "FY2025 revenue was INR 3,200 crore with EBITDA 600, PBT 500 and PAT 360; FY2026 revenue rose to INR 3,680 crore with EBITDA 660.2, PBT 574 and PAT 411 (consolidated, INR crore).",
+              "citation_ids": [
+                "6379f794381c307f983dc855:0",
+                "table:59f775112b5f68d11ce1f5f7"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "FY2026 cash from operations was INR 580 crore against capital expenditure of INR 100 crore; year-end debt was INR 300 crore and equity INR 2,000 crore.",
+              "citation_ids": [
+                "6379f794381c307f983dc855:0"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly revenue grew sequentially across the last four reported quarters: INR 950 crore (FY2026 Q3), INR 980 crore (FY2026 Q4), INR 1,000 crore (FY2027 Q1) and INR 1,200 crore (FY2027 Q2), with PAT rising from 110 to 150 crore over the same span.",
+              "citation_ids": [
+                "table:8122312e17c5bc3310f87f8d",
+                "table:0b05dabe9f55b9c0748415bc",
+                "table:0002c4c516c3923bc591194e",
+                "table:133949e5208290d56ef70433"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "guidance",
+          "title": "Promised vs delivered",
+          "findings": [
+            {
+              "section": "guidance",
+              "text": "Management has missed its explicit EBITDA margin guidance in each of the last three quarters: FY2026 Q4 guided 20% vs 19% actual (-1.0 pp), FY2027 Q1 guided 21% vs 20% actual (-1.0 pp), and FY2027 Q2 guided 22% vs 20% actual (-2.0 pp).",
+              "citation_ids": [
+                "80b415c09abe528fde78cf0a:0",
+                "43357a3d1a6b6d6bb4ac7161:0",
+                "4347ed339229528bc830bc48:0",
+                "e68f32bbe93e6917c0111676:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "For FY2027 Q3 management guided EBITDA margin of 23%; no actual result is available yet, so delivery on this guidance is unverified.",
+              "citation_ids": [
+                "e68f32bbe93e6917c0111676:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "No numerical revenue growth guidance or share-price target was provided in any transcript.",
+              "citation_ids": [
+                "e68f32bbe93e6917c0111676:0",
+                "4347ed339229528bc830bc48:0",
+                "43357a3d1a6b6d6bb4ac7161:0",
+                "80b415c09abe528fde78cf0a:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bull",
+          "title": "What could go right",
+          "findings": [
+            {
+              "section": "bull",
+              "text": "Revenue and PAT have risen sequentially for four straight quarters, reaching INR 1,200 crore revenue and INR 150 crore PAT in FY2027 Q2, suggesting demand resilience that management links to repeat client relationships.",
+              "citation_ids": [
+                "table:8122312e17c5bc3310f87f8d",
+                "table:0b05dabe9f55b9c0748415bc",
+                "table:0002c4c516c3923bc591194e",
+                "table:133949e5208290d56ef70433",
+                "e68f32bbe93e6917c0111676:0"
+              ]
+            },
+            {
+              "section": "bull",
+              "text": "FY2026 operating cash flow of INR 580 crore far exceeded capex of INR 100 crore, and debt of INR 300 crore is modest relative to equity of INR 2,000 crore, indicating self-funded growth and low leverage.",
+              "citation_ids": [
+                "6379f794381c307f983dc855:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bear",
+          "title": "What to watch",
+          "findings": [
+            {
+              "section": "bear",
+              "text": "Management has missed its own EBITDA margin guidance three consecutive times, with the shortfall widening from -1.0 pp in FY2026 Q4 and FY2027 Q1 to -2.0 pp in FY2027 Q2, and it has repeatedly attributed the pressure to delayed customer approvals and higher hiring costs.",
+              "citation_ids": [
+                "80b415c09abe528fde78cf0a:0",
+                "43357a3d1a6b6d6bb4ac7161:0",
+                "4347ed339229528bc830bc48:0",
+                "e68f32bbe93e6917c0111676:0"
+              ]
+            },
+            {
+              "section": "bear",
+              "text": "Revenue is concentrated in a few large clients, and management acknowledged that project timing remains uncertain when asked about execution risk; the 23% FY2027 Q3 margin guidance extends a pattern of targets that have not been met.",
+              "citation_ids": [
+                "6379f794381c307f983dc855:0",
+                "e68f32bbe93e6917c0111676:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        }
+      ],
+      "sources": [
+        {
+          "citation_id": "6379f794381c307f983dc855:0",
+          "text": "SYNTHETIC REVIEW SOURCE. Titan (TITAN). All figures and descriptions in this exercise are fictional, not actual company financials. The illustrative business provides recurring services to enterprise customers in India and overseas. Consolidated figures in INR crore. FY2025 revenue was 3200, EBITDA 600, PBT 500 and PAT 360. FY2026 revenue was 3680, EBITDA 660.2, PBT 574 and PAT 411. FY2026 cash from operations was 580 and capital expenditure was 100. Year-end debt was 300 and equity 2000. Management described repeat customer relationships and better project delivery as strengths. Risks include delayed customer approvals, hiring costs and the concentration of revenue in a few large clients. No numerical valuation or future share-price target was provided.",
+          "page": null,
+          "document_id": "6379f794381c307f983dc855",
+          "title": "SYNTHETIC TITAN FY2026 annual report",
+          "url": "",
+          "kind": "annual_report",
+          "published_on": "2026-05-31",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "e68f32bbe93e6917c0111676:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TITAN, FY2027 Q2. Period ended 2026-09-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1200 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 23% in the following quarter. PBT was INR 200 crore and PAT was INR 150 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "e68f32bbe93e6917c0111676",
+          "title": "SYNTHETIC TITAN FY2027 Q2 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-10-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "4347ed339229528bc830bc48:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TITAN, FY2027 Q1. Period ended 2026-06-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1000 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 22% in the following quarter. PBT was INR 160 crore and PAT was INR 120 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "4347ed339229528bc830bc48",
+          "title": "SYNTHETIC TITAN FY2027 Q1 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-07-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "43357a3d1a6b6d6bb4ac7161:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TITAN, FY2026 Q4. Period ended 2026-03-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 980 crore. EBITDA margin delivered was 19%. Management explicitly guided for EBITDA margin of 21% in the following quarter. PBT was INR 154 crore and PAT was INR 111 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "43357a3d1a6b6d6bb4ac7161",
+          "title": "SYNTHETIC TITAN FY2026 Q4 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-04-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "80b415c09abe528fde78cf0a:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for TITAN, FY2026 Q3. Period ended 2025-12-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 950 crore. EBITDA margin delivered was 18%. Management explicitly guided for EBITDA margin of 20% in the following quarter. PBT was INR 150 crore and PAT was INR 110 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "80b415c09abe528fde78cf0a",
+          "title": "SYNTHETIC TITAN FY2026 Q3 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-01-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "table:133949e5208290d56ef70433",
+          "document_id": "133949e5208290d56ef70433",
+          "title": "TITAN quarterly financials \u00b7 2026-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TITAN\", \"period_end\": \"2026-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1200.0, \"ebitda\": 240.0, \"pbt\": 200.0, \"pat\": 150.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TITAN",
+            "period_end": "2026-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1200.0,
+              "ebitda": 240.0,
+              "pbt": 200.0,
+              "pat": 150.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:0002c4c516c3923bc591194e",
+          "document_id": "0002c4c516c3923bc591194e",
+          "title": "TITAN quarterly financials \u00b7 2026-06-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TITAN\", \"period_end\": \"2026-06-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1000.0, \"ebitda\": 200.0, \"pbt\": 160.0, \"pat\": 120.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TITAN",
+            "period_end": "2026-06-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1000.0,
+              "ebitda": 200.0,
+              "pbt": 160.0,
+              "pat": 120.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:59f775112b5f68d11ce1f5f7",
+          "document_id": "59f775112b5f68d11ce1f5f7",
+          "title": "TITAN annual financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TITAN\", \"period_end\": \"2026-03-31\", \"frequency\": \"annual\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 3680.0, \"ebitda\": 660.2, \"pbt\": 574.0, \"pat\": 411.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TITAN",
+            "period_end": "2026-03-31",
+            "frequency": "annual",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 3680.0,
+              "ebitda": 660.2,
+              "pbt": 574.0,
+              "pat": 411.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:0b05dabe9f55b9c0748415bc",
+          "document_id": "0b05dabe9f55b9c0748415bc",
+          "title": "TITAN quarterly financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TITAN\", \"period_end\": \"2026-03-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 980.0, \"ebitda\": 186.2, \"pbt\": 154.0, \"pat\": 111.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TITAN",
+            "period_end": "2026-03-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 980.0,
+              "ebitda": 186.2,
+              "pbt": 154.0,
+              "pat": 111.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:8122312e17c5bc3310f87f8d",
+          "document_id": "8122312e17c5bc3310f87f8d",
+          "title": "TITAN quarterly financials \u00b7 2025-12-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"TITAN\", \"period_end\": \"2025-12-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 950.0, \"ebitda\": 171.0, \"pbt\": 150.0, \"pat\": 110.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "TITAN",
+            "period_end": "2025-12-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 950.0,
+              "ebitda": 171.0,
+              "pbt": 150.0,
+              "pat": 110.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        }
+      ],
+      "guidance": [
+        {
+          "period": "FY2026 Q4",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 20.0,
+          "guided_high": 20.0,
+          "actual": 19.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "80b415c09abe528fde78cf0a:0",
+            "43357a3d1a6b6d6bb4ac7161:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q1",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 21.0,
+          "guided_high": 21.0,
+          "actual": 20.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "43357a3d1a6b6d6bb4ac7161:0",
+            "4347ed339229528bc830bc48:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q2",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 22.0,
+          "guided_high": 22.0,
+          "actual": 20.0,
+          "delta": -2.0,
+          "status": "missed",
+          "citation_ids": [
+            "4347ed339229528bc830bc48:0",
+            "e68f32bbe93e6917c0111676:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q3",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 23.0,
+          "guided_high": 23.0,
+          "actual": null,
+          "delta": null,
+          "status": "missing_actual",
+          "citation_ids": [
+            "e68f32bbe93e6917c0111676:0"
+          ]
+        }
+      ],
+      "financials": [
+        {
+          "ticker": "TITAN",
+          "period_end": "2026-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1200.0,
+            "ebitda": 240.0,
+            "pbt": 200.0,
+            "pat": 150.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TITAN",
+          "period_end": "2026-06-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1000.0,
+            "ebitda": 200.0,
+            "pbt": 160.0,
+            "pat": 120.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TITAN",
+          "period_end": "2026-03-31",
+          "frequency": "annual",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 3680.0,
+            "ebitda": 660.2,
+            "pbt": 574.0,
+            "pat": 411.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TITAN",
+          "period_end": "2026-03-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 980.0,
+            "ebitda": 186.2,
+            "pbt": 154.0,
+            "pat": 111.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "TITAN",
+          "period_end": "2025-12-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 950.0,
+            "ebitda": 171.0,
+            "pbt": 150.0,
+            "pat": 110.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        }
+      ],
+      "network": [
+        {
+          "contact_id": "network-contact-03",
+          "name": "Demo Professional 03 (fictional)",
+          "score": 10,
+          "reasons": [
+            "Works at TITAN as Industry specialist (2016\u2013present)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-09",
+          "name": "Demo Professional 09 (fictional)",
+          "score": 10,
+          "reasons": [
+            "Works at TITAN as Industry specialist (2016\u2013present)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-15",
+          "name": "Demo Professional 15 (fictional)",
+          "score": 10,
+          "reasons": [
+            "Works at TITAN as Industry specialist (2016\u2013present)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-21",
+          "name": "Demo Professional 21 (fictional)",
+          "score": 10,
+          "reasons": [
+            "Works at TITAN as Industry specialist (2016\u2013present)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        },
+        {
+          "contact_id": "network-contact-27",
+          "name": "Demo Professional 27 (fictional)",
+          "score": 10,
+          "reasons": [
+            "Works at TITAN as Industry specialist (2016\u2013present)."
+          ],
+          "relationship": null,
+          "match_types": [
+            "company_insider"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-09-01"
+        }
+      ],
+      "gaps": [
+        "No numerical revenue growth guidance or share-price target exists in the supplied sources.",
+        "The FY2027 Q3 EBITDA margin actual is not yet available, so the 23% guidance cannot be assessed.",
+        "The financial tables for the four quarters and FY2026 annual carry no publication date (published_on is null); only the annual report (2026-05-31) and transcripts (2026-01-15, 2026-04-15, 2026-07-15, 2026-10-15) have dates.",
+        "FY2025 quarterly breakdowns and segment-level or geographic revenue splits are not supplied.",
+        "No valuation metrics, order book, client concentration percentages, or balance-sheet detail beyond FY2026 year-end debt and equity were provided.",
+        "All figures are synthetic demo data and should not be treated as actual company financials."
+      ],
+      "coverage": {
+        "documents": 5,
+        "transcripts": 4,
+        "annual_reports": 1,
+        "retrieved_excerpts": 5
+      },
+      "cached": false,
+      "model": "hyde/glm-5.3-flash",
+      "usage": {
+        "completion_tokens": 1432,
+        "prompt_tokens": 3726,
+        "total_tokens": 5158,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."
+    },
+    "CDSL": {
+      "ticker": "CDSL",
+      "question": "Explain the business, financial trajectory, management guidance delivery, positives and risks.",
+      "mode": "demo",
+      "status": "analysed",
+      "sections": [
+        {
+          "id": "business",
+          "title": "Business snapshot",
+          "findings": [
+            {
+              "section": "business",
+              "text": "CDSL provides recurring services to enterprise customers in India and overseas; management cites repeat customer relationships and better project delivery as strengths. Revenue is concentrated in a few large clients.",
+              "citation_ids": [
+                "ebe54f2d7c388bd32c50d35c:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "financial",
+          "title": "Financial trajectory",
+          "findings": [
+            {
+              "section": "financial",
+              "text": "FY2025 (consolidated, INR crore): revenue 3200, EBITDA 600, PBT 500, PAT 360. FY2026: revenue 3680, EBITDA 660.2, PBT 574, PAT 411. FY2026 cash from operations 580, capex 100, year-end debt 300, equity 2000.",
+              "citation_ids": [
+                "ebe54f2d7c388bd32c50d35c:0",
+                "table:61ff54f6b8227dbc5ec52de4"
+              ]
+            },
+            {
+              "section": "financial",
+              "text": "Quarterly trajectory (consolidated, INR crore): FY2026 Q3 revenue 950 / EBITDA 171 / PBT 150 / PAT 110; FY2026 Q4 revenue 980 / EBITDA 186.2 / PBT 154 / PAT 111; FY2027 Q1 revenue 1000 / EBITDA 200 / PBT 160 / PAT 120; FY2027 Q2 revenue 1200 / EBITDA 240 / PBT 200 / PAT 150.",
+              "citation_ids": [
+                "table:75bb4c7ce6e41c4dc79f9dfb",
+                "table:9f0b2e6394a71702c07e414e",
+                "table:98f9f9354350a02215515582",
+                "table:21b9588498c728601a0ec79d"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "guidance",
+          "title": "Promised vs delivered",
+          "findings": [
+            {
+              "section": "guidance",
+              "text": "Management has missed its own EBITDA-margin guidance for three consecutive quarters: FY2026 Q4 guided 20% vs 19% actual (-1.0 pp, missed); FY2027 Q1 guided 21% vs 20% actual (-1.0 pp, missed); FY2027 Q2 guided 22% vs 20% actual (-2.0 pp, missed). FY2027 Q3 guidance of 23% has no actual yet (missing_actual).",
+              "citation_ids": [
+                "2c136d9d221e0d5df6d2e455:0",
+                "270636fb09c847a82ef7028a:0",
+                "059e2035743ae1b11151431d:0",
+                "af7bddb066272c8301ea99d0:0"
+              ]
+            },
+            {
+              "section": "guidance",
+              "text": "Management explicitly guided FY2027 Q3 EBITDA margin at 23% (forward guidance, not yet delivered). No numerical revenue growth guidance or share-price target was provided in any transcript.",
+              "citation_ids": [
+                "af7bddb066272c8301ea99d0:0",
+                "059e2035743ae1b11151431d:0",
+                "270636fb09c847a82ef7028a:0",
+                "2c136d9d221e0d5df6d2e455:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bull",
+          "title": "What could go right",
+          "findings": [
+            {
+              "section": "bull",
+              "text": "Revenue and profit have grown sequentially every quarter for four quarters (950 -> 980 -> 1000 -> 1200 revenue; PAT 110 -> 111 -> 120 -> 150), and FY2026 revenue, EBITDA, PBT and PAT all exceeded FY2025, with repeat client relationships cited as supporting revenue resilience.",
+              "citation_ids": [
+                "table:75bb4c7ce6e41c4dc79f9dfb",
+                "table:9f0b2e6394a71702c07e414e",
+                "table:98f9f9354350a02215515582",
+                "table:21b9588498c728601a0ec79d",
+                "ebe54f2d7c388bd32c50d35c:0",
+                "af7bddb066272c8301ea99d0:0"
+              ]
+            },
+            {
+              "section": "bull",
+              "text": "FY2026 cash from operations of 580 crore comfortably exceeded capex of 100 crore, indicating self-funded operations; equity of 2000 crore versus debt of 300 crore at year-end.",
+              "citation_ids": [
+                "ebe54f2d7c388bd32c50d35c:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        },
+        {
+          "id": "bear",
+          "title": "What to watch",
+          "findings": [
+            {
+              "section": "bear",
+              "text": "Management has missed its EBITDA-margin guidance in each of the last three quarters, with the miss widening to -2.0 pp in FY2027 Q2; margin pressure is attributed to delayed customer approvals and higher hiring costs, and management says project timing remains uncertain.",
+              "citation_ids": [
+                "2c136d9d221e0d5df6d2e455:0",
+                "270636fb09c847a82ef7028a:0",
+                "059e2035743ae1b11151431d:0",
+                "af7bddb066272c8301ea99d0:0"
+              ]
+            },
+            {
+              "section": "bear",
+              "text": "Disclosed risks include delayed customer approvals, hiring costs, and revenue concentration in a few large clients; execution risk on project timing was flagged in response to an analyst question.",
+              "citation_ids": [
+                "ebe54f2d7c388bd32c50d35c:0",
+                "af7bddb066272c8301ea99d0:0"
+              ]
+            }
+          ],
+          "empty_message": "Not found in primary sources."
+        }
+      ],
+      "sources": [
+        {
+          "citation_id": "ebe54f2d7c388bd32c50d35c:0",
+          "text": "SYNTHETIC REVIEW SOURCE. CDSL (CDSL). All figures and descriptions in this exercise are fictional, not actual company financials. The illustrative business provides recurring services to enterprise customers in India and overseas. Consolidated figures in INR crore. FY2025 revenue was 3200, EBITDA 600, PBT 500 and PAT 360. FY2026 revenue was 3680, EBITDA 660.2, PBT 574 and PAT 411. FY2026 cash from operations was 580 and capital expenditure was 100. Year-end debt was 300 and equity 2000. Management described repeat customer relationships and better project delivery as strengths. Risks include delayed customer approvals, hiring costs and the concentration of revenue in a few large clients. No numerical valuation or future share-price target was provided.",
+          "page": null,
+          "document_id": "ebe54f2d7c388bd32c50d35c",
+          "title": "SYNTHETIC CDSL FY2026 annual report",
+          "url": "",
+          "kind": "annual_report",
+          "published_on": "2026-05-31",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "af7bddb066272c8301ea99d0:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for CDSL, FY2027 Q2. Period ended 2026-09-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1200 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 23% in the following quarter. PBT was INR 200 crore and PAT was INR 150 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "af7bddb066272c8301ea99d0",
+          "title": "SYNTHETIC CDSL FY2027 Q2 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-10-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "059e2035743ae1b11151431d:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for CDSL, FY2027 Q1. Period ended 2026-06-30. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 1000 crore. EBITDA margin delivered was 20%. Management explicitly guided for EBITDA margin of 22% in the following quarter. PBT was INR 160 crore and PAT was INR 120 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "059e2035743ae1b11151431d",
+          "title": "SYNTHETIC CDSL FY2027 Q1 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-07-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "270636fb09c847a82ef7028a:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for CDSL, FY2026 Q4. Period ended 2026-03-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 980 crore. EBITDA margin delivered was 19%. Management explicitly guided for EBITDA margin of 21% in the following quarter. PBT was INR 154 crore and PAT was INR 111 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "270636fb09c847a82ef7028a",
+          "title": "SYNTHETIC CDSL FY2026 Q4 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-04-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "2c136d9d221e0d5df6d2e455:0",
+          "text": "SYNTHETIC REVIEW TRANSCRIPT. Fictional financials for CDSL, FY2026 Q3. Period ended 2025-12-31. All figures are consolidated, INR crore. Consolidated revenue for this quarter was INR 950 crore. EBITDA margin delivered was 18%. Management explicitly guided for EBITDA margin of 20% in the following quarter. PBT was INR 150 crore and PAT was INR 110 crore. Management attributed margin pressure to delayed customer approvals and higher hiring costs. Repeat client relationships supported revenue resilience. An analyst asked about execution risk; management said project timing remains uncertain. No numerical revenue growth guidance or share-price target was provided.",
+          "page": null,
+          "document_id": "2c136d9d221e0d5df6d2e455",
+          "title": "SYNTHETIC CDSL FY2026 Q3 transcript",
+          "url": "",
+          "kind": "transcript",
+          "published_on": "2026-01-15",
+          "mode": "demo"
+        },
+        {
+          "citation_id": "table:21b9588498c728601a0ec79d",
+          "document_id": "21b9588498c728601a0ec79d",
+          "title": "CDSL quarterly financials \u00b7 2026-09-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"CDSL\", \"period_end\": \"2026-09-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1200.0, \"ebitda\": 240.0, \"pbt\": 200.0, \"pat\": 150.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "CDSL",
+            "period_end": "2026-09-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1200.0,
+              "ebitda": 240.0,
+              "pbt": 200.0,
+              "pat": 150.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:98f9f9354350a02215515582",
+          "document_id": "98f9f9354350a02215515582",
+          "title": "CDSL quarterly financials \u00b7 2026-06-30",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"CDSL\", \"period_end\": \"2026-06-30\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 1000.0, \"ebitda\": 200.0, \"pbt\": 160.0, \"pat\": 120.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "CDSL",
+            "period_end": "2026-06-30",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 1000.0,
+              "ebitda": 200.0,
+              "pbt": 160.0,
+              "pat": 120.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:61ff54f6b8227dbc5ec52de4",
+          "document_id": "61ff54f6b8227dbc5ec52de4",
+          "title": "CDSL annual financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"CDSL\", \"period_end\": \"2026-03-31\", \"frequency\": \"annual\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 3680.0, \"ebitda\": 660.2, \"pbt\": 574.0, \"pat\": 411.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "CDSL",
+            "period_end": "2026-03-31",
+            "frequency": "annual",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 3680.0,
+              "ebitda": 660.2,
+              "pbt": 574.0,
+              "pat": 411.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:9f0b2e6394a71702c07e414e",
+          "document_id": "9f0b2e6394a71702c07e414e",
+          "title": "CDSL quarterly financials \u00b7 2026-03-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"CDSL\", \"period_end\": \"2026-03-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 980.0, \"ebitda\": 186.2, \"pbt\": 154.0, \"pat\": 111.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "CDSL",
+            "period_end": "2026-03-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 980.0,
+              "ebitda": 186.2,
+              "pbt": 154.0,
+              "pat": 111.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        },
+        {
+          "citation_id": "table:75bb4c7ce6e41c4dc79f9dfb",
+          "document_id": "75bb4c7ce6e41c4dc79f9dfb",
+          "title": "CDSL quarterly financials \u00b7 2025-12-31",
+          "kind": "financial_table",
+          "published_on": null,
+          "page": null,
+          "mode": "demo",
+          "url": "",
+          "text": "{\"ticker\": \"CDSL\", \"period_end\": \"2025-12-31\", \"frequency\": \"quarterly\", \"basis\": \"consolidated\", \"currency\": \"INR\", \"unit\": \"crore\", \"metrics\": {\"revenue\": 950.0, \"ebitda\": 171.0, \"pbt\": 150.0, \"pat\": 110.0}, \"source_type\": \"synthetic\", \"source_url\": \"\", \"pages\": {}, \"mode\": \"demo\", \"source\": null}",
+          "financial_record": {
+            "ticker": "CDSL",
+            "period_end": "2025-12-31",
+            "frequency": "quarterly",
+            "basis": "consolidated",
+            "currency": "INR",
+            "unit": "crore",
+            "metrics": {
+              "revenue": 950.0,
+              "ebitda": 171.0,
+              "pbt": 150.0,
+              "pat": 110.0
+            },
+            "source_type": "synthetic",
+            "source_url": "",
+            "pages": {},
+            "mode": "demo",
+            "source": null
+          }
+        }
+      ],
+      "guidance": [
+        {
+          "period": "FY2026 Q4",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 20.0,
+          "guided_high": 20.0,
+          "actual": 19.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "2c136d9d221e0d5df6d2e455:0",
+            "270636fb09c847a82ef7028a:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q1",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 21.0,
+          "guided_high": 21.0,
+          "actual": 20.0,
+          "delta": -1.0,
+          "status": "missed",
+          "citation_ids": [
+            "270636fb09c847a82ef7028a:0",
+            "059e2035743ae1b11151431d:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q2",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 22.0,
+          "guided_high": 22.0,
+          "actual": 20.0,
+          "delta": -2.0,
+          "status": "missed",
+          "citation_ids": [
+            "059e2035743ae1b11151431d:0",
+            "af7bddb066272c8301ea99d0:0"
+          ],
+          "difference_unit": "percentage_points"
+        },
+        {
+          "period": "FY2027 Q3",
+          "metric": "ebitda_margin",
+          "unit": "percent",
+          "basis": "consolidated",
+          "guided_low": 23.0,
+          "guided_high": 23.0,
+          "actual": null,
+          "delta": null,
+          "status": "missing_actual",
+          "citation_ids": [
+            "af7bddb066272c8301ea99d0:0"
+          ]
+        }
+      ],
+      "financials": [
+        {
+          "ticker": "CDSL",
+          "period_end": "2026-09-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1200.0,
+            "ebitda": 240.0,
+            "pbt": 200.0,
+            "pat": 150.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "CDSL",
+          "period_end": "2026-06-30",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 1000.0,
+            "ebitda": 200.0,
+            "pbt": 160.0,
+            "pat": 120.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "CDSL",
+          "period_end": "2026-03-31",
+          "frequency": "annual",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 3680.0,
+            "ebitda": 660.2,
+            "pbt": 574.0,
+            "pat": 411.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "CDSL",
+          "period_end": "2026-03-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 980.0,
+            "ebitda": 186.2,
+            "pbt": 154.0,
+            "pat": 111.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        },
+        {
+          "ticker": "CDSL",
+          "period_end": "2025-12-31",
+          "frequency": "quarterly",
+          "basis": "consolidated",
+          "currency": "INR",
+          "unit": "crore",
+          "metrics": {
+            "revenue": 950.0,
+            "ebitda": 171.0,
+            "pbt": 150.0,
+            "pat": 110.0
+          },
+          "source_type": "synthetic",
+          "source_url": "",
+          "pages": {},
+          "mode": "demo",
+          "source": null
+        }
+      ],
+      "network": [
+        {
+          "contact_id": "network-reconnect",
+          "name": "Sameer Gupta (fictional)",
+          "score": 3,
+          "reasons": [
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": "2026-01-01"
+        },
+        {
+          "contact_id": "workflow-insider",
+          "name": "Vikram Shah (fictional)",
+          "score": 3,
+          "reasons": [
+            "Listed expertise: delivery operations."
+          ],
+          "relationship": null,
+          "match_types": [
+            "industry_expert"
+          ],
+          "provenance": "synthetic",
+          "last_contacted": null
+        }
+      ],
+      "gaps": [
+        "No numerical revenue growth guidance or share-price target was provided in any source.",
+        "FY2027 Q3 actual EBITDA margin is not yet available (missing_actual) for the 23% guidance.",
+        "The financial tables carry no publication date (published_on null); dates are unavailable for those records.",
+        "No segment-level, client-count, or valuation data was supplied.",
+        "All figures are synthetic/fictional for this exercise, not actual company financials."
+      ],
+      "coverage": {
+        "documents": 5,
+        "transcripts": 4,
+        "annual_reports": 1,
+        "retrieved_excerpts": 5
+      },
+      "cached": false,
+      "model": "hyde/glm-5.3-flash",
+      "usage": {
+        "completion_tokens": 1473,
+        "prompt_tokens": 3699,
+        "total_tokens": 5172,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."
+    }
+  }
+}
