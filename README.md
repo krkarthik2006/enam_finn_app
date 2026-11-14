@@ -4,9 +4,9 @@ An investor workspace for the ENAM build challenge. Next.js shows portfolio chan
 
 ## Hosted evaluation
 
-Open **https://finn-investor-workspace.vercel.app**. The private review password is the
-`FINN_REVIEW_PASSWORD` value in your local, ignored `.env.deploy`; do not commit or publish it.
-Vercel hosts the frontend and its authenticated server proxy. Railway runs one API instance with
+Open **https://finn-investor-workspace.vercel.app**. Anyone with the link can use the demo;
+no password or sign-in is required. All visitors share the demonstration workspace.
+Vercel hosts the frontend and its server proxy. Railway runs one API instance with
 SQLite and its source cache on the persistent `/var/data` volume. Sleeping is disabled for review.
 SQLite is the user's chosen database for this single-investor demo; Postgres is deferred.
 
@@ -32,7 +32,7 @@ Repeat hosted API acceptance without printing credentials:
 .venv/bin/python scripts/check_deployment.py
 ```
 
-The check verifies private access, original-page coverage, streamed model analysis, citations,
+The check verifies password-free access, protected backend access, original-page coverage, streamed model analysis, citations,
 the two-percentage-point guidance miss, and repeat-request caching. Physical-phone installation
 and two runs on mobile data still require a person with a phone; browser mobile emulation is separate.
 
@@ -297,7 +297,7 @@ flowchart LR
 
 ## Privacy and deployment boundary
 
-This version stores **one investor's** portfolio and network in one local database. `FINN_API_TOKEN` protects that instance; it is not multi-user authentication. It stores contact names, supplied career/education/expertise, explicit relationship IDs, provenance, notes and optional last-contact dates. Data stays until deleted; contact deletion also removes inbound relationship edges. Document deletion clears research caches. SQLite files and backups may retain deleted bytes until maintenance and backup expiry.
+This version stores **one investor's** portfolio and network in one local database. `FINN_API_TOKEN` protects direct backend access; the public demo proxy lets anyone with the link use the shared synthetic workspace. It is not multi-user authentication. It stores contact names, supplied career/education/expertise, explicit relationship IDs, provenance, notes and optional last-contact dates. Data stays until deleted; contact deletion also removes inbound relationship edges. Document deletion clears research caches. SQLite files and backups may retain deleted bytes until maintenance and backup expiry.
 
 The database is not encrypted at rest by this application. Keep its directory private and use host disk encryption. Before a shared/production deployment, add real authentication and tenant isolation, TLS, rate limits, provider/consent policy checks, retention and backup deletion, a persistent worker queue, monitored source freshness, and appropriate managed storage. None of those cloud choices are required to run locally. Public repositories should contain only code, synthetic fixtures and the lockfile; `.env`, database files and private network data are ignored.
 

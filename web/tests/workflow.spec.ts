@@ -1,7 +1,5 @@
 import {test,expect} from "@playwright/test";
 
-test.beforeEach(async({page})=>{if(process.env.FINN_E2E_PASSWORD){const response=await page.request.post("/api/session",{data:{password:process.env.FINN_E2E_PASSWORD}});expect(response.status()).toBe(200);}});
-
 test("review feed, network path, evidence and settings with backend offline",async({page},info)=>{
   await page.route("**/api/**",route=>route.fulfill({status:503,contentType:"application/json",body:'{"detail":"Offline check"}'}));
   const errors:string[]=[];page.on("pageerror",error=>errors.push(error.message));

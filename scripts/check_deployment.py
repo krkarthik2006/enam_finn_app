@@ -1,14 +1,12 @@
 """Check the hosted demo without printing credentials or changing investor settings.
 
-Run from the repository root. Credentials come from the environment or .env.deploy.
+Run from the repository root. The public demo requires no password or cookies.
 """
 import argparse
 import json
-import os
 from pathlib import Path
 
 import httpx
-from dotenv import dotenv_values
 
 
 def main():
@@ -17,15 +15,11 @@ def main():
     parser.add_argument("--backend", default="https://finn-api-production-e5f13f8d.up.railway.app")
     parser.add_argument("--report", type=Path, default=Path("/private/tmp/finn-hosted-check.json"))
     args = parser.parse_args()
-    password = os.environ.get("FINN_REVIEW_PASSWORD") or dotenv_values(".env.deploy").get("FINN_REVIEW_PASSWORD")
-    if not password:
-        raise SystemExit("Set FINN_REVIEW_PASSWORD or configure .env.deploy")
     with httpx.Client(timeout=240) as client:
         assert client.get(args.web).status_code == 200, "Frontend unavailable"
-        assert client.get(args.web + "/api/system").status_code == 401, "Private API is unprotected"
+        assert client.get(args.web + "/api/system").status_code == 200, "Public API unavailable"
         assert client.get(args.backend + "/health").json()["status"] == "ok", "Backend unhealthy"
         assert client.get(args.backend + "/api/system").status_code == 401, "Backend is unprotected"
-        assert client.post(args.web + "/api/session", json={"password": password}).status_code == 200, "Sign-in failed"
         system = client.get(args.web + "/api/system").json()
         assert system["model"]["configured"] and system["authentication_enabled"]
         assert system["counts"]["documents"].get("live", 0) > 0, "Real documents missing"
@@ -50,7 +44,7 @@ def main():
         assert briefs[-1]["cached"], "Repeated research should use its cache"
         report = {"web": args.web, "backend": args.backend, "counts": system["counts"],
                   "demo_as_of": system["demo_as_of"], "research_runs": briefs,
-                  "checks": "Sign-in, API protection, persistent corpus, streaming, citations, guidance math and cache passed"}
+                  "checks": "Password-free access, backend protection, persistent corpus, streaming, citations, guidance math and cache passed"}
         args.report.write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps(report, indent=2))
 

@@ -106,7 +106,7 @@ Build in this order:
 - **Done when:** the whole demo works on a real phone.
 
 ## Phase 7 — Deploy + make the demo safe (Sun afternoon, ~3h)
-- [x] Deploy the API (Railway, persistent SQLite volume) and the web app (Vercel), with private review sessions and server-only API credentials.
+- [x] Deploy the API (Railway, persistent SQLite volume) and the web app (Vercel), with public link access and server-only API credentials.
 - [x] Five synthetic review snapshots ship in web/public/demo.json and render if the API is unavailable. The hosted API also seeds an allowlisted public corpus with original-page text; frontend offline snapshots remain explicitly synthetic.
 - [x] Disable API sleeping for evaluation instead of a keep-warm ping; show streamed loading states for live research. Demo time windows remain anchored to the stored scenario.
 - [ ] Run the demo end to end twice on mobile data

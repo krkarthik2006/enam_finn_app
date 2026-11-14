@@ -1,13 +1,16 @@
 import { NextRequest } from "next/server";
-import {hasSession,sameOrigin} from "@/lib/session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 async function proxy(request: NextRequest, context: {params: Promise<{path: string[]}>}) {
-  if (!hasSession(request)) return Response.json({detail:"Sign in to the private review to use the API."},{status:401,headers:{"Cache-Control":"no-store"}});
-  if (!["GET","HEAD"].includes(request.method)&&!sameOrigin(request)) return Response.json({detail:"Cross-origin write refused"},{status:403});
+  if (!["GET","HEAD"].includes(request.method)) {
+    const origin = request.headers.get("origin");
+    let sameOrigin = !origin;
+    try { if (origin) sameOrigin = new URL(origin).host === request.headers.get("host"); } catch {}
+    if (!sameOrigin) return Response.json({detail:"Cross-origin write refused"},{status:403});
+  }
   const {path} = await context.params;
   const target = new URL(`/api/${path.map(encodeURIComponent).join("/")}`, process.env.FINN_BACKEND_URL || "http://127.0.0.1:8000");
   target.search = request.nextUrl.search;
