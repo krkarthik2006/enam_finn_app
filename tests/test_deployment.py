@@ -21,11 +21,13 @@ def test_hosting_refuses_missing_auth_or_ephemeral_storage(tmp_path):
         prepare(settings.model_copy(update={"cache_path": tmp_path / "ephemeral-cache"}), str(tmp_path / "persistent"))
 
 
-def test_hosted_review_seed_is_repeatable_and_preserves_settings(tmp_path):
+def test_hosted_primary_seed_is_repeatable_and_preserves_settings(tmp_path):
     settings = configuration(tmp_path)
     volume = str(tmp_path / "persistent")
     db = prepare(settings, volume)
     assert db.one("SELECT COUNT(*) n FROM contacts")["n"] == 40
+    for table in ('announcements', 'documents', 'financials', 'prices'):
+        assert db.one(f"SELECT COUNT(*) n FROM {table} WHERE mode='demo'")['n'] == 0
     db.set_setting("alerts", {"price_change_percent": 7})
     docs = db.one("SELECT COUNT(*) n FROM documents")["n"]
     prepared = prepare(settings, volume)
@@ -52,3 +54,27 @@ def test_public_bootstrap_has_real_sources_without_contacts_or_credentials(tmp_p
     count = db.one("SELECT COUNT(*) n FROM chunks")['n']
     bootstrap(db)
     assert db.one("SELECT COUNT(*) n FROM chunks")['n'] == count
+
+
+def test_hosting_removes_old_fictional_financial_seed_only(tmp_path):
+    from deploy.bootstrap import bootstrap
+    from finn.db import Database
+    from finn.review import seed_review
+    settings = configuration(tmp_path)
+    db = Database(settings.database_path)
+    db.initialize()
+    seed_review(db)
+    bootstrap(db)
+    real_docs = db.all("SELECT * FROM documents WHERE mode='live'")
+    db.set_setting('alerts', {'price_change_percent': 7})
+    prepare(settings, str(tmp_path / 'persistent'))
+    assert db.all("SELECT * FROM documents WHERE mode='live'") == real_docs
+    assert not db.all("SELECT id FROM documents WHERE mode='demo'")
+    assert not db.all("SELECT id FROM announcements WHERE mode='demo'")
+    assert not db.all("SELECT id FROM financials WHERE mode='demo'")
+    assert not db.all("SELECT ticker FROM prices WHERE mode='demo'")
+    assert not db.all("SELECT ticker FROM portfolio WHERE ticker='MOCKIT'")
+    assert db.one('SELECT COUNT(*) n FROM contacts')['n'] == 40
+    assert db.setting('alerts', {})['price_change_percent'] == 7
+    assert not db.all('SELECT id FROM chunk_search WHERE id NOT IN (SELECT id FROM chunks)')
+    assert not db.all('SELECT event_id FROM enrichments WHERE event_id NOT IN (SELECT id FROM announcements)')

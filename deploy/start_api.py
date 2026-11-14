@@ -7,7 +7,7 @@ import uvicorn
 from deploy.bootstrap import bootstrap
 from finn.config import Settings
 from finn.db import Database
-from finn.review import seed_review
+from finn.mock_network import seed_network
 
 
 def prepare(settings, volume):
@@ -22,12 +22,16 @@ def prepare(settings, volume):
         raise ValueError("Source cache must be stored inside the mounted persistent volume")
     db = Database(settings.database_path, settings.owner_id)
     db.initialize()
-    if not db.setting("hosted_review_seed", False):
-        if db.one("SELECT COUNT(*) n FROM portfolio")["n"] or db.one("SELECT COUNT(*) n FROM contacts")["n"]:
-            raise ValueError("Automatic review seeding requires an empty database")
-        seed_review(db)
-        db.set_setting("hosted_review_seed", True)
+    seed_network(db)
     bootstrap(db)
+    if not db.setting("primary_sources_only_v1", False):
+        with db.connect() as conn:
+            conn.execute("DELETE FROM chunk_search WHERE id IN (SELECT c.id FROM chunks c JOIN documents d ON d.id=c.document_id WHERE d.mode='demo')")
+            conn.execute("DELETE FROM enrichments WHERE event_id IN (SELECT id FROM announcements WHERE mode='demo')")
+            for table in ("documents", "announcements", "financials", "prices"):
+                conn.execute(f"DELETE FROM {table} WHERE mode='demo'")
+            conn.execute("DELETE FROM portfolio WHERE ticker LIKE 'MOCK%'")
+            conn.execute("INSERT OR REPLACE INTO settings VALUES ('primary_sources_only_v1', 'true')")
     return db
 
 

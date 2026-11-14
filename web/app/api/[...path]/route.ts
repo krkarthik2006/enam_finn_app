@@ -12,16 +12,23 @@ async function proxy(request: NextRequest, context: {params: Promise<{path: stri
     if (!sameOrigin) return Response.json({detail:"Cross-origin write refused"},{status:403});
   }
   const {path} = await context.params;
+  const body = ["GET", "HEAD"].includes(request.method) ? undefined : await request.text();
+  let requestedMode = request.nextUrl.searchParams.get("mode");
+  if (body) {
+    try {requestedMode = JSON.parse(body).mode || requestedMode;} catch {}
+  }
+  if (requestedMode && requestedMode !== "live") return Response.json({detail: "Company data must use primary sources."}, {status: 422});
+  if (path[0] === "demo") return Response.json({detail: "Test fixtures are unavailable in the public app."}, {status: 404});
   const target = new URL(`/api/${path.map(encodeURIComponent).join("/")}`, process.env.FINN_BACKEND_URL || "http://127.0.0.1:8000");
   target.search = request.nextUrl.search;
   const headers: Record<string, string> = {"Content-Type": "application/json"};
   if (process.env.FINN_API_TOKEN) headers.Authorization = `Bearer ${process.env.FINN_API_TOKEN}`;
   try {
     const response = await fetch(target, {method: request.method, headers, cache: "no-store", signal: request.signal,
-      body: ["GET", "HEAD"].includes(request.method) ? undefined : await request.text()});
+      body});
     return new Response(response.body, {status: response.status, headers: {"Content-Type": response.headers.get("content-type") || "application/json", "Cache-Control": "no-store"}});
   } catch {
-    return Response.json({detail: "Backend is offline. The saved demo is available."}, {status: 503});
+    return Response.json({detail: "Connection unavailable. Saved company data is available offline."}, {status: 503});
   }
 }
 export {proxy as GET, proxy as POST, proxy as PUT, proxy as DELETE};

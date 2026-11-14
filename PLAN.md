@@ -107,8 +107,8 @@ Build in this order:
 
 ## Phase 7 — Deploy + make the demo safe (Sun afternoon, ~3h)
 - [x] Deploy the API (Railway, persistent SQLite volume) and the web app (Vercel), with public link access and server-only API credentials.
-- [x] Five synthetic review snapshots ship in web/public/demo.json and render if the API is unavailable. The hosted API also seeds an allowlisted public corpus with original-page text; frontend offline snapshots remain explicitly synthetic.
-- [x] Disable API sleeping for evaluation instead of a keep-warm ping; show streamed loading states for live research. Demo time windows remain anchored to the stored scenario.
+- [x] Primary-source briefs ship in web/public/snapshot.json and render if the API is unavailable. Offline and connected financial data use original sources; only contact profiles and relationships are synthetic. Test-mode financial fixtures stay outside the public app.
+- [x] Disable API sleeping for evaluation instead of a keep-warm ping; show streamed loading states for live research. Public time windows use original filing dates; offline data is filtered to the selected window.
 - [ ] Run the demo end to end twice on mobile data
 
 ## Phase 8 — Writeup + submission (Sun evening, ~2–3h)

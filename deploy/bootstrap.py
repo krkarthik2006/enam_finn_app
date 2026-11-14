@@ -16,10 +16,10 @@ COLUMNS = {
 
 def bootstrap(db, path=None):
     path = path or Path(__file__).with_name("public_sources.json.gz")
-    if db.setting("public_sources_v1", False) or not path.exists():
+    if db.setting("public_sources_v2", False) or not path.exists():
         return
     bundle = json.loads(gzip.decompress(path.read_bytes()))
-    if bundle["version"] != 1 or set(bundle["tables"]) != set(COLUMNS):
+    if bundle["version"] != 2 or set(bundle["tables"]) != set(COLUMNS):
         raise ValueError("Unrecognised public-source bundle")
     with db.connect() as conn:
         for table, columns in COLUMNS.items():
@@ -35,4 +35,4 @@ def bootstrap(db, path=None):
     db.execute("INSERT OR IGNORE INTO portfolio VALUES (?,?)", ("INFY", json.dumps({"ticker": "INFY", "name": "Infosys", "sector": "IT services"})))
     from finn.enrichment import refresh_cards
     refresh_cards(db)
-    db.set_setting("public_sources_v1", True)
+    db.set_setting("public_sources_v2", True)

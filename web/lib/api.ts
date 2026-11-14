@@ -9,6 +9,10 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   return response.json();
 }
 
+export function isPrimaryBrief(brief: Brief): boolean {
+  return brief.mode === "live" && brief.sources.every(source => source.mode === "live" && source.url.startsWith("https://") && (!source.financial_record || source.financial_record.mode === "live")) && brief.financials.every(row => row.mode === "live");
+}
+
 export async function research(ticker: string, body: object, progress: (text: string) => void, signal: AbortSignal): Promise<Brief> {
   const response = await fetch(`/api/research/${encodeURIComponent(ticker)}/brief`, {method: "POST", signal, headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
   if (!response.ok || !response.body) throw new Error("Research is unavailable right now. Please try again.");
@@ -30,5 +34,6 @@ export async function research(ticker: string, body: object, progress: (text: st
     if (done) break;
   }
   if (!result) throw new Error("Research ended without a result. Please retry.");
+  if (!isPrimaryBrief(result)) throw new Error("Research returned non-primary sources. Please retry.");
   return result;
 }

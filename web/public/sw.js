@@ -1,8 +1,8 @@
-const CACHE = "finn-static-v6";
+const CACHE = "finn-static-v7";
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
-    await cache.addAll(["/", "/demo.json", "/icon.svg"]);
+    await cache.addAll(["/", "/snapshot.json", "/icon.svg"]);
     const shell = await cache.match("/");
     const html = await shell.text();
     const assets = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match => match[1].replaceAll("&amp;", "&")).filter(path => path.startsWith("/_next/static/"));
@@ -15,7 +15,7 @@ self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
   if (event.request.method !== "GET" || url.origin !== self.location.origin || url.pathname.startsWith("/api/")) return;
   if (event.request.mode === "navigate") {event.respondWith(fetch(event.request).catch(() => caches.match("/"))); return;}
-  if (url.pathname.startsWith("/_next/static/") || ["/demo.json", "/icon.svg"].includes(url.pathname)) {
+  if (url.pathname.startsWith("/_next/static/") || ["/snapshot.json", "/icon.svg"].includes(url.pathname)) {
     event.respondWith(caches.open(CACHE).then(async cache => {
       const saved = await cache.match(event.request); if (saved) return saved;
       const response = await fetch(event.request); if (response.ok) cache.put(event.request, response.clone()); return response;
