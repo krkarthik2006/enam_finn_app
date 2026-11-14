@@ -16,7 +16,8 @@ without a wholesale directory rewrite. The Next.js scaffold and build move to P6
 current model as a configurable baseline; provider/model allocation remains undecided.
 Each phase has code checks and an explicit live-source result. Synthetic fixtures remain
 separate from real sources; failed/blocked sources and unverified portfolio picks stay labelled.
-The user extended scope on 14 Nov: implement P5/P6 before review so the workflow can be inspected visually. P7 deployment remains separate.
+The user extended scope on 14 Nov: implement P5/P6 before review, then finish P7 for evaluation.
+The hosted demo retains SQLite on a persistent Railway volume by explicit user choice; Postgres is deferred.
 
 ## Product point of view
 
@@ -105,9 +106,9 @@ Build in this order:
 - **Done when:** the whole demo works on a real phone.
 
 ## Phase 7 — Deploy + make the demo safe (Sun afternoon, ~3h)
-- [ ] Deploy the API (Render/Railway) and the web app (Vercel)
-- [x] Five synthetic review snapshots ship in web/public/demo.json and render if the API is unavailable; real-source snapshot expansion remains a deployment task.
-- [ ] Keep-warm ping; loading states for live research
+- [x] Deploy the API (Railway, persistent SQLite volume) and the web app (Vercel), with private review sessions and server-only API credentials.
+- [x] Five synthetic review snapshots ship in web/public/demo.json and render if the API is unavailable. The hosted API also seeds an allowlisted public corpus with original-page text; frontend offline snapshots remain explicitly synthetic.
+- [x] Disable API sleeping for evaluation instead of a keep-warm ping; show streamed loading states for live research. Demo time windows remain anchored to the stored scenario.
 - [ ] Run the demo end to end twice on mobile data
 
 ## Phase 8 — Writeup + submission (Sun evening, ~2–3h)

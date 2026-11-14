@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+.venv
+.vscode
+web
+**/__pycache__
+.pytest_cache
+.ruff_cache
+data/*.sqlite*
+data/cache/live

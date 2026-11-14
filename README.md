@@ -1,6 +1,40 @@
 # FINN
 
-An investor workspace for the ENAM build challenge. Next.js shows portfolio changes, cited company research and a synthetic professional network. FastAPI/SQLite stores source pages, financial observations and model caches. Cloud deployment remains in P7.
+An investor workspace for the ENAM build challenge. Next.js shows portfolio changes, cited company research and a synthetic professional network. FastAPI/SQLite stores source pages, financial observations and model caches.
+
+## Hosted evaluation
+
+Open **https://finn-investor-workspace.vercel.app**. The private review password is the
+`FINN_REVIEW_PASSWORD` value in your local, ignored `.env.deploy`; do not commit or publish it.
+Vercel hosts the frontend and its authenticated server proxy. Railway runs one API instance with
+SQLite and its source cache on the persistent `/var/data` volume. Sleeping is disabled for review.
+SQLite is the user's chosen database for this single-investor demo; Postgres is deferred.
+
+Evaluate these workflows:
+
+1. **Today:** open MOCKIT's management change and follow You → Neha → Riya. Open its results
+   card for QoQ/YoY and the deliberately planted reference mismatch.
+2. **Research:** run a MOCKIT question, check 22% guidance versus 20% delivered, and open a
+   citation. Repeat the question to see cached analysis. All demo figures are fictional.
+3. **People:** search by name or expertise and inspect professional history and recorded paths.
+4. **Real data:** inspect available filings, choose a wider window when needed, and research
+   INFY using indexed original reports/transcripts. Missing evidence stays visible.
+5. **System:** inspect source coverage, model configuration and refresh outcomes. Email and
+   WhatsApp are explicitly unimplemented. Manage portfolio and alert settings from Today.
+
+Demo windows end at the latest stored synthetic filing, so the saved scenario stays usable
+after its seed date. Real-data windows use the current time. The offline fallback contains only
+public synthetic snapshots; new research and portfolio writes require the connected backend.
+
+Repeat hosted API acceptance without printing credentials:
+
+```sh
+.venv/bin/python scripts/check_deployment.py
+```
+
+The check verifies private access, original-page coverage, streamed model analysis, citations,
+the two-percentage-point guidance miss, and repeat-request caching. Physical-phone installation
+and two runs on mobile data still require a person with a phone; browser mobile emulation is separate.
 
 ## Visual review — P5/P6
 
@@ -47,7 +81,7 @@ npm --prefix web run test:e2e
 Browser checks cover desktop and a mobile viewport, backend-offline fallback, total-network-offline reload,
 source dialogs, settings and actual streamed model research. GitHub's frontend job deliberately sets
 `FINN_E2E_LIVE=0` because no credential was exported; local checks run the live flow. Physical-phone testing,
-cloud deployment, hosted execution of the new workflow and model allocation per task remain pending.
+hosted execution of the new workflow and model allocation per task remain separate from local checks.
 
 ## Run locally
 
@@ -159,7 +193,7 @@ select Ananya (industry expert), Vikram (current employee), and Neha (recorded c
 An unrelated agriculture contact is excluded. Vikram's employment overlap is explicitly unverified.
 The person ID is supplied in the fixture; automatic identification of executives is still future work.
 
-To run the same scenario against your configured GLM account, with possible model usage charges:
+To run the same scenario against your configured GLM account, using model tokens:
 
 ```sh
 PYTHONPATH=. uv run python scripts/check_workflow.py --live-model > /tmp/finn-workflow-live.json
@@ -242,7 +276,7 @@ Then call `POST /api/research` with `{"ticker":"TCS","question":"What was guided
 
 ```mermaid
 flowchart LR
-  UI[Future mobile frontend] --> API[FastAPI]
+  UI[Next.js mobile frontend / Vercel proxy] --> API[FastAPI / Railway]
   API --> DB[(SQLite + FTS5)]
   Sources[Yahoo / NSE / original company PDFs] --> Pipeline[Ingestion and parsing]
   Pipeline --> DB
@@ -301,7 +335,7 @@ Review the saved answers and add cases from real documents before claiming broad
 Providers used for research must support strict `json_schema` structured output. Invalid output
 and unknown citations still fail validation. Changing the output contract invalidates old analysis caches.
 
-The read-only source check is separate because external sites can rate-limit, block requests or change response formats. Default tests skip the paid live suite; report offline and live results separately.
+The read-only source check is separate because external sites can rate-limit, block requests or change response formats. Default tests skip the real-model suite; report offline and live results separately.
 
 GitHub Actions runs the backend tests and lint on every push and pull request, using Python 3.11
 and 3.12 with the committed lockfile. See [Backend tests](https://github.com/krkarthik2006/enam_finn_app/actions/workflows/tests.yml).
@@ -315,4 +349,8 @@ retained for seven days; database files and `.env` are excluded.
 
 ## Deliberately left for the next stage
 
-The frontend and mobile interaction design; broader filing-layout/OCR coverage; reliable live BSE access; automatic report/transcript selection; verified real-person biographies; advanced four-quarter guidance comparisons; notification delivery; stronger retrieval/semantic evaluation; and production hosting/privacy infrastructure. Calculations exist for explicitly sourced, compatible records; financial interpretation is not universally verified. P5/P6 expansion awaits user review of P0–P4.
+Broader filing-layout/OCR coverage; reliable live BSE access; verified real-person biographies;
+notification delivery; email/WhatsApp integrations; stronger retrieval/semantic evaluation; model
+selection per task; and multi-user production infrastructure. Automatic report/transcript discovery
+and compatible quarterly guidance comparisons are implemented, but source availability and explicit
+numeric evidence constrain their coverage. Financial interpretation is not universally verified.

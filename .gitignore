@@ -17,3 +17,5 @@ node_modules/
 *.tsbuildinfo
 web/test-results/
 web/playwright-report/
+.vercel/
+.railway/

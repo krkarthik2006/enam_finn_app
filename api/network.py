@@ -53,11 +53,16 @@ def router(db):
 
     @routes.get("/api/network/reconnect", tags=["network"])
     def reconnect(mode: Mode = "live"):
-        since = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+        as_of = datetime.now(timezone.utc)
+        if mode == "demo":
+            latest = db.one("SELECT MAX(published_at) latest FROM announcements WHERE mode='demo'")["latest"]
+            if latest:
+                as_of = datetime.fromisoformat(latest.replace("Z", "+00:00"))
+        since = (as_of - timedelta(days=1)).isoformat()
         events = [json.loads(r["payload"]) for r in db.all(
             "SELECT payload FROM announcements WHERE mode=? AND julianday(published_at)>=julianday(?)",
             (mode, since),
         )]
-        return {"nudges": reconnect_nudges(load_people(db), events)}
+        return {"nudges": reconnect_nudges(load_people(db), events, as_of.date())}
 
     return routes

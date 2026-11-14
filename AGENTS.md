@@ -107,7 +107,7 @@ or another destination. Keep credentials private and report real-model results s
 
 ## 4. Stack and layout
 
-- **Backend:** Python 3.11, FastAPI, SQLite in dev (`data/finn.db`), Postgres (Supabase) in prod via SQLAlchemy. `uv` or `pip` + `requirements.txt`.
+- **Backend:** Python 3.11, FastAPI, SQLite locally and on a persistent Railway volume for this single-investor demo (user decision, 2026-11-14). Postgres is deferred unless the scope changes. `uv` or `pip` + `requirements.txt`.
 - **Frontend:** Next.js (App Router) + TypeScript + Tailwind, mobile-first, installable PWA.
 - **Scheduled ingestion:** GitHub Actions cron calls the `ingest/` scripts.
 - **Deploy:** web on Vercel; API on Render or Railway.

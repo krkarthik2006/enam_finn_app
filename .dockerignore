@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+.venv
+.vscode
+**/__pycache__
+**/node_modules
+**/.next
+web
+data/*.sqlite*
+data/cache/live

@@ -14,6 +14,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from api.financials import router as financial_router
 from api.network import router as network_router
 from api.research import router as research_router
+from api.system import router as system_router
 from finn.alerts import digest, save_announcement, save_prices
 from finn.config import Settings
 from finn.db import Database
@@ -153,6 +154,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(financial_router(db), dependencies=protected)
     app.include_router(network_router(db), dependencies=protected)
     app.include_router(research_router(db, providers), dependencies=protected)
+    app.include_router(system_router(db, settings), dependencies=protected)
 
     @app.get("/api/usage", dependencies=protected, tags=["system"])
     def model_usage():
