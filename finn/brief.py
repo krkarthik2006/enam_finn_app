@@ -3,6 +3,7 @@
 import json
 import re
 from collections import defaultdict
+from datetime import date
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -12,7 +13,7 @@ from engine.llm import LLM, PROMPTS
 from finn.documents import retrieve
 from finn.network import recommend
 
-SECTION_NAMES = {"business": "Business snapshot", "financial": "Financial trajectory",
+SECTION_NAMES = {"answer": "Answer to your question", "business": "Business snapshot", "financial": "Financial trajectory",
                  "guidance": "Promised vs delivered", "bull": "What could go right", "bear": "What to watch"}
 
 
@@ -36,7 +37,7 @@ class Claims(BaseModel):
 
 class SectionFinding(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    section: Literal["business", "financial", "guidance", "bull", "bear"]
+    section: Literal["answer", "business", "financial", "guidance", "bull", "bear"]
     text: str = Field(min_length=1, max_length=2000)
     citation_ids: list[str] = Field(min_length=1, max_length=8)
 
@@ -55,7 +56,7 @@ def structured_sources(db, ticker, mode):
     for row in rows:
         item = json.loads(row["payload"])
         key = (item["period_end"], item["frequency"], item["basis"], item["currency"], item["unit"])
-        if key in seen or counts[item["frequency"]] >= (5 if item["frequency"] == "quarterly" else 2):
+        if key in seen or counts[item["frequency"]] >= (8 if item["frequency"] == "quarterly" else 5):
             continue
         seen.add(key)
         counts[item["frequency"]] += 1
@@ -146,7 +147,7 @@ def build_brief(db, settings, ticker, question, mode="live", use_model=True):
                "response_format": {"type": "json_schema", "json_schema": {"name": "research_brief", "strict": True, "schema": schema}},
                "messages": [{"role": "system", "content": (PROMPTS / "brief.md").read_text()},
                             {"role": "user", "content": json.dumps({"ticker": ticker, "question": question,
-                             "sources": sources, "computed_comparisons": comparisons})}]}
+                             "as_of": date.today().isoformat(), "sources": sources, "computed_comparisons": comparisons})}]}
     ids = {s["citation_id"] for s in sources}
 
     def validate(raw):
@@ -157,7 +158,7 @@ def build_brief(db, settings, ticker, question, mode="live", use_model=True):
             raise ValueError("Unknown brief citation")
 
     before = db.one("SELECT COUNT(*) AS n FROM llm_calls WHERE status='completed'")["n"]
-    raw = LLM(db, settings).complete(payload, "brief-v3", validate)
+    raw = LLM(db, settings).complete(payload, "brief-v4", validate)
     analysis = BriefAnalysis.model_validate_json(raw["choices"][0]["message"]["content"])
     grounded = [finding for finding in analysis.findings if supported_figures(finding, sources, comparisons)]
     if len(grounded) != len(analysis.findings):

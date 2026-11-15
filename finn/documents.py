@@ -83,6 +83,8 @@ def retrieve(db: Database, ticker: str, question: str, mode: str, document_ids: 
     tokens = list(dict.fromkeys(re.findall(r"[A-Za-z0-9]{3,}", question)))[:30]
     stop = {"the", "and", "what", "how", "this", "company", "explain", "its", "for", "with"}
     query = " OR ".join(f'"{t}"' for t in tokens if t.lower() not in stop)
+    if re.search(r"profitab|profit|earnings", question, re.I):
+        query = (query + " OR " if query else "") + '"profit after tax" OR "net profit" OR "net income" OR "profit for the year"'
     fields = """c.id, c.text, c.page, d.id AS document_id, d.title, d.url, d.kind, d.published_on, d.mode"""
     base = f"SELECT {fields} FROM chunks c JOIN documents d ON d.id=c.document_id"
     args = (ticker, mode)
