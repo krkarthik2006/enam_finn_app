@@ -24,9 +24,14 @@ async function proxy(request: NextRequest, context: {params: Promise<{path: stri
   const headers: Record<string, string> = {"Content-Type": "application/json"};
   if (process.env.FINN_API_TOKEN) headers.Authorization = `Bearer ${process.env.FINN_API_TOKEN}`;
   try {
-    const response = await fetch(target, {method: request.method, headers, cache: "no-store", signal: request.signal,
+    const response = await fetch(target, {method: request.method, headers, cache: "no-store", redirect: "manual", signal: request.signal,
       body});
-    return new Response(response.body, {status: response.status, headers: {"Content-Type": response.headers.get("content-type") || "application/json", "Cache-Control": "no-store"}});
+    const responseHeaders = new Headers({"Content-Type": response.headers.get("content-type") || "application/json", "Cache-Control": "no-store"});
+    for (const name of ["location", "content-disposition", "retry-after"]) {
+      const value = response.headers.get(name);
+      if (value) responseHeaders.set(name, value);
+    }
+    return new Response(response.body, {status: response.status, headers: responseHeaders});
   } catch {
     return Response.json({detail: "Connection unavailable. Saved company data is available offline."}, {status: 503});
   }

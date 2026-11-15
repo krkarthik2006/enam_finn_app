@@ -284,13 +284,17 @@ class Providers:
                 break
             try:
                 content = self._download(url)
-                target.parent.mkdir(parents=True, exist_ok=True)
-                temporary = target.with_suffix(".tmp")
-                temporary.write_bytes(content)
-                temporary.replace(target)
                 source = {"url": url, "fetched_at": datetime.now(timezone.utc).isoformat(),
                           "origin": "live", "stale": False}
-                metadata.write_text(json.dumps(source))
+                try:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    temporary = target.with_suffix(".tmp")
+                    temporary.write_bytes(content)
+                    temporary.replace(target)
+                    metadata.write_text(json.dumps(source))
+                except OSError:
+                    # A cache write must not discard an already downloaded original.
+                    source["cache_failure"] = "OSError"
                 self.cache.observations.append(source)
                 return content
             except (httpx.HTTPError, ProviderError):

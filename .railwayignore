@@ -9,3 +9,6 @@ web
 .ruff_cache
 data/*.sqlite*
 data/cache/live
+
+SUBMISSION_EMAIL.txt
+AI_BUILD_HISTORY.txt

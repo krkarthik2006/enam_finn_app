@@ -1,10 +1,12 @@
 import asyncio
+import html
 import json
 import logging
 import secrets
 import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 
 import httpx
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Query
@@ -251,7 +253,7 @@ def create_app(settings: Settings | None = None):
 
     @app.get("/api/announcements/{event_id}/document", dependencies=protected, tags=["push"])
     def filing_document(event_id: str):
-        from fastapi.responses import Response
+        from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
         row = db.one("SELECT payload FROM announcements WHERE id=?", (event_id,))
         if not row:
@@ -259,10 +261,23 @@ def create_app(settings: Settings | None = None):
         event = json.loads(row["payload"])
         if not event.get("url") or (event.get("source") or {}).get("kind") == "news" or event["ticker"].startswith("US-"):
             raise HTTPException(422, "Open the original source website for this document")
+        parsed = urlparse(event["url"])
+        if (parsed.scheme != "https" or parsed.hostname not in settings.document_hosts
+                or parsed.username or parsed.password or parsed.port not in (None, 443)):
+            raise HTTPException(422, "Use an official filing source")
+        if parsed.path.lower().endswith(".zip"):
+            return RedirectResponse(event["url"], status_code=307)
         try:
             content = providers.download(event["url"], prefer_cache=True)
-        except (ValueError, ProviderError, httpx.HTTPError) as exc:
-            raise HTTPException(502, "Saved filing unavailable. Open the source website instead.") from exc
+        except (ValueError, ProviderError, httpx.HTTPError, OSError):
+            source = html.escape(event["url"], quote=True)
+            return HTMLResponse(f'''<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Open filing · FINN</title>
+<style>body{{background:#101710;color:#e7e7df;font:18px/1.6 system-ui;margin:0;padding:32px}}
+main{{max-width:560px;margin:12vh auto}}h1{{font:36px Georgia}}a{{display:inline-block;color:#b0c9b7;margin:16px 24px 0 0}}</style>
+<main><h1>This filing couldn’t be loaded</h1><p>The exchange is temporarily unavailable and a saved copy isn’t available here. You can open the original filing or try again.</p>
+<a href="{source}" rel="noreferrer">Open original filing</a><a href="">Try again</a></main></html>''',
+                status_code=503, headers={"Cache-Control": "no-store", "Retry-After": "10"})
         return Response(content, media_type="application/pdf", headers={
             "Content-Disposition": f'inline; filename="{event["ticker"]}-{event_id}.pdf"',
             "Cache-Control": "private, no-store",
