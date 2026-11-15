@@ -130,6 +130,8 @@ class Providers:
                         continue
                 if not parsed:
                     raise ProviderError("NSE announcement timestamp format changed")
+                if not now - timedelta(days=days) <= parsed <= now:
+                    continue
                 results.append(
                     Announcement(
                         ticker=row.get("symbol", "").upper(),

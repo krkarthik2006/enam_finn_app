@@ -8,6 +8,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
+from urllib.parse import parse_qs, urlparse
 
 import httpx
 
@@ -78,6 +79,20 @@ class SourceCache:
             packaged = Path(__file__).parents[1] / "data/cache/demo_sources" / path.name
             if packaged.exists():
                 path = packaged
+        # A saved exchange response can cover a different date window. Match the
+        # exact company; the provider filters original timestamps to the new window.
+        if not path.exists() and url == "https://www.nseindia.com/api/corporate-announcements" and (params or {}).get("symbol"):
+            matches = []
+            for candidate in (Path(__file__).parents[1] / "data/cache/demo_sources").glob("*.json"):
+                try:
+                    saved = json.loads(candidate.read_text())
+                    parsed = urlparse(saved.get("url", ""))
+                    if parsed.hostname == "www.nseindia.com" and parsed.path == "/api/corporate-announcements" and parse_qs(parsed.query).get("symbol") == [params["symbol"]]:
+                        matches.append((saved["fetched_at"], candidate))
+                except (OSError, ValueError, KeyError):
+                    continue
+            if matches:
+                path = max(matches)[1]
         if path.exists():
             snapshot = json.loads(path.read_text())
             response = self.response(snapshot)

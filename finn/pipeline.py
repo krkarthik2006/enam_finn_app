@@ -60,8 +60,9 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
                                 except (ProviderError, ValueError) as exc:
                                     enrichment_errors.append({"event_id": saved["id"], "message": str(exc)})
                         count = len(data)
+                    stale_filings = source == "announcements" and any(item.get("origin") == "cache" and item.get("stale") for item in providers.cache.observations[before:])
                     report["sources"].append(
-                        {"ticker": ticker, "source": source, "status": "partial" if enrichment_errors else "ok", "count": count,
+                        {"ticker": ticker, "source": source, "status": "partial" if enrichment_errors or stale_filings else "ok", "count": count,
                          "provenance": providers.cache.observations[before:], "enrichment_errors": enrichment_errors}
                     )
                 except (ProviderError, ValueError) as exc:

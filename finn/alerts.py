@@ -120,47 +120,46 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
                 ticker,
                 mode,
                 completed_day.isoformat(),
-                settings.volume_lookback_days + 1,
+                settings.volume_lookback_days + (until - since).days + 3,
             ),
         )
-        if len(history) < 2:
-            continue
-        latest, previous = history[0], history[1]
-        timestamp = (datetime.fromisoformat(latest["day"] + "T16:00:00").replace(tzinfo=ZoneInfo("America/New_York"))
-                     if exchanges[ticker] == "US" else datetime.fromisoformat(latest["day"] + "T18:00:00+05:30")).astimezone(timezone.utc)
-        if not since <= timestamp <= until:
-            continue
-        change = (latest["close"] / previous["close"] - 1) * 100
-        baseline = history[1 : settings.volume_lookback_days + 1]
-        average = sum(p["volume"] for p in baseline) / len(baseline)
-        multiple = latest["volume"] / average if average > 0 else None
-        reasons = []
-        if abs(change) >= settings.price_change_percent:
-            reasons.append(
-                f"Daily close changed {change:+.2f}% (threshold ±{settings.price_change_percent:g}%)."
-            )
-        enough_history = len(baseline) == settings.volume_lookback_days
-        if enough_history and multiple is not None and multiple >= settings.volume_multiple:
-            reasons.append(f"Volume was {multiple:.2f}× the prior {len(baseline)} trading-day average.")
-        if reasons:
-            items.append(
-                {
-                    "id": f"price:{mode}:{ticker}:{latest['day']}",
-                    "ticker": ticker,
-                    "type": "market_alert",
-                    "mode": mode,
-                    "source": db.setting(f"prices_source:{mode}:{ticker}", None),
-                    "priority": "high",
-                    "attention_score": {"value": 5, "method": "market_threshold"},
-                    "published_at": timestamp.isoformat(),
-                    "summary": " ".join(reasons),
-                    "price_change_percent": round(change, 4),
-                    "volume_multiple": round(multiple, 4) if multiple is not None else None,
-                    "volume_baseline_days": len(baseline),
-                    "volume_baseline_complete": enough_history,
-                    "network": recommend(db, ticker=ticker)[:3],
-                }
-            )
+        for index, latest in enumerate(history[:-1]):
+            previous = history[index + 1]
+            timestamp = (datetime.fromisoformat(latest["day"] + "T16:00:00").replace(tzinfo=ZoneInfo("America/New_York"))
+                         if exchanges[ticker] == "US" else datetime.fromisoformat(latest["day"] + "T18:00:00+05:30")).astimezone(timezone.utc)
+            if not since <= timestamp <= until:
+                continue
+            change = (latest["close"] / previous["close"] - 1) * 100
+            baseline = history[index + 1 : index + settings.volume_lookback_days + 1]
+            average = sum(p["volume"] for p in baseline) / len(baseline)
+            multiple = latest["volume"] / average if average > 0 else None
+            reasons = []
+            if abs(change) >= settings.price_change_percent:
+                reasons.append(
+                    f"Daily close changed {change:+.2f}% (threshold ±{settings.price_change_percent:g}%)."
+                )
+            enough_history = len(baseline) == settings.volume_lookback_days
+            if enough_history and multiple is not None and multiple >= settings.volume_multiple:
+                reasons.append(f"Volume was {multiple:.2f}× the prior {len(baseline)} trading-day average.")
+            if reasons:
+                items.append(
+                    {
+                        "id": f"price:{mode}:{ticker}:{latest['day']}",
+                        "ticker": ticker,
+                        "type": "market_alert",
+                        "mode": mode,
+                        "source": db.setting(f"prices_source:{mode}:{ticker}", None),
+                        "priority": "high",
+                        "attention_score": {"value": 5, "method": "market_threshold"},
+                        "published_at": timestamp.isoformat(),
+                        "summary": " ".join(reasons),
+                        "price_change_percent": round(change, 4),
+                        "volume_multiple": round(multiple, 4) if multiple is not None else None,
+                        "volume_baseline_days": len(baseline),
+                        "volume_baseline_complete": enough_history,
+                        "network": recommend(db, ticker=ticker)[:3],
+                    }
+                )
     items.sort(key=lambda i: (i["attention_score"]["value"], datetime.fromisoformat(i["published_at"])), reverse=True)
     routine.sort(key=lambda i: datetime.fromisoformat(i["published_at"]), reverse=True)
     return {
