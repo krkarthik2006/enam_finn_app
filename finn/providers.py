@@ -4,7 +4,9 @@ import json
 import re
 import socket
 from datetime import datetime, timedelta, timezone
+from io import BytesIO
 from urllib.parse import quote, urljoin, urlparse
+from zipfile import BadZipFile, ZipFile
 from zoneinfo import ZoneInfo
 
 import httpx
@@ -21,6 +23,24 @@ class ProviderError(Exception):
 
 
 MAX_PDF_BYTES = 60_000_000
+
+
+def archive_pdf(content):
+    # Read only the PDF in memory; XML and archive paths are never extracted.
+    try:
+        with ZipFile(BytesIO(content)) as bundle:
+            entries = bundle.infolist()
+            if len(entries) > 100 or sum(item.file_size for item in entries) > MAX_PDF_BYTES:
+                raise ValueError("Filing archive exceeds document limits")
+            pdfs = [item for item in entries if not item.is_dir() and item.filename.lower().endswith('.pdf')]
+            if len(pdfs) != 1 or pdfs[0].flag_bits & 1:
+                raise ValueError("Filing archive must contain one unencrypted PDF")
+            pdf = bundle.read(pdfs[0])
+            if not pdf.startswith(b"%PDF-") or len(pdf) > MAX_PDF_BYTES:
+                raise ValueError("Filing archive contains an invalid PDF")
+            return pdf
+    except (BadZipFile, RuntimeError, NotImplementedError) as exc:
+        raise ValueError("Filing archive could not be read") from exc
 
 
 HEADERS = {
@@ -324,6 +344,8 @@ class Providers:
                         content.extend(part)
                         if len(content) > MAX_PDF_BYTES:
                             raise ValueError("Document exceeds 60 MB download limit")
+                    if urlparse(url).path.lower().endswith(".zip") or content.startswith(b"PK\x03\x04"):
+                        return archive_pdf(bytes(content))
                     if not content.startswith(b"%PDF-"):
                         raise ValueError(
                             "URL must return a PDF; paste extracted primary-source text for HTML sources"

@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
 
-test("TVS Motor PDF opens from its card and ZIP is an official download",async({page,context})=>{
+test("TVS Motor filings open as PDFs including the archive attachment",async({page,context})=>{
  await page.goto("/");
  await expect(page.locator(".content")).toHaveAttribute("aria-busy","false",{timeout:30000});
  await page.getByRole("button",{name:"30 days",exact:true}).click();
@@ -16,8 +16,17 @@ test("TVS Motor PDF opens from its card and ZIP is an official download",async({
  expect(response.status()).toBe(200);expect(response.headers()["content-type"]).toContain("application/pdf");
  const popup=await popupPromise;await popup.close();
  const zip=group.locator('a[href*="89e97a3082ef17f415a7e504/document"]');
- await expect(zip).toHaveText("Download filing");
- const redirect=await page.request.get((await zip.getAttribute("href"))!,{maxRedirects:0});
- expect(redirect.status()).toBe(307);
- expect(redirect.headers().location).toBe("https://nsearchives.nseindia.com/corporate/TVSMOTOR_ROID_104748_KMP_Doc.zip");
+ await expect(zip).toHaveText("Open filing");
+ const archiveResponsePromise=context.waitForEvent("response",{predicate:r=>r.url().includes("89e97a3082ef17f415a7e504/document")});
+ const archivePopupPromise=page.waitForEvent("popup");
+ await zip.click();
+ const archiveResponse=await archiveResponsePromise;
+ expect(archiveResponse.status()).toBe(200);
+ expect(archiveResponse.headers()["content-type"]).toContain("application/pdf");
+ await (await archivePopupPromise).close();
+ const archivePdf=await page.request.get((await zip.getAttribute("href"))!);
+ expect(archivePdf.status()).toBe(200);
+ expect(archivePdf.headers()["content-type"]).toContain("application/pdf");
+ expect(archivePdf.headers()["content-disposition"]).toContain("inline");
+ expect((await archivePdf.body()).subarray(0,5).toString()).toBe("%PDF-");
 });

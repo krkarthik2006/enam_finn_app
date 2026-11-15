@@ -253,7 +253,7 @@ def create_app(settings: Settings | None = None):
 
     @app.get("/api/announcements/{event_id}/document", dependencies=protected, tags=["push"])
     def filing_document(event_id: str):
-        from fastapi.responses import HTMLResponse, RedirectResponse, Response
+        from fastapi.responses import HTMLResponse, Response
 
         row = db.one("SELECT payload FROM announcements WHERE id=?", (event_id,))
         if not row:
@@ -265,8 +265,6 @@ def create_app(settings: Settings | None = None):
         if (parsed.scheme != "https" or parsed.hostname not in settings.document_hosts
                 or parsed.username or parsed.password or parsed.port not in (None, 443)):
             raise HTTPException(422, "Use an official filing source")
-        if parsed.path.lower().endswith(".zip"):
-            return RedirectResponse(event["url"], status_code=307)
         try:
             content = providers.download(event["url"], prefer_cache=True)
         except (ValueError, ProviderError, httpx.HTTPError, OSError):
