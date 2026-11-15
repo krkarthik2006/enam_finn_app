@@ -1,4 +1,4 @@
-const CACHE = "finn-static-v12";
+const CACHE = "finn-static-v13";
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);

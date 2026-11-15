@@ -262,3 +262,40 @@ test("portfolio edits persist through the API",async({page})=>{
  await expect(page.getByRole("button",{name:"Remove HCLTECH"})).toHaveCount(0);
  await expect(page.getByRole("button",{name:"Save portfolio",exact:true})).toBeEnabled();
  });
+
+ test("clean research and people flows keep navigation and empty states useful",async({page},info)=>{
+ const snapshot=await (await page.request.get("/snapshot.json")).json();
+ await page.route("**/api/**",async route=>{
+  const path=new URL(route.request().url()).pathname.slice(5);
+  if(path.startsWith("research/")){await route.fulfill({contentType:"application/x-ndjson",body:JSON.stringify({type:"result",data:{...snapshot.briefs.TCS,network:[],guidance:[]}})+"\n"});return;}
+  const values:Record<string,unknown>={portfolio:{companies:snapshot.portfolio},digest:{mode:"live",items:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
+  await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
+ });
+ await page.goto("/");await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
+ await expect(page.getByRole("textbox",{name:"Your question"})).toHaveAttribute("placeholder","Leave blank for a company overview");
+ if(info.project.name==="mobile"){
+  const company=await page.getByRole("textbox",{name:"Company"}).boundingBox();
+  expect(company!.width).toBeGreaterThan(250);
+ } else {expect((await page.getByRole("textbox",{name:"Company"}).boundingBox())!.width).toBeGreaterThan(175); }
+ await page.screenshot({path:`/private/tmp/finn-${info.project.name}-research-cleanup.png`,fullPage:true});
+ await page.getByRole("button",{name:"TCS",exact:true}).click();
+ await expect(page.getByRole("heading",{name:"Promised vs delivered",exact:true})).toBeVisible();
+ await expect(page.getByRole("heading",{name:"Relevant contacts",exact:true})).toHaveCount(0);
+ await expect(page.getByText("Comparable numerical guidance and delivered outcomes weren’t found in the available sources.",{exact:true})).toHaveCount(0);
+ await page.locator(".citation-chips button").first().click();
+ await expect(page.getByRole("dialog",{name:"Source excerpt",exact:true})).toBeVisible();
+ await page.getByRole("button",{name:"Close dialog"}).click();
+ await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+ await page.getByRole("button",{name:"People",exact:true}).filter({visible:true}).click();
+ await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(0);
+ await page.getByRole("textbox",{name:"Search people"}).fill("  Neha Rao  ");
+ await expect(page.locator(".person-card")).toHaveCount(1);
+ await page.getByRole("textbox",{name:"Search people"}).fill("no-such-person");
+ await page.getByRole("button",{name:"Show all people",exact:true}).click();
+ await expect(page.getByRole("textbox",{name:"Search people"})).toHaveValue("");
+ await expect(page.locator(".person-card")).toHaveCount(snapshot.contacts.length);
+ await page.getByRole("button",{name:"Sources & privacy",exact:true}).click();
+ await expect(page.locator(".about-copy")).toContainText("Indian and US companies");
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ });
