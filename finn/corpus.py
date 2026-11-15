@@ -1,16 +1,27 @@
 """Discover a bounded primary-source corpus, preserving unknown publication dates."""
 
 import re
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 from engine.financials import save_financial
 from finn.documents import extract_pdf, save_document
 from finn.models import Document
 from finn.providers import ProviderError, Providers
+from ingest.company import prepare_us_corpus
 
 
-def prepare_corpus(db, providers, ticker):
+def prepare_corpus(db, providers, ticker, company=None):
     indexed = db.all("SELECT id,kind,url,title FROM documents WHERE ticker=? AND mode='live'", (ticker,))
+    saved = db.setting('corpus:' + ticker, {})
+    checked = saved.get('checked_at')
+    if indexed and checked and 0 <= (datetime.now(timezone.utc) - datetime.fromisoformat(checked)).total_seconds() < 21600:
+        return {**saved, 'documents': indexed}
+    if company and company['market'] == 'US':
+        report = prepare_us_corpus(db, providers, company)
+        if report['documents']:
+            db.set_setting('corpus:' + ticker, {**report, 'checked_at': datetime.now(timezone.utc).isoformat()})
+        return report
     report = {"documents": [], "gaps": [], "financial_periods": 0}
     try:
         data = providers.fundamentals(ticker)
@@ -59,4 +70,6 @@ def prepare_corpus(db, providers, ticker):
     report["documents"] = db.all("SELECT id,kind,url,title FROM documents WHERE ticker=? AND mode='live'", (ticker,))
     if any(not r["published_on"] for r in db.all("SELECT published_on FROM documents WHERE ticker=? AND mode='live'", (ticker,))):
         report["gaps"].append("Some source publication dates are not supplied; no precise publication date has been invented.")
+    if report['documents']:
+        db.set_setting('corpus:' + ticker, {**report, 'checked_at': datetime.now(timezone.utc).isoformat()})
     return report

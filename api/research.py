@@ -1,13 +1,16 @@
 import json
+import re
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import Field
 
+from api.schemas import ResearchIdentity
 from finn.brief import build_brief
 from finn.corpus import prepare_corpus
 from finn.models import Input, Mode, normalize_ticker
 from finn.providers import ProviderError
+from ingest.company import resolve_company
 
 
 class BriefRequest(Input):
@@ -23,10 +26,14 @@ def router(db, providers):
     @routes.post("/api/research/{symbol}/brief", tags=["research"])
     @routes.post("/research/{symbol}", tags=["research"])
     def brief(symbol: str, body: BriefRequest):
-        try:
-            symbol = normalize_ticker(symbol)
-        except ValueError as exc:
-            raise HTTPException(422, str(exc)) from exc
+        query = symbol.strip()
+        if not 1 <= len(query) <= 120 or not re.fullmatch(r"[\w &.,:()'-]+", query):
+            raise HTTPException(422, 'Enter a company name or ticker.')
+        if body.mode == 'demo':
+            try:
+                query = normalize_ticker(query)
+            except ValueError as exc:
+                raise HTTPException(422, str(exc)) from exc
 
         def stream():
             def event(kind, data):
@@ -34,12 +41,20 @@ def router(db, providers):
             yield event("progress", "Checking indexed primary sources")
             corpus = {"gaps": []}
             try:
+                company = None
+                symbol = query
+                if body.mode == 'live':
+                    company = resolve_company(db, providers, query, fetch=body.prepare_sources)
+                    symbol = company['id']
                 if body.mode == "live" and body.prepare_sources:
                     yield event("progress", "Discovering annual report, transcripts and financial tables")
-                    corpus = prepare_corpus(db, providers, symbol)
+                    corpus = prepare_corpus(db, providers, symbol, company)
                 yield event("progress", "Retrieving source excerpts and checking guidance against delivered results")
                 result = build_brief(db, providers.settings, symbol, body.question, body.mode, body.use_model)
                 result["gaps"] = list(dict.fromkeys(result["gaps"] + corpus["gaps"]))
+                if company:
+                    result.update(ResearchIdentity(ticker=company['ticker'], company_id=company['id'],
+                                                  company_name=company['name'], market=company['market']).model_dump())
                 yield event("result", result)
             except (ProviderError, ValueError) as exc:
                 yield event("error", str(exc))

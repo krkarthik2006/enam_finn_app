@@ -13,7 +13,7 @@ SQLite is the user's chosen database for this single-investor demo; Postgres is 
 The app has three tabs:
 
 1. **Today:** read company filings and market updates, open the original evidence, and find relevant contacts. Choose 24 hours, 7 days or 30 days. Manage the portfolio and refresh its sources here.
-2. **Research:** enter any NSE ticker and a question, including the period you want to compare. FINN discovers annual reports, transcripts and financial tables automatically; the suggestions are shortcuts, not a fixed stock list. Open numbered citations to read the evidence. Missing sources remain gaps.
+2. **Research:** enter an Indian or US company name/ticker and a question, including the period you want to compare. FINN resolves the company and discovers its primary sources automatically; the suggestions are shortcuts, not a fixed stock list. Open numbered citations to read the evidence. Missing sources remain gaps.
 3. **People:** search names, companies or expertise and inspect recorded introduction paths.
 
 Connected requests use original company sources without a data-mode switch. Synthetic contact
@@ -45,15 +45,25 @@ Open **http://127.0.0.1:3000**. The review uses `data/primary_review.sqlite`, se
 The current key stays in the root `.env` and is used only by Python. The web proxy forwards a server-side
 API token if configured; neither credential is included in the browser bundle.
 
-Use **Today**, **Research** and **People** as described above. New research always requests
-primary sources for the entered NSE symbol, whether or not it is in the portfolio.
+Use **Today**, **Research** and **People** as described above. New research accepts company names and exchange tickers, whether or not they are in the portfolio.
+NSE companies use Screener report/transcript discovery; US companies use the official SEC company
+catalog and latest 10-K/20-F/40-F annual filing. Missing US call transcripts remain gaps. HTML filings
+retain their original URL and filing date; their page number stays unknown rather than being invented.
+US company documents use a separate internal identity so they cannot mix with an NSE namesake or INR tables.
+
+A first request resolves the company, downloads and indexes the report in SQLite, and generates a
+cited overview through the existing model cache. Name/ticker aliases and source checks are cached.
+Repeat requests reuse the documents immediately; an identical question with unchanged evidence reuses
+the model result without another model call. A new question reuses the documents but may require new
+analysis. Sources are rechecked after six hours; changed source content naturally changes the analysis
+cache key. The company catalog is cached for 24 hours. Explicit `US:`/`NSE:` prefixes can disambiguate names.
 
 Saved briefs in `web/public/snapshot.json` use original company reports, call transcripts and Screener tables.
 They remain available without the API and after a previously loaded production app goes offline.
 New research requires a connection; cached sources retain their original URLs and page numbers.
 Only professional contacts and relationships are synthetic. Fictional financials are confined to tests;
 the public proxy rejects test mode, and hosted startup removes older synthetic financial seeds.
-Source discovery attempts the latest annual report, four transcripts and Screener tables;
+NSE source discovery attempts the latest annual report, four transcripts and Screener tables;
 failed downloads and unknown publication dates stay visible as gaps.
 The current guidance comparator requires explicit, compatible quarterly period/basis/unit evidence;
 annual/qualitative guidance or missing outcomes are not converted into a numerical delivery score.

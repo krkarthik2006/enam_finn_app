@@ -3,8 +3,8 @@
   "short_name": "FINN",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f8f4",
-  "theme_color": "#1c483a",
+  "background_color": "#101612",
+  "theme_color": "#101612",
   "icons": [
     {
       "src": "/icon.svg",

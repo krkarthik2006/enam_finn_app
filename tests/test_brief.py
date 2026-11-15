@@ -79,3 +79,49 @@ def test_corpus_limits_and_company_host_scope(tmp_path, monkeypatch):
         {"kind": "transcript", "title": "Host spoof", "url": "https://company.example.evil.example/x.pdf"}]})
     refused = prepare_corpus(db, provider, "OTHER")
     assert not refused["documents"] and any("requires configuration" in g for g in refused["gaps"])
+
+
+def test_broad_questions_retrieve_financials_and_risks_beyond_cover_pages(tmp_path):
+    from finn.documents import retrieve
+    db = Database(tmp_path / 'long-report.sqlite')
+    db.initialize()
+    save_document(db, Document(ticker='NEW', kind='annual_report', title='Annual report'), [
+        *[(page, 'Cover sheet. Company address and registration information. ' * 70) for page in range(1, 10)],
+        (10, 'Our business supplies computing products and services to customers. ' * 40),
+        (11, 'Annual revenue was USD 100 million and net income was USD 20 million. ' * 40),
+        (12, 'Our main reported risk is customer concentration and competition. ' * 40)])
+    excerpts = retrieve(db, 'NEW', 'what is happening', 'live')
+    assert {10, 11, 12} <= {s['page'] for s in excerpts}
+    assert len({s['citation_id'] for s in excerpts}) == len(excerpts)
+
+
+def test_empty_punctuation_is_not_a_research_finding(tmp_path, monkeypatch):
+    settings = Settings(database_path=tmp_path / 'brief.sqlite', glm_api_key='unit-test', _env_file=None)
+    db = Database(settings.database_path)
+    db.initialize()
+    save_document(db, Document(ticker='TEST', kind='annual_report', title='Test report',
+                               text='TEST FIXTURE ONLY: The company provides subscription software. No financial forecast is supplied.'))
+    def complete(self, payload, version, validate):
+        source = json.loads(payload['messages'][1]['content'])['sources'][0]['citation_id']
+        raw = {'choices': [{'message': {'content': json.dumps({'findings': [
+            {'section': 'business', 'text': ':', 'citation_ids': [source]},
+            {'section': 'business', 'text': 'The company provides subscription software.', 'citation_ids': [source]},
+            {'section': 'business', 'text': 'The company provides subscription software.', 'citation_ids': [source]}], 'gaps': []})}}]}
+        validate(raw)
+        return raw
+    monkeypatch.setattr('finn.brief.LLM.complete', complete)
+    brief = build_brief(db, settings, 'TEST', 'Describe the business')
+    assert [f['text'] for s in brief['sections'] for f in s['findings']] == ['The company provides subscription software.']
+
+
+def test_newly_indexed_annual_report_wins_when_publication_dates_are_unknown(tmp_path):
+    db = Database(tmp_path / 'source-refresh.sqlite')
+    db.initialize()
+    settings = Settings(database_path=db.path, glm_api_key='', _env_file=None)
+    save_document(db, Document(ticker='NEW', kind='annual_report', title='Older report',
+                               url='https://issuer.example/older.pdf', text='TEST FIXTURE: Older business report with superseded evidence and financial information.'))
+    latest = save_document(db, Document(ticker='NEW', kind='annual_report', title='New report',
+                                       url='https://issuer.example/new.pdf', text='TEST FIXTURE: Newly indexed business report with current revenue and operating risk evidence.'))
+    brief = build_brief(db, settings, 'NEW', 'Describe the business', use_model=False)
+    assert {s['document_id'] for s in brief['sources']} == {latest['id']}
+    assert all(s['published_on'] is None for s in brief['sources'])

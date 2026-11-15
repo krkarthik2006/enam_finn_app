@@ -8,7 +8,7 @@ If a task conflicts with this file, stop and say so instead of guessing.
 
 FINN is a **mobile-first** investor copilot with three layers:
 - **Push**: tells the investor what changed and why it matters (windowed digest + threshold alerts).
-- **Pull**: on-demand research on any NSE ticker, grounded **only** in annual reports and concall transcripts.
+- **Pull**: on-demand research on NSE and US-listed companies by name or ticker, grounded **only** in annual reports and concall transcripts (US coverage currently uses SEC annual filings).
 - **Network**: the investor's own contacts as an intelligence layer, surfaced *inside* Push and Pull ("who can help me understand this"), and also queryable directly.
 
 Grading criteria: product judgment, creativity, architecture, efficiency. **Not** completeness.
@@ -109,6 +109,7 @@ or another destination. Keep credentials private and report real-model results s
 
 - **Backend:** Python 3.11, FastAPI, SQLite locally and on a persistent Railway volume for this single-investor demo (user decision, 2026-11-14). Postgres is deferred unless the scope changes. `uv` or `pip` + `requirements.txt`.
 - **Frontend:** Next.js (App Router) + TypeScript + Tailwind, mobile-first, installable PWA.
+- **Visual direction (user, 2026-11-15):** understated dark charcoal, warm light text, clear contrast, restrained green accents and serif headings. Keep the product elegant; avoid gradients, glowing decoration and generic AI styling.
 - **Scheduled ingestion:** GitHub Actions cron calls the `ingest/` scripts.
 - **Deploy:** web on Vercel; API on Render or Railway.
 
@@ -135,6 +136,7 @@ Rules:
 | yfinance (`TICKER.NS`) | EOD price/volume | 1y history; compute 20d avg volume |
 | BSE announcements API | filings | Map NSE symbol → BSE scrip code; NSE API as fallback (needs cookies, often blocked from cloud IPs) |
 | screener.in company page | quarterly/annual tables, links to concalls + annual reports | Polite: cache HTML, ≤1 req/sec, set a UA |
+| SEC EDGAR | US company identity and original annual filings (10-K / 20-F / 40-F) | Cache the company catalog and filings; rate-limit requests. HTML filings have no invented PDF page number. |
 | Company PDFs | transcripts, annual reports, results filings | Store PDF + extracted text per page |
 | `/data/mock/network.json` | synthetic people, orgs, edges | Investor-owned |
 

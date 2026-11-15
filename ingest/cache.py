@@ -12,6 +12,8 @@ import httpx
 
 _screener_lock = threading.Lock()
 _last_screener_fetch = 0.0
+_sec_lock = threading.Lock()
+_last_sec_fetch = 0.0
 
 
 class SourceCache:
@@ -19,9 +21,20 @@ class SourceCache:
         self.root, self.offline = root, offline
         self.observations = []
 
-    def fetch(self, client, url, *, params=None, headers=None, validate=None):
+    def fetch(self, client, url, *, params=None, headers=None, validate=None, max_age_seconds=0):
         key = hashlib.sha256(json.dumps([url, params], sort_keys=True).encode()).hexdigest()
         path = self.root / (key + ".json")
+        if max_age_seconds and path.exists():
+            try:
+                snapshot = json.loads(path.read_text())
+                age = (datetime.now(timezone.utc) - datetime.fromisoformat(snapshot['fetched_at'])).total_seconds()
+                if 0 <= age < max_age_seconds:
+                    response = self.response(snapshot)
+                    if validate:
+                        validate(response)
+                    return self.record(response, snapshot, 'cache', fresh=True)
+            except (OSError, ValueError, KeyError, TypeError):
+                pass
         failure = "offline mode"
         if not self.offline:
             for attempt in range(2):
@@ -31,6 +44,11 @@ class SourceCache:
                         with _screener_lock:
                             time.sleep(max(0, 1 - (time.monotonic() - _last_screener_fetch)))
                             _last_screener_fetch = time.monotonic()
+                    if url.startswith(('https://www.sec.gov/', 'https://data.sec.gov/')):
+                        global _last_sec_fetch
+                        with _sec_lock:
+                            time.sleep(max(0, 0.2 - (time.monotonic() - _last_sec_fetch)))
+                            _last_sec_fetch = time.monotonic()
                     response = client.get(url, params=params, headers=headers)
                     response.raise_for_status()
                     if len(response.content) > 20_000_000:
@@ -61,19 +79,21 @@ class SourceCache:
                 path = packaged
         if path.exists():
             snapshot = json.loads(path.read_text())
-            response = httpx.Response(
-                200, content=base64.b64decode(snapshot["body"]),
-                headers={"content-type": snapshot["content_type"]},
-                request=httpx.Request("GET", snapshot["url"]),
-            )
+            response = self.response(snapshot)
             if validate:
                 validate(response)
             return self.record(response, snapshot, "cache", failure)
         raise httpx.ConnectError(f"Public source unavailable ({failure}); no cached snapshot", request=httpx.Request("GET", url))
 
-    def record(self, response, snapshot, origin, failure=None):
+    @staticmethod
+    def response(snapshot):
+        return httpx.Response(200, content=base64.b64decode(snapshot['body']),
+                              headers={'content-type': snapshot['content_type']},
+                              request=httpx.Request('GET', snapshot['url']))
+
+    def record(self, response, snapshot, origin, failure=None, fresh=False):
         source = {"url": snapshot["url"], "fetched_at": snapshot["fetched_at"], "origin": origin,
-                  "stale": origin == "cache", "failure": failure}
+                  "stale": origin == "cache" and not fresh, "failure": failure}
         response.extensions["finn_source"] = source
         self.observations.append(source)
         return response

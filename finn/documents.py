@@ -101,7 +101,15 @@ def retrieve(db: Database, ticker: str, question: str, mode: str, document_ids: 
         )
     else:
         rows = []
-    # Include context when a question uses vocabulary that does not literally occur in the source.
+    # Broad questions such as "what is happening" still need business, financial
+    # and risk evidence, rather than only a long annual report's cover pages.
+    if not rows:
+        for topic in ('"business" OR "products" OR "customers"', '"revenue" OR "net income" OR "cash flows"', '"risk" OR "competition" OR "outlook"'):
+            rows.extend(db.all(base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? " + restriction +
+                "AND d.kind IN ('annual_report','transcript') AND chunk_search MATCH ? ORDER BY bm25(chunk_search) LIMIT 4",
+                (*args, topic)))
+        rows = list({row['id']: row for row in rows}.values())
+    # Keep an excerpt even when none of the usual overview terms appears.
     if not rows:
         rows = db.all(
             base + " WHERE d.ticker=? AND d.mode=? " + restriction + " AND d.kind IN ('annual_report','transcript') "

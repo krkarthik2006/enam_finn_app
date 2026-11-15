@@ -21,6 +21,8 @@ The hosted demo retains SQLite on a persistent Railway volume by explicit user c
 
 ## Product point of view
 
+Visual direction (user, 2026-11-15): understated dark charcoal, strong readable contrast, warm light text, restrained green accents and serif headings. Keep it elegant; avoid gradients, glowing decoration and generic AI styling.
+
 One ranked attention surface, not a dashboard. Three tabs:
 - **Today (Push):** a digest of cards sorted by attention score; the window picker defaults to 24h; routine filings collapse into a single "N routine filings" row.
 - **Ask (Pull):** command bar → research brief with citations on every claim.
@@ -79,6 +81,7 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - **Done when:** the digest for the demo window returns ranked cards with all 3 hero enrichments.
 
 ## Phase 5 — Pull engine (Sat evening/night, ~5–6h)
+- [x] User extension, 2026-11-15: company-name lookup for NSE and US companies, SEC annual-filings ingestion, market-isolated document IDs, and cache-first repeat research with periodic source refresh. US call transcripts remain an explicit coverage gap.
 - [x] Run live-model acceptance tests against known synthetic facts: financial accuracy, missing evidence, source isolation, citations, network selection, cache invalidation and document prompt injection; keep response artifacts for review (7 passed).
 - [ ] Extend acceptance coverage to real company documents, longer corpora, multiple periods/units and unsupported prose in findings/gaps; review factual support beyond the bounded numeric checks.
 - [x] Generic NSE ticker discovery: fetch Screener tables and attempt the latest annual report + four transcripts; preserve original PDF pages/cache and report missing sources. Live INFY: 1 annual + 4 transcripts; unseen HCLTECH: 1 annual + 3 transcripts, one HTML response rejected. Unknown publication dates remain unknown.

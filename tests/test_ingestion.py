@@ -158,3 +158,22 @@ def test_bse_contract_and_nse_fallback_provenance(tmp_path, monkeypatch):
     monkeypatch.setattr(providers, "_nse_announcements", lambda *args: items)
     assert providers.announcements("TEST", 7, "123456") == items
     assert providers.cache.observations[-1]["origin"] == "failed"
+
+
+def test_fresh_source_cache_avoids_http_and_expired_cache_refreshes(tmp_path):
+    from datetime import datetime, timedelta, timezone
+    cache = SourceCache(tmp_path)
+    calls = []
+    def handle(request):
+        calls.append(request)
+        return httpx.Response(200, json={'count': len(calls)})
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        cache.fetch(client, 'https://public.example/catalog', max_age_seconds=3600)
+        saved = cache.fetch(client, 'https://public.example/catalog', max_age_seconds=3600)
+        assert len(calls) == 1 and not saved.extensions['finn_source']['stale']
+        path = next(tmp_path.glob('*.json'))
+        snapshot = json.loads(path.read_text())
+        snapshot['fetched_at'] = (datetime.now(timezone.utc) - timedelta(days=2)).isoformat()
+        path.write_text(json.dumps(snapshot))
+        refreshed = cache.fetch(client, 'https://public.example/catalog', max_age_seconds=3600)
+        assert len(calls) == 2 and refreshed.json()['count'] == 2

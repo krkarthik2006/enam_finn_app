@@ -109,7 +109,7 @@ def guidance_claims(db, settings, evidence, use_model):
 
 
 def build_brief(db, settings, ticker, question, mode="live", use_model=True):
-    indexed = db.all("SELECT id,kind FROM documents WHERE ticker=? AND mode=? ORDER BY published_on DESC", (ticker, mode))
+    indexed = db.all("SELECT id,kind FROM documents WHERE ticker=? AND mode=? ORDER BY published_on DESC,rowid DESC", (ticker, mode))
     selected = [r["id"] for kind, limit in (("transcript", 4), ("annual_report", 1))
                 for r in [d for d in indexed if d["kind"] == kind][:limit]]
     evidence = retrieve(db, ticker, question, mode, selected)
@@ -150,9 +150,14 @@ def build_brief(db, settings, ticker, question, mode="live", use_model=True):
     before = db.one("SELECT COUNT(*) AS n FROM llm_calls WHERE status='completed'")["n"]
     raw = LLM(db, settings).complete(payload, "brief-v2", validate)
     analysis = BriefAnalysis.model_validate_json(raw["choices"][0]["message"]["content"])
+    unique = {}
+    for finding in analysis.findings:
+        if any(char.isalnum() for char in finding.text):
+            unique.setdefault((finding.section, finding.text), finding)
+    analysis.findings = list(unique.values())
     for section in sections:
         section["findings"] = [f.model_dump() for f in analysis.findings if f.section == section["id"]]
-    return {**result, "status": "analysed", "gaps": extraction_gaps + analysis.gaps,
+    return {**result, "status": "analysed" if analysis.findings else "evidence_only", "gaps": extraction_gaps + analysis.gaps,
             "model": settings.glm_model, "usage": raw.get("usage", {}),
             "cached": before == db.one("SELECT COUNT(*) AS n FROM llm_calls WHERE status='completed'")["n"],
             "validation": "References and computed comparisons checked; interpretation remains reviewable against source excerpts."}
