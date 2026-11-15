@@ -26,9 +26,16 @@ const dateText = (date?: string | null) => date ? new Date(date).toLocaleDateStr
 type Tab = "today" | "ask" | "people";
 type Detail = {kind: "event"; item: FeedItem} | {kind: "person"; person: Person} | {kind: "source"; source: Citation} | {kind: "settings"} | {kind: "about"} | {kind: "portfolio"};
 
-function savedWindow(saved: Snapshot, days: number): Snapshot {
-  const since = Date.now() - days * 86400000;
-  const inWindow = (item: FeedItem) => item.mode === "live" && new Date(item.published_at).getTime() >= since && new Date(item.published_at).getTime() <= Date.now();
+type CustomRange = {from: string; to: string};
+const indiaDate = (time: number) => new Date(time + 19800000).toISOString().slice(0,10);
+function windowBounds(days: number, range: CustomRange | null = null) {
+  const until = range ? Math.min(Date.now(), new Date(`${range.to}T00:00:00+05:30`).getTime() + 86400000 - 1) : Date.now();
+  const since = range ? new Date(`${range.from}T00:00:00+05:30`).getTime() : until - days * 86400000;
+  return {since, until};
+}
+function savedWindow(saved: Snapshot, days: number, range: CustomRange | null = null): Snapshot {
+  const {since, until} = windowBounds(days, range);
+  const inWindow = (item: FeedItem) => item.mode === "live" && new Date(item.published_at).getTime() >= since && new Date(item.published_at).getTime() <= until;
   const routine = saved.digest.routine.filter(inWindow);
   return {...saved, digest: {...saved.digest, items: saved.digest.items.filter(inWindow), routine, routine_count: routine.length}};
 }
@@ -81,6 +88,12 @@ export default function FinnApp() {
   const [connected, setConnected] = useState(false);
   const [windowDays, setWindowDays] = useState(1);
   const windowDaysRef = useRef(1);
+  const [customRange, setCustomRange] = useState<CustomRange | null>(null);
+  const customRangeRef = useRef<CustomRange | null>(null);
+  const [customOpen, setCustomOpen] = useState(false);
+  const [rangeFrom, setRangeFrom] = useState(()=>indiaDate(Date.now()-29*86400000));
+  const [rangeTo, setRangeTo] = useState(()=>indiaDate(Date.now()));
+  const [rangeError, setRangeError] = useState("");
   useEffect(() => {windowDaysRef.current = windowDays;}, [windowDays]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -99,14 +112,14 @@ export default function FinnApp() {
   const requestRef = useRef<AbortController | null>(null);
   const backendLoadRef = useRef(0);
 
-  async function loadBackend(days: number, saved: Snapshot) {
+  async function loadBackend(days: number, saved: Snapshot, range: CustomRange | null = customRangeRef.current) {
     const load = ++backendLoadRef.current;
     setLoading(true);
     try {
-      const end = Date.now();
-      const since = new Date(end - days * 86400000).toISOString();
+      const bounds = windowBounds(days, range);
+      const query = new URLSearchParams({mode:"live",since:new Date(bounds.since).toISOString(),until:new Date(bounds.until).toISOString(),include_routine:"true"});
       const [portfolio, digest, contacts, investor, settings, nudges] = await Promise.all([
-        api<{companies: Company[]}>("portfolio"), api<Digest>(`digest?mode=live&since=${since}&include_routine=true`),
+        api<{companies: Company[]}>("portfolio"), api<Digest>(`digest?${query}`),
         api<{contacts: Person[]}>("network"), api<Person>("network/investor"), api<Settings>("alerts/settings"),
         api<{nudges: Snapshot["nudges"]}>("network/reconnect?mode=live")
       ]);
@@ -116,7 +129,7 @@ export default function FinnApp() {
     } catch {
       if (load !== backendLoadRef.current) return;
       setConnected(false);
-      setWorkspace(savedWindow(saved, days));
+      setWorkspace(savedWindow(saved, days, range));
     } finally { if (load === backendLoadRef.current) setLoading(false); }
   }
 
@@ -177,6 +190,24 @@ export default function FinnApp() {
     if (connected) try {const result=await api<{paths:Path[];overlaps:typeof profileOverlaps}>(`network/paths?person_id=${encodeURIComponent(person.id)}`);setPath(result.paths);setProfileOverlaps(result.overlaps||[]);} catch {setPath([]);}
   }
 
+  function chooseWindow(days: number) {
+    setWindowDays(days);windowDaysRef.current=days;
+    setCustomRange(null);customRangeRef.current=null;setCustomOpen(false);setRangeError("");
+    if(snapshot)void loadBackend(days,snapshot,null);
+  }
+
+  function applyCustomRange(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const range={from:rangeFrom,to:rangeTo};
+    const {since,until}=windowBounds(1,range);
+    if(!Number.isFinite(since)||!Number.isFinite(until)||since>=until||rangeTo>indiaDate(Date.now())){setRangeError("Choose a valid start and end date, ending today or earlier.");return;}
+    if(until-since>366*86400000){setRangeError("Choose a range of up to 366 days.");return;}
+    const days=Math.max(1,Math.ceil((Date.now()-since)/86400000));
+    setWindowDays(days);windowDaysRef.current=days;setCustomRange(range);customRangeRef.current=range;
+    setCustomOpen(false);setRangeError("");
+    if(snapshot)void loadBackend(days,snapshot,range);
+  }
+
   async function refresh(companies = workspace?.portfolio || [], days = windowDays) {
     if (!snapshot) return;
     if (!connected) {await loadBackend(days, snapshot);return;}
@@ -186,7 +217,7 @@ export default function FinnApp() {
       try {
         for(let attempt=0;attempt<2;attempt++){
           let run:SystemStatus["refresh_runs"][number];let own=true;
-          try {run=await api("refresh",{method:"POST",body:JSON.stringify({tickers:companies.map(c=>c.ticker),days:Math.max(7,days),fundamentals:true,enrich:true,news:true})});}
+          try {run=await api("refresh",{method:"POST",body:JSON.stringify({tickers:companies.map(c=>c.ticker),days:Math.min(90,Math.max(7,days)),fundamentals:true,enrich:true,news:true})});}
           catch(error){
             if(!(error instanceof ApiError)||error.status!==409)throw error;
             const active=(await api<{runs:SystemStatus["refresh_runs"]}>("refresh")).runs.find(run=>["queued","running"].includes(run.status));
@@ -244,8 +275,10 @@ export default function FinnApp() {
     <div className="main-shell"><header className="topbar"><div className="mobile-brand brand-word">finn<span>✳</span></div><span className="breadcrumb">Workspace <ChevronRight size={13}/><strong>{nav.find(n => n.id === tab)?.label}</strong></span><div className="top-actions">{!connected && <span className="offline-status"><WifiOff size={13}/>Offline · saved data</span>}<button className="icon-button" aria-label="Alert preferences" onClick={() => setDetail({kind: "settings"})}><Settings2 size={18}/></button><span className="top-avatar">Y</span></div></header>
       <main className="content" aria-busy={loading}>
         {tab === "today" && <><section className="page-heading"><div><div className="eyebrow">{new Date().toLocaleDateString("en-IN", {weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata"})}</div><h1>Portfolio Status</h1></div><div className="heading-actions"><button className="secondary-button" onClick={() => setDetail({kind: "portfolio"})}><Layers3 size={15}/>Manage portfolio</button><button className="primary-button" onClick={() => void refresh()} disabled={loading || refreshing} title="Check the latest news, company filings and daily prices"><RefreshCw size={15} className={loading || refreshing ? "spin" : ""}/>{loading || refreshing ? "Checking updates…" : "Check updates"}</button></div></section>
-          <div className="feed-layout"><section className="feed"><div className="section-bar"><h2>Updates <span title="Individual updates across all sections in the selected period">{allFilings.length}</span></h2><label className="window-select"><Clock3 size={14}/><select aria-label="Digest window" value={windowDays} onChange={e => {const days = Number(e.target.value); setWindowDays(days); void loadBackend(days, snapshot);}}><option value={1}>Last 24 hours</option><option value={7}>Last 7 days</option><option value={30}>Last 30 days</option></select><ChevronDown size={13}/></label></div>
-            {!allFilings.length && <div className="empty-state"><Layers3 size={30}/><h3>No updates in this window.</h3><p>Try a longer timeframe or check for recent news and filings.</p>{windowDays === 1 && <button className="secondary-button" onClick={() => {setWindowDays(7); void loadBackend(7, snapshot);}}>Show last 7 days <ArrowRight size={14}/></button>}</div>}
+          <div className="timeframe-toolbar"><div className="timeframe-buttons" role="group" aria-label="Digest timeframe"><Clock3 size={15}/>{[[1,"24 hours"],[7,"7 days"],[30,"30 days"]].map(([days,title])=><button key={days} type="button" aria-pressed={!customRange&&windowDays===days} onClick={()=>chooseWindow(Number(days))}>{title}</button>)}<button type="button" aria-pressed={!!customRange} aria-expanded={customOpen} aria-controls="custom-timeframe" onClick={()=>{setCustomOpen(!customOpen);setRangeError("");}}>Custom</button></div>{customRange&&<span className="selected-date-range">{dateText(customRange.from)} – {dateText(customRange.to)}</span>}</div>
+          {customOpen&&<form id="custom-timeframe" className="custom-timeframe" onSubmit={applyCustomRange}><label>Start date<input type="date" value={rangeFrom} max={indiaDate(Date.now())} onChange={event=>setRangeFrom(event.target.value)} required/></label><label>End date<input type="date" value={rangeTo} min={rangeFrom} max={indiaDate(Date.now())} onChange={event=>setRangeTo(event.target.value)} required/></label><button className="primary-button" type="submit">Apply</button><button className="secondary-button" type="button" onClick={()=>setCustomOpen(false)}>Cancel</button><p>Dates use India time (IST). Up to 366 days.</p>{rangeError&&<p className="negative" role="alert">{rangeError}</p>}</form>}
+          <div className="feed-layout"><section className="feed"><div className="section-bar"><h2>Updates <span title="Individual updates across all sections in the selected period">{allFilings.length}</span></h2></div>
+            {!allFilings.length && <div className="empty-state"><Layers3 size={30}/><h3>No updates in this window.</h3><p>Try a longer timeframe or check for recent news and filings.</p>{windowDays === 1 && <button className="secondary-button" onClick={() => chooseWindow(7)}>Show last 7 days <ArrowRight size={14}/></button>}</div>}
             {groups.map(group => <details className={`feed-group ${group.items.length?"has-events":"empty-events"}`} key={group.id} onToggle={event=>{if(event.currentTarget.open&&["management","results","material"].includes(group.id))void prepareGroup(group.items);}}><summary><div><h2>{group.title}<span>{group.items.length}</span></h2><p>{group.description}</p></div><ChevronDown size={18}/></summary><div className="feed-group-content">{!group.items.length&&<p className="empty-note">{group.id==="market"?"No alerts from the available daily observations in this window.":`No ${group.title.toLowerCase()} in this window.`}{group.id==="results"&&" Results are quarterly; try the last 30 days."}</p>}{group.items.map((item, index) => <article className={`feed-card ${index === 0 ? "featured" : ""}`} key={item.id}><div className="card-top"><span className={`category-tag ${item.category === "management_change" ? "purple" : item.category === "capex" ? "ochre" : ""}`}>{item.type === "news" ? "News" : item.type === "market_alert" ? "Market movement" : label(item.category || "Update")}</span><span className="time-label">{dateText(item.published_at)}</span></div><div className="company-row"><span className="company-mark">{symbolText(item.ticker).slice(0, 2)}</span><div><strong>{clean(companyName(item.ticker))}</strong><span>{symbolText(item.ticker)} <i/> {item.type === "news" ? item.source?.publisher || "News article" : item.type === "market_alert" ? "End-of-day observation" : item.source?.publisher || "Exchange filing"}</span></div><button className="icon-button" aria-label={`View ${symbolText(item.ticker)} ${item.category || "market alert"}`} onClick={() => {setEventError(""); setDetail({kind: "event", item});}}><ArrowUpRight size={19}/></button></div>
               <h3 className="card-title">{clean(item.title || item.summary)}</h3>
               {item.enrichment?.results ? <div className="metric-row">{["revenue", "ebitda", "pbt", "pat"].map(metric => <div key={metric}><span>{metric === "revenue" ? "Revenue" : metric.toUpperCase()}</span><strong>{item.enrichment?.results?.period.metrics[metric]==null?"—":`₹${number(item.enrichment.results.period.metrics[metric])}`}<small> {item.enrichment?.results?.period.unit || "unit unavailable"}</small></strong><span className={(item.enrichment?.results?.comparisons.qoq?.[metric]?.percent || 0) < 0 ? "negative" : "positive"}>{item.enrichment?.results?.comparisons.qoq?.[metric]?.percent == null ? "QoQ unavailable" : `${number(item.enrichment.results.comparisons.qoq[metric].percent, 1)}% QoQ`}</span><span className={(item.enrichment?.results?.comparisons.yoy?.[metric]?.percent || 0) < 0 ? "negative" : "positive"}>{item.enrichment?.results?.comparisons.yoy?.[metric]?.percent == null ? "YoY unavailable" : `${number(item.enrichment.results.comparisons.yoy[metric].percent, 1)}% YoY`}</span></div>)}</div> : clean(item.enrichment?.summary || item.summary) !== clean(item.title || item.summary) && <p className="card-summary">{clean(item.enrichment?.summary || item.summary)}</p>}
@@ -300,7 +333,7 @@ export default function FinnApp() {
         {detail.item.enrichment?.management && <>{detail.item.enrichment.management.incoming&&<section className="incoming-profile"><h4>Incoming person</h4><strong>{detail.item.enrichment.management.incoming.name}</strong><span>{detail.item.enrichment.management.incoming.title}</span><p>{detail.item.enrichment.management.incoming.bio||"No background was supplied in this filing."}</p><a href={detail.item.url} target="_blank" rel="noopener noreferrer">Read the source filing <ExternalLink size={12}/></a></section>}<h4 className="detail-subheading">Recorded introduction</h4>{detail.item.enrichment.management.paths.map((p, i) => <div className="intro-path" key={i}>{p.names.map((name, j) => <span key={j}>{j > 0 && <ArrowRight size={15}/>}<strong>{j === 0 ? "You" : clean(name)}</strong></span>)}</div>)}{!!detail.item.enrichment.management.overlaps.length && <div className="overlap-panel"><h4>Shared professional context</h4>{detail.item.enrichment.management.overlaps.flatMap(o => [...o.work.map(w=>({label:w.company,detail:`${w.start_year}–${w.end_year} · employment overlap`})),...o.education.map(e=>({label:e.institution,detail:e.start_year!=null?`${e.start_year}–${e.end_year} · education overlap`:"Shared institution; dates unavailable"}))].map((w, i) => <div key={`${o.person_id}-${i}`}><span>{clean(o.name)}</span><strong>{w.label}</strong><p>{w.detail}</p><small>Overlap is not proof of acquaintance.</small></div>))}</div>}</>}
         {!!detail.item.enrichment?.management?.professional_context?.length&&<section className="profile-section"><h4>Shared employer or education</h4>{detail.item.enrichment.management.professional_context.map(person=><button className="research-person" key={person.person_id} onClick={()=>showPersonId(person.person_id)}><Avatar person={person}/><div><strong>{clean(person.name)}</strong><span>{person.reasons.join(" ")}</span></div><ChevronRight size={14}/></button>)}</section>}
         {!!detail.item.enrichment?.gaps.length && <div className="gaps-panel"><h4>What’s missing</h4>{detail.item.enrichment.gaps.map((g, i) => <p key={i}>{researchGap(g)}</p>)}</div>}{!!detail.item.network.length&&<h4 className="detail-subheading">People who could add context</h4>}{detail.item.network.map(p => <button className="research-person" key={p.contact_id} onClick={() => showPersonId(p.contact_id)}><Avatar person={p}/><div><strong>{clean(p.name)}</strong><span>{p.reasons.join(" ")}</span></div><ChevronRight size={14}/></button>)}{detail.item.mode === "live" && detail.item.type !== "news" && !detail.item.ticker.startsWith("US-") && ["results","management_change","M&A","capex","litigation"].includes(detail.item.category||"") && <div className="filing-extraction"><button className="secondary-button" disabled={enriching} onClick={async()=>{setEnriching(true);setEventError("");try{const enrichment=await api<NonNullable<FeedItem["enrichment"]>>(`announcements/${detail.item.id}/enrich`,{method:"POST"});setDetail({kind:"event",item:{...detail.item,enrichment}});void loadBackend(windowDays,snapshot);}catch{setEventError("Analysis couldn’t be completed. You can still open the filing above.");}finally{setEnriching(false);}}}><FileText size={15}/>{enriching?"Analysing filing…":"Analyse filing"}</button>{eventError&&<p className="negative" role="alert">{eventError}</p>}</div>}<div className="dialog-actions"><button className="primary-button" onClick={() => {const symbol = detail.item.ticker; setDetail(null); void ask(symbol);}}>Research this company <ArrowRight size={15}/></button></div></>}
-      {detail.kind === "portfolio" && <PortfolioForm companies={workspace.portfolio} connected={connected} onSave={async companies => {await api("portfolio", {method:"PUT",body:JSON.stringify({companies})}); const added=companies.filter(company=>!workspace.portfolio.some(old=>old.ticker===company.ticker)); setWorkspace({...workspace,portfolio:companies}); setDetail(null); if(added.length){setWindowDays(7);void refresh(added,7);}else{await loadBackend(windowDays,snapshot);setNotice("Portfolio saved.");}}}/>}
+      {detail.kind === "portfolio" && <PortfolioForm companies={workspace.portfolio} connected={connected} onSave={async companies => {await api("portfolio", {method:"PUT",body:JSON.stringify({companies})}); const added=companies.filter(company=>!workspace.portfolio.some(old=>old.ticker===company.ticker)); setWorkspace({...workspace,portfolio:companies}); setDetail(null); if(added.length){setCustomRange(null);customRangeRef.current=null;setCustomOpen(false);setWindowDays(7);windowDaysRef.current=7;void refresh(added,7);}else{await loadBackend(windowDays,snapshot);setNotice("Portfolio saved.");}}}/>}
       {detail.kind === "settings" && <SettingsForm settings={workspace.settings} connected={connected} onSave={async value => {if (connected) await api("alerts/settings", {method: "PUT", body: JSON.stringify(value)}); else localStorage.setItem("finn-demo-alerts", JSON.stringify(value)); setWorkspace({...workspace, settings: value}); setNotice(connected ? "Alert preferences saved." : "Preferences saved on this device. Reconnect to sync them."); setDetail(null); if (connected) void loadBackend(windowDays, snapshot);}}/>}
       {detail.kind === "about" && <div className="about-copy"><h3>About FINN</h3><p>Follow portfolio updates, research Indian and US companies, and find a contact who can help.</p><h4>Sources</h4><p>Portfolio news links to publisher articles. Research uses annual reports, earnings call transcripts and Screener financial tables. Tap a citation to read the evidence. Missing information stays visible.</p><h4>People and company data</h4><p>Contact profiles, professional histories and relationships are synthetic. Company financials and research use original public sources, including when viewing saved data offline.</p><h4>Privacy</h4><p>Contact profiles are not shared when researching companies. Introduction paths use recorded relationships. Shared employers or education alone do not establish a connection.</p></div>}
     </Dialog>}
