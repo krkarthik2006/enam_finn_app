@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, HTTPException, Query
 
-from engine.network import expertise_map, paths_to, reconnect_nudges, resolve_person
+from engine.network import expertise_map, paths_to, reconnect_nudges, resolve_person, study_overlap, work_overlap
 from finn.models import Contact, Mode
 
 
@@ -40,7 +40,9 @@ def router(db):
         people = load_people(db)
         if person_id not in {p["id"] for p in people}:
             raise HTTPException(404, "Person not found")
-        return {"paths": paths_to(people, investor(db), person_id),
+        target = next(person for person in people if person["id"] == person_id)
+        overlaps = [{"person_id": person["id"], "name": person["name"], "work": work_overlap(target, person), "education": study_overlap(target, person)} for person in people if person["id"] != person_id]
+        return {"paths": paths_to(people, investor(db), person_id), "overlaps": [item for item in overlaps if item["work"] or item["education"]],
                 "note": "Only recorded connections form paths; employment/education overlap is not acquaintance."}
 
     @routes.post("/api/network/resolve", tags=["network"])

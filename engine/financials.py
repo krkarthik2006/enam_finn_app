@@ -101,7 +101,9 @@ def compare_records(current, history):
             result[label] = {metric: {"percent": None, "status": "not_applicable_to_annual"} for metric in METRICS}
             continue
         prior = next((r for r in comparable if r.period_end == previous_period(current.period_end, months)), None)
-        result[label] = {metric: growth(current.metrics.get(metric), prior.metrics.get(metric) if prior else None)
+        result[label] = {metric: {**growth(current.metrics.get(metric), prior.metrics.get(metric) if prior else None),
+                                  "previous": prior.metrics.get(metric) if prior else None,
+                                  "period": prior.period_end.isoformat() if prior else None}
                          for metric in METRICS}
     return result
 

@@ -177,3 +177,28 @@ def test_fresh_source_cache_avoids_http_and_expired_cache_refreshes(tmp_path):
         path.write_text(json.dumps(snapshot))
         refreshed = cache.fetch(client, 'https://public.example/catalog', max_age_seconds=3600)
         assert len(calls) == 2 and refreshed.json()['count'] == 2
+
+
+def test_simultaneous_source_fetches_publish_complete_snapshots(tmp_path, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
+    cache = SourceCache(tmp_path)
+    barrier = Barrier(2)
+    original = Path.replace
+
+    def aligned_replace(path, target):
+        if path.suffix == '.tmp':
+            barrier.wait(timeout=5)
+        return original(path, target)
+
+    monkeypatch.setattr(Path, 'replace', aligned_replace)
+
+    def fetch(_):
+        with httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200, json={'value': 42}))) as client:
+            return cache.fetch(client, 'https://public.example/shared-source').json()
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert list(pool.map(fetch, range(2))) == [{'value': 42}, {'value': 42}]
+    snapshot = json.loads(next(tmp_path.glob('*.json')).read_text())
+    assert cache.response(snapshot).json() == {'value': 42}
+    assert not list(tmp_path.glob('*.tmp'))

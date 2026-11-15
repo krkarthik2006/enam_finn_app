@@ -38,6 +38,8 @@ def match_company(rows, query, prefix=False):
 
 def resolve_company(db, providers, query, fetch=True):
     market, name = 'auto', query.strip()
+    if name.upper().startswith('US-'):
+        market, name = 'US', name[3:]
     if ':' in name:
         prefix, name = name.split(':', 1)
         market = {'US': 'US', 'NASDAQ': 'US', 'NYSE': 'US', 'NSE': 'NSE'}.get(prefix.upper())
@@ -51,7 +53,7 @@ def resolve_company(db, providers, query, fetch=True):
         known = []
         for row in db.all('SELECT ticker,payload FROM portfolio UNION ALL SELECT ticker,payload FROM companies'):
             item = json.loads(row['payload'])
-            if item.get('market') == 'US' or (row['ticker'] not in indexed and item.get('identity_source') != 'screener'):
+            if item.get('market') == 'US' or item.get('exchange') == 'US' or row['ticker'].startswith('US-') or (row['ticker'] not in indexed and item.get('identity_source') != 'screener'):
                 continue
             known.append({**item, 'ticker': row['ticker'], 'name': item.get('name', row['ticker'])})
         selected = match_company(known, name)
@@ -63,7 +65,8 @@ def resolve_company(db, providers, query, fetch=True):
                 return remember_company(db, {'id': ticker, 'ticker': ticker, 'name': ticker, 'market': 'NSE'}, market, name)
         except ValueError:
             pass
-    if saved and (saved.get('market') != 'NSE' or saved.get('identity_source') == 'screener' or saved.get('id') in indexed):
+    if saved and (saved.get('market') != 'NSE' or (not saved.get('id', '').startswith('US-')
+                  and (saved.get('identity_source') == 'screener' or saved.get('id') in indexed))):
         return saved
     if not fetch:
         ticker = normalize_ticker(name)

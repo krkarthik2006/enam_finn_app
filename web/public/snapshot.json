@@ -69,7 +69,11 @@
       "relationship_strength": 5,
       "direct_contact": true,
       "knows": [
-        "workflow-cfo"
+        "workflow-cfo",
+        "network-contact-01",
+        "network-contact-04",
+        "network-contact-08",
+        "network-contact-15"
       ],
       "provenance": "synthetic",
       "source_url": "",
@@ -162,7 +166,11 @@
       ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-03",
+        "network-contact-10",
+        "network-contact-20"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -184,7 +192,10 @@
       "relationship_strength": 4,
       "direct_contact": true,
       "knows": [
-        "network-promoter"
+        "network-promoter",
+        "network-contact-05",
+        "network-contact-12",
+        "network-contact-28"
       ],
       "provenance": "synthetic",
       "source_url": "",
@@ -240,7 +251,12 @@
       "related_companies": [],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-02",
+        "network-contact-07",
+        "network-contact-16",
+        "network-contact-24"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -251,21 +267,42 @@
       "name": "Aarav Mehta (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "US-NVDA",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-02"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -276,21 +313,42 @@
       "name": "Priya Nair (fictional)",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "POWERGRID",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-03"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -301,21 +359,42 @@
       "name": "Arjun Kapoor (fictional)",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TATASTEEL",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-04"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -326,21 +405,42 @@
       "name": "Meera Joshi (fictional)",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ASIANPAINT",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-05"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -351,21 +451,42 @@
       "name": "Rohan Desai (fictional)",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "NVIDIA",
+          "ticker": "US-NVDA",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ULTRACEMCO",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-06"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -376,21 +497,42 @@
       "name": "Kavya Menon (fictional)",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Power Grid Corporation of India Ltd.",
+          "ticker": "POWERGRID",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "BSE",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-07"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -401,21 +543,42 @@
       "name": "Aditya Kulkarni (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Tata Steel Ltd.",
+          "ticker": "TATASTEEL",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MAXHEALTH",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-08"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -426,21 +589,42 @@
       "name": "Sana Khan (fictional)",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Asian Paints Ltd.",
+          "ticker": "ASIANPAINT",
+          "title": "Risk and governance adviser",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TVSMOTOR",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-09"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -451,21 +635,42 @@
       "name": "Nikhil Bhat (fictional)",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "UltraTech Cement Ltd.",
+          "ticker": "ULTRACEMCO",
+          "title": "Finance manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "CGPOWER",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-10"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -476,21 +681,42 @@
       "name": "Ishita Rao (fictional)",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "BSE Ltd.",
+          "ticker": "BSE",
+          "title": "Operations lead",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "VBL",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-11"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -501,21 +727,42 @@
       "name": "Varun Malhotra (fictional)",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Max Healthcare Institute Ltd.",
+          "ticker": "MAXHEALTH",
+          "title": "Strategy manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TRENT",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-12"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -526,21 +773,42 @@
       "name": "Pooja Shah (fictional)",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "TVS Motor Company Ltd.",
+          "ticker": "TVSMOTOR",
+          "title": "Risk and governance adviser",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "GAIL",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-13"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -551,21 +819,42 @@
       "name": "Rahul Verma (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "CG Power and Industrial Solutions Ltd.",
+          "ticker": "CGPOWER",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "PIDILITIND",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-14"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -576,21 +865,42 @@
       "name": "Anjali Sethi (fictional)",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Varun Beverages Ltd.",
+          "ticker": "VBL",
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "WIPRO",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-15"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -601,21 +911,42 @@
       "name": "Kunal Bose (fictional)",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "Trent Ltd.",
+          "ticker": "TRENT",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "IDEA",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-16"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -626,21 +957,42 @@
       "name": "Sneha Reddy (fictional)",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "GAIL (India) Ltd.",
+          "ticker": "GAIL",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MUTHOOTFIN",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-17"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -651,21 +1003,42 @@
       "name": "Vivek Jain (fictional)",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Pidilite Industries Ltd.",
+          "ticker": "PIDILITIND",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "CUMMINSIND",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-18"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -676,21 +1049,42 @@
       "name": "Tara Anand (fictional)",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "SUNPHARMA",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-19"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -701,21 +1095,42 @@
       "name": "Amit Chawla (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Vodafone Idea Ltd.",
+          "ticker": "IDEA",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ADANIENT",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-20"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -726,21 +1141,42 @@
       "name": "Nandini Pillai (fictional)",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Muthoot Finance Ltd.",
+          "ticker": "MUTHOOTFIN",
+          "title": "Risk and governance adviser",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TCS",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-21"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -751,21 +1187,42 @@
       "name": "Dhruv Khanna (fictional)",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "Cummins India Ltd.",
+          "ticker": "CUMMINSIND",
+          "title": "Finance manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "INFY",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-22"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -776,21 +1233,42 @@
       "name": "Swati Mishra (fictional)",
       "roles": [
         {
-          "company": "INFY",
+          "company": "Sun Pharmaceutical Industries Ltd.",
+          "ticker": "SUNPHARMA",
+          "title": "Operations lead",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
           "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "SRF",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-23"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -801,21 +1279,42 @@
       "name": "Manav Sinha (fictional)",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Adani Enterprises Ltd.",
+          "ticker": "ADANIENT",
+          "title": "Strategy manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "HCLTECH",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-24"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -826,21 +1325,42 @@
       "name": "Aisha Mirza (fictional)",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Risk and governance adviser",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "US-NVDA",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-25"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -851,21 +1371,42 @@
       "name": "Siddharth Roy (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "POWERGRID",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-26"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -878,19 +1419,40 @@
         {
           "company": "SRF",
           "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TATASTEEL",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-27"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -901,21 +1463,42 @@
       "name": "Akash Bansal (fictional)",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ASIANPAINT",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 2,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-28"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -926,21 +1509,42 @@
       "name": "Tanvi Gupta (fictional)",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "NVIDIA",
+          "ticker": "US-NVDA",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ULTRACEMCO",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 3,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-29"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -951,21 +1555,42 @@
       "name": "Abhinav Iyer (fictional)",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Power Grid Corporation of India Ltd.",
+          "ticker": "POWERGRID",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "BSE",
+          "kind": "competitor"
+        }
+      ],
       "relationship_strength": 4,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-30"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -976,21 +1601,42 @@
       "name": "Diya Suri (fictional)",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Tata Steel Ltd.",
+          "ticker": "TATASTEEL",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MAXHEALTH",
+          "kind": "customer"
+        }
+      ],
       "relationship_strength": 5,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-31"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -1001,21 +1647,42 @@
       "name": "Pranav Shetty (fictional)",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Asian Paints Ltd.",
+          "ticker": "ASIANPAINT",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
-      "education": [],
-      "related_companies": [],
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TVSMOTOR",
+          "kind": "supplier"
+        }
+      ],
       "relationship_strength": 1,
       "direct_contact": true,
-      "knows": [],
+      "knows": [
+        "network-contact-01"
+      ],
       "provenance": "synthetic",
       "source_url": "",
       "notes": "",
@@ -7908,34 +8575,258 @@
         "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional); recorded connections only"
       }
     ],
-    "network-contact-01": [],
-    "network-contact-02": [],
-    "network-contact-03": [],
-    "network-contact-04": [],
-    "network-contact-05": [],
+    "network-contact-01": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector",
+          "network-contact-01"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)",
+          "Aarav Mehta (fictional)"
+        ],
+        "hops": 2,
+        "strength": 1,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Aarav Mehta (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-02": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-reconnect",
+          "network-contact-02"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Sameer Gupta (fictional)",
+          "Priya Nair (fictional)"
+        ],
+        "hops": 2,
+        "strength": 2,
+        "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional) \u2192 Priya Nair (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-03": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-supplier",
+          "network-contact-03"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Leela Iyer (fictional)",
+          "Arjun Kapoor (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Leela Iyer (fictional) \u2192 Arjun Kapoor (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-04": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector",
+          "network-contact-04"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)",
+          "Meera Joshi (fictional)"
+        ],
+        "hops": 2,
+        "strength": 4,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Meera Joshi (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-05": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-peer",
+          "network-contact-05"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Devika Sen (fictional)",
+          "Rohan Desai (fictional)"
+        ],
+        "hops": 2,
+        "strength": 4,
+        "explanation": "Demo investor (fictional) \u2192 Devika Sen (fictional) \u2192 Rohan Desai (fictional); recorded connections only"
+      }
+    ],
     "network-contact-06": [],
-    "network-contact-07": [],
-    "network-contact-08": [],
+    "network-contact-07": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-reconnect",
+          "network-contact-07"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Sameer Gupta (fictional)",
+          "Aditya Kulkarni (fictional)"
+        ],
+        "hops": 2,
+        "strength": 2,
+        "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional) \u2192 Aditya Kulkarni (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-08": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector",
+          "network-contact-08"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)",
+          "Sana Khan (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Sana Khan (fictional); recorded connections only"
+      }
+    ],
     "network-contact-09": [],
-    "network-contact-10": [],
+    "network-contact-10": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-supplier",
+          "network-contact-10"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Leela Iyer (fictional)",
+          "Ishita Rao (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Leela Iyer (fictional) \u2192 Ishita Rao (fictional); recorded connections only"
+      }
+    ],
     "network-contact-11": [],
-    "network-contact-12": [],
+    "network-contact-12": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-peer",
+          "network-contact-12"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Devika Sen (fictional)",
+          "Pooja Shah (fictional)"
+        ],
+        "hops": 2,
+        "strength": 2,
+        "explanation": "Demo investor (fictional) \u2192 Devika Sen (fictional) \u2192 Pooja Shah (fictional); recorded connections only"
+      }
+    ],
     "network-contact-13": [],
     "network-contact-14": [],
-    "network-contact-15": [],
-    "network-contact-16": [],
+    "network-contact-15": [
+      {
+        "person_ids": [
+          "investor-local",
+          "workflow-connector",
+          "network-contact-15"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Neha Rao (fictional)",
+          "Kunal Bose (fictional)"
+        ],
+        "hops": 2,
+        "strength": 5,
+        "explanation": "Demo investor (fictional) \u2192 Neha Rao (fictional) \u2192 Kunal Bose (fictional); recorded connections only"
+      }
+    ],
+    "network-contact-16": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-reconnect",
+          "network-contact-16"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Sameer Gupta (fictional)",
+          "Sneha Reddy (fictional)"
+        ],
+        "hops": 2,
+        "strength": 1,
+        "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional) \u2192 Sneha Reddy (fictional); recorded connections only"
+      }
+    ],
     "network-contact-17": [],
     "network-contact-18": [],
     "network-contact-19": [],
-    "network-contact-20": [],
+    "network-contact-20": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-supplier",
+          "network-contact-20"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Leela Iyer (fictional)",
+          "Nandini Pillai (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Leela Iyer (fictional) \u2192 Nandini Pillai (fictional); recorded connections only"
+      }
+    ],
     "network-contact-21": [],
     "network-contact-22": [],
     "network-contact-23": [],
-    "network-contact-24": [],
+    "network-contact-24": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-reconnect",
+          "network-contact-24"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Sameer Gupta (fictional)",
+          "Aisha Mirza (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Sameer Gupta (fictional) \u2192 Aisha Mirza (fictional); recorded connections only"
+      }
+    ],
     "network-contact-25": [],
     "network-contact-26": [],
     "network-contact-27": [],
-    "network-contact-28": [],
+    "network-contact-28": [
+      {
+        "person_ids": [
+          "investor-local",
+          "network-peer",
+          "network-contact-28"
+        ],
+        "names": [
+          "Demo investor (fictional)",
+          "Devika Sen (fictional)",
+          "Tanvi Gupta (fictional)"
+        ],
+        "hops": 2,
+        "strength": 3,
+        "explanation": "Demo investor (fictional) \u2192 Devika Sen (fictional) \u2192 Tanvi Gupta (fictional); recorded connections only"
+      }
+    ],
     "network-contact-29": [],
     "network-contact-30": [],
     "network-contact-31": []

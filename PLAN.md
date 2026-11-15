@@ -68,6 +68,7 @@ The Network is **woven in**: every Push card and Pull brief can show a **"Who to
 - **Done when:** a test exists for each planted story and passes.
 
 ## Phase 4 — Push engine (Sat afternoon, ~4–5h)
+- [~] User extension, 2026-11-15: verified Indian/US portfolio names, US filings/prices, general-news headlines, automatic checks after adding, and clearer Portfolio Status/Check updates UI. News remains outside Research evidence.
 - [x] Existing classifier keeps explicit overrides and keyword decisions; optional source-cited model extraction supplies classification only on a rule miss. Provider categories remain source metadata rather than trusted taxonomy.
 - [x] engine/push.py: type weight × materiality × investor category preference + capped network boost; expose score components and rank digest cards.
 - [x] Configurable close/volume thresholds, complete prior-20-observation baseline, category preferences and routine collapse.
@@ -132,3 +133,5 @@ Build in this order:
 5. Alert settings UI (hard-code sensible defaults)
 
 **Never cut:** the hero workflows, deploy, writeup.
+
+- [~] User priority, 2026-11-15: expandable Management changes / Quarterly results / Material events, separate collapsed News, incoming-person filing background, four headline metrics with prior-quarter/year-ago comparisons, and more portfolio-linked synthetic professional overlaps. Implementation and publication pass; final functional review deferred at the user’s explicit request to pause tests.

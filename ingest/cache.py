@@ -7,6 +7,7 @@ import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from uuid import uuid4
 
 import httpx
 
@@ -61,7 +62,7 @@ class SourceCache:
                         "body": base64.b64encode(response.content).decode(),
                     }
                     self.root.mkdir(parents=True, exist_ok=True)
-                    temporary = path.with_suffix(".tmp")
+                    temporary = path.with_suffix(f".{uuid4().hex}.tmp")
                     temporary.write_text(json.dumps(snapshot))
                     temporary.replace(path)
                     return self.record(response, snapshot, "live")

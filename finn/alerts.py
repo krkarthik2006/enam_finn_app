@@ -1,6 +1,7 @@
 import hashlib
 import json
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 from finn.db import Database
 from finn.enrichment import save_card
@@ -75,7 +76,8 @@ def save_prices(db: Database, item: PriceImport):
 
 def digest(db: Database, since: datetime, until: datetime, mode: str, include_routine: bool):
     settings = AlertSettings(**db.setting("alerts", {}))
-    companies = db.all("SELECT ticker FROM portfolio")
+    companies = db.all("SELECT ticker,payload FROM portfolio")
+    exchanges = {c["ticker"]: json.loads(c["payload"]).get("exchange", "NSE") for c in companies}
     tickers = {c["ticker"] for c in companies}
     rows = db.all(
         "SELECT payload FROM announcements WHERE mode=? "
@@ -87,12 +89,13 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
         item = json.loads(row["payload"])
         if item["ticker"] not in tickers:
             continue
-        material = item["category"] in settings.material_categories
+        is_news = item.get("source", {}).get("kind") == "news" if item.get("source") else False
+        material = is_news or item["category"] in settings.material_categories
         stored = db.one("SELECT payload FROM enrichments WHERE event_id=? AND owner_id=?", (item["id"], db.owner_id))
         card = json.loads(stored["payload"]) if stored else {}
         item.update(
             {
-                "type": "announcement",
+                "type": "news" if is_news else "announcement",
                 "priority": "high" if material else "routine",
                 "summary": card.get("summary", item["title"]),
                 "summary_method": card.get("summary_method", "filing_title"),
@@ -105,21 +108,26 @@ def digest(db: Database, since: datetime, until: datetime, mode: str, include_ro
             }
         )
         (items if material else routine).append(item)
-    # EOD alerts belong to the end of the Indian trading day, not the request time.
+    # EOD alerts belong to their market session, not the request time.
     for ticker in sorted(tickers):
+        market_time = until.astimezone(ZoneInfo("America/New_York" if exchanges[ticker] == "US" else "Asia/Kolkata"))
+        completed_day = market_time.date()
+        if exchanges[ticker] == "US" and market_time.hour < 16:
+            completed_day -= timedelta(days=1)
         history = db.all(
             "SELECT * FROM prices WHERE ticker=? AND mode=? AND day<=? ORDER BY day DESC LIMIT ?",
             (
                 ticker,
                 mode,
-                until.astimezone(timezone(timedelta(hours=5, minutes=30))).date().isoformat(),
+                completed_day.isoformat(),
                 settings.volume_lookback_days + 1,
             ),
         )
         if len(history) < 2:
             continue
         latest, previous = history[0], history[1]
-        timestamp = datetime.fromisoformat(latest["day"] + "T18:00:00+05:30").astimezone(timezone.utc)
+        timestamp = (datetime.fromisoformat(latest["day"] + "T16:00:00").replace(tzinfo=ZoneInfo("America/New_York"))
+                     if exchanges[ticker] == "US" else datetime.fromisoformat(latest["day"] + "T18:00:00+05:30")).astimezone(timezone.utc)
         if not since <= timestamp <= until:
             continue
         change = (latest["close"] / previous["close"] - 1) * 100

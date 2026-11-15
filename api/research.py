@@ -14,7 +14,7 @@ from ingest.company import resolve_company
 
 
 class BriefRequest(Input):
-    question: str = Field(default="Explain the business, financial trajectory, management guidance delivery, positives and risks.", min_length=5, max_length=2000)
+    question: str = Field(default="Explain the business, financial trajectory, management guidance delivery, positives and risks.", min_length=1, max_length=2000)
     mode: Mode = "live"
     use_model: bool = True
     prepare_sources: bool = True

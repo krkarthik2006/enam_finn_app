@@ -357,3 +357,29 @@ notification delivery; email/WhatsApp integrations; stronger retrieval/semantic 
 selection per task; and multi-user production infrastructure. Automatic report/transcript discovery
 and compatible quarterly guidance comparisons are implemented, but source availability and explicit
 numeric evidence constrain their coverage. Financial interpretation is not universally verified.
+
+
+### Portfolio Status and news
+
+Add an Indian or US company by its name or ticker. The lookup verifies its identity before
+adding it; US holdings use an internal `US-` namespace and display their ordinary ticker.
+Saving new additions automatically checks their latest seven days of news/filings and daily
+prices, and selects that seven-day window. **Check updates** repeats the check for the saved
+portfolio. Headlines retain the publisher, publication date and original article link.
+Yahoo company RSS is cached for five minutes with stale-snapshot fallback; SEC filing lists
+are cached for fifteen minutes. New headlines appear as the check progresses; missing
+sources are reported as partial, not as a successful full refresh. Source-cache writes use
+unique temporary files so simultaneous research and update requests cannot collide.
+
+US prices use the Yahoo US symbol and New York market dates/close times. US filings come
+from the company's SEC submissions; they are not coerced into INR financial tables.
+Legacy typed names such as `NVIDIA` are resolved to the verified company on the next check.
+`POST /api/portfolio/resolve` accepts `{ "query": "NVIDIA" }`; refresh requests with
+`"news": true` verify identities and include headlines. Existing refresh callers retain
+their prior behavior unless requesting news; the scheduled poller and ingestion CLI include it.
+
+Research remains limited to annual reports, transcripts and Screener financial tables.
+News headlines cannot be converted into research documents through filing enrichment.
+Short nonempty research questions are accepted; blank UI questions use the existing overview.
+
+Portfolio Status groups management changes, quarterly results and material events into expandable sections. Market alerts and publisher news remain separate. Opening a core section prepares missing source-backed details; results show Revenue, EBITDA, PBT and PAT with available QoQ/YoY comparisons. Incoming-person background comes from the original filing, with shared employers/institutions distinguished from recorded introductions. The synthetic contact fixture now spans the selected portfolio companies.

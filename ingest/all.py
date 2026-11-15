@@ -12,6 +12,7 @@ from finn.documents import extract_pdf, save_document
 from finn.models import Document, normalize_ticker
 from finn.pipeline import run_refresh
 from finn.providers import Providers
+from ingest.portfolio_identity import canonicalize
 
 
 def main():
@@ -27,11 +28,12 @@ def main():
     db = Database(settings.database_path)
     db.initialize()
     providers = Providers(settings)
+    symbols = canonicalize(db, providers, [normalize_ticker(t) for t in args.tickers])
     identifier = str(uuid.uuid4())
     db.execute("INSERT INTO refresh_runs VALUES (?,?,NULL,?)", (
         identifier, datetime.now(timezone.utc).isoformat(), json.dumps({"status": "queued"}),
     ))
-    run_refresh(db, providers, identifier, [normalize_ticker(t) for t in args.tickers], args.days, args.fundamentals, args.enrich)
+    run_refresh(db, providers, identifier, symbols, args.days, args.fundamentals, args.enrich, True)
     if args.document_manifest:
         for payload in json.loads(args.document_manifest.read_text()):
             doc = Document(**payload)

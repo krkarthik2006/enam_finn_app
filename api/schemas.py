@@ -1,7 +1,7 @@
 """Response contracts shared with web/lib/types.ts."""
 from typing import Any, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SystemStatus(BaseModel):
@@ -20,3 +20,7 @@ class ResearchIdentity(BaseModel):
     company_id: str
     company_name: str
     market: Literal['NSE', 'US']
+
+
+class CompanyLookup(BaseModel):
+    query: str = Field(min_length=1, max_length=120)

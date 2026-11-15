@@ -48,8 +48,9 @@ class Providers:
         )
 
     def prices(self, ticker, exchange="NSE"):
-        suffix = ".NS" if exchange == "NSE" else ".BO"
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{quote(ticker + suffix)}"
+        suffix = {"NSE": ".NS", "BSE": ".BO", "US": ""}[exchange]
+        symbol = ticker.removeprefix("US-") if exchange == "US" else ticker
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{quote(symbol + suffix)}"
         try:
             with self.client() as client:
                 response = self.cache.fetch(client, url, params={"range": "1y", "interval": "1d"},
@@ -57,12 +58,13 @@ class Providers:
                 response.raise_for_status()
             result = response.json()["chart"]["result"][0]
             quote_data = result["indicators"]["quote"][0]
-            today = datetime.now(ZoneInfo("Asia/Kolkata")).date()
+            market_zone = ZoneInfo("America/New_York" if exchange == "US" else "Asia/Kolkata")
+            today = datetime.now(market_zone).date()
             bars = []
             for ts, close, volume in zip(
                 result["timestamp"], quote_data["close"], quote_data["volume"], strict=True
             ):
-                day = datetime.fromtimestamp(ts, ZoneInfo("Asia/Kolkata")).date()
+                day = datetime.fromtimestamp(ts, market_zone).date()
                 # Never treat today's still-changing quote as an EOD observation.
                 if day >= today or close is None or volume is None:
                     continue

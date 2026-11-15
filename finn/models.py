@@ -23,6 +23,7 @@ Category = Literal[
     "agm_egm",
     "pledging",
     "unclassified",
+    "news",
 ]
 Ticker = Annotated[str, Field(min_length=1, max_length=30)]
 
@@ -44,9 +45,17 @@ class Company(Input):
     ticker: Ticker
     name: str = Field(min_length=1, max_length=200)
     sector: str = Field(default="", max_length=100)
-    exchange: Literal["NSE", "BSE"] = "NSE"
+    exchange: Literal["NSE", "BSE", "US"] = "NSE"
     bse_code: str | None = Field(default=None, pattern=r"^\d{6}$")
     _ticker = field_validator("ticker")(normalize_ticker)
+
+    @model_validator(mode="after")
+    def market_identity(self):
+        if self.exchange == "US" and not self.ticker.startswith("US-"):
+            self.ticker = normalize_ticker("US-" + self.ticker)
+        if self.ticker.startswith("US-"):
+            self.exchange = "US"
+        return self
 
 
 class Portfolio(Input):
@@ -193,6 +202,7 @@ class Refresh(Input):
     days: int = Field(default=7, ge=1, le=90)
     fundamentals: bool = False
     enrich: bool = False
+    news: bool = False
 
     @field_validator("tickers")
     @classmethod

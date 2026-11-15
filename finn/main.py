@@ -14,6 +14,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from api.financials import router as financial_router
 from api.network import router as network_router
 from api.research import router as research_router
+from api.schemas import CompanyLookup
 from api.system import router as system_router
 from finn.alerts import digest, save_announcement, save_prices
 from finn.config import Settings
@@ -40,6 +41,7 @@ from finn.pipeline import run_refresh
 from finn.providers import ProviderError, Providers
 from finn.research import Research
 from finn.scenario import seed_workflow
+from ingest.portfolio_identity import canonicalize, lookup
 
 
 def create_app(settings: Settings | None = None):
@@ -69,6 +71,11 @@ def create_app(settings: Settings | None = None):
         tickers = request.tickers or [r["ticker"] for r in db.all("SELECT ticker FROM portfolio")]
         if not tickers:
             raise HTTPException(422, "Create a portfolio or provide tickers first")
+        if request.news:
+            try:
+                tickers = canonicalize(db, providers, tickers)
+            except ProviderError as exc:
+                raise HTTPException(422, str(exc)) from exc
         run_id = str(uuid.uuid4())
         now = datetime.now(timezone.utc).isoformat()
         report = {"id": run_id, "status": "queued", "tickers": tickers, "days": request.days, "sources": []}
@@ -83,9 +90,9 @@ def create_app(settings: Settings | None = None):
         while True:
             await asyncio.sleep(settings.refresh_interval_seconds)
             try:
-                report = enqueue(Refresh())
+                report = enqueue(Refresh(news=True))
                 await asyncio.to_thread(
-                    run_refresh, db, providers, report["id"], report["tickers"], report["days"]
+                    run_refresh, db, providers, report["id"], report["tickers"], report["days"], False, False, True
                 )
             except HTTPException:
                 continue
@@ -181,6 +188,13 @@ def create_app(settings: Settings | None = None):
     @app.post("/api/demo/phases", dependencies=protected, tags=["demo"])
     def phase_seed():
         return seed_phases(db)
+
+    @app.post("/api/portfolio/resolve", dependencies=protected, tags=["portfolio"])
+    def resolve_portfolio_company(body: CompanyLookup):
+        try:
+            return lookup(db, providers, body.query)
+        except (ProviderError, ValueError) as exc:
+            raise HTTPException(422, "Company not found. Try its full name or ticker.") from exc
 
     @app.get("/api/portfolio", dependencies=protected, tags=["portfolio"])
     def get_portfolio():
@@ -279,7 +293,7 @@ def create_app(settings: Settings | None = None):
     @app.post("/api/refresh", status_code=202, dependencies=protected, tags=["ingestion"])
     def refresh(body: Refresh, background: BackgroundTasks):
         report = enqueue(body)
-        background.add_task(run_refresh, db, providers, report["id"], report["tickers"], body.days, body.fundamentals, body.enrich)
+        background.add_task(run_refresh, db, providers, report["id"], report["tickers"], body.days, body.fundamentals, body.enrich, body.news)
         return report
 
     @app.get("/api/refresh", dependencies=protected, tags=["ingestion"])

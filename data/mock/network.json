@@ -38,7 +38,11 @@
         }
       ],
       "knows": [
-        "workflow-cfo"
+        "workflow-cfo",
+        "network-contact-01",
+        "network-contact-04",
+        "network-contact-08",
+        "network-contact-15"
       ],
       "relationship_strength": 5
     },
@@ -100,6 +104,11 @@
       "expertise": [
         "specialty chemicals",
         "capacity expansion"
+      ],
+      "knows": [
+        "network-contact-03",
+        "network-contact-10",
+        "network-contact-20"
       ]
     },
     {
@@ -114,7 +123,10 @@
         }
       ],
       "knows": [
-        "network-promoter"
+        "network-promoter",
+        "network-contact-05",
+        "network-contact-12",
+        "network-contact-28"
       ],
       "relationship_strength": 4
     },
@@ -157,6 +169,12 @@
       "expertise": [
         "IT services",
         "delivery operations"
+      ],
+      "knows": [
+        "network-contact-02",
+        "network-contact-07",
+        "network-contact-16",
+        "network-contact-24"
       ]
     },
     {
@@ -165,18 +183,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "US-NVDA",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-02"
+      ]
     },
     {
       "id": "network-contact-02",
@@ -184,18 +226,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "POWERGRID",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-03"
+      ]
     },
     {
       "id": "network-contact-03",
@@ -203,18 +269,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TATASTEEL",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-04"
+      ]
     },
     {
       "id": "network-contact-04",
@@ -222,18 +312,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ASIANPAINT",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-05"
+      ]
     },
     {
       "id": "network-contact-05",
@@ -241,18 +355,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "NVIDIA",
+          "ticker": "US-NVDA",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ULTRACEMCO",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-06"
+      ]
     },
     {
       "id": "network-contact-06",
@@ -260,18 +398,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Power Grid Corporation of India Ltd.",
+          "ticker": "POWERGRID",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "BSE",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-07"
+      ]
     },
     {
       "id": "network-contact-07",
@@ -279,18 +441,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Tata Steel Ltd.",
+          "ticker": "TATASTEEL",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MAXHEALTH",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-08"
+      ]
     },
     {
       "id": "network-contact-08",
@@ -298,18 +484,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Asian Paints Ltd.",
+          "ticker": "ASIANPAINT",
+          "title": "Risk and governance adviser",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TVSMOTOR",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-09"
+      ]
     },
     {
       "id": "network-contact-09",
@@ -317,18 +527,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "UltraTech Cement Ltd.",
+          "ticker": "ULTRACEMCO",
+          "title": "Finance manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "CGPOWER",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-10"
+      ]
     },
     {
       "id": "network-contact-10",
@@ -336,18 +570,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "BSE Ltd.",
+          "ticker": "BSE",
+          "title": "Operations lead",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "VBL",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-11"
+      ]
     },
     {
       "id": "network-contact-11",
@@ -355,18 +613,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Max Healthcare Institute Ltd.",
+          "ticker": "MAXHEALTH",
+          "title": "Strategy manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TRENT",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-12"
+      ]
     },
     {
       "id": "network-contact-12",
@@ -374,18 +656,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "TVS Motor Company Ltd.",
+          "ticker": "TVSMOTOR",
+          "title": "Risk and governance adviser",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "GAIL",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-13"
+      ]
     },
     {
       "id": "network-contact-13",
@@ -393,18 +699,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "CG Power and Industrial Solutions Ltd.",
+          "ticker": "CGPOWER",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "PIDILITIND",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-14"
+      ]
     },
     {
       "id": "network-contact-14",
@@ -412,18 +742,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Varun Beverages Ltd.",
+          "ticker": "VBL",
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "WIPRO",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-15"
+      ]
     },
     {
       "id": "network-contact-15",
@@ -431,18 +785,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "Trent Ltd.",
+          "ticker": "TRENT",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "IDEA",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-16"
+      ]
     },
     {
       "id": "network-contact-16",
@@ -450,18 +828,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "GAIL (India) Ltd.",
+          "ticker": "GAIL",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MUTHOOTFIN",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-17"
+      ]
     },
     {
       "id": "network-contact-17",
@@ -469,18 +871,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Pidilite Industries Ltd.",
+          "ticker": "PIDILITIND",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "CUMMINSIND",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-18"
+      ]
     },
     {
       "id": "network-contact-18",
@@ -488,18 +914,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "SUNPHARMA",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-19"
+      ]
     },
     {
       "id": "network-contact-19",
@@ -507,18 +957,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Vodafone Idea Ltd.",
+          "ticker": "IDEA",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ADANIENT",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-20"
+      ]
     },
     {
       "id": "network-contact-20",
@@ -526,18 +1000,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SRF",
-          "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "company": "Muthoot Finance Ltd.",
+          "ticker": "MUTHOOTFIN",
+          "title": "Risk and governance adviser",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TCS",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-21"
+      ]
     },
     {
       "id": "network-contact-21",
@@ -545,18 +1043,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "Cummins India Ltd.",
+          "ticker": "CUMMINSIND",
+          "title": "Finance manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "INFY",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-22"
+      ]
     },
     {
       "id": "network-contact-22",
@@ -564,18 +1086,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "INFY",
+          "company": "Sun Pharmaceutical Industries Ltd.",
+          "ticker": "SUNPHARMA",
+          "title": "Operations lead",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "Infosys",
           "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "SRF",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-23"
+      ]
     },
     {
       "id": "network-contact-23",
@@ -583,18 +1129,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Adani Enterprises Ltd.",
+          "ticker": "ADANIENT",
+          "title": "Strategy manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "HCLTECH",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-24"
+      ]
     },
     {
       "id": "network-contact-24",
@@ -602,18 +1172,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Risk and governance adviser",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Tata Consultancy Services",
+          "ticker": "TCS",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "US-NVDA",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-25"
+      ]
     },
     {
       "id": "network-contact-25",
@@ -621,18 +1215,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Finance manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "POWERGRID",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-26"
+      ]
     },
     {
       "id": "network-contact-26",
@@ -642,16 +1260,40 @@
         {
           "company": "SRF",
           "ticker": "SRF",
-          "title": "Industry specialist",
-          "start_year": 2015,
-          "end_year": 2023
+          "title": "Operations lead",
+          "start_year": 2023,
+          "end_year": null
+        },
+        {
+          "company": "SRF",
+          "ticker": "SRF",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "specialty chemicals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Delhi",
+          "start_year": 2007,
+          "end_year": 2011
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TATASTEEL",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-27"
+      ]
     },
     {
       "id": "network-contact-27",
@@ -659,18 +1301,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "TITAN",
-          "ticker": "TITAN",
-          "title": "Industry specialist",
-          "start_year": 2016,
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Strategy manager",
+          "start_year": 2024,
           "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "retail"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 2,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ASIANPAINT",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-28"
+      ]
     },
     {
       "id": "network-contact-28",
@@ -678,18 +1344,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "INFY",
-          "ticker": "INFY",
-          "title": "Industry specialist",
-          "start_year": 2017,
-          "end_year": 2023
+          "company": "NVIDIA",
+          "ticker": "US-NVDA",
+          "title": "Risk and governance adviser",
+          "start_year": 2022,
+          "end_year": null
+        },
+        {
+          "company": "HCL Technologies",
+          "ticker": "HCLTECH",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "IT services"
+        "litigation",
+        "governance"
       ],
       "relationship_strength": 3,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIM Ahmedabad",
+          "start_year": 2012,
+          "end_year": 2014
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "ULTRACEMCO",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-29"
+      ]
     },
     {
       "id": "network-contact-29",
@@ -697,18 +1387,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "LT",
-          "ticker": "LT",
-          "title": "Industry specialist",
-          "start_year": 2018,
+          "company": "Power Grid Corporation of India Ltd.",
+          "ticker": "POWERGRID",
+          "title": "Finance manager",
+          "start_year": 2023,
           "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2016,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "engineering"
+        "corporate finance",
+        "quarterly results"
       ],
       "relationship_strength": 4,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "BSE",
+          "kind": "competitor"
+        }
+      ],
+      "knows": [
+        "network-contact-30"
+      ]
     },
     {
       "id": "network-contact-30",
@@ -716,18 +1430,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "SUNPHARMA",
-          "ticker": "SUNPHARMA",
-          "title": "Industry specialist",
-          "start_year": 2019,
-          "end_year": 2023
+          "company": "Tata Steel Ltd.",
+          "ticker": "TATASTEEL",
+          "title": "Operations lead",
+          "start_year": 2024,
+          "end_year": null
+        },
+        {
+          "company": "Wipro Ltd.",
+          "ticker": "WIPRO",
+          "title": "Business analyst",
+          "start_year": 2017,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "pharmaceuticals"
+        "operations",
+        "capital expenditure"
       ],
       "relationship_strength": 5,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "IIT Bombay",
+          "start_year": 2008,
+          "end_year": 2012
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "MAXHEALTH",
+          "kind": "customer"
+        }
+      ],
+      "knows": [
+        "network-contact-31"
+      ]
     },
     {
       "id": "network-contact-31",
@@ -735,18 +1473,42 @@
       "provenance": "synthetic",
       "roles": [
         {
-          "company": "HDFCBANK",
-          "ticker": "HDFCBANK",
-          "title": "Industry specialist",
-          "start_year": 2014,
+          "company": "Asian Paints Ltd.",
+          "ticker": "ASIANPAINT",
+          "title": "Strategy manager",
+          "start_year": 2022,
           "end_year": null
+        },
+        {
+          "company": "Infosys",
+          "ticker": "INFY",
+          "title": "Business analyst",
+          "start_year": 2015,
+          "end_year": 2021
         }
       ],
       "expertise": [
-        "banking"
+        "M&A",
+        "industry strategy"
       ],
       "relationship_strength": 1,
-      "last_contacted": "2026-09-01"
+      "last_contacted": "2026-09-01",
+      "education": [
+        {
+          "institution": "Institute of Chartered Accountants of India",
+          "start_year": 2009,
+          "end_year": 2013
+        }
+      ],
+      "related_companies": [
+        {
+          "ticker": "TVSMOTOR",
+          "kind": "supplier"
+        }
+      ],
+      "knows": [
+        "network-contact-01"
+      ]
     }
   ]
 }

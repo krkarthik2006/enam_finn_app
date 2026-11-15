@@ -6,21 +6,25 @@ from finn.alerts import save_announcement, save_prices
 from finn.db import Database
 from finn.enrichment import extract_filing, refresh_cards
 from finn.providers import ProviderError, Providers
+from ingest.updates import news, us_filings
 
 
-def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[str], days: int, fundamentals=False, enrichments=False):
+def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[str], days: int, fundamentals=False, enrichments=False, include_news=False):
     started = datetime.now(timezone.utc).isoformat()
     report = {"id": run_id, "status": "running", "tickers": tickers, "sources": [], "days": days}
     db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
     try:
         portfolio = {r["ticker"]: json.loads(r["payload"]) for r in db.all("SELECT * FROM portfolio")}
         for ticker in tickers:
-            exchange = portfolio.get(ticker, {}).get("exchange", "NSE")
+            exchange = portfolio.get(ticker, {}).get("exchange", "US" if ticker.startswith("US-") else "NSE")
             bse_code = portfolio.get(ticker, {}).get("bse_code")
             company = db.one("SELECT payload FROM companies WHERE ticker=?", (ticker,))
-            if company:
-                bse_code = bse_code or json.loads(company["payload"]).get("bse_code")
-            for source in (("prices", "fundamentals", "announcements") if fundamentals else ("prices", "announcements")):
+            identity = json.loads(company["payload"]) if company else {}
+            bse_code = bse_code or identity.get("bse_code")
+            sources = ["prices"] + (["fundamentals"] if fundamentals and exchange != "US" else []) + ["announcements"]
+            if include_news:
+                sources.insert(0, "news")
+            for source in sources:
                 before = len(providers.cache.observations)
                 enrichment_errors = []
                 try:
@@ -38,12 +42,17 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
                         ))
                         count = len(financials["records"])
                     else:
-                        if exchange != "NSE" and not bse_code:
+                        if source == "news":
+                            data = news(providers, ticker, exchange, days)
+                        elif exchange == "US":
+                            data = us_filings(providers, identity, days)
+                        elif exchange != "NSE" and not bse_code:
                             raise ProviderError("Provide a verified BSE code before automatic BSE filing ingestion")
-                        data = providers.announcements(ticker, days, bse_code)
+                        else:
+                            data = providers.announcements(ticker, days, bse_code)
                         for item in data:
                             saved = save_announcement(db, item)
-                            if enrichments and saved["category"] in ("results", "management_change", "M&A", "capex", "litigation", "unclassified"):
+                            if enrichments and exchange != "US" and source != "news" and saved["category"] in ("results", "management_change", "M&A", "capex", "litigation"):
                                 try:
                                     extract_filing(db, saved, providers)
                                 except (ProviderError, ValueError) as exc:

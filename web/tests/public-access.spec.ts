@@ -2,7 +2,7 @@ import {test,expect} from "@playwright/test";
 
 test("workspace opens without a password or session",async({page})=>{
  await page.goto("/");
- await expect(page.getByRole("heading",{name:"Portfolio updates"})).toBeVisible();
+ await expect(page.getByRole("heading",{name:"Portfolio Status"})).toBeVisible();
  await expect(page.getByLabel("Review password")).toHaveCount(0);
  await expect(page.getByRole("button",{name:"Sign out",exact:true})).toHaveCount(0);
  expect((await page.context().cookies()).some(c=>c.name==="finn_review_session")).toBe(false);

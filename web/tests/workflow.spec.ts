@@ -4,7 +4,7 @@ test("three simple tabs, offline updates, saved research and contacts",async({pa
   await page.route("**/api/**",route=>route.fulfill({status:503,contentType:"application/json",body:'{"detail":"Offline check"}'}));
   const errors:string[]=[];page.on("pageerror",error=>errors.push(error.message));
   await page.goto("/");
-  await expect(page.getByRole("heading",{name:"Portfolio updates"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Portfolio Status"})).toBeVisible();
   await expect(page.getByText("Offline · saved data",{exact:true})).toBeAttached();
   await expect(page.getByRole("button",{name:"System",exact:true})).toHaveCount(0);
   await expect(page.getByRole("button",{name:"Real data",exact:true})).toHaveCount(0);
@@ -87,12 +87,12 @@ test("installed shell updates old caches and reloads without the network",async(
   await page.goto("/");
   await expect.poll(()=>navigations).toBeGreaterThanOrEqual(2);
   await expect.poll(async()=>{try{return await page.evaluate(async()=>(await caches.keys()).includes("finn-static-v7"));}catch{return true;}}).toBe(false);
-  await expect(page.getByRole("heading",{name:"Portfolio updates"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Portfolio Status"})).toBeVisible();
   expect(await page.evaluate(async()=>{await navigator.serviceWorker.ready;return true;})).toBe(true);
   await expect.poll(()=>page.evaluate(()=>!!navigator.serviceWorker.controller)).toBe(true);
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole("heading",{name:"Portfolio updates"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Portfolio Status"})).toBeVisible();
   await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
   await page.getByRole("button",{name:"TCS",exact:true}).click();
   await expect(page.getByRole("heading",{name:"Promised vs delivered",exact:true})).toBeVisible();
@@ -106,15 +106,16 @@ test("portfolio edits persist through the API",async({page})=>{
  await page.goto("/");
  await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
  await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
- await page.getByRole("textbox",{name:"Add NSE ticker"}).fill("TESTUI");
+ const added=["HCLTECH","TITAN","CDSL","ICICIBANK"].find(ticker=>!original.companies.some((c:{ticker:string})=>c.ticker===ticker))!;
+ await page.getByRole("textbox",{name:"Company name or ticker"}).fill(added);
  await page.getByRole("button",{name:"Add company",exact:true}).click();
  await page.route("**/api/portfolio",async route=>{if(route.request().method()==="GET")await new Promise(resolve=>setTimeout(resolve,1500));await route.continue();});
  await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
  await expect(page.getByRole("dialog")).not.toBeVisible();
  const portfolio=await (await page.request.get("/api/portfolio")).json();
- expect(portfolio.companies.some((c:{ticker:string})=>c.ticker==="TESTUI")).toBe(true);
+ expect(portfolio.companies.some((c:{ticker:string})=>c.ticker===added)).toBe(true);
  await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
- await page.getByRole("button",{name:"Remove TESTUI"}).click();
+ await page.getByRole("button",{name:`Remove ${added}`}).click();
  await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
  await expect(page.getByRole("dialog")).not.toBeVisible();
  } finally {
@@ -211,7 +212,7 @@ test("portfolio edits persist through the API",async({page})=>{
      const rgb=(value:string)=>value.match(/[\d.]+/g)!.slice(0,3).map(Number);
      const lum=(value:string)=>rgb(value).map(v=>v/255).map(v=>v<=0.04045?v/12.92:((v+0.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
      const ratio=(a:string,b:string)=>(Math.max(lum(a),lum(b))+0.05)/(Math.min(lum(a),lum(b))+0.05);
-     const body=getComputedStyle(document.body),muted=getComputedStyle(document.querySelector(".page-heading p")!),button=getComputedStyle(document.querySelector(".primary-button")!);
+     const body=getComputedStyle(document.body),muted=getComputedStyle(document.querySelector(".eyebrow")!),button=getComputedStyle(document.querySelector(".primary-button")!);
      return {background:lum(body.backgroundColor),text:ratio(body.color,body.backgroundColor),muted:ratio(muted.color,body.backgroundColor),button:ratio(button.color,button.backgroundColor)};
    });
    expect(colors.background).toBeLessThan(0.08);
@@ -233,13 +234,15 @@ test("portfolio edits persist through the API",async({page})=>{
  await page.route("**/api/**",async route=>{
    const path=new URL(route.request().url()).pathname.slice(5);
    if(path==="portfolio"&&route.request().method()==="PUT"){companies=route.request().postDataJSON().companies;saves++;}
+   if(path==="portfolio/resolve"){const ticker=route.request().postDataJSON().query.trim().toUpperCase();await route.fulfill({contentType:"application/json",body:JSON.stringify({ticker,name:ticker,sector:"",exchange:"NSE"})});return;}
+   if(path.startsWith("refresh")){await route.fulfill({contentType:"application/json",body:JSON.stringify({id:"portfolio-test",status:"completed",sources:[]})});return;}
    const values:Record<string,unknown>={portfolio:{companies},digest:{mode:"live",items:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
    await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
  });
  await page.goto("/");await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
  await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
  await expect(page.getByText("3 companies",{exact:true})).toBeVisible();
- const input=page.getByRole("textbox",{name:"Add NSE ticker"});
+ const input=page.getByRole("textbox",{name:"Company name or ticker"});
  await input.fill("HCLTECH");await input.press("Enter");
  await expect(page.getByRole("button",{name:"Remove HCLTECH"})).toBeVisible();expect(saves).toBe(0);
  await input.fill("HCLTECH");await input.press("Enter");
@@ -348,5 +351,50 @@ test("portfolio edits persist through the API",async({page})=>{
  await expect(page.getByRole("dialog",{name:"Source excerpt",exact:true})).toBeVisible();
  await expect(page.getByRole("link",{name:"Open original document",exact:true})).toHaveAttribute("href",/^https:\/\//);
  await page.getByRole("button",{name:"Close dialog"}).click();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ });
+
+ test("portfolio status verifies NVIDIA, checks its news automatically and opens primary-source research",async({page},info)=>{
+ const snapshot=await (await page.request.get("/snapshot.json")).json();
+ let companies=snapshot.portfolio.slice(0,1),checked=false,checks=0;
+ await page.route("**/api/**",async route=>{
+  const path=new URL(route.request().url()).pathname.slice(5);
+  if(path==="portfolio/resolve"){
+   expect(route.request().postDataJSON().query).toBe("NVIDIA");
+   await route.fulfill({contentType:"application/json",body:JSON.stringify({ticker:"US-NVDA",name:"NVIDIA CORP",sector:"",exchange:"US"})});return;
+  }
+  if(path==="portfolio"&&route.request().method()==="PUT")companies=route.request().postDataJSON().companies;
+  if(path==="refresh"){
+   expect(route.request().postDataJSON().news).toBe(true);expect(route.request().postDataJSON().enrich).toBe(false);checked=true;checks++;
+   await route.fulfill({contentType:"application/json",body:JSON.stringify({id:"news-check",status:"queued",tickers:["US-NVDA"]})});return;
+  }
+  if(path==="refresh/news-check"){
+   await route.fulfill({contentType:"application/json",body:JSON.stringify({id:"news-check",status:"completed",sources:[{ticker:"US-NVDA",source:"news",status:"ok",count:1}]})});return;
+  }
+  if(path==="research/US-NVDA/brief"){
+   await route.fulfill({contentType:"application/x-ndjson",body:JSON.stringify({type:"result",data:{...snapshot.briefs.TCS,ticker:"NVDA",company_id:"US-NVDA",company_name:"NVIDIA CORP",market:"US"}})+"\n"});return;
+  }
+  const news={id:"news-one",ticker:"US-NVDA",type:"news",category:"news",mode:"live",title:"NVIDIA reports a product launch",summary:"NVIDIA reports a product launch",published_at:new Date().toISOString(),url:"https://finance.yahoo.com/news/original-story.html",source:{kind:"news",publisher:"Yahoo Finance"},network:[],attention_score:{value:1}};
+  const values:Record<string,unknown>={portfolio:{companies},digest:{mode:"live",items:checked?[news]:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
+  await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
+ });
+ await page.goto("/");await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ await expect(page.getByRole("heading",{name:"Portfolio Status",exact:true})).toBeVisible();
+ await expect(page.getByText("What changed, why it matters, and who can help.",{exact:true})).toHaveCount(0);
+ await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
+ await page.getByRole("textbox",{name:"Company name or ticker"}).fill("NVIDIA");
+ await page.getByRole("button",{name:"Add company",exact:true}).click();
+ await expect(page.getByRole("button",{name:"Remove NVDA",exact:true})).toBeVisible();
+ await expect(page.getByRole("dialog")).toContainText("NVIDIA CORP");
+ await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
+ await expect(page.getByRole("heading",{name:"NVIDIA reports a product launch",exact:true})).toBeVisible();
+ expect(checked).toBe(true);
+ await page.screenshot({path:`/private/tmp/finn-${info.project.name}-portfolio-status.png`,fullPage:true});
+ await expect(page.getByRole("link",{name:"Read article",exact:true})).toHaveAttribute("href","https://finance.yahoo.com/news/original-story.html");
+ await expect(page.getByRole("button",{name:"Check updates",exact:true})).toBeEnabled();
+ await page.getByRole("button",{name:"Check updates",exact:true}).click();
+ await expect.poll(()=>checks).toBe(2);
+ await page.getByRole("button",{name:"Research company",exact:true}).click();
+ await expect(page.locator(".brief-header")).toContainText("NVIDIA CORP");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  });

@@ -94,6 +94,32 @@ def event_hash(event):
     return hashlib.sha256(json.dumps(event, sort_keys=True).encode()).hexdigest()
 
 
+def attach_management_background(result, event, facts, quotes, people):
+    person = (facts or {}).get("incoming_person")
+    if not person:
+        return
+    bio = " ".join(quotes[c]["text"] for c in person.get("citation_ids", []) if c in quotes)
+    management = result.setdefault("management", {"person": None, "paths": [], "overlaps": []})
+    management["incoming"] = {"name": person["name"], "title": person.get("title", ""),
+                              "bio": bio[:1800], "source_url": event.get("url", "")}
+    context = []
+    for contact in people:
+        if not contact.get("direct_contact", True):
+            continue
+        reasons = []
+        for role in contact.get("roles", []):
+            company = role["company"].replace(" (fictional)", "")
+            if len(company) >= 4 and company.casefold() in bio.casefold():
+                reasons.append(f"Shared employer: {company}. Working together is not established by this filing.")
+        for education in contact.get("education", []):
+            institution = education if isinstance(education, str) else education["institution"]
+            if institution.casefold() in bio.casefold():
+                reasons.append(f"Shared institution: {institution}. Attendance dates need confirmation.")
+        if reasons:
+            context.append({"person_id": contact["id"], "name": contact["name"], "reasons": list(dict.fromkeys(reasons))})
+    management["professional_context"] = context[:6]
+
+
 def save_card(db, event, facts=None):
     old = db.one("SELECT payload FROM enrichments WHERE event_id=? AND owner_id=?", (event["id"], db.owner_id))
     cached = json.loads(old["payload"]) if old else {}
@@ -126,6 +152,7 @@ def save_card(db, event, facts=None):
             result["extraction_coverage"] = cached["extraction_coverage"]
         if "source_quotes" in cached:
             result["source_quotes"] = cached["source_quotes"]
+    attach_management_background(result, event, facts, result.get("source_quotes", {}), people)
     db.execute("INSERT OR REPLACE INTO enrichments VALUES (?,?,?)", (event["id"], db.owner_id, json.dumps(result)))
     return result
 
@@ -136,6 +163,10 @@ def refresh_cards(db):
 
 
 def extract_filing(db, event, providers):
+    if (event.get("source") or {}).get("kind") == "news":
+        raise ValueError("News articles are not primary company filings and cannot be research evidence.")
+    if event["ticker"].startswith("US-"):
+        raise ValueError("Read the original US filing; structured US financial extraction is not available.")
     if event.get("url"):
         content = providers.download(event["url"])
         pages = extract_pdf(content)
@@ -172,6 +203,10 @@ def extract_filing(db, event, providers):
                       and re.search(r"profit before tax|\bpbt\b", text, re.I)]
         if statements:
             candidates = statements
+    elif event["category"] == "management_change":
+        profiles = [(page, text) for page, text in pages if re.search(r"brief profile|brief resume|qualification|experience|appointment|resignation", text, re.I)]
+        if profiles:
+            candidates = profiles
     # Bound model context; report truncation explicitly rather than treating a partial PDF as complete.
     selected, size = [], 0
     for page, text in candidates:
@@ -297,7 +332,7 @@ def extract_filing(db, event, providers):
             FinancialRecord(ticker=event["ticker"], period_end=period.period_end, basis=period.basis,
                             metrics={metric: f.value for metric, f in period.items()}, source_type="filing", unit=period.unit)
 
-    raw = LLM(db, providers.settings).complete(request, "filing-v6", validate)
+    raw = LLM(db, providers.settings).complete(request, "filing-v7", validate)
     facts = parse_facts(raw)
     for period in facts.financial_periods:
         save_financial(db, FinancialRecord(
@@ -322,7 +357,8 @@ def extract_filing(db, event, providers):
     result["source_quotes"] = {c: {**source[c], "url": event.get("url", "")} for c in sorted(cited)}
     result["extraction_coverage"] = {"included_pages": len(selected), "total_pages": len(pages),
                                      "truncated": len(selected) < len(pages), "page_numbers": [p for p, _ in selected],
-                                     "selection": "financial_statement_pages" if candidates is not pages else "document_prefix"}
+                                     "selection": ("management_profile_pages" if event["category"] == "management_change" else "financial_statement_pages") if candidates is not pages else "document_prefix"}
+    attach_management_background(result, event, facts.model_dump(mode="json"), result["source_quotes"], load_people(db))
     if len(selected) < len(pages):
         result["gaps"].append("Only the included filing pages were analysed; remaining pages were omitted from model context.")
     db.execute("INSERT OR REPLACE INTO enrichments VALUES (?,?,?)", (event["id"], db.owner_id, json.dumps(result)))

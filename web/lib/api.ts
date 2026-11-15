@@ -1,9 +1,20 @@
 import type { Brief } from "./types";
 
+export class ApiError extends Error {
+  constructor(message: string, public status: number) {super(message);}
+}
+
+export class ResearchError extends Error {}
+
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api/${path}`, {cache: "no-store", ...init, headers: {"Content-Type": "application/json", ...init?.headers}});
   if (!response.ok) {
-    throw new Error("This request couldn’t be completed. Please try again.");
+    let message="This request couldn’t be completed. Please try again.";
+    if(response.status===422){
+      const body=await response.json().catch(()=>({}));
+      if(typeof body.detail==="string"&&body.detail.startsWith("Company not found"))message="Company not found. Try its full name or ticker.";
+    }
+    throw new ApiError(message,response.status);
   }
   return response.json();
 }
@@ -14,7 +25,7 @@ export function isPrimaryBrief(brief: Brief): boolean {
 
 export async function research(ticker: string, body: object, progress: (text: string) => void, signal: AbortSignal): Promise<Brief> {
   const response = await fetch(`/api/research/${encodeURIComponent(ticker)}/brief`, {method: "POST", signal, headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
-  if (!response.ok || !response.body) throw new Error("Research is unavailable right now. Please try again.");
+  if (!response.ok || !response.body) throw new ResearchError("Research is unavailable right now. Please try again.");
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
@@ -27,12 +38,12 @@ export async function research(ticker: string, body: object, progress: (text: st
       if (!line.trim()) continue;
       const event = JSON.parse(line);
       if (event.type === "progress") progress("Reading company reports and transcripts…");
-      if (event.type === "error") throw new Error("Research couldn’t be completed. Please try again.");
+      if (event.type === "error") throw new ResearchError(typeof event.data === "string" && event.data.startsWith("Company not found") ? "Company not found. Try its full name or ticker." : "Research couldn’t be completed. Please try again.");
       if (event.type === "result") result = event.data;
     }
     if (done) break;
   }
-  if (!result) throw new Error("Research ended without a result. Please retry.");
-  if (!isPrimaryBrief(result)) throw new Error("Research returned non-primary sources. Please retry.");
+  if (!result) throw new ResearchError("Research ended without a result. Please retry.");
+  if (!isPrimaryBrief(result)) throw new ResearchError("Research returned non-primary sources. Please retry.");
   return result;
 }

@@ -7,7 +7,7 @@ If a task conflicts with this file, stop and say so instead of guessing.
 ## 1. What we are building (one paragraph)
 
 FINN is a **mobile-first** investor copilot with three layers:
-- **Push**: tells the investor what changed and why it matters (windowed digest + threshold alerts).
+- **Push**: tells the investor what changed and why it matters (windowed digest + threshold alerts), including labelled general-news headlines for Indian and US companies (user extension, 2026-11-15). News must never enter Pull evidence.
 - **Pull**: on-demand research on NSE and US-listed companies by name or ticker, grounded **only** in annual reports and concall transcripts (US coverage currently uses SEC annual filings).
 - **Network**: the investor's own contacts as an intelligence layer, surfaced *inside* Push and Pull ("who can help me understand this"), and also queryable directly.
 
@@ -133,10 +133,11 @@ Rules:
 
 | Source | Use | Notes |
 |---|---|---|
-| yfinance (`TICKER.NS`) | EOD price/volume | 1y history; compute 20d avg volume |
+| Yahoo Finance chart (`TICKER.NS` / US ticker) | EOD price/volume | 1y history; compute 20d avg volume; use the exchange timezone |
+| Yahoo Finance company RSS | General-news headlines in Push only | Keep original title, publisher, date and link. No article scraping or use as Pull evidence. |
 | BSE announcements API | filings | Map NSE symbol → BSE scrip code; NSE API as fallback (needs cookies, often blocked from cloud IPs) |
 | screener.in company page | quarterly/annual tables, links to concalls + annual reports | Polite: cache HTML, ≤1 req/sec, set a UA |
-| SEC EDGAR | US company identity and original annual filings (10-K / 20-F / 40-F) | Cache the company catalog and filings; rate-limit requests. HTML filings have no invented PDF page number. |
+| SEC EDGAR | US identity; annual filings for Pull, recent company filings for Push | Cache the company catalog and filings; rate-limit requests. HTML filings have no invented PDF page number. |
 | Company PDFs | transcripts, annual reports, results filings | Store PDF + extracted text per page |
 | `/data/mock/network.json` | synthetic people, orgs, edges | Investor-owned |
 
@@ -145,6 +146,9 @@ Matching people across sources (entity resolution) goes in `engine/network.py::r
 ---
 
 ## 6. How to do a task
+
+User override (2026-11-15): pause automated/backend/model/browser test runs during the current product-iteration pass. The user wants faster implementation and a single final review/test pass later. Compile/build only as required to publish; explicitly report untested changes. This overrides the test-running steps below until the user asks for final testing.
+
 
 1. Read `AGENTS.md`, the relevant `PLAN.md` phase, and the last 3 entries in `BUILD_LOG.md`.
 2. Reply with: your assumptions, your plan (steps + how each step is verified), and the files you'll touch.
