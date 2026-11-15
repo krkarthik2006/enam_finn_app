@@ -231,7 +231,7 @@ export default function FinnApp() {
     {id:"market",title:"Market alerts",description:"Daily price and volume moves",items:digest.items.filter(item=>item.type==="market_alert")},
     {id:"news",title:"News",description:"Publisher headlines and original articles",items:digest.items.filter(item=>item.type==="news")},
     {id:"other",title:"Other filings",description:"Routine disclosures and announcements",items:allFilings.filter(item=>item.type!=="news"&&item.type!=="market_alert"&&!["management_change","results","M&A","capex","litigation"].includes(item.category||""))}
-  ].sort((a,b)=>b.items.length-a.items.length);
+  ].sort((a,b)=>Number(a.id==="other")-Number(b.id==="other")||b.items.length-a.items.length);
   const thesis = brief?.sections.filter(section=>["bull","bear"].includes(section.id)) || [];
   const thesisIds = new Set(thesis.flatMap(section=>section.findings.flatMap(finding=>finding.citation_ids)));
   const thesisSources = brief?.sources.filter(source=>thesisIds.has(source.citation_id)).filter((source,index,all)=>all.findIndex(other=>other.document_id===source.document_id)===index) || [];
