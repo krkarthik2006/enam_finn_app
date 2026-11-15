@@ -147,3 +147,21 @@ def test_company_and_documents_survive_a_new_application_instance(research_app, 
         saved = ask(second, 'NVDA')[-1]['data']
     assert saved['sources'] == original['sources']
     assert saved['company_id'] == 'US-NVDA'
+
+
+@pytest.mark.parametrize('stale_alias', [False, True])
+def test_unverified_portfolio_entry_does_not_override_company_identity(research_app, stale_alias):
+    client, requests, _ = research_app
+    db = client.app.state.db
+    assert client.put('/api/portfolio', json={'companies': [{'ticker': 'NVIDIA', 'name': 'NVIDIA'}]}).status_code == 200
+    if stale_alias:
+        company = {'id': 'NVIDIA', 'ticker': 'NVIDIA', 'name': 'NVIDIA', 'market': 'NSE'}
+        db.execute('INSERT OR REPLACE INTO companies VALUES (?,?)', ('NVIDIA', json.dumps(company)))
+        db.set_setting('research_company:auto:NVIDIA', company)
+    result = ask(client, 'NVIDIA')[-1]['data']
+    assert result['company_id'] == 'US-NVDA' and result['ticker'] == 'NVDA'
+    assert result['coverage']['annual_reports'] == 1
+    count = len(requests)
+    repeat = ask(client, 'NVIDIA')[-1]['data']
+    assert repeat['sources'] == result['sources'] and len(requests) == count
+    assert client.get('/api/portfolio').json()['companies'][0]['ticker'] == 'NVIDIA'

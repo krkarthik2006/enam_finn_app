@@ -45,14 +45,15 @@ def resolve_company(db, providers, query, fetch=True):
             raise ProviderError('Enter a company name or ticker.')
     alias = f'research_company:{market}:{name_key(name)}'
     saved = db.setting(alias, None)
-    # Known Indian companies take precedence over an unqualified US ticker alias.
+    indexed = {row['ticker'] for row in db.all("SELECT DISTINCT ticker FROM documents WHERE mode='live'")}
+    # Only verified identities or indexed primary sources establish an NSE company.
     if market != 'US':
         known = []
         for row in db.all('SELECT ticker,payload FROM portfolio UNION ALL SELECT ticker,payload FROM companies'):
             item = json.loads(row['payload'])
-            if item.get('market') == 'US':
+            if item.get('market') == 'US' or (row['ticker'] not in indexed and item.get('identity_source') != 'screener'):
                 continue
-            known.append({'ticker': row['ticker'], 'name': item.get('name', row['ticker'])})
+            known.append({**item, 'ticker': row['ticker'], 'name': item.get('name', row['ticker'])})
         selected = match_company(known, name)
         if selected:
             return remember_company(db, {**selected, 'id': selected['ticker'], 'market': 'NSE'}, market, name)
@@ -62,7 +63,7 @@ def resolve_company(db, providers, query, fetch=True):
                 return remember_company(db, {'id': ticker, 'ticker': ticker, 'name': ticker, 'market': 'NSE'}, market, name)
         except ValueError:
             pass
-    if saved:
+    if saved and (saved.get('market') != 'NSE' or saved.get('identity_source') == 'screener' or saved.get('id') in indexed):
         return saved
     if not fetch:
         ticker = normalize_ticker(name)
@@ -79,7 +80,8 @@ def resolve_company(db, providers, query, fetch=True):
                     candidates.append({'ticker': match[1].upper(), 'name': item['name']})
             selected = match_company(candidates, name)
             if selected:
-                return remember_company(db, {**selected, 'id': selected['ticker'], 'market': 'NSE'}, market, name)
+                return remember_company(db, {**selected, 'id': selected['ticker'], 'market': 'NSE',
+                                              'identity_source': 'screener'}, market, name)
         except (httpx.HTTPError, ValueError, KeyError, TypeError):
             pass
     if market != 'NSE':

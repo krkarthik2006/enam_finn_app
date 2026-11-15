@@ -299,3 +299,54 @@ test("portfolio edits persist through the API",async({page})=>{
  await expect(page.locator(".about-copy")).toContainText("Indian and US companies");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  });
+
+ test("research opens with short cited previews that jump to details and original sources",async({page},info)=>{
+ const snapshot=await (await page.request.get("/snapshot.json")).json();
+ const brief=structuredClone(snapshot.briefs.TCS);
+ brief.sections.find((s:{id:string})=>s.id==="bear").findings=[];
+ await page.route("**/api/**",async route=>{
+  const path=new URL(route.request().url()).pathname.slice(5);
+  if(path.startsWith("research/")){await route.fulfill({contentType:"application/x-ndjson",body:JSON.stringify({type:"result",data:brief})+"\n"});return;}
+  const values:Record<string,unknown>={portfolio:{companies:snapshot.portfolio},digest:{mode:"live",items:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
+  await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
+ });
+ await page.goto("/");await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
+ await page.getByRole("button",{name:"TCS",exact:true}).click();
+ const overview=page.getByRole("navigation",{name:"Research overview",exact:true});
+ await expect(overview).toBeVisible();
+ await expect(overview.locator(".summary-jump")).toHaveCount(brief.sections.length);
+ for(const section of brief.sections){
+  const summary=overview.locator(`a[href="#research-${section.id}"]`);
+  await expect(summary).toContainText(section.title);
+  if(section.findings.length)await expect(summary.locator("p")).toHaveText(await page.locator(`#research-${section.id} .finding`).first().evaluate(el=>el.firstChild?.textContent||""));
+  else await expect(summary).toContainText(section.empty_message);
+  const preview=summary.locator("p");
+  const height=await preview.evaluate(el=>({height:el.getBoundingClientRect().height,line:parseFloat(getComputedStyle(el).lineHeight)}));
+  expect(height.height).toBeLessThanOrEqual(height.line*2+1);
+ }
+ await overview.screenshot({path:`/private/tmp/finn-${info.project.name}-research-overview.png`});
+ await overview.locator('a[href="#research-financial"]').click();
+ const financial=page.locator("#research-financial");
+ await expect.poll(()=>financial.evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
+ expect(await financial.evaluate(el=>el.getBoundingClientRect().top)).toBeLessThan(100);
+ await expect(financial.locator(".finding").first()).toContainText(brief.sections.find((s:{id:string})=>s.id==="financial").findings[0].text);
+ const expectedIds=new Set(brief.sections.find((s:{id:string})=>s.id==="financial").findings.flatMap((f:{citation_ids:string[]})=>f.citation_ids));
+ const expectedSources=brief.sources.filter((source:{citation_id:string})=>expectedIds.has(source.citation_id));
+ const originalLinks=financial.locator(".section-sources a");
+ expect(await originalLinks.count()).toBeGreaterThan(0);
+ for(const link of await originalLinks.all()){
+  const href=await link.getAttribute("href");
+  expect(expectedSources.some((source:{url:string;page:number|null})=>href===source.url+(source.page?`#page=${source.page}`:""))).toBe(true);
+  await expect(link).toHaveAttribute("target","_blank");
+ }
+ await financial.getByRole("link",{name:"Back to overview",exact:true}).click();
+ await expect(overview).toBeInViewport();
+ await overview.getByRole("link",{name:"View sources for Business snapshot",exact:true}).click();
+ await expect(page.locator("#research-business-sources")).toBeInViewport();
+ await page.locator("#research-business .citation-chips button").first().click();
+ await expect(page.getByRole("dialog",{name:"Source excerpt",exact:true})).toBeVisible();
+ await expect(page.getByRole("link",{name:"Open original document",exact:true})).toHaveAttribute("href",/^https:\/\//);
+ await page.getByRole("button",{name:"Close dialog"}).click();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ });
