@@ -226,3 +226,39 @@ test("portfolio edits persist through the API",async({page})=>{
    expect(paper.background).not.toBe("rgb(255, 255, 255)");
    expect(paper.color).not.toBe("rgb(0, 0, 0)");
  });
+
+ test("portfolio adds beyond three with Enter and explains capacity",async({page})=>{
+ const snapshot=await (await page.request.get("/snapshot.json")).json();
+ let companies=["INFY","SRF","TCS"].map(ticker=>({ticker,name:ticker,sector:""}));let saves=0;
+ await page.route("**/api/**",async route=>{
+   const path=new URL(route.request().url()).pathname.slice(5);
+   if(path==="portfolio"&&route.request().method()==="PUT"){companies=route.request().postDataJSON().companies;saves++;}
+   const values:Record<string,unknown>={portfolio:{companies},digest:{mode:"live",items:[],routine:[],routine_count:0},network:{contacts:snapshot.contacts},"network/investor":snapshot.investor,"alerts/settings":snapshot.settings,"network/reconnect":{nudges:[]}};
+   await route.fulfill({contentType:"application/json",body:JSON.stringify(values[path]||{})});
+ });
+ await page.goto("/");await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
+ await expect(page.getByText("3 companies",{exact:true})).toBeVisible();
+ const input=page.getByRole("textbox",{name:"Add NSE ticker"});
+ await input.fill("HCLTECH");await input.press("Enter");
+ await expect(page.getByRole("button",{name:"Remove HCLTECH"})).toBeVisible();expect(saves).toBe(0);
+ await input.fill("HCLTECH");await input.press("Enter");
+ await expect(page.locator(".portfolio-form").getByRole("alert")).toContainText("already in your portfolio");
+ for(const ticker of ["RELIANCE","TITAN","CDSL"]){await input.fill(ticker);await input.press("Enter");}
+ await expect(page.getByText("7 companies",{exact:true})).toBeVisible();
+ await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
+ await expect(page.getByRole("dialog")).not.toBeVisible();expect(companies).toHaveLength(7);expect(saves).toBe(1);
+ await page.reload();await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ if(await page.locator(".watchlist").isVisible())await page.getByRole("button",{name:"View all 7 companies",exact:true}).click();
+ else await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
+ await expect(page.getByText("7 companies",{exact:true})).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.getByRole("button",{name:"Close dialog"}).click();
+ companies=Array.from({length:50},(_,i)=>({ticker:`TEST${i}`,name:`Test company ${i}`,sector:""}));
+ await page.reload();await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
+ await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
+ await input.fill("HCLTECH");await page.getByRole("button",{name:"Add company",exact:true}).click();
+ await expect(page.locator(".portfolio-form").getByRole("alert")).toContainText("50 companies");
+ await expect(page.getByRole("button",{name:"Remove HCLTECH"})).toHaveCount(0);
+ await expect(page.getByRole("button",{name:"Save portfolio",exact:true})).toBeEnabled();
+ });

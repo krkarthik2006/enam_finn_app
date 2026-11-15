@@ -9,3 +9,5 @@
 .filing-extraction{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}.filing-extraction .empty-note{margin:9px 0}
 
 .empty-state>.secondary-button{margin-top:18px}
+
+.watchlist .portfolio-manage{justify-content:space-between;color:var(--accent);font-size:11px;padding-top:14px}
