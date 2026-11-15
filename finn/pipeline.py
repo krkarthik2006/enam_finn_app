@@ -15,6 +15,7 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
     db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
     try:
         portfolio = {r["ticker"]: json.loads(r["payload"]) for r in db.all("SELECT * FROM portfolio")}
+        attempted_enrichments = set()
         for ticker in tickers:
             exchange = portfolio.get(ticker, {}).get("exchange", "US" if ticker.startswith("US-") else "NSE")
             bse_code = portfolio.get(ticker, {}).get("bse_code")
@@ -53,6 +54,7 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
                         for item in data:
                             saved = save_announcement(db, item)
                             if enrichments and exchange != "US" and source != "news" and saved["category"] in ("results", "management_change", "M&A", "capex", "litigation"):
+                                attempted_enrichments.add(saved["id"])
                                 try:
                                     extract_filing(db, saved, providers)
                                 except (ProviderError, ValueError) as exc:
@@ -66,6 +68,25 @@ def run_refresh(db: Database, providers: Providers, run_id: str, tickers: list[s
                     report["sources"].append(
                         {"ticker": ticker, "source": source, "status": "error", "message": str(exc)}
                     )
+                db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
+        # Stored filings remain actionable when exchange discovery fails or the filing
+        # predates the current refresh window. Do not repeatedly extract completed cards.
+        if enrichments:
+            for row in db.all("SELECT id,ticker,payload FROM announcements WHERE mode='live'"):
+                if row["ticker"] not in tickers or row["ticker"].startswith("US-") or row["id"] in attempted_enrichments:
+                    continue
+                event = json.loads(row["payload"])
+                if event["category"] not in ("results", "management_change", "M&A", "capex", "litigation"):
+                    continue
+                stored = db.one("SELECT payload FROM enrichments WHERE event_id=? AND owner_id=?", (row["id"], db.owner_id))
+                card = json.loads(stored["payload"]) if stored else {}
+                if (event["category"] == "results" and card.get("results")) or card.get("source_quotes"):
+                    continue
+                try:
+                    extract_filing(db, event, providers)
+                    report["sources"].append({"ticker": row["ticker"], "source": "saved_filing_details", "event_id": row["id"], "status": "ok", "count": 1})
+                except (ProviderError, ValueError) as exc:
+                    report["sources"].append({"ticker": row["ticker"], "source": "saved_filing_details", "event_id": row["id"], "status": "error", "message": str(exc)})
                 db.execute("UPDATE refresh_runs SET payload=? WHERE id=?", (json.dumps(report), run_id))
         errors = sum(s["status"] != "ok" for s in report["sources"])
         refresh_cards(db)

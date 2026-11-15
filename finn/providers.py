@@ -20,6 +20,9 @@ class ProviderError(Exception):
     pass
 
 
+MAX_PDF_BYTES = 60_000_000
+
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; FINNResearch/0.1)",
     "Accept": "application/json,text/html,*/*",
@@ -292,7 +295,7 @@ class Providers:
                     break
         if target.exists() and metadata.exists():
             content = target.read_bytes()
-            if not content.startswith(b"%PDF-") or len(content) > 20_000_000:
+            if not content.startswith(b"%PDF-") or len(content) > MAX_PDF_BYTES:
                 raise ValueError("Cached PDF is invalid")
             source = {**json.loads(metadata.read_text()), "origin": "cache", "stale": True}
             self.cache.observations.append(source)
@@ -312,8 +315,8 @@ class Providers:
                     content = bytearray()
                     for part in response.iter_bytes():
                         content.extend(part)
-                        if len(content) > 20_000_000:
-                            raise ValueError("Document exceeds 20 MB download limit")
+                        if len(content) > MAX_PDF_BYTES:
+                            raise ValueError("Document exceeds 60 MB download limit")
                     if not content.startswith(b"%PDF-"):
                         raise ValueError(
                             "URL must return a PDF; paste extracted primary-source text for HTML sources"
