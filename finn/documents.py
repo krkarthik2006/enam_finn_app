@@ -127,13 +127,24 @@ def retrieve(db: Database, ticker: str, question: str, mode: str, document_ids: 
             "AND d.kind IN ('annual_report','transcript') AND chunk_search MATCH ? ORDER BY bm25(chunk_search) LIMIT 1",
             (ticker, mode, document_id, '"guidance" OR "outlook" OR "revenue" OR "business" OR "risk"'),
         ))
+    if document_ids:
+        supporting = []
+        for topic in ('"opportunities" OR "growth drivers" OR "capacity expansion" OR "market share" OR "new products"',
+                      '"risk factors" OR "key risks" OR "principal risks" OR "commodity prices" OR "foreign exchange" OR "competition"'):
+            supporting.extend(db.all(
+                base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? " + restriction +
+                "AND d.kind IN ('annual_report','transcript') AND chunk_search MATCH ? ORDER BY bm25(chunk_search) LIMIT 3",
+                (*args, topic),
+            ))
+        # Keep question evidence first, with explicit room for both investment cases.
+        rows = list({row["id"]: row for row in [*rows[:6], *supporting, *rows[6:]]}.values())
     # Give multiple periods a chance to appear instead of filling context with one long annual report.
     selected, remaining, seen = [], [], set()
     for row in rows:
-        if row["document_id"] not in seen and len(selected) < 12:
+        if row["document_id"] not in seen and len(selected) < 16:
             selected.append(row)
             seen.add(row["document_id"])
         else:
             remaining.append(row)
-    selected.extend(remaining[: 12 - len(selected)])
+    selected.extend(remaining[: 16 - len(selected)])
     return [{"citation_id": r.pop("id"), **r, "published_on": r["published_on"] or None} for r in selected]

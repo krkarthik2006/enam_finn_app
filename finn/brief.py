@@ -14,7 +14,7 @@ from finn.documents import retrieve
 from finn.network import recommend
 
 SECTION_NAMES = {"answer": "Answer to your question", "business": "Business snapshot", "financial": "Financial trajectory",
-                 "guidance": "Promised vs delivered", "bull": "What could go right", "bear": "What to watch"}
+                 "guidance": "Promised vs delivered", "bull": "Bull case", "bear": "Bear case"}
 
 
 class Claim(BaseModel):
@@ -158,12 +158,23 @@ def build_brief(db, settings, ticker, question, mode="live", use_model=True):
             raise ValueError("Unknown brief citation")
 
     before = db.one("SELECT COUNT(*) AS n FROM llm_calls WHERE status='completed'")["n"]
-    raw = LLM(db, settings).complete(payload, "brief-v4", validate)
+    raw = LLM(db, settings).complete(payload, "brief-v5", validate)
     analysis = BriefAnalysis.model_validate_json(raw["choices"][0]["message"]["content"])
     grounded = [finding for finding in analysis.findings if supported_figures(finding, sources, comparisons)]
     if len(grounded) != len(analysis.findings):
         analysis.gaps.append("Some numerical claims could not be verified against the cited sources.")
     analysis.findings = grounded
+    if tables and not any(finding.section == "financial" for finding in analysis.findings):
+        table = tables[0]
+        record = table["financial_record"]
+        figures = "; ".join(f"{name} {record['metrics'][metric]:g}" for metric, name in
+                            (("revenue", "Revenue"), ("ebitda", "EBITDA"), ("pbt", "PBT"), ("pat", "PAT"))
+                            if record["metrics"].get(metric) is not None)
+        if figures:
+            analysis.findings.append(SectionFinding(section="financial", text=(
+                f"Latest reported {record['frequency']} figures, period ended {record['period_end']} "
+                f"({record['basis']}, {record['currency']} {record['unit']}): {figures}."
+            ), citation_ids=[table["citation_id"]]))
     unique = {}
     for finding in analysis.findings:
         if any(char.isalnum() for char in finding.text):
