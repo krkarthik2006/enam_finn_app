@@ -20,7 +20,7 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export function isPrimaryBrief(brief: Brief): boolean {
-  return brief.mode === "live" && brief.sources.every(source => source.mode === "live" && source.url.startsWith("https://") && (!source.financial_record || source.financial_record.mode === "live")) && brief.financials.every(row => row.mode === "live");
+  return brief.mode === "live" && brief.sources.every(source => source.mode === "live" && ["annual_report","transcript","financial_table"].includes(source.kind) && source.url.startsWith("https://") && (!source.financial_record || source.financial_record.mode === "live")) && brief.financials.every(row => row.mode === "live");
 }
 
 export async function research(ticker: string, body: object, progress: (text: string) => void, signal: AbortSignal): Promise<Brief> {

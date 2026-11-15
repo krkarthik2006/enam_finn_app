@@ -108,6 +108,15 @@ def guidance_claims(db, settings, evidence, use_model):
     return claims, gaps
 
 
+def supported_figures(finding, sources, comparisons):
+    def numbers(text):
+        return {float(value.replace(",", "")) for value in re.findall(r"(?<![\w])[-+]?\d[\d,]*(?:\.\d+)?", text)}
+
+    cited = " ".join(source["text"] for source in sources if source["citation_id"] in finding.citation_ids)
+    allowed = numbers(cited) | numbers(json.dumps(comparisons))
+    return numbers(finding.text) <= allowed
+
+
 def build_brief(db, settings, ticker, question, mode="live", use_model=True):
     indexed = db.all("SELECT id,kind FROM documents WHERE ticker=? AND mode=? ORDER BY published_on DESC,rowid DESC", (ticker, mode))
     selected = [r["id"] for kind, limit in (("transcript", 4), ("annual_report", 1))
@@ -148,8 +157,12 @@ def build_brief(db, settings, ticker, question, mode="live", use_model=True):
             raise ValueError("Unknown brief citation")
 
     before = db.one("SELECT COUNT(*) AS n FROM llm_calls WHERE status='completed'")["n"]
-    raw = LLM(db, settings).complete(payload, "brief-v2", validate)
+    raw = LLM(db, settings).complete(payload, "brief-v3", validate)
     analysis = BriefAnalysis.model_validate_json(raw["choices"][0]["message"]["content"])
+    grounded = [finding for finding in analysis.findings if supported_figures(finding, sources, comparisons)]
+    if len(grounded) != len(analysis.findings):
+        analysis.gaps.append("Some numerical claims could not be verified against the cited sources.")
+    analysis.findings = grounded
     unique = {}
     for finding in analysis.findings:
         if any(char.isalnum() for char in finding.text):

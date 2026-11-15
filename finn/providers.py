@@ -268,7 +268,7 @@ class Providers:
         if not addresses or any(not ipaddress.ip_address(a[4][0]).is_global for a in addresses):
             raise ValueError("Document URLs must resolve only to public addresses")
 
-    def download(self, url):
+    def download(self, url, prefer_cache=False):
         parsed = urlparse(url)
         if (parsed.scheme != "https" or parsed.hostname not in self.settings.document_hosts
                 or parsed.username or parsed.password or parsed.port not in (None, 443)):
@@ -276,7 +276,8 @@ class Providers:
         identifier = hashlib.sha256(url.encode()).hexdigest()
         target = self.settings.cache_path / "pdf" / (identifier + ".pdf")
         metadata = target.with_suffix(".json")
-        for attempt in range(2):
+        attempts = 0 if prefer_cache and target.exists() and metadata.exists() else 2
+        for attempt in range(attempts):
             if self.settings.offline_sources:
                 break
             try:

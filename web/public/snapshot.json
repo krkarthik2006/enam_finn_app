@@ -9198,7 +9198,7 @@
           "findings": [
             {
               "section": "business",
-              "text": "Infosys is a global IT services company whose risk disclosures describe service delivery to clients across units, with revenue concentrated in a few geographies and client industries and dependent on a limited number of clients. The company is positioning around AI-driven services, with management citing $15bn of deal wins and AI projects that command better pricing but carry higher talent cost.",
+              "text": "Infosys provides IT services. Its risk disclosures identify revenue concentration in a few geographies and client industries, with a large part of revenue dependent on a limited number of clients. Management says AI projects can command better pricing but also require higher-cost talent.",
               "citation_ids": [
                 "a1ee741ab6eb896bb0178086:367",
                 "df3cf4eb36b452c5daa5ad3a:68"
@@ -10021,7 +10021,7 @@
           "findings": [
             {
               "section": "financial",
-              "text": "Consolidated quarterly revenue (INR crore): Q3 FY26 (period end 2025-09-30) 65,799; Q4 FY26 (2025-12-31) 67,087; Q1 FY27 (2026-03-31) 70,698; Q2 FY27 (2026-06-30) 72,275; Q3 FY27 (2026-09-30) 73,188 \u2014 a sequential rise across all five reported quarters. Annual consolidated revenue: FY2025-26 (period end 2026-03-31) 267,021 vs FY2024-25 (2025-03-31) 255,324. PAT by quarter: 12,131; 10,720; 13,784; 13,420; 13,934; annual PAT 49,454 (FY26) vs 48,797 (FY25). Operating profit by quarter: 17,978; 18,269; 19,276; 18,556; 18,815; annual 72,398 (FY26) vs 67,407 (FY25). PBT by quarter: 16,068; 14,078; 18,362; 17,944; 18,638; annual 65,487 (FY26) vs 65,331 (FY25). EBITDA is not provided in the supplied tables. The Q1 FY27 transcript states revenue of \u20b972,275 crore, growing 2.2% sequentially and 13.9% year-on-year, the fourth consecutive quarter of growth.",
+              "text": "Consolidated quarterly revenue (INR crore): quarter ended 2025-09-30 65,799; quarter ended 2025-12-31 67,087; quarter ended 2026-03-31 70,698; quarter ended 2026-06-30 72,275; quarter ended 2026-09-30 73,188 \u2014 a sequential rise across all five reported quarters. Annual consolidated revenue: FY2025-26 (period end 2026-03-31) 267,021 vs FY2024-25 (2025-03-31) 255,324. PAT by quarter: 12,131; 10,720; 13,784; 13,420; 13,934; annual PAT 49,454 (FY26) vs 48,797 (FY25). Operating profit by quarter: 17,978; 18,269; 19,276; 18,556; 18,815; annual 72,398 (FY26) vs 67,407 (FY25). PBT by quarter: 16,068; 14,078; 18,362; 17,944; 18,638; annual 65,487 (FY26) vs 65,331 (FY25). EBITDA is not provided in the supplied tables. The Q1 FY27 transcript states revenue of \u20b972,275 crore, growing 2.2% sequentially and 13.9% year-on-year, the fourth consecutive quarter of growth.",
               "citation_ids": [
                 "table:769d972a95d51b73f4eb615f",
                 "table:4dec603cc4c86e0e091b540c",

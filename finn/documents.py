@@ -115,6 +115,16 @@ def retrieve(db: Database, ticker: str, question: str, mode: str, document_ids: 
             base + " WHERE d.ticker=? AND d.mode=? " + restriction + " AND d.kind IN ('annual_report','transcript') "
             "ORDER BY d.published_on DESC,c.position LIMIT 8", args
         )
+    # A long report can occupy all global search hits. Give each selected report/call
+    # one relevant business, financial or guidance excerpt before filling the context.
+    for document_id in document_ids or []:
+        if any(row["document_id"] == document_id for row in rows):
+            continue
+        rows.extend(db.all(
+            base + " JOIN chunk_search s ON s.id=c.id WHERE d.ticker=? AND d.mode=? AND d.id=? "
+            "AND d.kind IN ('annual_report','transcript') AND chunk_search MATCH ? ORDER BY bm25(chunk_search) LIMIT 1",
+            (ticker, mode, document_id, '"guidance" OR "outlook" OR "revenue" OR "business" OR "risk"'),
+        ))
     # Give multiple periods a chance to appear instead of filling context with one long annual report.
     selected, remaining, seen = [], [], set()
     for row in rows:

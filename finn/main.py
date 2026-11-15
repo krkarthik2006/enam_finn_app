@@ -249,6 +249,25 @@ def create_app(settings: Settings | None = None):
             raise HTTPException(422, "Subject person must belong to this investor")
         return save_announcement(db, body)
 
+    @app.get("/api/announcements/{event_id}/document", dependencies=protected, tags=["push"])
+    def filing_document(event_id: str):
+        from fastapi.responses import Response
+
+        row = db.one("SELECT payload FROM announcements WHERE id=?", (event_id,))
+        if not row:
+            raise HTTPException(404, "Filing not found")
+        event = json.loads(row["payload"])
+        if not event.get("url") or (event.get("source") or {}).get("kind") == "news" or event["ticker"].startswith("US-"):
+            raise HTTPException(422, "Open the original source website for this document")
+        try:
+            content = providers.download(event["url"], prefer_cache=True)
+        except (ValueError, ProviderError, httpx.HTTPError) as exc:
+            raise HTTPException(502, "Saved filing unavailable. Open the source website instead.") from exc
+        return Response(content, media_type="application/pdf", headers={
+            "Content-Disposition": f'inline; filename="{event["ticker"]}-{event_id}.pdf"',
+            "Cache-Control": "private, no-store",
+        })
+
     @app.post("/api/announcements/{event_id}/enrich", dependencies=protected, tags=["ingestion"])
     def enrich_filing(event_id: str):
         event = db.one("SELECT payload FROM announcements WHERE id=?", (event_id,))
