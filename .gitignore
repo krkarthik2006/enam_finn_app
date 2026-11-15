@@ -19,3 +19,7 @@ web/test-results/
 web/playwright-report/
 .vercel/
 .railway/
+
+# Local submission draft and session attachment; review before sharing.
+SUBMISSION_EMAIL.txt
+AI_BUILD_HISTORY.txt

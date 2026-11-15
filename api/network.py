@@ -3,7 +3,14 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, HTTPException, Query
 
-from engine.network import expertise_map, paths_to, reconnect_nudges, resolve_person, study_overlap, work_overlap
+from engine.network import (
+    expertise_map,
+    paths_to,
+    reconnect_nudges,
+    resolve_person,
+    study_overlap,
+    work_overlap,
+)
 from finn.models import Contact, Mode
 
 

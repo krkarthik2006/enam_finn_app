@@ -147,7 +147,7 @@ Matching people across sources (entity resolution) goes in `engine/network.py::r
 
 ## 6. How to do a task
 
-User override (2026-11-15): pause automated/backend/model/browser test runs during the current product-iteration pass. The user wants faster implementation and a single final review/test pass later. Compile/build only as required to publish; explicitly report untested changes. This overrides the test-running steps below until the user asks for final testing.
+User update (2026-11-15): testing is resumed. The user requests vital Push/Pull checks and broader desktop/mobile end-to-end testing as needed, while conserving time and Codex capacity for the final submission email draft. Run the backend and configured real-model acceptance suite, then a broad browser pass; repeat only affected/failing checks. The earlier temporary testing pause is revoked.
 
 
 1. Read `AGENTS.md`, the relevant `PLAN.md` phase, and the last 3 entries in `BUILD_LOG.md`.

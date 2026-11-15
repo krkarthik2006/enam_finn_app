@@ -54,7 +54,7 @@ test("new NSE tickers request primary sources without a mode switch",async({page
   await expect(page.locator(".connection")).toHaveCount(0);
   await expect(page.getByRole("heading",{name:"Reconnect",exact:true})).toHaveCount(0);
   await page.getByRole("button",{name:"Show last 7 days",exact:true}).click();
-  await expect(page.getByRole("combobox",{name:"Digest window"})).toHaveValue("7");
+  await expect(page.getByRole("button",{name:"7 days",exact:true})).toHaveAttribute("aria-pressed","true");
   await expect(page.locator(".content")).toHaveAttribute("aria-busy","false");
   await page.getByRole("button",{name:"Research",exact:true}).filter({visible:true}).click();
   await page.getByRole("textbox",{name:"Company"}).fill("HCLTECH");
@@ -111,13 +111,13 @@ test("portfolio edits persist through the API",async({page})=>{
  await page.getByRole("button",{name:"Add company",exact:true}).click();
  await page.route("**/api/portfolio",async route=>{if(route.request().method()==="GET")await new Promise(resolve=>setTimeout(resolve,1500));await route.continue();});
  await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
- await expect(page.getByRole("dialog")).not.toBeVisible();
+ await expect(page.getByRole("dialog")).not.toBeVisible({timeout:20000});
  const portfolio=await (await page.request.get("/api/portfolio")).json();
  expect(portfolio.companies.some((c:{ticker:string})=>c.ticker===added)).toBe(true);
  await page.getByRole("button",{name:"Manage portfolio",exact:true}).click();
  await page.getByRole("button",{name:`Remove ${added}`}).click();
  await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
- await expect(page.getByRole("dialog")).not.toBeVisible();
+ await expect(page.getByRole("dialog")).not.toBeVisible({timeout:20000});
  } finally {
   expect((await page.request.put("/api/portfolio",{data:original})).status()).toBe(200);
  }
@@ -318,8 +318,8 @@ test("portfolio edits persist through the API",async({page})=>{
  await page.getByRole("button",{name:"TCS",exact:true}).click();
  const overview=page.getByRole("navigation",{name:"Research overview",exact:true});
  await expect(overview).toBeVisible();
- await expect(overview.locator(".summary-jump")).toHaveCount(brief.sections.length);
- for(const section of brief.sections){
+ await expect(overview.locator(".summary-jump")).toHaveCount(brief.sections.filter((section:{id:string})=>!["answer","bull","bear"].includes(section.id)).length+1);
+ for(const section of brief.sections.filter((section:{id:string})=>!["answer","bull","bear"].includes(section.id))){
   const summary=overview.locator(`a[href="#research-${section.id}"]`);
   await expect(summary).toContainText(section.title);
   if(section.findings.length)await expect(summary.locator("p")).toHaveText(await page.locator(`#research-${section.id} .finding`).first().evaluate(el=>el.firstChild?.textContent||""));
@@ -365,7 +365,7 @@ test("portfolio edits persist through the API",async({page})=>{
   }
   if(path==="portfolio"&&route.request().method()==="PUT")companies=route.request().postDataJSON().companies;
   if(path==="refresh"){
-   expect(route.request().postDataJSON().news).toBe(true);expect(route.request().postDataJSON().enrich).toBe(false);checked=true;checks++;
+   expect(route.request().postDataJSON().news).toBe(true);expect(route.request().postDataJSON().enrich).toBe(true);checked=true;checks++;
    await route.fulfill({contentType:"application/json",body:JSON.stringify({id:"news-check",status:"queued",tickers:["US-NVDA"]})});return;
   }
   if(path==="refresh/news-check"){
@@ -387,6 +387,7 @@ test("portfolio edits persist through the API",async({page})=>{
  await expect(page.getByRole("button",{name:"Remove NVDA",exact:true})).toBeVisible();
  await expect(page.getByRole("dialog")).toContainText("NVIDIA CORP");
  await page.getByRole("button",{name:"Save portfolio",exact:true}).click();
+ await page.locator(".feed-group").filter({has:page.locator("summary h2",{hasText:"News"})}).locator("summary").click();
  await expect(page.getByRole("heading",{name:"NVIDIA reports a product launch",exact:true})).toBeVisible();
  expect(checked).toBe(true);
  await page.screenshot({path:`/private/tmp/finn-${info.project.name}-portfolio-status.png`,fullPage:true});

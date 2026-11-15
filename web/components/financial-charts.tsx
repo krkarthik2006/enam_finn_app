@@ -13,8 +13,7 @@ function Trend({title, rows, metric, margin = false}: {title: string; rows: Fina
   const low = Math.min(0, ...points), high = Math.max(0, ...points), span = high - low || 1;
   const x = (index: number) => 65 + index * 310 / Math.max(1, rows.length - 1);
   const y = (value: number) => 155 - (value - low) / span * 120;
-  let connected = false;
-  const path = values.map((value, index) => {if (value == null) {connected = false; return "";} const segment = `${connected ? "L" : "M"}${x(index)},${y(value)}`; connected = true; return segment;}).join(" ");
+  const path = values.map((value,index)=>value==null?"":`${index>0&&values[index-1]!=null?"L":"M"}${x(index)},${y(value)}`).join(" ");
   const latest = values.findLast(value => value != null);
   return <figure className="financial-trend"><figcaption><h4>{title}</h4><strong>{latest == null ? "—" : format(latest)}{margin ? "%" : ""}</strong><span>{margin ? "PAT ÷ revenue" : `${rows[0].currency || "INR"} ${rows[0].unit}`}</span></figcaption><svg viewBox="0 0 400 200" role="img" aria-label={`${title} by period ended`}><title>{title}. {rows.map((row, index) => `${row.period_end}: ${values[index] == null ? "unavailable" : format(values[index] as number)}`).join("; ")}</title>
     {[low, low + span / 2, low + span].map(value => <g key={value}><line x1="60" x2="380" y1={y(value)} y2={y(value)} stroke="var(--line)"/><text x="2" y={y(value) + 4} fontSize="11" fill="var(--muted)">{format(value)}{margin ? "%" : ""}</text></g>)}

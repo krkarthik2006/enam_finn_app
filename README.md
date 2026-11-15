@@ -10,10 +10,12 @@ Vercel hosts the frontend and its server proxy. Railway runs one API instance wi
 SQLite and its source cache on the persistent `/var/data` volume. Sleeping is disabled for review.
 SQLite is the user's chosen database for this single-investor demo; Postgres is deferred.
 
+For the clearest filing walkthrough, choose **30 days**, expand **Quarterly results**, and open a filing. The 24-hour default can be quiet on weekends. Hosted exchange requests can be blocked; official snapshots captured on 13 November 2026 retain their original dates and cache provenance.
+
 The app has three tabs:
 
-1. **Today:** read company filings and market updates, open the original evidence, and find relevant contacts. Choose 24 hours, 7 days or 30 days. Manage the portfolio and refresh its sources here.
-2. **Research:** enter an Indian or US company name/ticker and a question, including the period you want to compare. FINN resolves the company and discovers its primary sources automatically; the suggestions are shortcuts, not a fixed stock list. Open numbered citations to read the evidence. Missing sources remain gaps.
+1. **Today:** read company filings and market updates, open the original evidence, and find relevant contacts. Choose 24 hours, 7 days, 30 days or an inclusive custom date range. Manage the portfolio and refresh its sources here.
+2. **Research:** enter an Indian or US company name/ticker and a question, including the period you want to compare. FINN resolves the company and discovers its primary sources automatically; the suggestions are shortcuts, not a fixed stock list. The direct answer comes first, followed by financial trend charts and a cited Bull vs bear comparison. Open numbered citations to read the evidence. Missing sources remain gaps.
 3. **People:** search names, companies or expertise and inspect recorded introduction paths.
 
 Connected requests use original company sources without a data-mode switch. Synthetic contact
